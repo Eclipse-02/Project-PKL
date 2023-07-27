@@ -11,20 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fs_sec_users', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             // $table->string("coy_id")->primary();
             // $table->string("empl_id")->primary(); // fs_mst_employees
             // $table->string("empl_branch"); // fs_mst_branch
             // $table->date("access_last");
             // $table->integer("max_session");
             // $table->date("expired_pwd");
+            $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->string("created_by");
-            $table->string("updated_by");
+            // $table->string("created_by");
+            // $table->string("updated_by");
             $table->timestamps();
         });
     }

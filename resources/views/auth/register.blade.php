@@ -60,8 +60,8 @@
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center me-2" aria-current="page"
                             href="{{ route('welcome') }}">
-                            <i class="fa fa-chart-pie opacity-6  me-1"></i>
-                            Return to The Main Page
+                            <i class="fas fa-home opacity-6  me-1"></i>
+                            Main Page
                         </a>
                     </li>
                     <li class="nav-item">
@@ -97,21 +97,38 @@
                             <h5>Register</h5>
                         </div>
                         <div class="card-body">
-                            <form role="form">
+                            <form method="POST" action="{{ route('register') }}">
+                                @csrf
+
                                 <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="Name" aria-label="Name">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name" aria-label="Name">
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <input type="email" class="form-control" placeholder="Email"
-                                        aria-label="Email">
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email" aria-label="Email">
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <input type="password" class="form-control" placeholder="Password"
-                                        aria-label="Password">
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password" aria-label="Password">
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <input id="password-confirm" type="password" class="form-control" placeholder="Password Confirm" name="password_confirmation" required autocomplete="new-password">
                                 </div>
                                 <div class="text-center">
-                                    <button type="button" class="btn btn-dark w-100 my-4 mb-2">Sign
-                                        up</button>
+                                    <button type="submit" class="btn btn-dark w-100 my-4 mb-2">Sign up</button>
                                 </div>
                                 <p class="text-sm text-center mt-3 mb-0">Sudah memiliki akun? <a href="javascript:;">Sign in</a></p>
                             </form>

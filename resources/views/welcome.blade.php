@@ -796,9 +796,6 @@
 		@include('sections.footer')
 		<!-- footer-copyright end -->
 
-
-
-
 		<script src="{{ asset('master/assets/js/jquery.js') }}"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 

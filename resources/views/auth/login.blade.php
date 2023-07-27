@@ -40,13 +40,26 @@
             <div class="page-header vh-100">
                 <div class="container">
                     <div class="row vh-100">
-                        <div class="col-12 d-flex flex-column mx-lg-0 mx-auto justify-content-center">
-                            <div class="logo">
+                        <div class="col-6 d-flex mt-4 mx-lg-0 mx-auto justify-content-center row">
+                            <div class="logo col-4">
                                 <a href="index.html">
                                     tour<span>Nest</span>
                                 </a>
                             </div><!-- /.logo-->
+                            <div class="col-4 text-center">
+                                <a class="nav-link me-2" href="{{ route('welcome') }}">
+                                    <i class="fas fa-home"></i>
+                                    Main Page
+                                </a>
+                            </div>
+                            <div class="col-4 text-center">
+                                <a class="nav-link me-2" href="{{ route('register') }}">
+                                    <i class="fas fa-clipboard-list"></i>
+                                    Register
+                                </a>
+                            </div>
                         </div>
+                        <div class="col-6"></div>
                         <div class="col-6 d-flex flex-column mx-lg-0 mx-auto justify-content-center">
                             <div class=" py-2">
                                 <div class="my-5">
