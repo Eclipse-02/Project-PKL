@@ -11,43 +11,46 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fs_mst_provinsi', function (Blueprint $table) {
-            $table->string("prov_code")->primary();
+        Schema::create('provinsis', function (Blueprint $table) {
+            $table->id('prov_code');
             $table->string("provinsi");
             $table->boolean("is_active")->nullable();
-            $table->string("created_by");
-            $table->string("updated_by");
+            $table->string("created_by")->nullable();
+            $table->string("updated_by")->nullable();
             $table->timestamps();
         });
 
-        Schema::create('fs_mst_kota', function (Blueprint $table) {
-            $table->string("kota_code")->primary();
+        Schema::create('kotas', function (Blueprint $table) {
+            $table->id("kota_code");
             $table->string("kota");
-            $table->string("prov_code"); // fs_mst_provinsi
+            $table->unsignedBigInteger('prov_code');
             $table->boolean("is_active")->nullable();
             $table->string("created_by");
             $table->string("updated_by");
             $table->timestamps();
+            $table->foreign("prov_code")->references('prov_code')->on('provinsis')->onDelete('cascade'); // fs_mst_provinsi
         });
 
-        Schema::create('fs_mst_kecamatan', function (Blueprint $table) {
-            $table->string("kec_code")->primary();
+        Schema::create('kecamatans', function (Blueprint $table) {
+            $table->id("kec_code");
             $table->string("kecamatan");
-            $table->string("kota_code"); // fs_mst_kota
+            $table->unsignedBigInteger('kota_code')->unsigned();
             $table->boolean("is_active")->nullable();
             $table->string("created_by");
             $table->string("updated_by");
             $table->timestamps();
+            $table->foreign("kota_code")->references('kota_code')->on('kotas')->onDelete('cascade'); // fs_mst_provinsi// fs_mst_kota
         });
 
-        Schema::create('fs_mst_kelurahan', function (Blueprint $table) {
-            $table->string("kel_code")->primary();
+        Schema::create('kelurahans', function (Blueprint $table) {
+            $table->id("kel_code");
             $table->string("kelurahan");
-            $table->string("kec_code"); // fs_mst_kecamatan
+            $table->unsignedBigInteger('kec_code')->unsigned();
             $table->boolean("is_active")->nullable();
             $table->string("created_by");
             $table->string("updated_by");
             $table->timestamps();
+            $table->foreign("kec_code")->references('kec_code')->on('kecamatans')->onDelete('cascade'); // fs_mst_kecamatan
         });
     }
 
@@ -56,9 +59,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fs_mst_provinsi');
-        Schema::dropIfExists('fs_mst_kota');
-        Schema::dropIfExists('fs_mst_kecamatan');
-        Schema::dropIfExists('fs_mst_kelurahan');
+        Schema::dropIfExists('provinsis');
+        Schema::dropIfExists('kotas');
+        Schema::dropIfExists('kecamatans');
+        Schema::dropIfExists('kelurahans');
     }
 };

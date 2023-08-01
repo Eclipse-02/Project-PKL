@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('fs_mst_area', function (Blueprint $table) {
-            $table->string("coy_id")->primary();
+            $table->id("coy_id");
             $table->string("area_code");
             $table->string("area_name");
             $table->boolean("is_active")->nullable();

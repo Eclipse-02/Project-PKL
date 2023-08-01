@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('fs_mst_branch', function (Blueprint $table) {
-            $table->string("coy_id")->primary();
+            $table->id("coy_id");
             $table->string("branch_code");
             $table->string("branch_name");
             $table->string("branch_addr");
@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string("branch_tlp");
             $table->string("branch_hp01");
             $table->string("branch_hp02");
-            $table->string("prov_code"); // fs_mst_provinsi
-            $table->string("kota_code"); // fs_mst_kota
-            $table->string("kec_code"); // fs_mst_kecamatan
-            $table->string("kel_code"); // fs_mst_kelurahan
+            $table->unsignedBigInteger("prov_code"); // fs_mst_provinsi
+            $table->unsignedBigInteger("kota_code"); // fs_mst_kota
+            $table->unsignedBigInteger("kec_code"); // fs_mst_kecamatan
+            $table->unsignedBigInteger("kel_code"); // fs_mst_kelurahan
             $table->string("zip_code"); // fs_mst_zip
             $table->string("branch_type");
             $table->string("area_code"); // fs_mst_area

@@ -11,18 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fs_mst_zip', function (Blueprint $table) {
-            $table->string("zip_code")->primary();
+        Schema::create('zips', function (Blueprint $table) {
+            $table->id("zip_code");
             $table->string("sub_zip_code");
-            $table->string("zip_desc");
-            $table->string("prov_code"); // fs_mst_provinsi
-            $table->string("kota_code"); // fs_mst_kota
-            $table->string("kec_code"); // fs_mst_kecamatan
-            $table->string("kel_code"); // fs_mst_kelurahan
+            $table->text("zip_desc");
+            $table->unsignedBigInteger("prov_code"); // fs_mst_provinsi
+            $table->unsignedBigInteger("kota_code"); // fs_mst_kota
+            $table->unsignedBigInteger("kec_code"); // fs_mst_kecamatan
+            $table->unsignedBigInteger("kel_code"); // fs_mst_kelurahan
             $table->boolean("is_active")->nullable();
             $table->string("created_by");
             $table->string("updated_by");
             $table->timestamps();
+            $table->foreign("prov_code")->references('prov_code')->on('provinsis')->onDelete('cascade');
+            $table->foreign("kota_code")->references('kota_code')->on('kotas')->onDelete('cascade');
+            $table->foreign("kec_code")->references('kec_code')->on('kecamatans')->onDelete('cascade');
+            $table->foreign("kel_code")->references('kel_code')->on('kelurahans')->onDelete('cascade');
         });
     }
 

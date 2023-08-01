@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Kota extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'kota',
+        'prov_code',
+        'is_active',
+        'created_by',
+        'updated_by',
+    ];
+
+    function provinsi() {
+        return $this->belongsTo(Provinsi::class);
+    }
+
+    function kecamatans() {
+        return $this->hasMany(Kecamatan::class);
+    }
+}

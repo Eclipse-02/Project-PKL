@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('fs_utl_doc_seqs', function (Blueprint $table) {
-            $table->string("coy_id")->primary();
+            $table->id("coy_id");
             $table->string("branch_code"); // fs_mst_branch
             $table->bigInteger("start_value");
             $table->bigInteger("last_value");

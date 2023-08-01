@@ -4,10 +4,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <link rel="shortcut icon" type="image/icon" href="{{ asset('master/assets/logo/favicon.png') }}"/>
     <title>
-        Argon Dashboard 2 by Creative Tim
+        Travel | Register
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -130,7 +129,7 @@
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-dark w-100 my-4 mb-2">Sign up</button>
                                 </div>
-                                <p class="text-sm text-center mt-3 mb-0">Sudah memiliki akun? <a href="javascript:;">Sign in</a></p>
+                                <p class="text-sm text-center mt-3 mb-0">Sudah memiliki akun? <a href="{{ route('login') }}">Sign in</a></p>
                             </form>
                         </div>
                     </div>

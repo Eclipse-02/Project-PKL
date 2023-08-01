@@ -26,38 +26,20 @@
                                 <li class="smooth-menu"><a href="#spo">Special Offers</a></li>
                                 <li class="smooth-menu"><a href="#blog">Blog</a></li>
                                 <li class="smooth-menu"><a href="#reg">Registration</a></li>
-                                <span class="divider"></span>
                                 <li>
                                     @guest
                                         @if (Route::has('login'))
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                            </li>
+                                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                         @endif
 
                                         @if (Route::has('register'))
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                            </li>
+                                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                         @endif
                                     @else
-                                        <li class="nav-item dropdown">
-                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                                {{ Auth::user()->name }}
-                                            </a>
-
-                                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                                document.getElementById('logout-form').submit();">
-                                                    {{ __('Logout') }}
-                                                </a>
-
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                    @csrf
-                                                </form>
-                                            </div>
-                                        </li>
+                                        <a class="nav-link" href="{{ route('dashboard') }}">
+                                            <i class="fas fa-user" style="padding-right: 0.25rem"></i>
+                                            {{ Auth::user()->name }}
+                                        </a>
                                     @endguest
                                 </li><!--/.project-btn--> 
                             </ul>

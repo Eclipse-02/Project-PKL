@@ -5,10 +5,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('master/assets/img/apple-icon.png') }}">
-    <link rel="icon" type="image/png" href="{{ asset('master/assets/img/favicon.png') }}">
+    <link rel="shortcut icon" type="image/icon" href="{{ asset('master/assets/logo/favicon.png') }}"/>
     <title>
-        Login | My POS
+        Travel | Login
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -40,23 +39,25 @@
             <div class="page-header vh-100">
                 <div class="container">
                     <div class="row vh-100">
-                        <div class="col-6 d-flex mt-4 mx-lg-0 mx-auto justify-content-center row">
-                            <div class="logo col-4">
+                        <div class="col-6 d-flex mt-4 mx-lg-0 mx-auto align-content-center row">
+                            <div class="logo col-6">
                                 <a href="index.html">
                                     tour<span>Nest</span>
                                 </a>
                             </div><!-- /.logo-->
-                            <div class="col-4 text-center">
-                                <a class="nav-link me-2" href="{{ route('welcome') }}">
-                                    <i class="fas fa-home"></i>
-                                    Main Page
-                                </a>
-                            </div>
-                            <div class="col-4 text-center">
-                                <a class="nav-link me-2" href="{{ route('register') }}">
-                                    <i class="fas fa-clipboard-list"></i>
-                                    Register
-                                </a>
+                            <div class="col-6 row">
+                                <div class="col-6 text-center">
+                                    <a class="nav-link my-1" href="{{ route('welcome') }}">
+                                        <i class="fas fa-home"></i>
+                                        Main Page
+                                    </a>
+                                </div>
+                                <div class="col-6 text-center">
+                                    <a class="nav-link my-1" href="{{ route('register') }}">
+                                        <i class="fas fa-clipboard-list"></i>
+                                        Register
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="col-6"></div>

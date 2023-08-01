@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('fs_sec_menus', function (Blueprint $table) {
-            $table->string("menu_id")->primary();
+            $table->id("menu_id");
             $table->string("menu_desc");
             $table->string("menu_name");
             $table->tinyText("menu_type");

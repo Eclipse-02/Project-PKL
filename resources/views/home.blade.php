@@ -1,7 +1,17 @@
 @extends('dashboard.master')
 
+@section('title', 'Dashboard')
+
 @section('content')
 <div class="row">
+    <div class="col-12 mb-3">
+        <span class="text-start">
+            <h3>
+                Hello, 
+                <span class="bg-primary px-3 py-1 d-inline rounded-pill">{{ auth()->user()->name }}</span>
+            </h3>
+        </span>
+    </div>
     <div class="col-lg-3 col-6">
         <!-- small box -->
         <div class="small-box bg-info">
