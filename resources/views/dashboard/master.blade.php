@@ -112,6 +112,78 @@
     <script src="{{ asset('dash/dist/js/demo.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('dash/dist/js/pages/dashboard.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Prov
+            $.ajax({
+                url: "https://api.binderbyte.com/wilayah/provinsi?api_key=53e97f612cd3597e4f43f27577fe64245808f0bc9d3f484aff47c6046d7b02f3",
+                method: 'GET',
+                success: function(response) {
+                    response.value.forEach(element => {
+                        $("#sel_prov").append("<option value='" + element.id + "'>" + element.name + "</option>");
+                    });
+                }
+            });
+
+            // Kab/Kota
+            $('#sel_prov').change(function () {
+                var prov_id = $(this).val();
+
+                $('#sel_kab').empty();
+                $('#sel_kab').prop('disabled', false);
+
+                $.ajax({
+                    url: "https://api.binderbyte.com/wilayah/kabupaten?api_key=53e97f612cd3597e4f43f27577fe64245808f0bc9d3f484aff47c6046d7b02f3&id_provinsi=" + prov_id,
+                    method: 'GET',
+                    success: function(response) {
+                        $("#sel_kab").append("<option selected class='text-center'>-- Pilih Kabupaten/Kota --</option>");
+                        response.value.forEach(element => {
+                            $("#sel_kab").append("<option value='" + element.id + "'>" + element.name + "</option>");
+                        });
+                    }
+                });
+            });
+
+            // Kec
+            $('#sel_kab').change(function () {
+                var kab_id = $(this).val();
+
+                $('#sel_kec').empty();
+                $('#sel_kec').prop('disabled', false);
+
+                $.ajax({
+                    url: "https://api.binderbyte.com/wilayah/kecamatan?api_key=53e97f612cd3597e4f43f27577fe64245808f0bc9d3f484aff47c6046d7b02f3&id_kabupaten=" + kab_id,
+                    method: 'GET',
+                    success: function(response) {
+                        $("#sel_kec").append("<option selected class='text-center'>-- Pilih Kecamatan --</option>");
+                        response.value.forEach(element => {
+                            console.log(element.id);
+                            $("#sel_kec").append("<option value='" + element.id + "'>" + element.name + "</option>");
+                        });
+                    }
+                });
+            });
+
+            // Kel
+            $('#sel_kec').change(function () {
+                var kec_id = $(this).val();
+
+                $('#sel_kel').empty();
+                $('#sel_kel').prop('disabled', false);
+
+                $.ajax({
+                    url: "https://api.binderbyte.com/wilayah/kelurahan?api_key=53e97f612cd3597e4f43f27577fe64245808f0bc9d3f484aff47c6046d7b02f3&id_kecamatan=" + kec_id,
+                    method: 'GET',
+                    success: function(response) {
+                        $("#sel_kel").append("<option selected class='text-center'>-- Pilih Kelurahan --</option>");
+                        response.value.forEach(element => {
+                            $("#sel_kel").append("<option value='" + element.id + "'>" + element.name + "</option>");
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

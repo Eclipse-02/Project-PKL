@@ -13,10 +13,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(LaratrustSeeder::class);
-        $this->call(ProvinsiSeeder::class);
-        $this->call(KotaSeeder::class);
-        $this->call(KecamatanSeeder::class);
-        $this->call(KelurahanSeeder::class);
+        // $this->call(ProvinsiSeeder::class);
+        // $this->call(KotaSeeder::class);
+        // $this->call(KecamatanSeeder::class);
+        // $this->call(KelurahanSeeder::class);
 
         \App\Models\User::factory()->create([
             'name' => 'Konsumen',

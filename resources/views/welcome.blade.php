@@ -683,6 +683,17 @@
 		<!--Custom JS-->
 		<script src="{{ asset('master/assets/js/custom.js') }}"></script>
 
+		<script type="text/javascript">
+			function goRegister() {
+				 window.location.replace('{{ route('register') }}');
+			}
+			function goLogin() {
+				 window.location.replace('{{ route('login') }}');
+			}
+			function goDashboard() {
+				 window.location.replace('{{ route('dashboard') }}');
+			}
+		</script>
 
 	</body>
 

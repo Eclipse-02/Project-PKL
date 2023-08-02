@@ -177,7 +177,7 @@
                     <li class="nav-header">KONSUMEN</li>
                     <!-- Registrasi -->
                     <li class="nav-item">
-                        <a href="{{ route('registrasi') }}"
+                        <a href="{{ route('registrasi.create') }}"
                             class="nav-link {{ request()->is('dashboard/registrasi') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,9 +18,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
-Route::get('/dashboard/registrasi', function () {
-    return view('dashboard.konsumen.registrasi');
-})->name('registrasi');
+
+// Route::get('/dashboard/registrasi', function () {
+//     return view('dashboard.konsumen.registrasi');
+// })->name('registrasi');
+
+Route::resource('/dashboard/registrasi', RegisterController::class);
 
 Auth::routes(['verify' => true]);
 
