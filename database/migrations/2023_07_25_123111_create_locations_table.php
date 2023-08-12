@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('provinsis', function (Blueprint $table) {
             $table->id('prov_code');
+            $table->uuid('id');
             $table->string("provinsi");
             $table->boolean("is_active")->nullable();
             $table->string("created_by")->nullable();
@@ -22,6 +23,7 @@ return new class extends Migration
 
         Schema::create('kotas', function (Blueprint $table) {
             $table->id("kota_code");
+            $table->uuid("id");
             $table->string("kota");
             $table->unsignedBigInteger('prov_code');
             $table->boolean("is_active")->nullable();
@@ -33,6 +35,7 @@ return new class extends Migration
 
         Schema::create('kecamatans', function (Blueprint $table) {
             $table->id("kec_code");
+            $table->uuid("id");
             $table->string("kecamatan");
             $table->unsignedBigInteger('kota_code')->unsigned();
             $table->boolean("is_active")->nullable();
@@ -44,6 +47,7 @@ return new class extends Migration
 
         Schema::create('kelurahans', function (Blueprint $table) {
             $table->id("kel_code");
+            $table->uuid("id");
             $table->string("kelurahan");
             $table->unsignedBigInteger('kec_code')->unsigned();
             $table->boolean("is_active")->nullable();

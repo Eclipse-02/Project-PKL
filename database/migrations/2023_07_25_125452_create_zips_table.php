@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('zips', function (Blueprint $table) {
             $table->id("zip_code");
-            $table->string("sub_zip_code");
+            $table->uuid("id");
+            $table->string("sub_zip_code", 5);
             $table->text("zip_desc");
             $table->unsignedBigInteger("prov_code"); // fs_mst_provinsi
             $table->unsignedBigInteger("kota_code"); // fs_mst_kota
             $table->unsignedBigInteger("kec_code"); // fs_mst_kecamatan
             $table->unsignedBigInteger("kel_code"); // fs_mst_kelurahan
-            $table->boolean("is_active")->nullable();
+            $table->boolean("is_active")->nullable()->default(0);
             $table->string("created_by");
             $table->string("updated_by");
             $table->timestamps();
@@ -35,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fs_mst_zip');
+        Schema::dropIfExists('zips');
     }
 };

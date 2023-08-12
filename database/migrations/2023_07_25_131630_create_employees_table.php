@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fs_mst_employees', function (Blueprint $table) {
+        Schema::create('employees', function (Blueprint $table) {
             $table->id("coy_id");
+            $table->uuid("id");
             $table->string("empl_id");
             $table->string("empl_branch"); // fs_mst_branch
             $table->string("empl_nik");
-            $table->string("empl_name"); // fs_mst_kota
+            $table->string("empl_name");
             $table->string("position_code"); // fs_mst_position
             $table->string("empl_up_level"); // fs_mst_employees
             $table->string("empl_status");
@@ -27,15 +28,23 @@ return new class extends Migration
             $table->string("empl_tlp");
             $table->string("empl_hp01");
             $table->string("empl_hp02");
-            $table->string("prov_code"); // fs_mst_provinsi
-            $table->string("kota_code"); // fs_mst_kota
-            $table->string("kec_code"); // fs_mst_kecamatan
-            $table->string("kel_code"); // fs_mst_kelurahan
-            $table->string("zip_code"); // fs_mst_zip
+            $table->unsignedBigInteger("prov_code"); // fs_mst_provinsi
+            $table->unsignedBigInteger("kota_code"); // fs_mst_kota
+            $table->unsignedBigInteger("kec_code"); // fs_mst_kecamatan
+            $table->unsignedBigInteger("kel_code"); // fs_mst_kelurahan
+            $table->integer("zip_code"); // fs_mst_zip
             $table->string("created_by");
             $table->string("updated_by");
             $table->timestamps();
+            $table->foreign("prov_code")->references('prov_code')->on('provinsis')->onDelete('cascade');
+            $table->foreign("kota_code")->references('kota_code')->on('kotas')->onDelete('cascade');
+            $table->foreign("kec_code")->references('kec_code')->on('kecamatans')->onDelete('cascade');
+            $table->foreign("kel_code")->references('kel_code')->on('kelurahans')->onDelete('cascade');
         });
+
+        // Schema::create('employees', function (Blueprint $table) {
+        //     $table->foreign("empl_branch")->references('branch_code')->on('branches')->onDelete('cascade');
+        // });
     }
 
     /**
@@ -43,6 +52,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fs_mst_employees');
+        Schema::dropIfExists('employees');
     }
 };

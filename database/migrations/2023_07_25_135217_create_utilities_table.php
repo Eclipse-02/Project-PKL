@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fs_utl_doc_seqs', function (Blueprint $table) {
+        Schema::create('utilities', function (Blueprint $table) {
             $table->id("coy_id");
+            $table->uuid("id");
             $table->string("branch_code"); // fs_mst_branch
             $table->bigInteger("start_value");
             $table->bigInteger("last_value");
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fs_utl_doc_seqs');
+        Schema::dropIfExists('utilities');
     }
 };

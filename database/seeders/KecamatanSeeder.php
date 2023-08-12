@@ -282,3 +282,4 @@ class KecamatanSeeder extends Seeder
         }
     }
 }
+}

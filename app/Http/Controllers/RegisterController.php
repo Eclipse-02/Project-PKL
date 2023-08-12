@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Register;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class RegisterController extends Controller
 {
@@ -28,7 +30,33 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request->file('image')->store('images');
+        if ($request->hasFile('image')) {
+
+            //get filename with extension
+            $filenamewithextension = $request->file('image')->getClientOriginalName();
+    
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+    
+            //get file extension
+            $extension = $request->file('image')->getClientOriginalExtension();
+    
+            //filename to store
+            $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+    
+            Storage::put('public/images/'. $filenametostore, fopen($request->file('image'), 'r+'));
+            Storage::put('public/images/crop/'. $filenametostore, fopen($request->file('image'), 'r+'));
+    
+            //Crop image here
+            $cropimage = public_path('storage/images/'.$filenametostore);
+            $img = Image::make($request->file('image'))->crop($request->input('w'), $request->input('h'), $request->input('x1'), $request->input('y1'))->save($cropimage);
+    
+            // you can save the below image path in database
+            $path = asset('storage/images/'.$filenametostore);
+    
+            return redirect('dashboard/registrasi/create')->with(['success' => "Image cropped successfully.", 'path' => $path]);
+        }
     }
 
     /**

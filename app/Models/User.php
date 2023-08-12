@@ -2,17 +2,19 @@
 
 namespace App\Models;
 
+use Laravel\Sanctum\HasApiTokens;
+use Laratrust\Contracts\LaratrustUser;
+use Illuminate\Notifications\Notifiable;
+use Laratrust\Traits\HasRolesAndPermissions;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Laratrust\Contracts\LaratrustUser;
-use Laratrust\Traits\HasRolesAndPermissions;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements LaratrustUser, MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, HasRolesAndPermissions;
+
+    protected $primaryKey = 'coy_id';
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +24,6 @@ class User extends Authenticatable implements LaratrustUser, MustVerifyEmail
     protected $fillable = [
         'name',
         'email',
-        'password',
     ];
 
     /**
@@ -44,4 +45,22 @@ class User extends Authenticatable implements LaratrustUser, MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected $dates = [
+        'access_last',
+        'expired_pwd',
+    ];
+
+    function branch() {
+        return $this->hasOne(Branch::class, 'coy_id', 'coy_id');
+    }
+
+    function employee() {
+        return $this->hasOne(Employee::class, 'coy_id', 'coy_id');
+    }
+
+    function uid() {
+        return $this->hasOne(UserUID::class, 'user_id', 'coy_id');
+    }
+
 }

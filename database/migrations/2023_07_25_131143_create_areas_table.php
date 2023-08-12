@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fs_mst_area', function (Blueprint $table) {
+        Schema::create('areas', function (Blueprint $table) {
             $table->id("coy_id");
-            $table->string("area_code");
+            $table->uuid("id");
+            $table->string("area_code", 5);
             $table->string("area_name");
             $table->boolean("is_active")->nullable();
             $table->string("created_by");
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fs_mst_area');
+        Schema::dropIfExists('areas');
     }
 };

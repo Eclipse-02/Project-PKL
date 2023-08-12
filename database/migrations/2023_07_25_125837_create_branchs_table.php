@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fs_mst_branch', function (Blueprint $table) {
+        Schema::create('branches', function (Blueprint $table) {
             $table->id("coy_id");
+            $table->uuid("id");
             $table->string("branch_code");
             $table->string("branch_name");
             $table->string("branch_addr");
@@ -25,7 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger("kec_code"); // fs_mst_kecamatan
             $table->unsignedBigInteger("kel_code"); // fs_mst_kelurahan
             $table->string("zip_code"); // fs_mst_zip
-            $table->string("branch_type");
+            $table->string("branch_type", 2);
             $table->string("area_code"); // fs_mst_area
             $table->boolean("is_active")->nullable();
             $table->string("created_by");
@@ -39,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fs_mst_branch');
+        Schema::dropIfExists('branches');
     }
 };

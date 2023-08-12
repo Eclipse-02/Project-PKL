@@ -685,13 +685,13 @@
 
 		<script type="text/javascript">
 			function goRegister() {
-				 window.location.replace('{{ route('register') }}');
+				window.location.replace('{{ route('register') }}');
 			}
 			function goLogin() {
-				 window.location.replace('{{ route('login') }}');
+				window.location.replace('{{ route('login') }}');
 			}
 			function goDashboard() {
-				 window.location.replace('{{ route('dashboard') }}');
+				window.location.replace('{{ route('dashboard') }}');
 			}
 		</script>
 

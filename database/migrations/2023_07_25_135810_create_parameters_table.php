@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fs_mst_param', function (Blueprint $table) {
+        Schema::create('parameters', function (Blueprint $table) {
             $table->id("coy_id");
+            $table->uuid("id");
             $table->string("key")->index();
             $table->string("value");
             $table->string("notes");
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fs_mst_param');
+        Schema::dropIfExists('parameters');
     }
 };
