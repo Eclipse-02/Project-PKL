@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id("zip_code");
             $table->uuid("id");
             $table->string("sub_zip_code", 5);
-            $table->text("zip_desc");
+            $table->string("zip_desc", 100);
             $table->unsignedBigInteger("prov_code"); // fs_mst_provinsi
             $table->unsignedBigInteger("kota_code"); // fs_mst_kota
             $table->unsignedBigInteger("kec_code"); // fs_mst_kecamatan

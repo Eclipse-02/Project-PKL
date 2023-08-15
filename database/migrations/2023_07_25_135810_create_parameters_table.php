@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('parameters', function (Blueprint $table) {
             $table->id("coy_id");
             $table->uuid("id");
-            $table->string("key")->index();
-            $table->string("value");
-            $table->string("notes");
+            $table->string("key", 100)->index();
+            $table->string("value", 150);
+            $table->string("notes", 200);
             $table->string("created_by");
             $table->string("updated_by");
             $table->timestamps();

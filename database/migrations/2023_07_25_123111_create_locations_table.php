@@ -14,17 +14,17 @@ return new class extends Migration
         Schema::create('provinsis', function (Blueprint $table) {
             $table->id('prov_code');
             $table->uuid('id');
-            $table->string("provinsi");
+            $table->string("provinsi", 100);
             $table->boolean("is_active")->nullable();
-            $table->string("created_by")->nullable();
-            $table->string("updated_by")->nullable();
+            $table->string("created_by");
+            $table->string("updated_by");
             $table->timestamps();
         });
 
         Schema::create('kotas', function (Blueprint $table) {
             $table->id("kota_code");
             $table->uuid("id");
-            $table->string("kota");
+            $table->string("kota", 100);
             $table->unsignedBigInteger('prov_code');
             $table->boolean("is_active")->nullable();
             $table->string("created_by");
@@ -36,7 +36,7 @@ return new class extends Migration
         Schema::create('kecamatans', function (Blueprint $table) {
             $table->id("kec_code");
             $table->uuid("id");
-            $table->string("kecamatan");
+            $table->string("kecamatan", 100);
             $table->unsignedBigInteger('kota_code')->unsigned();
             $table->boolean("is_active")->nullable();
             $table->string("created_by");
@@ -48,7 +48,7 @@ return new class extends Migration
         Schema::create('kelurahans', function (Blueprint $table) {
             $table->id("kel_code");
             $table->uuid("id");
-            $table->string("kelurahan");
+            $table->string("kelurahan", 100);
             $table->unsignedBigInteger('kec_code')->unsigned();
             $table->boolean("is_active")->nullable();
             $table->string("created_by");

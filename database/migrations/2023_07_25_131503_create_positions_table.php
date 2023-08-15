@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('positions', function (Blueprint $table) {
             $table->id("coy_id");
             $table->uuid("id");
-            $table->string("poss_code")->unique();
-            $table->string("poss_name");
+            $table->string("poss_code", 5)->unique();
+            $table->string("poss_name", 60);
             $table->boolean("is_active")->nullable();
             $table->string("created_by");
             $table->string("updated_by");

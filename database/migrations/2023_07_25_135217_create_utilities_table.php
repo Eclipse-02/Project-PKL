@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('utilities', function (Blueprint $table) {
             $table->id("coy_id");
             $table->uuid("id");
-            $table->string("branch_code"); // fs_mst_branch
+            $table->string("branch_code", 5); // fs_mst_branch
             $table->bigInteger("start_value");
             $table->bigInteger("last_value");
             $table->bigInteger("max_value");
             $table->integer("increment_by");
-            $table->string("description");
+            $table->string("description", 50);
             $table->boolean("is_cycle")->nullable();
             $table->string("created_by");
             $table->string("updated_by");

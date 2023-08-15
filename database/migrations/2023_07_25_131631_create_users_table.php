@@ -13,18 +13,18 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id("coy_id");
-            $table->string("empl_id")->nullable(); // fs_mst_employees
-            $table->string("empl_branch")->nullable(); // fs_mst_branch
+            $table->string("empl_id", 15); // fs_mst_employees
+            $table->string("empl_branch", 5); // fs_mst_branch
             $table->timestamp("access_last")->nullable();
             $table->integer("max_session")->nullable();
             $table->date("expired_pwd")->nullable();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('email_verified_at');
             $table->string('password');
             $table->rememberToken();
-            $table->string("created_by")->nullable();
-            $table->string("updated_by")->nullable();
+            $table->string("created_by");
+            $table->string("updated_by");
             $table->timestamps();
         });
 

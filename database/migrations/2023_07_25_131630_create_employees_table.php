@@ -14,25 +14,25 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id("coy_id");
             $table->uuid("id");
-            $table->string("empl_id");
-            $table->string("empl_branch"); // fs_mst_branch
-            $table->string("empl_nik");
-            $table->string("empl_name");
-            $table->string("position_code"); // fs_mst_position
-            $table->string("empl_up_level"); // fs_mst_employees
-            $table->string("empl_status");
+            $table->string("empl_id", 10);
+            $table->string("empl_branch", 5); // fs_mst_branch
+            $table->string("empl_nik", 10);
+            $table->string("empl_name", 30);
+            $table->string("position_code", 10); // fs_mst_position
+            $table->string("empl_up_level", 10)->nullable(); // fs_mst_employees
+            $table->string("empl_status", 2);
             $table->date("empl_eff_date");
-            $table->string("empl_email");
-            $table->string("empl_addr");
-            $table->string("empl_tlp_area");
-            $table->string("empl_tlp");
-            $table->string("empl_hp01");
-            $table->string("empl_hp02");
-            $table->unsignedBigInteger("prov_code"); // fs_mst_provinsi
-            $table->unsignedBigInteger("kota_code"); // fs_mst_kota
-            $table->unsignedBigInteger("kec_code"); // fs_mst_kecamatan
-            $table->unsignedBigInteger("kel_code"); // fs_mst_kelurahan
-            $table->integer("zip_code"); // fs_mst_zip
+            $table->string("empl_email", 25);
+            $table->string("empl_addr", 200)->nullable();
+            $table->string("empl_tlp_area", 5)->nullable();
+            $table->string("empl_tlp", 6)->nullable();
+            $table->string("empl_hp01", 10)->nullable();
+            $table->string("empl_hp02", 10)->nullable();
+            $table->unsignedBigInteger("prov_code")->nullable(); // fs_mst_provinsi
+            $table->unsignedBigInteger("kota_code")->nullable(); // fs_mst_kota
+            $table->unsignedBigInteger("kec_code")->nullable(); // fs_mst_kecamatan
+            $table->unsignedBigInteger("kel_code")->nullable(); // fs_mst_kelurahan
+            $table->string("zip_code", 5)->nullable(); // fs_mst_zip
             $table->string("created_by");
             $table->string("updated_by");
             $table->timestamps();
