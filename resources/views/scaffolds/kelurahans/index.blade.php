@@ -33,6 +33,25 @@
             </thead>
             <tbody>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <select data-column="3" class="form-control filter-select">
+                            <option value="">All</option>
+                                <option value="1">1</option>
+                                <option value="0">0</option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>
@@ -112,6 +131,12 @@
             }).always(function(data) {
                 $('#example').DataTable().draw(false);
             });
+        });
+
+        $('.filter-select').change(function() {
+            table.column( $(this).data('column') )
+                .search( $(this).val() )
+                .draw();
         });
     });
 </script>

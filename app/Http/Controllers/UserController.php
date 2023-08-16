@@ -107,7 +107,7 @@ class UserController extends Controller
             ]);
             UserUID::create(['user_id' => $id->coy_id]);
             Alert::toast('Data Created Successfully!', 'success');
-            return redirect()->route('provinsis.index');
+            return redirect()->route('users.index');
         }
     }
 
@@ -165,7 +165,7 @@ class UserController extends Controller
                 'updated_by' => Auth::user()->name,
             ]);
             Alert::toast('Data Created Successfully!', 'success');
-            return redirect()->route('provinsis.index');
+            return redirect()->route('users.index');
         }
     }
 

@@ -92,7 +92,7 @@ class ParameterController extends Controller
                 'updated_by' => Auth::user()->name,
             ]);
             Alert::toast('Data Created Successfully!', 'success');
-            return redirect()->route('provinsis.index');
+            return redirect()->route('parameters.index');
         }
     }
 
@@ -136,7 +136,7 @@ class ParameterController extends Controller
                 'updated_by' => Auth::user()->name,
             ]);
             Alert::toast('Data Created Successfully!', 'success');
-            return redirect()->route('provinsis.index');
+            return redirect()->route('parameters.index');
         }
     }
 

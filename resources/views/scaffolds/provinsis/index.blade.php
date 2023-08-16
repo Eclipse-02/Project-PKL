@@ -38,10 +38,9 @@
                     <td></td>
                     <td>
                         <select data-column="2" class="form-control filter-select">
-                            <option value="">Select Is Active</option>
-                            @foreach ($active as $i)
-                                <option value="{{ $i->is_active }}">{{ $i->is_active }}</option>
-                            @endforeach
+                            <option value="">All</option>
+                                <option value="1">1</option>
+                                <option value="0">0</option>
                         </select>
                     </td>
                     <td></td>
