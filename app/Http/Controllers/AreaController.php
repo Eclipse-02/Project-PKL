@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Area;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -80,18 +81,19 @@ class AreaController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back();
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            Area::create([
+                'area_code' => $request->area_code,
+                'area_name' => $request->area_name,
+                'is_active' => $request->is_active,
+                'created_by' => Auth::user()->name,
+                'updated_by' => Auth::user()->name,
+            ]);   
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
         }
-
-        Area::create([
-            'area_code' => $request->area_code,
-            'area_name' => $request->area_name,
-            'is_active' => $request->is_active,
-            'created_by' => Auth::user()->name,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        return redirect()->route('areas.index');
     }
 
     /**
@@ -123,14 +125,19 @@ class AreaController extends Controller
             'is_active' => 'required|integer',
         ]);
 
-        $area->update([
-            'area_code' => $request->area_code,
-            'area_name' => $request->area_name,
-            'is_active' => $request->is_active,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        return redirect()->route('areas.index');
+        if ($validator->fails()) {
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $area->update([
+                'area_code' => $request->area_code,
+                'area_name' => $request->area_name,
+                'is_active' => $request->is_active,
+                'updated_by' => Auth::user()->name,
+            ]); 
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
+        }
     }
 
     /**

@@ -1,43 +1,39 @@
 @extends('dashboard.master')
 
-@section('title', 'Create Provinsi')
+@section('title', 'Create Role')
 
 @section('content')
 <div class="row">
     <div class="col-lg-12 mb-3">
-        <a href="{{ route('provinsis.index') }}" class="btn btn-secondary mx-2">Return</a>
+        <a href="{{ route('roles.index') }}" class="btn btn-secondary mx-2">Return</a>
     </div>
     <div class="col-lg-12 mb-3">
-        <form action="{{ route('provinsis.store') }}" method="post">
+        <form action="{{ route('roles.store') }}" method="post">
         @csrf
 
             <div class="row mx-2">
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
-                        <label class="form-label">Provinsi</label>
-                        <input type="text" class="form-control @error('provinsi')is-invalid @enderror" id="provinsi" name="provinsi" placeholder="Provinsi">
-                        @error('provinsi')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <label class="form-label">Role Name</label>
+                        <input type="text" class="form-control form-control-alternative" id="role_name" name="role_name" placeholder="Role Name">
                     </div>
                 </div>
-                <div class="col-lg-12 col-md-6 mb-3">
+                <div class="col-lg-12 col-md-6">
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <input type="text" class="form-control form-control-alternative" id="desc" name="desc" placeholder="Description">
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-6">
                     <label class="form-label">Is Active</label>
                     <div class="custom-control custom-radio">
                         <input class="custom-control-input" id="is_active" value="1" name="is_active" type="radio">
                         <label class="custom-control-label" for="Yes">Yes</label>
                     </div>
-                    <div class="custom-control custom-radio">
+                    <div class="custom-control custom-radio mb-3">
                         <input class="custom-control-input" id="is_active" value="0" name="is_active" type="radio">
                         <label class="custom-control-label" for="No">No</label>
                     </div>
-                    @error('is_active')
-                        <span class="invalid-feedback d-block" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <button type="submit" class="btn btn-primary w-100">Submit</button>

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Branch;
 use App\Models\Zip;
+use App\Models\Branch;
 use App\Models\Employee;
-use App\Models\Provinsi;
 use App\Models\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -102,35 +102,36 @@ class EmployeeController extends Controller
             'zip_code' => 'required|string',
         ]);
 
-        // if ($validator->fails()) {
-        //     return redirect()->back();
-        // }
-
-        Employee::create([
-            'empl_id' => $request->empl_id,
-            'empl_branch' => $request->empl_branch,
-            'empl_nik' => $request->empl_nik,
-            'empl_name' => $request->empl_name,
-            'position_code' => $request->position_code,
-            'empl_up_level' => $request->empl_up_level,
-            'empl_status' => $request->empl_status,
-            'empl_eff_date' => $request->empl_eff_date,
-            'empl_email' => $request->empl_email,
-            'empl_addr' => $request->empl_addr,
-            'empl_tlp_area' => $request->empl_tlp_area,
-            'empl_tlp' => $request->empl_tlp,
-            'empl_hp01' => $request->empl_hp01,
-            'empl_hp02' => $request->empl_hp02,
-            'prov_code' => $request->prov_code,
-            'kota_code' => $request->kota_code,
-            'kec_code' => $request->kec_code,
-            'kel_code' => $request->kel_code,
-            'zip_code' => $request->zip_code,
-            'created_by' => Auth::user()->name,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        return redirect()->route('employees.index');
+        if ($validator->fails()) {
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            Employee::create([
+                'empl_id' => $request->empl_id,
+                'empl_branch' => $request->empl_branch,
+                'empl_nik' => $request->empl_nik,
+                'empl_name' => $request->empl_name,
+                'position_code' => $request->position_code,
+                'empl_up_level' => $request->empl_up_level,
+                'empl_status' => $request->empl_status,
+                'empl_eff_date' => $request->empl_eff_date,
+                'empl_email' => $request->empl_email,
+                'empl_addr' => $request->empl_addr,
+                'empl_tlp_area' => $request->empl_tlp_area,
+                'empl_tlp' => $request->empl_tlp,
+                'empl_hp01' => $request->empl_hp01,
+                'empl_hp02' => $request->empl_hp02,
+                'prov_code' => $request->prov_code,
+                'kota_code' => $request->kota_code,
+                'kec_code' => $request->kec_code,
+                'kel_code' => $request->kel_code,
+                'zip_code' => $request->zip_code,
+                'created_by' => Auth::user()->name,
+                'updated_by' => Auth::user()->name,
+            ]);
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
+        }
     }
 
     /**
@@ -181,29 +182,35 @@ class EmployeeController extends Controller
             'zip_code' => 'required|string',
         ]);
 
-        $employee->update([
-            'empl_id' => $request->empl_id,
-            'empl_branch' => $request->empl_branch,
-            'empl_nik' => $request->empl_nik,
-            'empl_name' => $request->empl_name,
-            'position_code' => $request->position_code,
-            'empl_up_level' => $request->empl_up_level,
-            'empl_status' => $request->empl_status,
-            'empl_eff_date' => $request->empl_eff_date,
-            'empl_email' => $request->empl_email,
-            'empl_addr' => $request->empl_addr,
-            'empl_tlp_area' => $request->empl_tlp_area,
-            'empl_tlp' => $request->empl_tlp,
-            'empl_hp01' => $request->empl_hp01,
-            'empl_hp02' => $request->empl_hp02,
-            'prov_code' => $request->prov_code,
-            'kota_code' => $request->kota_code,
-            'kec_code' => $request->kec_code,
-            'kel_code' => $request->kel_code,
-            'zip_code' => $request->zip_code,
-            'updated_by' => Auth::user()->name,
-        ]);
-
+        if ($validator->fails()) {
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $employee->update([
+                'empl_id' => $request->empl_id,
+                'empl_branch' => $request->empl_branch,
+                'empl_nik' => $request->empl_nik,
+                'empl_name' => $request->empl_name,
+                'position_code' => $request->position_code,
+                'empl_up_level' => $request->empl_up_level,
+                'empl_status' => $request->empl_status,
+                'empl_eff_date' => $request->empl_eff_date,
+                'empl_email' => $request->empl_email,
+                'empl_addr' => $request->empl_addr,
+                'empl_tlp_area' => $request->empl_tlp_area,
+                'empl_tlp' => $request->empl_tlp,
+                'empl_hp01' => $request->empl_hp01,
+                'empl_hp02' => $request->empl_hp02,
+                'prov_code' => $request->prov_code,
+                'kota_code' => $request->kota_code,
+                'kec_code' => $request->kec_code,
+                'kel_code' => $request->kel_code,
+                'zip_code' => $request->zip_code,
+                'updated_by' => Auth::user()->name,
+            ]);
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
+        }
         return redirect()->route('employees.index');
     }
 

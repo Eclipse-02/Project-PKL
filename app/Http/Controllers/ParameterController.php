@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Parameter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -80,18 +81,19 @@ class ParameterController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back();
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            Parameter::create([
+                'key' => $request->key,
+                'value' => $request->value,
+                'notes' => $request->notes,
+                'created_by' => Auth::user()->name,
+                'updated_by' => Auth::user()->name,
+            ]);
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
         }
-
-        Parameter::create([
-            'key' => $request->key,
-            'value' => $request->value,
-            'notes' => $request->notes,
-            'created_by' => Auth::user()->name,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        return redirect()->route('parameters.index');
     }
 
     /**
@@ -123,14 +125,19 @@ class ParameterController extends Controller
             'notes' => 'required|string'
         ]);
 
-        $parameter->update([
-            'key' => $request->key,
-            'value' => $request->value,
-            'notes' => $request->notes,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        return redirect()->route('parameters.index');
+        if ($validator->fails()) {
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $parameter->update([
+                'key' => $request->key,
+                'value' => $request->value,
+                'notes' => $request->notes,
+                'updated_by' => Auth::user()->name,
+            ]);
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
+        }
     }
 
     /**

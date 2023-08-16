@@ -1,6 +1,6 @@
 @extends('dashboard.master')
 
-@section('title', 'Provinsi')
+@section('title', 'Role')
 
 @section('content')
 <div class="row">
@@ -14,14 +14,15 @@
             <li><a class="dropdown-item" href="#">PDF</a></li>
             </ul>
         </div>
-            <a href="{{ route('provinsis.create') }}" class="btn btn-success">Create</a>
+            <a href="{{ route('roles.create') }}" class="btn btn-success">Create</a>
     </div>
     <div class="col-lg-12 mb-3">
         <table id="example" class="table table-striped" style="width:100%">
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Provinsi</th>
+                    <th>Role Name</th>
+                    <th>Description</th>
                     <th>Is Active</th>
                     <th>Created By</th>
                     <th>Created At</th>
@@ -32,25 +33,6 @@
             </thead>
             <tbody>
             </tbody>
-            <tfoot>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <select data-column="2" class="form-control filter-select">
-                            <option value="">Select Is Active</option>
-                            @foreach ($active as $i)
-                                <option value="{{ $i->is_active }}">{{ $i->is_active }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tfoot>
         </table>
     </div>
 </div>
@@ -64,7 +46,7 @@
             serverSide: true,
             scrollX: true,
             ajax: {
-                "url": "{{ route('provinsis.index') }}",
+                "url": "{{ route('roles.index') }}",
 				"type": "GET"
             },
             columns: [{
@@ -74,8 +56,12 @@
                     searchable: false
                 },
                 {
-                    data: "provinsi",
-                    name: "provinsi"
+                    data: "role_name",
+                    name: "role_name"
+                },
+                {
+                    data: "description",
+                    name: "description"
                 },
                 {
                     data: "is_active",
@@ -126,12 +112,6 @@
             }).always(function(data) {
                 $('#example').DataTable().draw(false);
             });
-        });
-
-        $('.filter-select').change(function() {
-            table.column( $(this).data('column') )
-                .search( $(this).val() )
-                .draw();
         });
     });
 </script>

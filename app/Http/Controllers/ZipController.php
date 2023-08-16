@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Zip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -84,22 +85,23 @@ class ZipController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back();
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            Zip::create([
+                'sub_zip_code' => $request->sub_zip_code,
+                'zip_desc' => $request->zip_desc,
+                'prov_code' => $request->prov_code,
+                'kota_code' => $request->kota_code,
+                'kec_code' => $request->kec_code,
+                'kel_code' => $request->kel_code,
+                'is_active' => $request->is_active,
+                'created_by' => Auth::user()->name,
+                'updated_by' => Auth::user()->name,
+            ]);
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
         }
-
-        Zip::create([
-            'sub_zip_code' => $request->sub_zip_code,
-            'zip_desc' => $request->zip_desc,
-            'prov_code' => $request->prov_code,
-            'kota_code' => $request->kota_code,
-            'kec_code' => $request->kec_code,
-            'kel_code' => $request->kel_code,
-            'is_active' => $request->is_active,
-            'created_by' => Auth::user()->name,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        return redirect()->route('zips.index');
     }
 
     /**
@@ -135,18 +137,23 @@ class ZipController extends Controller
             'is_active' => 'required|integer'
         ]);
 
-        $zip->update([
-            'sub_zip_code' => $request->sub_zip_code,
-            'zip_desc' => $request->zip_desc,
-            'prov_code' => $request->prov_code,
-            'kota_code' => $request->kota_code,
-            'kec_code' => $request->kec_code,
-            'kel_code' => $request->kel_code,
-            'is_active' => $request->is_active,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        return redirect()->route('zips.index');
+        if ($validator->fails()) {
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $zip->update([
+                'sub_zip_code' => $request->sub_zip_code,
+                'zip_desc' => $request->zip_desc,
+                'prov_code' => $request->prov_code,
+                'kota_code' => $request->kota_code,
+                'kec_code' => $request->kec_code,
+                'kel_code' => $request->kel_code,
+                'is_active' => $request->is_active,
+                'updated_by' => Auth::user()->name,
+            ]);
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
+        }
     }
 
     /**

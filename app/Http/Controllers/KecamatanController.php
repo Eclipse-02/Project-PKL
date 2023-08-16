@@ -6,6 +6,7 @@ use App\Models\Kota;
 use App\Models\Kecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -82,18 +83,19 @@ class KecamatanController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back();
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            Kecamatan::create([
+                'kecamatan' => $request->kecamatan,
+                'kota_code' => $request->kota_code,
+                'is_active' => $request->is_active,
+                'created_by' => Auth::user()->name,
+                'updated_by' => Auth::user()->name,
+            ]);
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
         }
-
-        Kecamatan::create([
-            'kecamatan' => $request->kecamatan,
-            'kota_code' => $request->kota_code,
-            'is_active' => $request->is_active,
-            'created_by' => Auth::user()->name,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        return redirect()->route('kecamatans.index');
     }
 
     /**
@@ -126,14 +128,19 @@ class KecamatanController extends Controller
             'is_active' => 'required|integer'
         ]);
 
-        $kecamatan->update([
-            'kecamatan' => $request->kecamatan,
-            'kota_code' => $request->kota_code,
-            'is_active' => $request->is_active,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        return redirect()->route('kecamatans.index');
+        if ($validator->fails()) {
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $kecamatan->update([
+                'kecamatan' => $request->kecamatan,
+                'kota_code' => $request->kota_code,
+                'is_active' => $request->is_active,
+                'updated_by' => Auth::user()->name,
+            ]);
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
+        }
     }
 
     /**

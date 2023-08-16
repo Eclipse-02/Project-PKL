@@ -6,6 +6,7 @@ use App\Models\Kota;
 use App\Models\Provinsi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -81,15 +82,20 @@ class KotaController extends Controller
             'is_active' => 'required|integer'
         ]);
 
-        Kota::create([
-            'kota' => $request->kota,
-            'prov_code' => $request->prov_code,
-            'is_active' => $request->is_active,
-            'created_by' => Auth::user()->name,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        return redirect()->route('kotas.index');
+        if ($validator->fails()) {
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            Kota::create([
+                'kota' => $request->kota,
+                'prov_code' => $request->prov_code,
+                'is_active' => $request->is_active,
+                'created_by' => Auth::user()->name,
+                'updated_by' => Auth::user()->name,
+            ]);
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
+        }
     }
 
     /**
@@ -122,14 +128,19 @@ class KotaController extends Controller
             'is_active' => 'required|integer'
         ]);
 
-        $kota->update([
-            'kota' => $request->kota,
-            'prov_code' => $request->prov_code,
-            'is_active' => $request->is_active,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        return redirect()->route('kotas.index');
+        if ($validator->fails()) {
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $kota->update([
+                'kota' => $request->kota,
+                'prov_code' => $request->prov_code,
+                'is_active' => $request->is_active,
+                'updated_by' => Auth::user()->name,
+            ]);
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
+        }
     }
 
     /**

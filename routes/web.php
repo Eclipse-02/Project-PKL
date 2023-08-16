@@ -31,19 +31,21 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::resource('/dashboard/registrasi', RegisterController::class);
-Route::resource('provinsis', ProvinsiController::class);
-Route::resource('kotas', KotaController::class);
-Route::resource('kecamatans', KecamatanController::class);
-Route::resource('kelurahans', KelurahanController::class);
-Route::resource('zips', ZipController::class);
-Route::resource('branchs', BranchController::class);
-Route::resource('parameters', ParameterController::class);
-Route::resource('users', UserController::class);
-Route::resource('employees', EmployeeController::class);
-Route::resource('positions', PositionController::class);
-Route::resource('areas', AreaController::class);
-Route::resource('userroles', UserRoleController::class);
+Route::middleware('auth')->group(function () {
+    Route::resource('/dashboard/registrasi', RegisterController::class);
+    Route::resource('provinsis', ProvinsiController::class);
+    Route::resource('kotas', KotaController::class);
+    Route::resource('kecamatans', KecamatanController::class);
+    Route::resource('kelurahans', KelurahanController::class);
+    Route::resource('zips', ZipController::class);
+    Route::resource('branchs', BranchController::class);
+    Route::resource('parameters', ParameterController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('employees', EmployeeController::class);
+    Route::resource('positions', PositionController::class);
+    Route::resource('areas', AreaController::class);
+    // Route::resource('userroles', UserRoleController::class);
+});
 
 Auth::routes(['verify' => true]);
 

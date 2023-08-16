@@ -13,26 +13,26 @@
 
             <div class="row mx-2">
                 <div class="col-lg-12 col-md-6">
-                    <div class="form-group @error('area_code') has-danger @enderror">
+                    <div class="form-group">
                         <label class="form-label">Area Code</label>
-                        <input type="text" class="form-control form-control-alternative" id="area_code" name="area_code" placeholder="Area Code">
+                        <input type="text" class="form-control @error('area_code')is-invalid @enderror" id="area_code" name="area_code" placeholder="Area Code">
+                        @error('area_code')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('area_code')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
-                    <div class="form-group @error('area_name') has-danger @enderror">
+                    <div class="form-group">
                         <label class="form-label">Area Name</label>
-                        <input type="text" class="form-control form-control-alternative" id="area_name" name="area_name" placeholder="Area Name">
+                        <input type="text" class="form-control @error('area_name')is-invalid @enderror" id="area_name" name="area_name" placeholder="Area Name">
+                        @error('area_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('area_name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <label class="form-label">Is Active</label>
@@ -44,6 +44,11 @@
                         <input class="custom-control-input" id="is_active" value="0" name="is_active" type="radio">
                         <label class="custom-control-label" for="No">No</label>
                     </div>
+                    @error('is_active')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <button type="submit" class="btn btn-primary w-100">Submit</button>

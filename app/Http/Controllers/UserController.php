@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Branch;
 use App\Models\User;
-use App\Models\Employee;
+use App\Models\Branch;
 use App\Models\UserUID;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -90,24 +91,24 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back();
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $id = User::create([
+                'empl_id' => $request->empl_id,
+                'empl_branch' => $request->empl_branch,
+                'max_session' => $request->max_session,
+                'expired_pwd' => $request->expired_pwd,
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'created_by' => Auth::user()->name,
+                'updated_by' => Auth::user()->name,
+            ]);
+            UserUID::create(['user_id' => $id->coy_id]);
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
         }
-
-        $id = User::create([
-            'empl_id' => $request->empl_id,
-            'empl_branch' => $request->empl_branch,
-            'max_session' => $request->max_session,
-            'expired_pwd' => $request->expired_pwd,
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'created_by' => Auth::user()->name,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        UserUID::create(['user_id' => $id->coy_id]);
-
-        return redirect()->route('users.index');
     }
 
     /**
@@ -149,18 +150,23 @@ class UserController extends Controller
             'password' => 'required|string',
         ]);
 
-        $user->update([
-            'empl_id' => $request->empl_id,
-            'empl_branch' => $request->empl_branch,
-            'max_session' => $request->max_session,
-            'expired_pwd' => $request->expired_pwd,
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        return redirect()->route('users.index');
+        if ($validator->fails()) {
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $user->update([
+                'empl_id' => $request->empl_id,
+                'empl_branch' => $request->empl_branch,
+                'max_session' => $request->max_session,
+                'expired_pwd' => $request->expired_pwd,
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'updated_by' => Auth::user()->name,
+            ]);
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
+        }
     }
 
     /**

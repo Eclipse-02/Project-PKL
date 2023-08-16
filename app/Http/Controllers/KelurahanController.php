@@ -6,6 +6,7 @@ use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -82,18 +83,19 @@ class KelurahanController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back();
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            Kelurahan::create([
+                'kelurahan' => $request->kelurahan,
+                'kec_code' => $request->kec_code,
+                'is_active' => $request->is_active,
+                'created_by' => Auth::user()->name,
+                'updated_by' => Auth::user()->name,
+            ]);
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
         }
-
-        Kelurahan::create([
-            'kelurahan' => $request->kelurahan,
-            'kec_code' => $request->kec_code,
-            'is_active' => $request->is_active,
-            'created_by' => Auth::user()->name,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        return redirect()->route('kelurahans.index');
     }
 
     /**
@@ -126,14 +128,19 @@ class KelurahanController extends Controller
             'is_active' => 'required|integer'
         ]);
 
-        $kelurahan->update([
-            'kelurahan' => $request->kelurahan,
-            'kec_code' => $request->kec_code,
-            'is_active' => $request->is_active,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        return redirect()->route('kelurahans.index');
+        if ($validator->fails()) {
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $kelurahan->update([
+                'kelurahan' => $request->kelurahan,
+                'kec_code' => $request->kec_code,
+                'is_active' => $request->is_active,
+                'updated_by' => Auth::user()->name,
+            ]);
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
+        }
     }
 
     /**

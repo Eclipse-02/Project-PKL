@@ -4,13 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Zip;
 use App\Models\Area;
-use App\Models\Kota;
 use App\Models\Branch;
-use App\Models\Provinsi;
-use App\Models\Kecamatan;
-use App\Models\Kelurahan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -99,31 +96,32 @@ class BranchController extends Controller
             'is_active' => 'required|integer',
         ]);
 
-        // if ($validator->fails()) {
-        //     return redirect()->back();
-        // }
-
-        Branch::create([
-            'branch_code' => $request->branch_code,
-            'branch_name' => $request->branch_name,
-            'branch_addr' => $request->branch_addr,
-            'branch_tlp_area' => $request->branch_tlp_area,
-            'branch_tlp' => $request->branch_tlp,
-            'branch_hp01' => $request->branch_hp01,
-            'branch_hp02' => $request->branch_hp02,
-            'prov_code' => $request->prov_code,
-            'kota_code' => $request->kota_code,
-            'kec_code' => $request->kec_code,
-            'kel_code' => $request->kel_code,
-            'zip_code' => $request->zip_code,
-            'branch_type' => $request->branch_type,
-            'area_code' => $request->area_code,
-            'is_active' => $request->is_active,
-            'created_by' => Auth::user()->name,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        return redirect()->route('branchs.index');
+        if ($validator->fails()) {
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            Branch::create([
+                'branch_code' => $request->branch_code,
+                'branch_name' => $request->branch_name,
+                'branch_addr' => $request->branch_addr,
+                'branch_tlp_area' => $request->branch_tlp_area,
+                'branch_tlp' => $request->branch_tlp,
+                'branch_hp01' => $request->branch_hp01,
+                'branch_hp02' => $request->branch_hp02,
+                'prov_code' => $request->prov_code,
+                'kota_code' => $request->kota_code,
+                'kec_code' => $request->kec_code,
+                'kel_code' => $request->kel_code,
+                'zip_code' => $request->zip_code,
+                'branch_type' => $request->branch_type,
+                'area_code' => $request->area_code,
+                'is_active' => $request->is_active,
+                'created_by' => Auth::user()->name,
+                'updated_by' => Auth::user()->name,
+            ]); 
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
+        }
     }
 
     /**
@@ -169,26 +167,31 @@ class BranchController extends Controller
             'is_active' => 'required|integer',
         ]);
 
-        $branch->update([
-            'branch_code' => $request->branch_code,
-            'branch_name' => $request->branch_name,
-            'branch_addr' => $request->branch_addr,
-            'branch_tlp_area' => $request->branch_tlp_area,
-            'branch_tlp' => $request->branch_tlp,
-            'branch_hp01' => $request->branch_hp01,
-            'branch_hp02' => $request->branch_hp02,
-            'prov_code' => $request->prov_code,
-            'kota_code' => $request->kota_code,
-            'kec_code' => $request->kec_code,
-            'kel_code' => $request->kel_code,
-            'zip_code' => $request->zip_code,
-            'branch_type' => $request->branch_type,
-            'area_code' => $request->area_code,
-            'is_active' => $request->is_active,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        return redirect()->route('branchs.index');
+        if ($validator->fails()) {
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $branch->update([
+                'branch_code' => $request->branch_code,
+                'branch_name' => $request->branch_name,
+                'branch_addr' => $request->branch_addr,
+                'branch_tlp_area' => $request->branch_tlp_area,
+                'branch_tlp' => $request->branch_tlp,
+                'branch_hp01' => $request->branch_hp01,
+                'branch_hp02' => $request->branch_hp02,
+                'prov_code' => $request->prov_code,
+                'kota_code' => $request->kota_code,
+                'kec_code' => $request->kec_code,
+                'kel_code' => $request->kel_code,
+                'zip_code' => $request->zip_code,
+                'branch_type' => $request->branch_type,
+                'area_code' => $request->area_code,
+                'is_active' => $request->is_active,
+                'updated_by' => Auth::user()->name,
+            ]);
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
+        }
     }
 
     /**

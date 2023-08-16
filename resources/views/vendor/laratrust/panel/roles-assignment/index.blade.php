@@ -1,9 +1,61 @@
-@extends('laratrust::panel.layout')
+@extends('dashboard.master')
 
 @section('title', 'Roles Assignment')
 
 @section('content')
-  <div class="flex flex-col">
+<div class="row">
+  <div class="col-lg-12 mb-3">
+    <span>User model to assign roles/permissions</span>
+    <label class="d-block w-25">
+      <select class="form-select d-block w-100 mt-1" x-model="model">
+        <option value="initial" disabled selected>Select a user model</option>
+        @foreach ($models as $model)
+          <option value="{{$model}}">{{ucwords($model)}}</option>
+        @endforeach
+      </select>
+    </label>
+  </div>
+  <div class="col-lg-12 mb-3">
+    <table id="example" class="table table-striped" style="width:100%">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th># Roles</th>
+                @if(config('laratrust.panel.assign_permissions_to_user'))<th># Permissions</th>@endif
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($users as $user)
+              <tr>
+                <td>
+                  {{$user->getKey()}}
+                </td>
+                <td>
+                  {{$user->name ?? 'The model doesn\'t have a `name` attribute'}}
+                </td>
+                <td>
+                  {{$user->roles_count}}
+                </td>
+                @if(config('laratrust.panel.assign_permissions_to_user'))
+                <td>
+                  {{$user->permissions_count}}
+                </td>
+                @endif
+                <td>
+                  <a
+                    href="{{route('laratrust.roles-assignment.edit', ['roles_assignment' => $user->getKey(), 'model' => $modelKey])}}"
+                    class="btn btn-primary"
+                  >Edit</a>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+  </div>
+</div>
+  {{-- <div class="flex flex-col">
     <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
       <div
         x-data="{ model: @if($modelKey) '{{$modelKey}}' @else 'initial' @endif }"
@@ -23,7 +75,7 @@
           <table class="min-w-full">
             <thead>
               <tr>
-                <th class="th">Id</th>
+                <th>Id</th>
                 <th class="th">Name</th>
                 <th class="th"># Roles</th>
                 @if(config('laratrust.panel.assign_permissions_to_user'))<th class="th"># Permissions</th>@endif
@@ -64,5 +116,5 @@
 
       </div>
     </div>
-  </div>
+  </div> --}}
 @endsection

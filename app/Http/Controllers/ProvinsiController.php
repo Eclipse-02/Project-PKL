@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Provinsi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,6 +16,7 @@ class ProvinsiController extends Controller
      */
     public function index(Request $request)
     {
+        $active = Provinsi::select('is_active')->groupBy('is_active')->get();
         if ($request->ajax()) {
             $data = Provinsi::all();
             return DataTables::of($data)
@@ -56,8 +58,14 @@ class ProvinsiController extends Controller
                     })
                     ->rawColumns(['action'])
                     ->make(true);
+            // return DataTables::eloquent($data)
+            //     ->filterColumn('provinsi', function($query, $keyword) {
+            //         $sql = "provinsi  like ?";
+            //         $query->whereRaw($sql, ["%{$keyword}%"]);
+            //     })
+            // ->toJson();
         }
-        return view('scaffolds.provinsis.index');
+        return view('scaffolds.provinsis.index', compact('active'));
     }
 
     // public function exportExcel() 
@@ -89,17 +97,18 @@ class ProvinsiController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with('error');
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            Provinsi::create([
+                'provinsi' => $request->provinsi,
+                'is_active' => $request->is_active,
+                'created_by' => Auth::user()->name,
+                'updated_by' => Auth::user()->name,
+            ]);
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
         }
-
-        Provinsi::create([
-            'provinsi' => $request->provinsi,
-            'is_active' => $request->is_active,
-            'created_by' => Auth::user()->name,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        return redirect()->route('provinsis.index');
     }
 
     /**
@@ -130,13 +139,18 @@ class ProvinsiController extends Controller
             'is_active' => 'required|integer'
         ]);
 
-        $provinsi->update([
-            'provinsi' => $request->provinsi,
-            'is_active' => $request->is_active,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        return redirect()->route('provinsis.index');
+        if ($validator->fails()) {
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $provinsi->update([
+                'provinsi' => $request->provinsi,
+                'is_active' => $request->is_active,
+                'updated_by' => Auth::user()->name,
+            ]);    
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('provinsis.index');
+        }
     }
 
     /**
