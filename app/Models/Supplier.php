@@ -6,9 +6,10 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Coy extends Model
+class Supplier extends Model
 {
     use HasFactory;
+
     /**
      * The "booting" function of model
      *
@@ -45,17 +46,33 @@ class Coy extends Model
     }
 
     protected $fillable = [
-        'coy_name',
-        'coy_addr',
-        'empl_tlp_area',
-        'empl_tlp',
-        'empl_hp01',
-        'empl_hp02',
+        'supl_code',
+        'branch_code',
+        'is_active',
+        'supl_status',
+        'supl_name',
+        'supl_type',
+        'supl_sub_type',
+        'supl_pic_name',
+        'poss_code',
+        'supl_id_no',
+        'supl_addr',
+        'supl_tlp_area',
+        'supl_tlp',
+        'supl_hp01',
+        'supl_hp02',
         'prov_code',
         'kota_code',
         'kec_code',
         'kel_code',
         'zip_code',
+        'supl_npwp_no',
+        'supl_npwp_name',
+        'supl_npwp_addr',
+        'supl_desc',
+        'file_name_mou',
+        'file_name_ktp',
+        'file_name_npwp',
         'created_by',
         'updated_by',
     ];
@@ -74,5 +91,13 @@ class Coy extends Model
 
     function kelurahan() {
         return $this->hasOne(Kelurahan::class, 'kel_code', 'kel_code');
+    }
+
+    function zip() {
+        return $this->hasMany(Zip::class, 'zip_code', 'zip_code');
+    }
+
+    function position() {
+        return $this->hasMany(Position::class, 'poss_code', 'poss_code');
     }
 }

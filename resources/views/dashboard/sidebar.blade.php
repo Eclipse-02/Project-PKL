@@ -133,6 +133,96 @@
                     <span class="nav-link-text ms-1">Parameter</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('coys*') ? 'active' : '' }}" href="{{ route('coys.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Coy</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('vaccines*') ? 'active' : '' }}" href="{{ route('vaccines.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Vaccine</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('jobs*') ? 'active' : '' }}" href="{{ route('jobs.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Job</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('edus*') ? 'active' : '' }}" href="{{ route('edus.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Edu</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('countries*') ? 'active' : '' }}" href="{{ route('countries.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Country</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('relations*') ? 'active' : '' }}" href="{{ route('relations.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Relation</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('banks*') ? 'active' : '' }}" href="{{ route('banks.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Bank</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('suppliersubtypes*') ? 'active' : '' }}" href="{{ route('suppliersubtypes.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Supplier Sub Type</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('suppliers*') ? 'active' : '' }}" href="{{ route('suppliers.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Supplier</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('supplieraccs*') ? 'active' : '' }}" href="{{ route('supplieraccs.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Supplier Acc</span>
+                </a>
+            </li>
             @endrole
         </ul>
     </div>

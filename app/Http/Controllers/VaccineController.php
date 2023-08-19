@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Provinsi;
+use App\Models\Vaccine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
-class ProvinsiController extends Controller
+class VaccineController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,16 +17,16 @@ class ProvinsiController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Provinsi::all();
+            $data = Vaccine::all();
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
 
                         if ($row->is_active == 1) {
                             $btn = '
-                            <form action="provinsis/'.$row->id.'" method="POST">
+                            <form action="vaccines/'.$row->id.'" method="POST">
 
-                                <a class="btn btn-info" href="provinsis/'.$row->id.'" >
+                                <a class="btn btn-info" href="vaccines/'.$row->id.'" >
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
                                         <style>svg{fill:#ffffff}</style>
@@ -35,7 +35,7 @@ class ProvinsiController extends Controller
                                 </svg>
                                 </a>
 
-                                <a class="btn btn-primary" href="provinsis/'.$row->id.'/edit" >
+                                <a class="btn btn-primary" href="vaccines/'.$row->id.'/edit" >
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
@@ -56,9 +56,9 @@ class ProvinsiController extends Controller
                             ';
                         } else {
                             $btn = '
-                            <form action="provinsis/'.$row->id.'" method="POST">
+                            <form action="vaccines/'.$row->id.'" method="POST">
     
-                                <a class="btn btn-info" href="provinsis/'.$row->id.'" >
+                                <a class="btn btn-info" href="vaccines/'.$row->id.'" >
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
                                         <style>svg{fill:#ffffff}</style>
@@ -67,7 +67,7 @@ class ProvinsiController extends Controller
                                 </svg>
                                 </a>
     
-                                <a class="btn btn-primary" href="provinsis/'.$row->id.'/edit" >
+                                <a class="btn btn-primary" href="vaccines/'.$row->id.'/edit" >
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
@@ -91,25 +91,15 @@ class ProvinsiController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.provinsis.index');
+        return view('scaffolds.vaccines.index');
     }
-
-    // public function exportExcel() 
-    // {
-    //     return Excel::download(new MereksExport, 'Laporan Merek.xlsx');
-    // }
-
-    // public function exportPDF() 
-    // {
-    //     return Excel::download(new MereksExport, 'Laporan Merek.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
-    // }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('scaffolds.provinsis.create');
+        return view('scaffolds.vaccines.create');
     }
 
     /**
@@ -118,7 +108,7 @@ class ProvinsiController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'provinsi' => 'required|string',
+            'vc_name' => 'required|string',
             'is_active' => 'required|integer'
         ]);
 
@@ -126,42 +116,42 @@ class ProvinsiController extends Controller
             Alert::toast('Oops, Something Wrong Happened!', 'error');
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
-            Provinsi::create([
-                'provinsi' => $request->provinsi,
+            Vaccine::create([
+                'vc_name' => $request->vc_name,
                 'is_active' => $request->is_active,
                 'created_by' => Auth::user()->name,
                 'updated_by' => Auth::user()->name,
             ]);
             Alert::toast('Data Created Successfully!', 'success');
-            return redirect()->route('provinsis.index');
+            return redirect()->route('vaccines.index');
         }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($provinsi)
+    public function show($vaccine)
     {
-        $data = Provinsi::where('id', $provinsi)->first();
-        return view('scaffolds.provinsis.view', compact('data'));
+        $data = Vaccine::where('id', $vaccine)->first();
+        return view('scaffolds.vaccines.view', compact('data'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($provinsi)
+    public function edit($vaccine)
     {
-        $data = Provinsi::where('id', $provinsi)->first();
-        return view('scaffolds.provinsis.edit', compact('data'));
+        $data = Vaccine::where('id', $vaccine)->first();
+        return view('scaffolds.vaccines.edit', compact('data'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Provinsi $provinsi)
+    public function update(Request $request, Vaccine $vaccine)
     {
         $validator = Validator::make($request->all(), [
-            'provinsi' => 'required|string',
+            'vc_name' => 'required|string',
             'is_active' => 'required|integer'
         ]);
 
@@ -169,38 +159,31 @@ class ProvinsiController extends Controller
             Alert::toast('Oops, Something Wrong Happened!', 'error');
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
-            $provinsi->update([
-                'provinsi' => $request->provinsi,
+            $vaccine->update([
+                'vc_name' => $request->vc_name,
                 'is_active' => $request->is_active,
                 'updated_by' => Auth::user()->name,
             ]);    
             Alert::toast('Data Created Successfully!', 'success');
-            return redirect()->route('provinsis.index');
+            return redirect()->route('vaccines.index');
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Provinsi $provinsi)
+    public function destroy(Vaccine $vaccine)
     {
-        if ($provinsi->is_active == 1) {
-            $provinsi->update([
+        if ($vaccine->is_active == 1) {
+            $vaccine->update([
                 'is_active' => 0
             ]);
         } else {
-            $provinsi->update([
+            $vaccine->update([
                 'is_active' => 1
             ]);
         }
 
-        return redirect()->route('provinsis.index');
-    }
-
-    public function api()
-    {
-        $data = Provinsi::select('prov_code', 'provinsi')->get();
-
-        return response()->json($data);
+        return redirect()->route('vaccines.index');
     }
 }

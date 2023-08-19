@@ -24,18 +24,24 @@ class DatabaseSeeder extends Seeder
             'name' => 'Konsumen',
             'email' => 'konsumen@gmail.com',
             'password' => Hash::make('konsumen'),
+            'created_by' => 'Seeder',
+            'updated_by' => 'Seeder',
         ])->addRole('konsumen');
 
         $user2 = User::factory()->create([
             'name' => 'Office',
             'email' => 'office@gmail.com',
             'password' => Hash::make('office'),
+            'created_by' => 'Seeder',
+            'updated_by' => 'Seeder',
         ])->addRole('office');
 
         $user3 = User::factory()->create([
             'name' => 'Agen',
             'email' => 'agen@gmail.com',
             'password' => Hash::make('agen'),
+            'created_by' => 'Seeder',
+            'updated_by' => 'Seeder',
         ])->addRole('agen');
 
         UserUID::create([

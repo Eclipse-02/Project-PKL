@@ -1,6 +1,6 @@
 @extends('dashboard.master')
 
-@section('title', 'Coy')
+@section('title', 'Bank')
 
 @section('content')
 <div class="row">
@@ -14,24 +14,21 @@
             <li><a class="dropdown-item" href="#">PDF</a></li>
             </ul>
         </div>
-            <a href="{{ route('coys.create') }}" class="btn btn-success">Create</a>
+            <a href="{{ route('banks.create') }}" class="btn btn-success">Create</a>
     </div>
     <div class="col-lg-12 mb-3">
         <table id="example" class="table table-striped" style="width:100%">
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Coy Name</th>
-                    <th>Coy Address</th>
-                    <th>Employee Telephone Area</th>
-                    <th>Employee Telephone</th>
-                    <th>Employee Handphone 1</th>
-                    <th>Employee Handphone 2</th>
-                    <th>Provinsi Code</th>
+                    <th>Bank Code</th>
+                    <th>Bank Name</th>
+                    <th>Bank Branch</th>
+                    <th>Prov Code</th>
                     <th>Kota Code</th>
-                    <th>Kecamatan Code</th>
-                    <th>Kelurahan Code</th>
-                    <th>Zip Code</th>
+                    <th>Kec Code</th>
+                    <th>Kel Code</th>
+                    <th>Is Active</th>
                     <th>Created By</th>
                     <th>Created At</th>
                     <th>Updated By</th>
@@ -41,6 +38,30 @@
             </thead>
             <tbody>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <select data-column="9" class="form-control filter-select">
+                            <option value="">All</option>
+                                <option value="1">1</option>
+                                <option value="0">0</option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>
@@ -54,7 +75,7 @@
             serverSide: true,
             scrollX: true,
             ajax: {
-                "url": "{{ route('coys.index') }}",
+                "url": "{{ route('banks.index') }}",
 				"type": "GET"
             },
             columns: [{
@@ -64,28 +85,16 @@
                     searchable: false
                 },
                 {
-                    data: "coy_name",
-                    name: "coy_name"
+                    data: "bank_code",
+                    name: "bank_code"
                 },
                 {
-                    data: "coy_addr",
-                    name: "coy_addr"
+                    data: "bank_name",
+                    name: "bank_name"
                 },
                 {
-                    data: "empl_tlp_area",
-                    name: "empl_tlp_area"
-                },
-                {
-                    data: "empl_tlp",
-                    name: "empl_tlp"
-                },
-                {
-                    data: "empl_hp01",
-                    name: "empl_hp01"
-                },
-                {
-                    data: "empl_hp02",
-                    name: "empl_hp02"
+                    data: "bank_branch",
+                    name: "bank_branch"
                 },
                 {
                     data: "prov_code",
@@ -104,8 +113,8 @@
                     name: "kel_code"
                 },
                 {
-                    data: "zip_code",
-                    name: "zip_code"
+                    data: "is_active",
+                    name: "is_active"
                 },
                 {
                     data: "created_by",
@@ -152,6 +161,12 @@
             }).always(function(data) {
                 $('#example').DataTable().draw(false);
             });
+        });
+
+        $('.filter-select').change(function() {
+            table.column( $(this).data('column') )
+                .search( $(this).val() )
+                .draw();
         });
     });
 </script>

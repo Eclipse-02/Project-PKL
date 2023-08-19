@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Provinsi;
+use App\Models\Bank;
+use App\Models\Supplier;
+use App\Models\SupplierAcc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
-class ProvinsiController extends Controller
+class SupplierAccController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,16 +19,16 @@ class ProvinsiController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Provinsi::all();
+            $data = SupplierAcc::all();
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
 
                         if ($row->is_active == 1) {
                             $btn = '
-                            <form action="provinsis/'.$row->id.'" method="POST">
+                            <form action="supplieraccs/'.$row->id.'" method="POST">
 
-                                <a class="btn btn-info" href="provinsis/'.$row->id.'" >
+                                <a class="btn btn-info" href="supplieraccs/'.$row->id.'" >
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
                                         <style>svg{fill:#ffffff}</style>
@@ -35,7 +37,7 @@ class ProvinsiController extends Controller
                                 </svg>
                                 </a>
 
-                                <a class="btn btn-primary" href="provinsis/'.$row->id.'/edit" >
+                                <a class="btn btn-primary" href="supplieraccs/'.$row->id.'/edit" >
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
@@ -56,9 +58,9 @@ class ProvinsiController extends Controller
                             ';
                         } else {
                             $btn = '
-                            <form action="provinsis/'.$row->id.'" method="POST">
+                            <form action="supplieraccs/'.$row->id.'" method="POST">
     
-                                <a class="btn btn-info" href="provinsis/'.$row->id.'" >
+                                <a class="btn btn-info" href="supplieraccs/'.$row->id.'" >
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
                                         <style>svg{fill:#ffffff}</style>
@@ -67,7 +69,7 @@ class ProvinsiController extends Controller
                                 </svg>
                                 </a>
     
-                                <a class="btn btn-primary" href="provinsis/'.$row->id.'/edit" >
+                                <a class="btn btn-primary" href="supplieraccs/'.$row->id.'/edit" >
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
@@ -91,25 +93,17 @@ class ProvinsiController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.provinsis.index');
+        return view('scaffolds.supplieraccs.index');
     }
-
-    // public function exportExcel() 
-    // {
-    //     return Excel::download(new MereksExport, 'Laporan Merek.xlsx');
-    // }
-
-    // public function exportPDF() 
-    // {
-    //     return Excel::download(new MereksExport, 'Laporan Merek.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
-    // }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('scaffolds.provinsis.create');
+        $suppliers = Supplier::select('supl_code', 'supl_name')->get();
+        $banks = Bank::select('bank_code', 'bank_name')->get();
+        return view('scaffolds.supplieraccs.create', compact('suppliers', 'banks'));
     }
 
     /**
@@ -118,89 +112,106 @@ class ProvinsiController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'provinsi' => 'required|string',
-            'is_active' => 'required|integer'
+            'supl_code' => 'required|string',
+            'bank_code' => 'required|string',
+            'acc_no' => 'required|string',
+            'acc_name' => 'required|string',
+            'acc_desc' => 'required|string',
+            'acc_curr' => 'required|string',
+            'acc_status' => 'required|string',
         ]);
 
         if ($validator->fails()) {
             Alert::toast('Oops, Something Wrong Happened!', 'error');
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
-            Provinsi::create([
-                'provinsi' => $request->provinsi,
-                'is_active' => $request->is_active,
+            SupplierAcc::create([
+                'supl_code' => $request->supl_code,
+                'bank_code' => $request->bank_code,
+                'acc_no' => $request->acc_no,
+                'acc_name' => $request->acc_name,
+                'acc_desc' => $request->acc_desc,
+                'acc_curr' => $request->acc_curr,
+                'acc_status' => $request->acc_status,
                 'created_by' => Auth::user()->name,
                 'updated_by' => Auth::user()->name,
             ]);
             Alert::toast('Data Created Successfully!', 'success');
-            return redirect()->route('provinsis.index');
+            return redirect()->route('supplieraccs.index');
         }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($provinsi)
+    public function show($supplierAcc)
     {
-        $data = Provinsi::where('id', $provinsi)->first();
-        return view('scaffolds.provinsis.view', compact('data'));
+        $data = SupplierAcc::where('id', $supplierAcc)->first();
+        $suppliers = Supplier::select('supl_code', 'supl_name')->get();
+        $banks = Bank::select('bank_code', 'bank_name')->get();
+        return view('scaffolds.supplieraccs.view', compact('data', 'suppliers', 'banks'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($provinsi)
+    public function edit($supplierAcc)
     {
-        $data = Provinsi::where('id', $provinsi)->first();
-        return view('scaffolds.provinsis.edit', compact('data'));
+        $data = SupplierAcc::where('id', $supplierAcc)->first();
+        $$suppliers = Supplier::select('supl_code', 'supl_name')->get();
+        $banks = Bank::select('bank_code', 'bank_name')->get();
+        return view('scaffolds.supplieraccs.edit', compact('data', 'suppliers', 'banks'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Provinsi $provinsi)
+    public function update(Request $request, SupplierAcc $supplierAcc)
     {
         $validator = Validator::make($request->all(), [
-            'provinsi' => 'required|string',
-            'is_active' => 'required|integer'
+            'supl_code' => 'required|string',
+            'bank_code' => 'required|string',
+            'acc_no' => 'required|string',
+            'acc_name' => 'required|string',
+            'acc_desc' => 'required|string',
+            'acc_curr' => 'required|string',
+            'acc_status' => 'required|string',
         ]);
 
         if ($validator->fails()) {
             Alert::toast('Oops, Something Wrong Happened!', 'error');
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
-            $provinsi->update([
-                'provinsi' => $request->provinsi,
-                'is_active' => $request->is_active,
+            $supplierAcc->update([
+                'supl_code' => $request->supl_code,
+                'bank_code' => $request->bank_code,
+                'acc_no' => $request->acc_no,
+                'acc_name' => $request->acc_name,
+                'acc_desc' => $request->acc_desc,
+                'acc_curr' => $request->acc_curr,
+                'acc_status' => $request->acc_status,
                 'updated_by' => Auth::user()->name,
             ]);    
             Alert::toast('Data Created Successfully!', 'success');
-            return redirect()->route('provinsis.index');
+            return redirect()->route('supplieraccs.index');
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Provinsi $provinsi)
+    public function destroy(SupplierAcc $supplierAcc)
     {
-        if ($provinsi->is_active == 1) {
-            $provinsi->update([
+        if ($supplierAcc->is_active == 1) {
+            $supplierAcc->update([
                 'is_active' => 0
             ]);
         } else {
-            $provinsi->update([
+            $supplierAcc->update([
                 'is_active' => 1
             ]);
         }
 
-        return redirect()->route('provinsis.index');
-    }
-
-    public function api()
-    {
-        $data = Provinsi::select('prov_code', 'provinsi')->get();
-
-        return response()->json($data);
+        return redirect()->route('supplieraccs.index');
     }
 }

@@ -6,9 +6,10 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Coy extends Model
+class SupplierSubType extends Model
 {
     use HasFactory;
+
     /**
      * The "booting" function of model
      *
@@ -45,34 +46,10 @@ class Coy extends Model
     }
 
     protected $fillable = [
-        'coy_name',
-        'coy_addr',
-        'empl_tlp_area',
-        'empl_tlp',
-        'empl_hp01',
-        'empl_hp02',
-        'prov_code',
-        'kota_code',
-        'kec_code',
-        'kel_code',
-        'zip_code',
+        'sub_code',
+        'sub_name',
+        'is_active',
         'created_by',
         'updated_by',
     ];
-
-    function provinsi() {
-        return $this->hasOne(Provinsi::class, 'prov_code', 'prov_code');
-    }
-
-    function kota() {
-        return $this->hasOne(Kota::class, 'kota_code', 'kota_code');
-    }
-
-    function kecamatan() {
-        return $this->hasOne(Kecamatan::class, 'kec_code', 'kec_code');
-    }
-
-    function kelurahan() {
-        return $this->hasOne(Kelurahan::class, 'kel_code', 'kel_code');
-    }
 }

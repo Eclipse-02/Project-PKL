@@ -6,9 +6,10 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Coy extends Model
+class Bank extends Model
 {
     use HasFactory;
+
     /**
      * The "booting" function of model
      *
@@ -45,12 +46,10 @@ class Coy extends Model
     }
 
     protected $fillable = [
-        'coy_name',
-        'coy_addr',
-        'empl_tlp_area',
-        'empl_tlp',
-        'empl_hp01',
-        'empl_hp02',
+        'bank_code',
+        'bank_name',
+        'bank_branch',
+        'is_active',
         'prov_code',
         'kota_code',
         'kec_code',
@@ -74,5 +73,9 @@ class Coy extends Model
 
     function kelurahan() {
         return $this->hasOne(Kelurahan::class, 'kel_code', 'kel_code');
+    }
+
+    function zip() {
+        return $this->hasMany(Zip::class, 'zip_code', 'zip_code');
     }
 }
