@@ -13,6 +13,12 @@
 
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">
+                    <label class="form-label">Coy ID</label>
+                    <input type="text" class="form-control form-control-alternative" id="coy_id" name="coy_id" placeholder="Coy ID">
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-6">
+                <div class="form-group">
                     <label class="form-label">Coy Name</label>
                     <input type="text" class="form-control form-control-alternative" id="coy_name" name="coy_name" placeholder="Coy Name">
                 </div>

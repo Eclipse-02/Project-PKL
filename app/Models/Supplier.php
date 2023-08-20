@@ -46,6 +46,7 @@ class Supplier extends Model
     }
 
     protected $fillable = [
+        'coy_id',
         'supl_code',
         'branch_code',
         'is_active',
@@ -99,5 +100,9 @@ class Supplier extends Model
 
     function position() {
         return $this->hasMany(Position::class, 'poss_code', 'poss_code');
+    }
+
+    function coy() {
+        return $this->belongsTo(Coy::class, 'coy_id', 'coy_id');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coy;
 use App\Models\Zip;
 use App\Models\Bank;
 use Illuminate\Http\Request;
@@ -101,7 +102,8 @@ class BankController extends Controller
     public function create()
     {
         $zips = Zip::select('sub_zip_code', 'zip_desc')->get();
-        return view('scaffolds.banks.create', compact('zips'));
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.banks.create', compact('zips', 'coys'));
     }
 
     /**
@@ -110,6 +112,7 @@ class BankController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+        'coy_id' => 'required|integer',
             'bank_code' => 'required|string',
             'bank_name' => 'required|string',
             'bank_branch' => 'required|string',
@@ -126,6 +129,7 @@ class BankController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             Bank::create([
+                'coy_id' => $request->coy_id,
                 'bank_code' => $request->bank_code,
                 'bank_name' => $request->bank_name,
                 'bank_branch' => $request->bank_branch,
@@ -159,7 +163,8 @@ class BankController extends Controller
     {
         $data = Bank::where('id', $bank)->first();
         $zips = Zip::select('sub_zip_code', 'zip_desc')->get();
-        return view('scaffolds.banks.edit', compact('data', 'zips'));
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.banks.edit', compact('data', 'zips', 'coys'));
     }
 
     /**
@@ -168,6 +173,7 @@ class BankController extends Controller
     public function update(Request $request, Bank $bank)
     {
         $validator = Validator::make($request->all(), [
+        'coy_id' => 'required|integer',
             'bank_code' => 'required|string',
             'bank_name' => 'required|string',
             'bank_branch' => 'required|string',
@@ -184,6 +190,7 @@ class BankController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $bank->update([
+                'coy_id' => $request->coy_id,
                 'bank_code' => $request->bank_code,
                 'bank_name' => $request->bank_name,
                 'bank_branch' => $request->bank_branch,

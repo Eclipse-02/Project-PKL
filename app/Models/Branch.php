@@ -46,6 +46,7 @@ class Branch extends Model
     }
 
     protected $fillable = [
+            'coy_id',
             'branch_code',
             'branch_name',
             'branch_addr',
@@ -83,5 +84,9 @@ class Branch extends Model
 
     function zip() {
         return $this->hasMany(Zip::class, 'zip_code', 'zip_code');
+    }
+
+    function coy() {
+        return $this->belongsTo(Coy::class, 'coy_id', 'coy_id');
     }
 }

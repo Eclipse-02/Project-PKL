@@ -16,6 +16,17 @@
             <div class="row mx-2">
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
+                        <label class="form-label">Coy ID</label>
+                        <select class="form-select" id="coy_id" name="coy_id">
+                            <option selected class="text-center">-- Pilih Coy ID --</option>
+                            @foreach ($coys as $k)
+                                <option value="{{ $k->coy_id }}">{{ $k->coy_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-6">
+                    <div class="form-group">
                         <label class="form-label">Branch Code</label>
                         <input type="text" class="form-control form-control-alternative" id="branch_code" name="branch_code" placeholder="Branch Code">
                     </div>
@@ -62,7 +73,7 @@
                         <select class="form-select" id="zip_code" name="zip_code">
                             <option selected class="text-center">-- Pilih Zip --</option>
                             @foreach ($zips as $k)
-                                <option value="{{ $k->sub_zip_code }}">{{ $k->sub_zip_code }} - {{ $k->zip_desc }}</option>
+                                <option value="{{ $k->zip_code }}">{{ $k->sub_zip_code }} - {{ $k->zip_desc }}</option>
                             @endforeach
                         </select>
                     </div>

@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id("coy_id");
+            $table->string("coy_id", 5);
+            $table->uuid("id");
             $table->string("empl_id", 15)->nullable(); // fs_mst_employees
             $table->string("empl_branch", 5)->nullable(); // fs_mst_branch
             $table->timestamp("access_last")->nullable();
@@ -27,15 +28,6 @@ return new class extends Migration
             $table->string("updated_by");
             $table->timestamps();
         });
-
-        Schema::create('users_uid', function (Blueprint $table) {
-            $table->id('uid_id');
-            $table->unsignedBigInteger('user_id');
-            $table->uuid("id");
-            $table->foreign("user_id")->references('coy_id')->on('users')->onDelete('cascade');
-            $table->timestamps();
-        });
-
     }
 
     /**

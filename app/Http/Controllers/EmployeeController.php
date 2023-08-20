@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coy;
 use App\Models\Zip;
 use App\Models\Branch;
 use App\Models\Employee;
@@ -72,7 +73,8 @@ class EmployeeController extends Controller
         $zips = Zip::select('sub_zip_code', 'zip_desc')->get();
         $positions = Position::select('poss_code', 'poss_name')->get();
         $branches = Branch::select('branch_code', 'branch_name')->get();
-        return view('scaffolds.employees.create',  compact('zips', 'positions', 'branches'));
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.employees.create',  compact('zips', 'positions', 'branches', 'coys'));
     }
 
     /**
@@ -81,6 +83,7 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'empl_id' => 'required|string',
             'empl_branch' => 'required|string',
             'empl_nik' => 'required|string',
@@ -107,6 +110,7 @@ class EmployeeController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             Employee::create([
+                'coy_id' => $request->coy_id,
                 'empl_id' => $request->empl_id,
                 'empl_branch' => $request->empl_branch,
                 'empl_nik' => $request->empl_nik,
@@ -152,7 +156,8 @@ class EmployeeController extends Controller
         $zips = Zip::select('sub_zip_code', 'zip_desc')->get();
         $positions = Position::select('poss_code', 'poss_name')->get();
         $branches = Branch::select('branch_code', 'branch_name')->get();
-        return view('scaffolds.employees.edit', compact('data', 'zips', 'positions', 'branches'));
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.employees.edit', compact('data', 'zips', 'positions', 'branches', 'coys'));
     }
 
     /**
@@ -161,7 +166,7 @@ class EmployeeController extends Controller
     public function update(Request $request, Employee $employee)
     {
         $validator = Validator::make($request->all(), [
-            'empl_id' => 'required|string',
+            'coy_id' => 'required|integer',
             'empl_branch' => 'required|string',
             'empl_nik' => 'required|string',
             'empl_name' => 'required|string',
@@ -187,7 +192,7 @@ class EmployeeController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $employee->update([
-                'empl_id' => $request->empl_id,
+                'coy_id' => $request->coy_id,
                 'empl_branch' => $request->empl_branch,
                 'empl_nik' => $request->empl_nik,
                 'empl_name' => $request->empl_name,

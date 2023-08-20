@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coy;
 use App\Models\Parameter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -66,7 +67,8 @@ class ParameterController extends Controller
      */
     public function create()
     {
-        return view('scaffolds.parameters.create');
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.parameters.create', compact('coys'));
     }
 
     /**
@@ -75,6 +77,7 @@ class ParameterController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'key' => 'required|string',
             'value' => 'required|string',
             'notes' => 'required|string'
@@ -85,6 +88,7 @@ class ParameterController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             Parameter::create([
+                'coy_id' => $request->coy_id,
                 'key' => $request->key,
                 'value' => $request->value,
                 'notes' => $request->notes,
@@ -111,7 +115,8 @@ class ParameterController extends Controller
     public function edit($parameter)
     {
         $data = Parameter::where('id', $parameter)->first();
-        return view('scaffolds.parameters.edit', compact('data'));
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.parameters.edit', compact('data', 'coys'));
     }
 
     /**
@@ -120,6 +125,7 @@ class ParameterController extends Controller
     public function update(Request $request, Parameter $parameter)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'key' => 'required|string',
             'value' => 'required|string',
             'notes' => 'required|string'
@@ -130,6 +136,7 @@ class ParameterController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $parameter->update([
+                'coy_id' => $request->coy_id,
                 'key' => $request->key,
                 'value' => $request->value,
                 'notes' => $request->notes,

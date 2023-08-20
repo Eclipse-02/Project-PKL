@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coy;
 use App\Models\Area;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -99,7 +100,8 @@ class AreaController extends Controller
      */
     public function create()
     {
-        return view('scaffolds.areas.create');
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.areas.create', compact('coys'));
     }
 
     /**
@@ -108,6 +110,7 @@ class AreaController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'area_code' => 'required|integer',
             'area_name' => 'required|string',
             'is_active' => 'required|integer',
@@ -118,6 +121,7 @@ class AreaController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             Area::create([
+                'coy_id' => $request->coy_id,
                 'area_code' => $request->area_code,
                 'area_name' => $request->area_name,
                 'is_active' => $request->is_active,
@@ -144,7 +148,8 @@ class AreaController extends Controller
     public function edit($area)
     {
         $data = Area::where('id', $area)->first();
-        return view('scaffolds.areas.edit', compact('data'));
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.areas.edit', compact('data', 'coys'));
     }
 
     /**
@@ -153,6 +158,7 @@ class AreaController extends Controller
     public function update(Request $request, Area $area)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'area_code' => 'required|integer',
             'area_name' => 'required|string',
             'is_active' => 'required|integer',
@@ -163,6 +169,7 @@ class AreaController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $area->update([
+                'coy_id' => $request->coy_id,
                 'area_code' => $request->area_code,
                 'area_name' => $request->area_name,
                 'is_active' => $request->is_active,

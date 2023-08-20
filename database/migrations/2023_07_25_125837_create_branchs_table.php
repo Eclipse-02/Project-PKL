@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('branches', function (Blueprint $table) {
-            $table->id("coy_id");
+            $table->string("coy_id", 5);
             $table->uuid("id");
             $table->string("branch_code", 5);
             $table->string("branch_name", 60);
@@ -25,13 +25,19 @@ return new class extends Migration
             $table->unsignedBigInteger("kota_code"); // fs_mst_kota
             $table->unsignedBigInteger("kec_code"); // fs_mst_kecamatan
             $table->unsignedBigInteger("kel_code"); // fs_mst_kelurahan
-            $table->string("zip_code", 5); // fs_mst_zip
+            $table->unsignedBigInteger("zip_code"); // fs_mst_zip
             $table->string("branch_type", 2);
             $table->string("area_code", 5); // fs_mst_area
             $table->boolean("is_active")->nullable();
             $table->string("created_by");
             $table->string("updated_by");
             $table->timestamps();
+            $table->foreign("coy_id")->references('coy_id')->on('coys')->onDelete('cascade');
+            $table->foreign("prov_code")->references('prov_code')->on('provinsis')->onDelete('cascade');
+            $table->foreign("kota_code")->references('kota_code')->on('kotas')->onDelete('cascade');
+            $table->foreign("kec_code")->references('kec_code')->on('kecamatans')->onDelete('cascade');
+            $table->foreign("kel_code")->references('kel_code')->on('kelurahans')->onDelete('cascade');
+            $table->foreign("zip_code")->references('zip_code')->on('zips')->onDelete('cascade');
         });
     }
 

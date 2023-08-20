@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coy;
 use App\Models\Edu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -99,7 +100,8 @@ class EduController extends Controller
      */
     public function create()
     {
-        return view('scaffolds.edus.create');
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.edus.create', compact('coys'));
     }
 
     /**
@@ -108,6 +110,7 @@ class EduController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'edu_name' => 'required|string',
             'edu_code' => 'required|string',
             'is_active' => 'required|integer'
@@ -118,6 +121,7 @@ class EduController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             Edu::create([
+                'coy_id' => $request->coy_id,
                 'edu_name' => $request->edu_name,
                 'edu_code' => $request->edu_code,
                 'is_active' => $request->is_active,
@@ -144,7 +148,8 @@ class EduController extends Controller
     public function edit($edu)
     {
         $data = Edu::where('id', $edu)->first();
-        return view('scaffolds.edus.edit', compact('data'));
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.edus.edit', compact('data', 'coys'));
     }
 
     /**
@@ -153,6 +158,7 @@ class EduController extends Controller
     public function update(Request $request, Edu $edu)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'edu_name' => 'required|string',
             'edu_code' => 'required|string',
             'is_active' => 'required|integer'
@@ -163,6 +169,7 @@ class EduController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $edu->update([
+                'coy_id' => $request->coy_id,
                 'edu_name' => $request->edu_name,
                 'edu_code' => $request->edu_code,
                 'updated_by' => Auth::user()->name,

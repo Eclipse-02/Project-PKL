@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coy;
 use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -99,7 +100,8 @@ class JobController extends Controller
      */
     public function create()
     {
-        return view('scaffolds.jobs.create');
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.jobs.create', compact('coys'));
     }
 
     /**
@@ -108,6 +110,7 @@ class JobController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'job_name' => 'required|string',
             'job_code' => 'required|string',
             'is_active' => 'required|integer'
@@ -118,6 +121,7 @@ class JobController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             Job::create([
+                'coy_id' => $request->coy_id,
                 'job_name' => $request->job_name,
                 'job_code' => $request->job_code,
                 'is_active' => $request->is_active,
@@ -144,7 +148,8 @@ class JobController extends Controller
     public function edit($job)
     {
         $data = Job::where('id', $job)->first();
-        return view('scaffolds.jobs.edit', compact('data'));
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.jobs.edit', compact('data', 'coys'));
     }
 
     /**
@@ -153,6 +158,7 @@ class JobController extends Controller
     public function update(Request $request, Job $job)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'job_name' => 'required|string',
             'job_code' => 'required|string',
             'is_active' => 'required|integer'
@@ -163,6 +169,7 @@ class JobController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $job->update([
+                'coy_id' => $request->coy_id,
                 'job_name' => $request->job_name,
                 'job_code' => $request->job_code,
                 'updated_by' => Auth::user()->name,

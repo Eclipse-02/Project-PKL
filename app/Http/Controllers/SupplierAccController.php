@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coy;
 use App\Models\Bank;
 use App\Models\Supplier;
 use App\Models\SupplierAcc;
@@ -103,7 +104,8 @@ class SupplierAccController extends Controller
     {
         $suppliers = Supplier::select('supl_code', 'supl_name')->get();
         $banks = Bank::select('bank_code', 'bank_name')->get();
-        return view('scaffolds.supplieraccs.create', compact('suppliers', 'banks'));
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.supplieraccs.create', compact('suppliers', 'banks', 'coys'));
     }
 
     /**
@@ -112,6 +114,7 @@ class SupplierAccController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'supl_code' => 'required|string',
             'bank_code' => 'required|string',
             'acc_no' => 'required|string',
@@ -126,6 +129,7 @@ class SupplierAccController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             SupplierAcc::create([
+                'coy_id' => $request->coy_id,
                 'supl_code' => $request->supl_code,
                 'bank_code' => $request->bank_code,
                 'acc_no' => $request->acc_no,
@@ -160,7 +164,8 @@ class SupplierAccController extends Controller
         $data = SupplierAcc::where('id', $supplierAcc)->first();
         $$suppliers = Supplier::select('supl_code', 'supl_name')->get();
         $banks = Bank::select('bank_code', 'bank_name')->get();
-        return view('scaffolds.supplieraccs.edit', compact('data', 'suppliers', 'banks'));
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.supplieraccs.edit', compact('data', 'suppliers', 'banks', 'coys'));
     }
 
     /**
@@ -169,6 +174,7 @@ class SupplierAccController extends Controller
     public function update(Request $request, SupplierAcc $supplierAcc)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'supl_code' => 'required|string',
             'bank_code' => 'required|string',
             'acc_no' => 'required|string',
@@ -183,6 +189,7 @@ class SupplierAccController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $supplierAcc->update([
+                'coy_id' => $request->coy_id,
                 'supl_code' => $request->supl_code,
                 'bank_code' => $request->bank_code,
                 'acc_no' => $request->acc_no,

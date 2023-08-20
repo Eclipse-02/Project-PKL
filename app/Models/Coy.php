@@ -45,6 +45,7 @@ class Coy extends Model
     }
 
     protected $fillable = [
+        'coy_id',
         'coy_name',
         'coy_addr',
         'empl_tlp_area',

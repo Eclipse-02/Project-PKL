@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coy;
 use App\Models\User;
 use App\Models\Branch;
 use App\Models\UserUID;
@@ -72,7 +73,8 @@ class UserController extends Controller
     {
         $employees = Employee::select('empl_id', 'empl_name')->get();
         $branches = Branch::select('branch_code', 'branch_name')->get();
-        return view('scaffolds.users.create', compact('employees', 'branches'));
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.users.create', compact('employees', 'branches', 'coys'));
     }
 
     /**
@@ -81,6 +83,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'empl_id' => 'required|string',
             'empl_branch' => 'required|string',
             'max_session' => 'required|string',
@@ -95,6 +98,7 @@ class UserController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $id = User::create([
+                'coy_id' => $request->coy_id,
                 'empl_id' => $request->empl_id,
                 'empl_branch' => $request->empl_branch,
                 'max_session' => $request->max_session,
@@ -132,7 +136,8 @@ class UserController extends Controller
         }])->first();
         $employees = Employee::select('empl_id', 'empl_name')->get();
         $branches = Branch::select('branch_code', 'branch_name')->get();
-        return view('scaffolds.users.edit', compact('data', 'employees', 'branches'));
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.users.edit', compact('data', 'employees', 'branches', 'coys'));
     }
 
     /**
@@ -141,6 +146,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'empl_id' => 'required|string',
             'empl_branch' => 'required|string',
             'max_session' => 'required|string',
@@ -155,6 +161,7 @@ class UserController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $user->update([
+                'coy_id' => $request->empl_id,
                 'empl_id' => $request->empl_id,
                 'empl_branch' => $request->empl_branch,
                 'max_session' => $request->max_session,

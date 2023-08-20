@@ -14,11 +14,22 @@
             <div class="row mx-2">
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
+                        <label class="form-label">Coy ID</label>
+                        <select class="form-select" id="coy_id" name="coy_id">
+                            <option selected class="text-center">-- Pilih Coy ID --</option>
+                            @foreach ($coys as $k)
+                                <option value="{{ $k->coy_id }}" {{ old('coy_id') == $k->coy_id ? 'selected' : '' }}>{{ $k->coy_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-6">
+                    <div class="form-group">
                         <label class="form-label">Supplier Code</label>
                         <select class="form-select" id="supl_code" name="supl_code">
                             <option selected class="text-center">-- Pilih Supplier Code --</option>
                             @foreach ($suppliers as $k)
-                                <option value="{{ $k->supl_code }}">{{ $k->supl_name }}</option>
+                                <option value="{{ $k->supl_code }}" {{ old('supl_code') == $k->supl_code ? 'selected' : '' }}>{{ $k->supl_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -29,7 +40,7 @@
                         <select class="form-select" id="bank_code" name="bank_code">
                             <option selected class="text-center">-- Pilih Bank Code --</option>
                             @foreach ($banks as $k)
-                                <option value="{{ $k->bank_code }}">{{ $k->bank_name }}</option>
+                                <option value="{{ $k->bank_code }}" {{ old('bank_code') == $k->bank_code ? 'selected' : '' }}>{{ $k->bank_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -52,12 +63,17 @@
                         <textarea class="form-control form-control-alternative" rows="3" id="acc_desc" name="acc_desc" placeholder="Acc Description">{{ old('acc_desc') }}</textarea>
                     </div>
                 </div>
-                {{-- <div class="col-lg-12 col-md-6">
+                <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Acc Currency</label>
-                        <input type="text" class="form-control" id="acc_no" name="acc_no" placeholder="Acc No" value="{{ old('acc_no') }}">
+                        <input class="form-control" list="datalistOptions" id="acc_curr" name="acc_curr" placeholder="Type to search..." value="{{ old('acc_curr') }}">
+                        <datalist id="datalistOptions">
+                            <option value="IDR">
+                            <option value="USD">
+                            <option value="DLL">
+                        </datalist>
                     </div>
-                </div> --}}
+                </div>
                 <div class="col-lg-12 col-md-6 mb-3">
                     <label class="form-label">Acc Status</label>
                     <div class="custom-control custom-radio">

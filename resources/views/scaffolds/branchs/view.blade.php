@@ -9,11 +9,11 @@
         </div>
         <div class="col-lg-12 mb-3">
             <dl class="row mx-2">
-                <dt class="col-sm-3">ID</dt>
-                <dd class="col-sm-9">{{ $data->coy_id }}</dd>
-
                 <dt class="col-sm-3">UID</dt>
                 <dd class="col-sm-9">{{ $data->id }}</dd>
+
+                <dt class="col-sm-3">Coy ID</dt>
+                <dd class="col-sm-9"> {{ $data->coy->coy_name }} / {{ $data->coy->coy_id }}</dd>
 
                 <dt class="col-sm-3">Branch Code</dt>
                 <dd class="col-sm-9">{{ $data->branch_code }}</dd>
@@ -48,8 +48,8 @@
                 <dt class="col-sm-3">Kelurahan Code</dt>
                 <dd class="col-sm-9">{{ $data->kelurahan->kelurahan }} / {{ $data->kel_code }}</dd>
 
-                <dt class="col-sm-3">Zip Code</dt>
-                <dd class="col-sm-9">{{ $data->zip_code }}</dd>
+                {{-- <dt class="col-sm-3">Zip Code</dt>
+                <dd class="col-sm-9">{{ $data->zip->zip_desc }} / {{ $data->zip->sub_zip_code }}</dd> --}}
 
                 <dt class="col-sm-3">Branch Type</dt>
                 <dd class="col-sm-9">{{ $data->branch_type == 'HO' ? 'Head Office' : 'Branch' }}</dd>

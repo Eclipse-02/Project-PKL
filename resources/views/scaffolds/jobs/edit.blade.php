@@ -15,6 +15,17 @@
             <div class="row mx-2">
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
+                        <label class="form-label">Coy ID</label>
+                        <select class="form-select" id="coy_id" name="coy_id">
+                            <option selected class="text-center">-- Pilih Coy ID --</option>
+                            @foreach ($coys as $k)
+                                <option value="{{ $k->coy_id }}" {{ $data->coy_id == $k->coy_id ? 'selected' : '' }}>{{ $k->coy_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-6">
+                    <div class="form-group">
                         <label class="form-label">Job Code</label>
                         <input type="text" class="form-control" id="job_code" name="job_code" placeholder="Job Code" value="{{ $data->job_code }}">
                     </div>

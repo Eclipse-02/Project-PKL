@@ -20,7 +20,6 @@ use App\Http\Controllers\SupplierAccController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\SupplierSubTypeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\VaccineController;
 use App\Http\Controllers\ZipController;
 use Illuminate\Support\Facades\Auth;
@@ -64,7 +63,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('suppliersubtypes', SupplierSubTypeController::class);
     Route::resource('suppliers', SupplierController::class);
     Route::resource('supplieraccs', SupplierAccController::class);
-    // Route::resource('userroles', UserRoleController::class);
 });
 
 Auth::routes(['verify' => true]);

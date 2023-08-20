@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Zip;
 use App\Models\Area;
 use App\Models\Branch;
+use App\Models\Coy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -101,9 +102,10 @@ class BranchController extends Controller
      */
     public function create()
     {
-        $zips = Zip::select('sub_zip_code', 'zip_desc')->get();
+        $zips = Zip::select('zip_code', 'sub_zip_code', 'zip_desc')->get();
         $areas = Area::select('area_code', 'area_name')->get();
-        return view('scaffolds.branchs.create', compact('zips', 'areas'));
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.branchs.create', compact('zips', 'areas', 'coys'));
     }
 
     /**
@@ -112,7 +114,8 @@ class BranchController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'branch_code' => 'required|integer',
+            'coy_id' => 'required|integer',
+            'branch_code' => 'required|string',
             'branch_name' => 'required|string',
             'branch_addr' => 'required|string',
             'branch_tlp_area' => 'required|string',
@@ -134,6 +137,7 @@ class BranchController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             Branch::create([
+                'coy_id' => $request->coy_id,
                 'branch_code' => $request->branch_code,
                 'branch_name' => $request->branch_name,
                 'branch_addr' => $request->branch_addr,
@@ -153,7 +157,7 @@ class BranchController extends Controller
                 'updated_by' => Auth::user()->name,
             ]); 
             Alert::toast('Data Created Successfully!', 'success');
-            return redirect()->route('provinsis.index');
+            return redirect()->route('branchs.index');
         }
     }
 
@@ -163,6 +167,7 @@ class BranchController extends Controller
     public function show($branch)
     {
         $data = Branch::where('id', $branch)->first();
+        // dd($data);
         return view('scaffolds.branchs.view', compact('data'));
     }
 
@@ -173,8 +178,9 @@ class BranchController extends Controller
     {
         $data = Branch::where('id', $branch)->first();
         $areas = Area::select('area_code', 'area_name')->get();
-        $zips = Zip::select('sub_zip_code', 'zip_desc')->get();
-        return view('scaffolds.branchs.edit', compact('data', 'areas', 'zips'));
+        $zips = Zip::select('zip_code', 'sub_zip_code', 'zip_desc')->get();
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.branchs.edit', compact('data', 'areas', 'zips', 'coys'));
     }
 
     /**
@@ -183,7 +189,8 @@ class BranchController extends Controller
     public function update(Request $request, Branch $branch)
     {
         $validator = Validator::make($request->all(), [
-            'branch_code' => 'required|integer',
+            'coy_id' => 'required|integer',
+            'branch_code' => 'required|string',
             'branch_name' => 'required|string',
             'branch_addr' => 'required|string',
             'branch_tlp_area' => 'required|string',
@@ -205,6 +212,7 @@ class BranchController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $branch->update([
+                'coy_id' => $request->coy_id,
                 'branch_code' => $request->branch_code,
                 'branch_name' => $request->branch_name,
                 'branch_addr' => $request->branch_addr,

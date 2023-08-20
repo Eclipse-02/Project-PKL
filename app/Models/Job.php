@@ -46,10 +46,15 @@ class Job extends Model
     }
 
     protected $fillable = [
+        'coy_id',
         'job_code',
         'job_name',
         'is_active',
         'created_by',
         'updated_by',
     ];
+
+    function coy() {
+        return $this->belongsTo(Coy::class, 'coy_id', 'coy_id');
+    }
 }

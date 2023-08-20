@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coy;
+use App\Models\Zip;
 use App\Models\Branch;
 use App\Models\Position;
 use App\Models\Supplier;
-use App\Models\SupplierSubType;
-use App\Models\Zip;
 use Illuminate\Http\Request;
+use App\Models\SupplierSubType;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
@@ -107,7 +108,8 @@ class SupplierController extends Controller
         $supplierSubTypes = SupplierSubType::select('sub_code', 'sub_name')->get();
         $poss = Position::select('poss_code', 'poss_name')->get();
         $zips = Zip::select('sub_zip_code', 'zip_desc')->get();
-        return view('scaffolds.suppliers.create', compact('branchs', 'supplierSubTypes', 'poss', 'zips'));
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.suppliers.create', compact('branchs', 'supplierSubTypes', 'poss', 'zips', 'coys'));
     }
 
     /**
@@ -116,6 +118,7 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'supl_code' => 'required|string',
             'branch_code' => 'required|string',
             'is_active' => 'required|string',
@@ -149,6 +152,7 @@ class SupplierController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             Supplier::create([
+                'coy_id' => $request->coy_id,
                 'supl_code' => $request->supl_code,
                 'branch_code' => $request->branch_code,
                 'is_active' => $request->is_active,
@@ -207,7 +211,8 @@ class SupplierController extends Controller
         $supplierSubTypes = SupplierSubType::select('sub_code', 'sub_name')->get();
         $poss = Position::select('poss_code', 'poss_name')->get();
         $zips = Zip::select('sub_zip_code', 'zip_desc')->get();
-        return view('scaffolds.suppliers.edit', compact('data', 'branchs', 'supplierSubTypes', 'poss', 'zips'));
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.suppliers.edit', compact('data', 'branchs', 'supplierSubTypes', 'poss', 'zips', 'coys'));
     }
 
     /**
@@ -216,6 +221,7 @@ class SupplierController extends Controller
     public function update(Request $request, Supplier $supplier)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'supl_code' => 'required|string',
             'branch_code' => 'required|string',
             'is_active' => 'required|string',
@@ -250,6 +256,7 @@ class SupplierController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $supplier->update([
+                'coy_id' => $request->coy_id,
                 'supl_code' => $request->supl_code,
                 'branch_code' => $request->branch_code,
                 'is_active' => $request->is_active,

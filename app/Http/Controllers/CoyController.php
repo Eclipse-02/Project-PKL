@@ -77,6 +77,7 @@ class CoyController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'coy_name' => 'required|string',
             'coy_addr' => 'required|string',
             'empl_tlp_area' => 'required|string',
@@ -95,6 +96,7 @@ class CoyController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             Coy::create([
+                'coy_id' => $request->coy_id,
                 'coy_name' => $request->coy_name,
                 'coy_addr' => $request->coy_addr,
                 'empl_tlp_area' => $request->empl_tlp_area,
@@ -139,6 +141,7 @@ class CoyController extends Controller
     public function update(Request $request, Coy $coy)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'coy_name' => 'required|string',
             'coy_addr' => 'required|string',
             'empl_tlp_area' => 'required|string',
@@ -157,6 +160,7 @@ class CoyController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $coy->update([
+                'coy_id' => $request->coy_id,
                 'coy_name' => $request->coy_name,
                 'coy_addr' => $request->coy_addr,
                 'empl_tlp_area' => $request->empl_tlp_area,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coy;
 use App\Models\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -99,7 +100,8 @@ class PositionController extends Controller
      */
     public function create()
     {
-        return view('scaffolds.positions.create');
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.positions.create', compact('coys'));
     }
 
     /**
@@ -108,6 +110,7 @@ class PositionController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'poss_code' => 'required|string',
             'poss_name' => 'required|string',
             'is_active' => 'required|integer'
@@ -118,6 +121,7 @@ class PositionController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             Position::create([
+                'coy_id' => $request->coy_id,
                 'poss_code' => $request->poss_code,
                 'poss_name' => $request->poss_name,
                 'is_active' => $request->is_active,
@@ -144,7 +148,8 @@ class PositionController extends Controller
     public function edit($position)
     {
         $data = Position::where('id', $position)->first();
-        return view('scaffolds.positions.edit', compact('data'));
+        $coys = Coy::select('coy_id', 'coy_name')->get();
+        return view('scaffolds.positions.edit', compact('data', 'coys'));
     }
 
     /**
@@ -153,6 +158,7 @@ class PositionController extends Controller
     public function update(Request $request, Position $position)
     {
         $validator = Validator::make($request->all(), [
+            'coy_id' => 'required|integer',
             'poss_code' => 'required|string',
             'poss_name' => 'required|string',
             'is_active' => 'required|integer'
@@ -163,6 +169,7 @@ class PositionController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $position->update([
+                'coy_id' => $request->coy_id,
                 'poss_code' => $request->poss_code,
                 'poss_name' => $request->poss_name,
                 'is_active' => $request->is_active,

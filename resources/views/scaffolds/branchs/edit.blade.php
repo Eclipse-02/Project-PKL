@@ -15,6 +15,17 @@
             <div class="row mx-2">
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
+                        <label class="form-label">Coy ID</label>
+                        <select class="form-select" id="coy_id" name="coy_id">
+                            <option selected class="text-center">-- Pilih Coy ID --</option>
+                            @foreach ($coys as $k)
+                                <option value="{{ $k->coy_id }}" {{ $data->coy_id == $k->coy_id ? 'selected' : '' }}>{{ $k->coy_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-6">
+                    <div class="form-group">
                         <label class="form-label">Branch Code</label>
                         <input type="text" class="form-control @error('branch_code')is-invalid @enderror" id="branch_code" name="branch_code" placeholder="Branch Code" value="{{ $data->branch_code }}">
                         @error('branch_code')
@@ -96,7 +107,7 @@
                         <select class="form-select @error('zip_code')is-invalid @enderror" id="zip_code" name="zip_code">
                             <option>-- Pilih Zip --</option>
                             @foreach ($zips as $i)
-                                <option value="{{ $i->sub_zip_code }}" {{ $data->zip_code == $i->sub_zip_code ? 'selected' : '' }}>{{ $i->zip_desc }}</option>
+                                <option value="{{ $i->zip_code }}" {{ $data->zip_code == $i->zip_code ? 'selected' : '' }}>{{ $i->sub_zip_code }} - {{ $i->zip_desc }}</option>
                             @endforeach
                         </select>
                         @error('zip_code')

@@ -46,10 +46,15 @@ class Area extends Model
     }
 
     protected $fillable = [
+        'coy_id',
         'area_code',
         'area_name',
         'is_active',
         'created_by',
         'updated_by',
     ];
+
+    function coy() {
+        return $this->belongsTo(Coy::class, 'coy_id', 'coy_id');
+    }
 }

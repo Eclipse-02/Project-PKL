@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Laratrust\Contracts\LaratrustUser;
 use Illuminate\Notifications\Notifiable;
@@ -14,6 +15,41 @@ class User extends Authenticatable implements LaratrustUser, MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, HasRolesAndPermissions;
 
+    /**
+     * The "booting" function of model
+     *
+     * @return void
+     */
+    protected static function boot() {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if ( ! $model->getKey()) {
+                $model->id = (string) Str::uuid();
+            }
+        });
+    }
+
+    /**
+     * Get the value indicating whether the IDs are incrementing.
+     *
+     * @return bool
+     */
+    public function getIncrementing()
+    {
+        return false;
+    }
+
+    /**
+     * Get the auto-incrementing key type.
+     *
+     * @return string
+     */
+    public function getKeyType()
+    {
+        return 'string';
+    }
+
     protected $primaryKey = 'coy_id';
 
     /**
@@ -22,6 +58,7 @@ class User extends Authenticatable implements LaratrustUser, MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
+        'coy_id',
         'name',
         'email',
     ];
@@ -61,6 +98,10 @@ class User extends Authenticatable implements LaratrustUser, MustVerifyEmail
 
     function uid() {
         return $this->hasOne(UserUID::class, 'user_id', 'coy_id');
+    }
+
+    function coy() {
+        return $this->belongsTo(Coy::class, 'coy_id', 'coy_id');
     }
 
 }

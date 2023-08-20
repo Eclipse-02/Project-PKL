@@ -46,10 +46,15 @@ class Parameter extends Model
     }
 
     protected $fillable = [
+            'coy_id',
             'key',
             'value',
             'notes',
             'created_by',
             'updated_by',
     ];
+
+    function coy() {
+        return $this->belongsTo(Coy::class, 'coy_id', 'coy_id');
+    }
 }

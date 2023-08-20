@@ -46,6 +46,7 @@ class Employee extends Model
     }
 
     protected $fillable = [
+            'coy_id',
             'empl_id',
             'empl_branch',
             'empl_nik',
@@ -95,5 +96,9 @@ class Employee extends Model
 
     function zip() {
         return $this->hasOne(Zip::class, 'zip_id', 'zip_id');
+    }
+
+    function coy() {
+        return $this->belongsTo(Coy::class, 'coy_id', 'coy_id');
     }
 }

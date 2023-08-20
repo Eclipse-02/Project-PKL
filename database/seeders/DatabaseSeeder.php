@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\UserUID;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,7 +21,9 @@ class DatabaseSeeder extends Seeder
         // $this->call(KecamatanSeeder::class);
         // $this->call(KelurahanSeeder::class);
 
-        $user1 = User::factory()->create([
+        User::factory()->create([
+            'coy_id' => 1,
+            'id' => Str::uuid(),
             'name' => 'Konsumen',
             'email' => 'konsumen@gmail.com',
             'password' => Hash::make('konsumen'),
@@ -28,7 +31,9 @@ class DatabaseSeeder extends Seeder
             'updated_by' => 'Seeder',
         ])->addRole('konsumen');
 
-        $user2 = User::factory()->create([
+        User::factory()->create([
+            'coy_id' => 1,
+            'id' => Str::uuid(),
             'name' => 'Office',
             'email' => 'office@gmail.com',
             'password' => Hash::make('office'),
@@ -36,24 +41,14 @@ class DatabaseSeeder extends Seeder
             'updated_by' => 'Seeder',
         ])->addRole('office');
 
-        $user3 = User::factory()->create([
+        User::factory()->create([
+            'coy_id' => 1,
+            'id' => Str::uuid(),
             'name' => 'Agen',
             'email' => 'agen@gmail.com',
             'password' => Hash::make('agen'),
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ])->addRole('agen');
-
-        UserUID::create([
-            'user_id' => $user1->coy_id
-        ]);
-
-        UserUID::create([
-            'user_id' => $user2->coy_id
-        ]);
-
-        UserUID::create([
-            'user_id' => $user3->coy_id
-        ]);
     }
 }

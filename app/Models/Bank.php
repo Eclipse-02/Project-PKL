@@ -46,6 +46,7 @@ class Bank extends Model
     }
 
     protected $fillable = [
+        'coy_id',
         'bank_code',
         'bank_name',
         'bank_branch',
@@ -77,5 +78,9 @@ class Bank extends Model
 
     function zip() {
         return $this->hasMany(Zip::class, 'zip_code', 'zip_code');
+    }
+
+    function coy() {
+        return $this->belongsTo(Coy::class, 'coy_id', 'coy_id');
     }
 }
