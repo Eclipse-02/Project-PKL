@@ -19,20 +19,20 @@ class DatabaseSeeder extends Seeder
         $this->call(KecamatanSeeder::class);
         $this->call(KelurahanSeeder::class);
         $this->call(ZipSeeder::class);
+        $this->call(CoySeeder::class);
         $this->call(BranchSeeder::class);
         $this->call(AreaSeeder::class);
         $this->call(PositionSeeder::class);
         $this->call(EmployeeSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(ParameterSeeder::class);
-        $this->call(CoySeeder::class);
         $this->call(VaccineSeeder::class);
         $this->call(JobSeeder::class);
         $this->call(EduSeeder::class);
         $this->call(CountrySeeder::class);
         $this->call(RelationSeeder::class);
         $this->call(BankSeeder::class);
-        $this->call(SupplierSubType::class);
+        $this->call(SupplierSubTypeSeeder::class);
         $this->call(SupplierSeeder::class);
         $this->call(SupplierAccSeeder::class);
     }

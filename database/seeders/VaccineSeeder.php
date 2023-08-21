@@ -14,7 +14,7 @@ class VaccineSeeder extends Seeder
      */
     public function run(): void
     {
-        Vaccine::factory()->create([
+        Vaccine::create([
             'id' => Str::uuid(),
             'vc_code' => 1,
             'vc_name' => 'Vaccine 1',

@@ -14,7 +14,7 @@ class SupplierSubTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        SupplierSubType::factory()->create([
+        SupplierSubType::create([
             'id' => Str::uuid(),
             'sub_code' => 1,
             'sub_name' => 'Sub 1',

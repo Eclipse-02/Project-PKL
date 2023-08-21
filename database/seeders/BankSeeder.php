@@ -14,7 +14,7 @@ class BankSeeder extends Seeder
      */
     public function run(): void
     {
-        Bank::factory()->create([
+        Bank::create([
             'coy_id' => 1,
             'id' => Str::uuid(),
             'bank_code' => 1,

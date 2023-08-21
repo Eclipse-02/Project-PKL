@@ -14,7 +14,7 @@ class ParameterSeeder extends Seeder
      */
     public function run(): void
     {
-        Parameter::factory()->create([
+        Parameter::create([
             'coy_id' => 1,
             'id' => Str::uuid(),
             'key' => '123',

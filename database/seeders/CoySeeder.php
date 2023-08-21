@@ -14,7 +14,7 @@ class CoySeeder extends Seeder
      */
     public function run(): void
     {
-        Coy::factory()->create([
+        Coy::create([
             'coy_id' => 1,
             'id' => Str::uuid(),
             'coy_name' => 'Great Comp .LTD',

@@ -14,7 +14,7 @@ class EduSeeder extends Seeder
      */
     public function run(): void
     {
-        Edu::factory()->create([
+        Edu::create([
             'coy_id' => 1,
             'id' => Str::uuid(),
             'edu_code' => 1,

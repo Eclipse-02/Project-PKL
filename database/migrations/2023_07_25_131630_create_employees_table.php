@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid("id");
             $table->string("empl_id", 10);
             $table->string("empl_branch", 5); // fs_mst_branch
-            $table->string("empl_nik", 10);
+            $table->string("empl_nik", 20);
             $table->string("empl_name", 30);
             $table->string("position_code", 10); // fs_mst_position
             $table->string("empl_up_level", 10)->nullable(); // fs_mst_employees

@@ -14,7 +14,7 @@ class RelationSeeder extends Seeder
      */
     public function run(): void
     {
-        Relation::factory()->create([
+        Relation::create([
             'id' => Str::uuid(),
             'rel_code' => 1,
             'rel_name' => 'Relation 1',

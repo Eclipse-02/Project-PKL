@@ -14,7 +14,7 @@ class SupplierAccSeeder extends Seeder
      */
     public function run(): void
     {
-        SupplierAcc::factory()->create([
+        SupplierAcc::create([
             'coy_id' => 1,
             'id' => Str::uuid(),
             'supl_code' => 1,

@@ -14,7 +14,7 @@ class CountrySeeder extends Seeder
      */
     public function run(): void
     {
-        Country::factory()->create([
+        Country::create([
             'id' => Str::uuid(),
             'con_code' => 1,
             'con_name' => 'Indonesia',

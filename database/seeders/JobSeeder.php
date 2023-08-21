@@ -14,7 +14,7 @@ class JobSeeder extends Seeder
      */
     public function run(): void
     {
-        Job::factory()->create([
+        Job::create([
             'coy_id' => 1,
             'id' => Str::uuid(),
             'job_code' => 1,
