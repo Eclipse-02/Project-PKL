@@ -84,6 +84,7 @@
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Supplier Pic</label>
+                        <img class="supplier-preview img-fluid mb-3">
                         <input type="file" class="form-control form-control-alternative" id="supl_pic_name" name="supl_pic_name" placeholder="Supplier Pic">
                     </div>
                 </div>
@@ -204,18 +205,21 @@
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">File Name MOU</label>
+                        <img class="mou-preview img-fluid mb-3">
                         <input type="file" class="form-control form-control-alternative" id="file_name_mou" name="file_name_mou" placeholder="File Name MOU">
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">File Name KTP</label>
+                        <img class="ktp-preview img-fluid mb-3">
                         <input type="file" class="form-control form-control-alternative" id="file_name_ktp" name="file_name_ktp" placeholder="File Name KTP">
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">File Name NPWP</label>
+                        <img class="npwp-preview img-fluid mb-3">
                         <input type="file" class="form-control form-control-alternative" id="file_name_npwp" name="file_name_npwp" placeholder="File Name NPWP">
                     </div>
                 </div>
@@ -292,6 +296,67 @@
                             })
                         )
                     );
+    });
+
+    $('#supl_pic_name').change(function() {
+        const supl_pic_name = document.querySelector('#supl_pic_name');
+        const supl_pic_namePreview = document.querySelector('.supplier-preview');
+
+        supl_pic_namePreview.style.display = 'block';
+        supl_pic_namePreview.style.height = '200px';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(supl_pic_name.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            supl_pic_namePreview.src = oFREvent.target.result;
+        }
+    });
+
+    $('#file_name_mou').change(function() {
+        const file_name_mou = document.querySelector('#file_name_mou');
+        const file_name_mouPreview = document.querySelector('.mou-preview');
+
+        file_name_mouPreview.style.display = 'block';
+        file_name_mouPreview.style.height = '200px';
+
+        console.log(file_name_mou.files[0]);
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(file_name_mou.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            file_name_mouPreview.src = oFREvent.target.result;
+        }
+    });
+
+    $('#file_name_ktp').change(function() {
+        const file_name_ktp = document.querySelector('#file_name_ktp');
+        const file_name_ktpPreview = document.querySelector('.ktp-preview');
+
+        file_name_ktpPreview.style.display = 'block';
+        file_name_ktpPreview.style.height = '200px';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(file_name_ktp.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            file_name_ktpPreview.src = oFREvent.target.result;
+        }
+    });
+
+    $('#file_name_npwp').change(function() {
+        const file_name_npwp = document.querySelector('#file_name_npwp');
+        const file_name_npwpPreview = document.querySelector('.npwp-preview');
+
+        file_name_npwpPreview.style.display = 'block';
+        file_name_npwpPreview.style.height = '200px';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(file_name_npwp.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            file_name_npwpPreview.src = oFREvent.target.result;
+        }
     });
 </script>
 @endsection

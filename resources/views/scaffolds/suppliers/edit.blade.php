@@ -100,7 +100,7 @@
                         <select class="form-select" id="supl_sub_type" name="supl_sub_type">
                             <option selected class="text-center">-- Pilih Supplier Sub Type --</option>
                             @foreach ($supplierSubTypes as $k)
-                                <option value="{{ $k->sub_code }}" {{ $data->sub_code == $k->sub_code ? 'selected' : '' }}>{{ $k->sub_name }}</option>
+                                <option value="{{ $k->sub_code }}" {{ $data->supl_sub_type == $k->sub_code ? 'selected' : '' }}>{{ $k->sub_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -108,6 +108,8 @@
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Supplier Pic</label>
+                        <input type="hidden" name="old_supl_pic_name" value="{{ $data->supl_pic_name }}">
+                        <img src="{{ asset('storage/supl-img/' . $data->supl_pic_name) }}" class="supplier-preview img-fluid d-block mb-3" style="height: 200px">
                         <input type="file" class="form-control form-control-alternative" id="supl_pic_name" name="supl_pic_name" placeholder="Supplier Pic" value="{{ $data->supl_pic_name }}">
                     </div>
                 </div>
@@ -164,7 +166,7 @@
                         <select class="form-select" id="zip_code" name="zip_code">
                             <option selected class="text-center">-- Pilih Zip --</option>
                             @foreach ($zips as $k)
-                                <option value="{{ $k->sub_zip_code }}" {{ $data->sub_zip_code == $k->sub_zip_code ? 'selected' : '' }}>{{ $k->sub_zip_code }} - {{ $k->zip_desc }}</option>
+                                <option value="{{ $k->sub_zip_code }}" {{ $data->zip_code == $k->sub_zip_code ? 'selected' : '' }}>{{ $k->sub_zip_code }} - {{ $k->zip_desc }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -228,18 +230,24 @@
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">File Name MOU</label>
-                        <input type="file" class="form-control form-control-alternative" id="file_name_mou" name="file_name_mou" placeholder="File Name MOU" value="{{ $data->file_name_mou }}">
+                        <input type="hidden" name="old_file_name_mou" value="{{ $data->file_name_mou }}">
+                        <img src="{{ asset('storage/mous/' . $data->file_name_mou) }}" class="mou-preview img-fluid d-block mb-3" style="height: 200px">
+                        <input type="file" class="form-control form-control-alternative" id="file_name_mou" name="file_name_mou" placeholder="File Name MOU">
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">File Name KTP</label>
-                        <input type="file" class="form-control form-control-alternative" id="file_name_ktp" name="file_name_ktp" placeholder="File Name KTP" value="{{ $data->file_name_ktp }}">
+                        <input type="hidden" name="old_file_name_ktp" value="{{ $data->file_name_ktp }}">
+                        <img src="{{ asset('storage/ktps/' . $data->file_name_ktp) }}" class="ktp-preview img-fluid d-block mb-3" style="height: 200px">
+                        <input type="file" class="form-control form-control-alternative" id="file_name_ktp" name="file_name_ktp" placeholder="File Name KTP">
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">File Name NPWP</label>
+                        <input type="hidden" name="old_file_name_npwp" value="{{ $data->file_name_npwp }}">
+                        <img src="{{ asset('storage/npwps/' . $data->file_name_npwp) }}" class="npwp-preview img-fluid d-block mb-3" style="height: 200px">
                         <input type="file" class="form-control form-control-alternative" id="file_name_npwp" name="file_name_npwp" placeholder="File Name NPWP" value="{{ $data->file_name_npwp }}">
                     </div>
                 </div>
@@ -259,7 +267,6 @@
     $('#kec_code').attr("style", "pointer-events: none; background-color: lightgray;");
     $('#kel_code').attr("style", "pointer-events: none; background-color: lightgray;");
 
-    // $('#zip_code').change(function() {
         var zip_code = $('#zip_code').find(':selected').val();
         console.log(zip_code);
 
@@ -319,6 +326,54 @@
                             })
                         )
                     );
-    // });
+
+    $('#supl_pic_name').change(function() {
+        const supl_pic_name = document.querySelector('#supl_pic_name');
+        const supl_pic_namePreview = document.querySelector('.supplier-preview');
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(supl_pic_name.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            supl_pic_namePreview.src = oFREvent.target.result;
+        }
+    });
+
+    $('#file_name_mou').change(function() {
+        const file_name_mou = document.querySelector('#file_name_mou');
+        const file_name_mouPreview = document.querySelector('.mou-preview');
+
+        console.log(file_name_mou.files[0]);
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(file_name_mou.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            file_name_mouPreview.src = oFREvent.target.result;
+        }
+    });
+
+    $('#file_name_ktp').change(function() {
+        const file_name_ktp = document.querySelector('#file_name_ktp');
+        const file_name_ktpPreview = document.querySelector('.ktp-preview');
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(file_name_ktp.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            file_name_ktpPreview.src = oFREvent.target.result;
+        }
+    });
+
+    $('#file_name_npwp').change(function() {
+        const file_name_npwp = document.querySelector('#file_name_npwp');
+        const file_name_npwpPreview = document.querySelector('.npwp-preview');
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(file_name_npwp.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            file_name_npwpPreview.src = oFREvent.target.result;
+        }
+    });
 </script>
 @endsection

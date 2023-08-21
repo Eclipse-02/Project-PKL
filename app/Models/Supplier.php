@@ -99,7 +99,7 @@ class Supplier extends Model
     }
 
     function position() {
-        return $this->hasMany(Position::class, 'poss_code', 'poss_code');
+        return $this->belongsTo(Position::class, 'poss_code', 'poss_code');
     }
 
     function coy() {

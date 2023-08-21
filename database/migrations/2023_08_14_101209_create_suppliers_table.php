@@ -48,6 +48,7 @@ return new class extends Migration
             $table->foreign("kota_code")->references('kota_code')->on('kotas')->onDelete('cascade');
             $table->foreign("kec_code")->references('kec_code')->on('kecamatans')->onDelete('cascade');
             $table->foreign("kel_code")->references('kel_code')->on('kelurahans')->onDelete('cascade');
+            $table->foreign("poss_code")->references('poss_code')->on('positions')->onDelete('cascade');
         });
     }
 

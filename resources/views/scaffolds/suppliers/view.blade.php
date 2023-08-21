@@ -1,11 +1,11 @@
 @extends('dashboard.master')
 
-@section('title', 'View Branch')
+@section('title', 'View Supplier')
 
 @section('content')
     <div class="row">
         <div class="col-lg-12 mb-3">
-            <a href="{{ route('branchs.index') }}" class="btn btn-secondary mx-2">Return</a>
+            <a href="{{ route('suppliers.index') }}" class="btn btn-secondary mx-2">Return</a>
         </div>
         <div class="col-lg-12 mb-3">
             <dl class="row mx-2">
@@ -22,21 +22,7 @@
                 <dd class="col-sm-9">{{ $data->branch_code }}</dd>
 
                 <dt class="col-sm-3">Supplier Status</dt>
-                <dd class="col-sm-9">
-                    {{ 
-                        if ($data->supl_status == "NW") {
-                            Baru Disimpan
-                        } else if ($data->supl_status == "NA") {
-                            Need Approval
-                        } else if ($data->supl_status == "AP") {
-                            Approved
-                        } else if ($data->supl_status == "CL") {
-                            Close
-                        } else {
-                            Reject
-                        }
-                    }}
-                </dd>
+                <dd class="col-sm-9">@if($data->supl_status == "NW")Baru Disimpan @elseif($data->supl_status == "NA")Need Approval @elseif($data->supl_status == "AP")Approved @elseif($data->supl_status == "CL")Close @else Reject @endif</dd>
 
                 <dt class="col-sm-3">Supplier Type</dt>
                 <dd class="col-sm-9">{{ $data->supl_type == 1 ? 'Company' : 'Individual' }}</dd>
@@ -45,7 +31,9 @@
                 <dd class="col-sm-9">{{ $data->supl_sub_type }}</dd>
 
                 <dt class="col-sm-3">Supplier Pic</dt>
-                <dd class="col-sm-9">{{ $data->supl_pic_name }}</dd>
+                <dd class="col-sm-9">
+                    <img class="img-thumbnail rounded mx-auto" style="height: 200px" src="{{ asset('storage/supl-img/' . $data->supl_pic_name) }}" alt="supplier picture">
+                </dd>
 
                 <dt class="col-sm-3">Position Code</dt>
                 <dd class="col-sm-9">{{ $data->position->poss_code }} / {{ $data->position->poss_name }}</dd>
@@ -93,13 +81,19 @@
                 <dd class="col-sm-9">{{ $data->supl_desc }}</dd>
 
                 <dt class="col-sm-3">File Name MOU</dt>
-                <dd class="col-sm-9">{{ $data->file_name_mou }}</dd>
+                <dd class="col-sm-9">
+                    <img class="img-thumbnail rounded mx-auto" style="height: 200px" src="{{ asset('storage/mous/' . $data->file_name_mou) }}" alt="mou picture">
+                </dd>
 
                 <dt class="col-sm-3">File Name KTP</dt>
-                <dd class="col-sm-9">{{ $data->file_name_ktp }}</dd>
+                <dd class="col-sm-9">
+                    <img class="img-thumbnail rounded mx-auto" style="height: 200px" src="{{ asset('storage/ktps/' . $data->file_name_ktp) }}" alt="ktp picture">
+                </dd>
 
                 <dt class="col-sm-3">File Name NPWP</dt>
-                <dd class="col-sm-9">{{ $data->file_name_npwp }}</dd>
+                <dd class="col-sm-9">
+                    <img class="img-thumbnail rounded mx-auto" style="height: 200px" src="{{ asset('storage/npwps/' . $data->file_name_npwp) }}" alt="npwp picture">
+                </dd>
 
                 <dt class="col-sm-3">Is Active</dt>
                 <dd class="col-sm-9">{{ $data->is_active == 1 ? "Yes" : "No" }}</dd>

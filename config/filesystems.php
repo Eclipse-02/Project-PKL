@@ -71,6 +71,10 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('storage/supl-img') => storage_path('supl/supl-img'),
+        public_path('storage/ktps') => storage_path('supl/files/ktps'),
+        public_path('storage/mous') => storage_path('supl/files/mous'),
+        public_path('storage/npwps') => storage_path('supl/files/npwps'),
     ],
 
 ];

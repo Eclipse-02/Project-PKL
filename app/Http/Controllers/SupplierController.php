@@ -10,6 +10,7 @@ use App\Models\Supplier;
 use Illuminate\Http\Request;
 use App\Models\SupplierSubType;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -125,7 +126,7 @@ class SupplierController extends Controller
             'supl_name' => 'required|string',
             'supl_type' => 'required|string',
             'supl_sub_type' => 'required|string',
-            'supl_pic_name' => 'required|string',
+            'supl_pic_name' => 'required|image|file',
             'poss_code' => 'required|string',
             'supl_id_no' => 'required|string',
             'supl_addr' => 'required|string',
@@ -142,15 +143,19 @@ class SupplierController extends Controller
             'supl_npwp_name' => 'required|string',
             'supl_npwp_addr' => 'required|string',
             'supl_desc' => 'required|string',
-            'file_name_mou' => 'required|string',
-            'file_name_ktp' => 'required|string',
-            'file_name_npwp' => 'required|string',
+            'file_name_mou' => 'required|image|file',
+            'file_name_ktp' => 'required|image|file',
+            'file_name_npwp' => 'required|image|file',
         ]);
 
         if ($validator->fails()) {
             Alert::toast('Oops, Something Wrong Happened!', 'error');
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
+            $request->file('supl_pic_name')->move(storage_path('supl/supl-img'), $request->file('supl_pic_name')->getClientOriginalName());
+            $request->file('file_name_mou')->move(storage_path('supl/files/mous'), $request->file('file_name_mou')->getClientOriginalName());
+            $request->file('file_name_ktp')->move(storage_path('supl/files/ktps'), $request->file('file_name_ktp')->getClientOriginalName());
+            $request->file('file_name_npwp')->move(storage_path('supl/files/npwps'), $request->file('file_name_npwp')->getClientOriginalName());
             Supplier::create([
                 'coy_id' => $request->coy_id,
                 'supl_code' => $request->supl_code,
@@ -160,7 +165,7 @@ class SupplierController extends Controller
                 'supl_name' => $request->supl_name,
                 'supl_type' => $request->supl_type,
                 'supl_sub_type' => $request->supl_sub_type,
-                'supl_pic_name' => $request->supl_pic_name,
+                'supl_pic_name' => $request->file('supl_pic_name')->getClientOriginalName(),
                 'poss_code' => $request->poss_code,
                 'supl_id_no' => $request->supl_id_no,
                 'supl_addr' => $request->supl_addr,
@@ -176,10 +181,10 @@ class SupplierController extends Controller
                 'supl_npwp_no' => $request->supl_npwp_no,
                 'supl_npwp_name' => $request->supl_npwp_name,
                 'supl_npwp_addr' => $request->supl_npwp_addr,
+                'file_name_mou' => $request->file('file_name_mou')->getClientOriginalName(),
+                'file_name_ktp' => $request->file('file_name_ktp')->getClientOriginalName(),
+                'file_name_npwp' => $request->file('file_name_npwp')->getClientOriginalName(),
                 'supl_desc' => $request->supl_desc,
-                'file_name_mou' => $request->file_name_mou,
-                'file_name_ktp' => $request->file_name_ktp,
-                'file_name_npwp' => $request->file_name_npwp,
                 'created_by' => Auth::user()->name,
                 'updated_by' => Auth::user()->name,
             ]);
@@ -229,7 +234,7 @@ class SupplierController extends Controller
             'supl_name' => 'required|string',
             'supl_type' => 'required|string',
             'supl_sub_type' => 'required|string',
-            'supl_pic_name' => 'required|string',
+            'supl_pic_name' => 'image|file',
             'poss_code' => 'required|string',
             'supl_id_no' => 'required|string',
             'supl_addr' => 'required|string',
@@ -246,15 +251,39 @@ class SupplierController extends Controller
             'supl_npwp_name' => 'required|string',
             'supl_npwp_addr' => 'required|string',
             'supl_desc' => 'required|string',
-            'file_name_mou' => 'required|string',
-            'file_name_ktp' => 'required|string',
-            'file_name_npwp' => 'required|string',
+            'file_name_mou' => 'image|file',
+            'file_name_ktp' => 'image|file',
+            'file_name_npwp' => 'image|file',
         ]);
 
         if ($validator->fails()) {
             Alert::toast('Oops, Something Wrong Happened!', 'error');
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
+            if ($request->file('supl_pic_name')) {
+                unlink(storage_path('supl/supl-img/' . $request->old_supl_pic_name));
+                $request->file('supl_pic_name')->move(storage_path('supl/supl-img'), $request->file('supl_pic_name')->getClientOriginalName());
+                $supplier->update(['supl_pic_name' => $request->file('supl_pic_name')->getClientOriginalName()]);
+            }
+            
+            if ($request->file('file_name_mou')) {
+                unlink(storage_path('supl/files/mous/' . $request->old_file_name_mou));
+                $request->file('file_name_mou')->move(storage_path('supl/files/mous'), $request->file('file_name_mou')->getClientOriginalName());
+                $supplier->update(['file_name_mou' => $request->file('file_name_mou')->getClientOriginalName()]);
+            }
+            
+            if ($request->file('file_name_ktp')) {
+                unlink(storage_path('supl/files/ktps/' . $request->old_file_name_ktp));
+                $request->file('file_name_ktp')->move(storage_path('supl/files/ktps'), $request->file('file_name_ktp')->getClientOriginalName());
+                $supplier->update(['file_name_ktp' => $request->file('file_name_ktp')->getClientOriginalName()]);
+            }
+            
+            if ($request->file('file_name_npwp')) {
+                unlink(storage_path('supl/files/npwps/' . $request->old_file_name_npwp));
+                $request->file('file_name_npwp')->move(storage_path('supl/files/npwps'), $request->file('file_name_npwp')->getClientOriginalName());
+                $supplier->update(['file_name_npwp' => $request->file('file_name_npwp')->getClientOriginalName()]);
+            }
+
             $supplier->update([
                 'coy_id' => $request->coy_id,
                 'supl_code' => $request->supl_code,
@@ -264,7 +293,6 @@ class SupplierController extends Controller
                 'supl_name' => $request->supl_name,
                 'supl_type' => $request->supl_type,
                 'supl_sub_type' => $request->supl_sub_type,
-                'supl_pic_name' => $request->supl_pic_name,
                 'poss_code' => $request->poss_code,
                 'supl_id_no' => $request->supl_id_no,
                 'supl_addr' => $request->supl_addr,
@@ -281,11 +309,8 @@ class SupplierController extends Controller
                 'supl_npwp_name' => $request->supl_npwp_name,
                 'supl_npwp_addr' => $request->supl_npwp_addr,
                 'supl_desc' => $request->supl_desc,
-                'file_name_mou' => $request->file_name_mou,
-                'file_name_ktp' => $request->file_name_ktp,
-                'file_name_npwp' => $request->file_name_npwp,
                 'updated_by' => Auth::user()->name,
-            ]);    
+            ]);
             Alert::toast('Data Created Successfully!', 'success');
             return redirect()->route('suppliers.index');
         }
