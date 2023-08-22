@@ -115,15 +115,15 @@
                     <span class="nav-link-text ms-1">User</span>
                 </a>
             </li>
-            {{-- <li class="nav-item">
-                <a class="nav-link {{ request()->is('userroles*') ? 'active' : '' }}" href="{{ route('userroles.index') }}">
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('userroles*') ? 'active' : '' }}" href="{{ url('userroles') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-user-tag text-danger text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">User Role</span>
                 </a>
-            </li> --}}
+            </li>
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('parameters*') ? 'active' : '' }}" href="{{ route('parameters.index') }}">
                     <div
