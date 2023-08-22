@@ -5,7 +5,7 @@
 @section('content')
 <div class="row">
   <div class="col-lg-12 mb-3">
-      <a href="{{ route('areas.index') }}" class="btn btn-secondary mx-2">Return</a>
+      <a href="{{ url('userroles') }}" class="btn btn-secondary mx-2">Return</a>
   </div>
   <div class="col-lg-12 mb-3">
     <form

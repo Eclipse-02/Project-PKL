@@ -50,7 +50,7 @@ class User extends Authenticatable implements LaratrustUser, MustVerifyEmail
         return 'string';
     }
 
-    protected $primaryKey = 'coy_id';
+    protected $primaryKey = 'empl_id';
 
     /**
      * The attributes that are mass assignable.
