@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Supplier;
-use App\Models\SupplierSubType;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

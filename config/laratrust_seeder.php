@@ -26,6 +26,7 @@ return [
             'employee' => 'c,r,u,d',
             'user' => 'c,r,u,d',
             'userrole' => 'c,r,u,d',
+            'rolepermission' => 'c,r,u,d',
             'parameter' => 'c,r,u,d',
             'coy' => 'c,r,u,d',
             'vaccine' => 'c,r,u,d',
