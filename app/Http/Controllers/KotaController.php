@@ -110,6 +110,7 @@ class KotaController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'kota_code' => 'required|integer',
             'kota' => 'required|string',
             'prov_code' => 'required|integer',
             'is_active' => 'required|integer'
@@ -120,6 +121,7 @@ class KotaController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             Kota::create([
+                'kota_code' => $request->kota_code,
                 'kota' => $request->kota,
                 'prov_code' => $request->prov_code,
                 'is_active' => $request->is_active,
@@ -156,6 +158,7 @@ class KotaController extends Controller
     public function update(Request $request, Kota $kota)
     {
         $validator = Validator::make($request->all(), [
+            'kota_code' => 'required|integer',
             'kota' => 'required|string',
             'prov_code' => 'required|integer',
             'is_active' => 'required|integer'
@@ -166,6 +169,7 @@ class KotaController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $kota->update([
+                'kota_code' => $request->kota_code,
                 'kota' => $request->kota,
                 'prov_code' => $request->prov_code,
                 'is_active' => $request->is_active,

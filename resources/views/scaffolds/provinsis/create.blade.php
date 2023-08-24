@@ -14,6 +14,17 @@
             <div class="row mx-2">
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
+                        <label class="form-label">Prov Code</label>
+                        <input type="text" class="form-control @error('prov_code')is-invalid @enderror" id="prov_code" name="prov_code" placeholder="Prov Code" value="{{ old('prov_code') }}">
+                        @error('prov_code')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-6">
+                    <div class="form-group">
                         <label class="form-label">Provinsi</label>
                         <input type="text" class="form-control @error('provinsi')is-invalid @enderror" id="provinsi" name="provinsi" placeholder="Provinsi" value="{{ old('provinsi') }}">
                         @error('provinsi')

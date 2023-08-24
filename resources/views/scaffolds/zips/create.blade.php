@@ -15,57 +15,103 @@
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Zip Code</label>
-                        <input type="text" maxlength="5" class="form-control form-control-alternative" id="sub_zip_code" name="sub_zip_code" placeholder="Max 5 Numbers">
+                        <input type="text" class="form-control @error('zip_code')is-invalid @enderror" id="zip_code" name="zip_code" placeholder="Zip Code" value="{{ old('zip_code') }}">
+                        @error('zip_code')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-6">
+                    <div class="form-group">
+                        <label class="form-label">Sub Zip Code</label>
+                        <input type="text" maxlength="5" class="form-control @error('sub_zip_code')is-invalid @enderror" id="sub_zip_code" name="sub_zip_code" placeholder="Max 5 Numbers" value="{{ old('sub_zip_code') }}">
+                        @error('sub_zip_code')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Zip Desc</label>
-                        <textarea class="form-control form-control-alternative" rows="3" placeholder="Write some descriptions here..." name="zip_desc" id="zip_desc"></textarea>
+                        <textarea class="form-control @error('zip_desc')is-invalid @enderror" rows="3" placeholder="Write some descriptions here..." name="zip_desc" id="zip_desc">{{ old('zip_desc') }}</textarea>
+                        @error('zip_desc')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Provinsi</label>
-                        <select class="form-select" id="prov_code" name="prov_code">
-                            <option selected class="text-center">-- Pilih Provinsi --</option>
+                        <select class="form-select @error('prov_code')is-invalid @enderror" id="prov_code" name="prov_code">
+                            <option class="text-center" selected disabled>-- Pilih Provinsi --</option>
                         </select>
+                        @error('prov_code')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Kota</label>
-                        <select class="form-select" id="kota_code" name="kota_code" disabled>
-                            <option selected class="text-center">-- Pilih Provinsi Terlebih Dahulu --</option>
+                        <select class="form-select @error('kota_code')is-invalid @enderror" id="kota_code" name="kota_code" disabled>
+                            <option class="text-center" selected disabled>-- Pilih Provinsi Terlebih Dahulu --</option>
                         </select>
+                        @error('kota_code')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Kecamatan</label>
-                        <select class="form-select" id="kec_code" name="kec_code" disabled>
-                            <option selected class="text-center">-- Pilih Kota Terlebih Dahulu --</option>
+                        <select class="form-select @error('kec_code')is-invalid @enderror" id="kec_code" name="kec_code" disabled>
+                            <option class="text-center" selected disabled>-- Pilih Kota Terlebih Dahulu --</option>
                         </select>
+                        @error('kec_code')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Kelurahan</label>
-                        <select class="form-select" id="kel_code" name="kel_code" disabled>
-                            <option selected class="text-center">-- Pilih Kecamatan Terlebih Dahulu --</option>
+                        <select class="form-select @error('kel_code')is-invalid @enderror" id="kel_code" name="kel_code" disabled>
+                            <option class="text-center" selected disabled>-- Pilih Kecamatan Terlebih Dahulu --</option>
                         </select>
+                        @error('kel_code')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
-                <div class="col-lg-12 col-md-6">
+                <div class="col-lg-12 col-md-6 mb-3">
                     <label class="form-label">Is Active</label>
                     <div class="custom-control custom-radio">
-                        <input class="custom-control-input" id="is_active" value="1" name="is_active" type="radio">
+                        <input class="custom-control-input" id="is_active" value="1" name="is_active" type="radio" {{ old('is_active') == 1 ? 'checked' : '' }}>
                         <label class="custom-control-label" for="Yes">Yes</label>
                     </div>
-                    <div class="custom-control custom-radio mb-3">
-                        <input class="custom-control-input" id="is_active" value="0" name="is_active" type="radio">
+                    <div class="custom-control custom-radio">
+                        <input class="custom-control-input" id="is_active" value="0" name="is_active" type="radio" {{ old('is_active') == 0 ? 'checked' : '' }}>
                         <label class="custom-control-label" for="No">No</label>
                     </div>
+                    @error('is_active')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <button type="submit" class="btn btn-primary w-100">Submit</button>
@@ -98,10 +144,10 @@
         $('#kec_code').prop('disabled', true);
         $('#kel_code').prop('disabled', true);
 
-        $("#kota_code").append("<option selected class='text-center'>-- Pilih Kecamatan --</option>");
-        $("#kec_code").append("<option selected class='text-center'>-- Pilih Kota Terlebih Dahulu --</option>");
+        $("#kota_code").append("<option class='text-center' selected disabled>-- Pilih Kecamatan --</option>");
+        $("#kec_code").append("<option class='text-center' selected disabled>-- Pilih Kota Terlebih Dahulu --</option>");
         $("#kel_code").append(
-            "<option selected class='text-center'>-- Pilih Kecamatan Terlebih Dahulu --</option>"
+            "<option class='text-center' selected disabled>-- Pilih Kecamatan Terlebih Dahulu --</option>"
         );
 
         fetch(`http://127.0.0.1:8000/api/v1/kotas?code=` + prov_code)
@@ -122,9 +168,9 @@
         $('#kec_code').prop('disabled', false);
         $('#kel_code').prop('disabled', true);
 
-        $("#kec_code").append("<option selected class='text-center'>-- Pilih Kecamatan --</option>");
+        $("#kec_code").append("<option class='text-center' selected disabled>-- Pilih Kecamatan --</option>");
         $("#kel_code").append(
-            "<option selected class='text-center'>-- Pilih Kecamatan Terlebih Dahulu --</option>"
+            "<option class='text-center' selected disabled>-- Pilih Kecamatan Terlebih Dahulu --</option>"
         );
 
         fetch(`http://127.0.0.1:8000/api/v1/kecamatans?code=` + kota_code)
@@ -144,7 +190,7 @@
         $('#kel_code').prop('disabled', false);
 
         $("#kel_code").append(
-            "<option selected class='text-center'>-- Pilih Kelurahan --</option>"
+            "<option class='text-center' selected disabled>-- Pilih Kelurahan --</option>"
         );
 
         fetch(`http://127.0.0.1:8000/api/v1/kelurahans?code=` + kecamatan_code)

@@ -46,6 +46,7 @@ class Kecamatan extends Model
     }
 
     protected $fillable = [
+        'kec_code',
         'kecamatan',
         'kota_code',
         'is_active',

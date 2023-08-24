@@ -108,7 +108,8 @@ class ZipController extends Controller
     public function store(Request $request)
 {
         $validator = Validator::make($request->all(), [
-            'sub_zip_code' => 'required|string',
+            'zip_code' => 'required|integer',
+            'sub_zip_code' => 'required|integer',
             'zip_desc' => 'required|string',
             'prov_code' => 'required|integer',
             'kota_code' => 'required|integer',
@@ -122,6 +123,7 @@ class ZipController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             Zip::create([
+                'zip_code' => $request->zip_code,
                 'sub_zip_code' => $request->sub_zip_code,
                 'zip_desc' => $request->zip_desc,
                 'prov_code' => $request->prov_code,
@@ -161,7 +163,8 @@ class ZipController extends Controller
     public function update(Request $request, Zip $zip)
     {
         $validator = Validator::make($request->all(), [
-            'sub_zip_code' => 'required|string',
+            'zip_code' => 'required|integer',
+            'sub_zip_code' => 'required|integer',
             'zip_desc' => 'required|string',
             'prov_code' => 'required|integer',
             'kota_code' => 'required|integer',
@@ -175,6 +178,7 @@ class ZipController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $zip->update([
+                'zip_code' => $request->zip_code,
                 'sub_zip_code' => $request->sub_zip_code,
                 'zip_desc' => $request->zip_desc,
                 'prov_code' => $request->prov_code,

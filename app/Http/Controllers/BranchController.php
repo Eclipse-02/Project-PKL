@@ -102,7 +102,7 @@ class BranchController extends Controller
      */
     public function create()
     {
-        $zips = Zip::select('zip_code', 'sub_zip_code', 'zip_desc')->get();
+        $zips = Zip::select('zip_code', 'zip_desc')->get();
         $areas = Area::select('area_code', 'area_name')->get();
         $coys = Coy::select('coy_id', 'coy_name')->get();
         return view('scaffolds.branchs.create', compact('zips', 'areas', 'coys'));
@@ -178,7 +178,7 @@ class BranchController extends Controller
     {
         $data = Branch::where('id', $branch)->first();
         $areas = Area::select('area_code', 'area_name')->get();
-        $zips = Zip::select('zip_code', 'sub_zip_code', 'zip_desc')->get();
+        $zips = Zip::select('zip_code', 'zip_desc')->get();
         $coys = Coy::select('coy_id', 'coy_name')->get();
         return view('scaffolds.branchs.edit', compact('data', 'areas', 'zips', 'coys'));
     }

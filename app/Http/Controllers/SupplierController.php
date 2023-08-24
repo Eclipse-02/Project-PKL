@@ -108,7 +108,7 @@ class SupplierController extends Controller
         $branchs = Branch::select('branch_code', 'branch_name')->get();
         $supplierSubTypes = SupplierSubType::select('sub_code', 'sub_name')->get();
         $poss = Position::select('poss_code', 'poss_name')->get();
-        $zips = Zip::select('sub_zip_code', 'zip_desc')->get();
+        $zips = Zip::select('zip_code', 'zip_desc')->get();
         $coys = Coy::select('coy_id', 'coy_name')->get();
         return view('scaffolds.suppliers.create', compact('branchs', 'supplierSubTypes', 'poss', 'zips', 'coys'));
     }
@@ -202,7 +202,7 @@ class SupplierController extends Controller
         $branchs = Branch::select('branch_code', 'branch_name')->get();
         $supplierSubTypes = SupplierSubType::select('sub_code', 'sub_name')->get();
         $poss = Position::select('poss_code', 'poss_name')->get();
-        $zips = Zip::select('sub_zip_code', 'zip_desc')->get();
+        $zips = Zip::select('zip_code', 'zip_desc')->get();
         return view('scaffolds.suppliers.view', compact('data', 'branchs', 'supplierSubTypes', 'poss', 'zips'));
     }
 
@@ -215,7 +215,7 @@ class SupplierController extends Controller
         $branchs = Branch::select('branch_code', 'branch_name')->get();
         $supplierSubTypes = SupplierSubType::select('sub_code', 'sub_name')->get();
         $poss = Position::select('poss_code', 'poss_name')->get();
-        $zips = Zip::select('sub_zip_code', 'zip_desc')->get();
+        $zips = Zip::select('zip_code', 'zip_desc')->get();
         $coys = Coy::select('coy_id', 'coy_name')->get();
         return view('scaffolds.suppliers.edit', compact('data', 'branchs', 'supplierSubTypes', 'poss', 'zips', 'coys'));
     }

@@ -21,6 +21,7 @@
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Country Code</th>
                     <th>Country Name</th>
                     <th>Is Active</th>
                     <th>Created By</th>
@@ -36,8 +37,9 @@
                 <tr>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td>
-                        <select data-column="3" class="form-control filter-select">
+                        <select data-column="4" class="form-control filter-select">
                             <option value="">All</option>
                                 <option value="1">1</option>
                                 <option value="0">0</option>
@@ -71,6 +73,10 @@
                     name: "DT_RowIndex",
                     orderable: true,
                     searchable: false
+                },
+                {
+                    data: "con_code",
+                    name: "con_code"
                 },
                 {
                     data: "con_name",

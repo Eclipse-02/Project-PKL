@@ -21,6 +21,7 @@
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Coy ID</th>
                     <th>Employee ID</th>
                     <th>Employee Branch</th>
                     <th>Access Last</th>
@@ -58,6 +59,10 @@
                     name: "DT_RowIndex",
                     orderable: true,
                     searchable: false
+                },
+                {
+                    data: "coy_id",
+                    name: "coy_id"
                 },
                 {
                     data: "empl_id",

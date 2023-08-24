@@ -21,6 +21,7 @@
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Kel Code</th>
                     <th>Kelurahan</th>
                     <th>Kecamatan Code</th>
                     <th>Is Active</th>
@@ -38,8 +39,9 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td>
-                        <select data-column="3" class="form-control filter-select">
+                        <select data-column="5" class="form-control filter-select">
                             <option value="">All</option>
                                 <option value="1">1</option>
                                 <option value="0">0</option>
@@ -73,6 +75,10 @@
                     name: "DT_RowIndex",
                     orderable: true,
                     searchable: false
+                },
+                {
+                    data: "kel_code",
+                    name: "kel_code"
                 },
                 {
                     data: "kelurahan",

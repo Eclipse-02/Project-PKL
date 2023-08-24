@@ -22,6 +22,7 @@
                 <tr>
                     <th>No</th>
                     <th>Zip Code</th>
+                    <th>Sub Zip Code</th>
                     <th>Zip Desc</th>
                     <th>Prov Code</th>
                     <th>Kota Code</th>
@@ -46,8 +47,9 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td>
-                        <select data-column="7" class="form-control filter-select">
+                        <select data-column="8" class="form-control filter-select">
                             <option value="">All</option>
                                 <option value="1">1</option>
                                 <option value="0">0</option>
@@ -81,6 +83,10 @@
                     name: "DT_RowIndex",
                     orderable: true,
                     searchable: false
+                },
+                {
+                    data: "zip_code",
+                    name: "zip_code"
                 },
                 {
                     data: "sub_zip_code",

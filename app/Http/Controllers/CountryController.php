@@ -108,6 +108,7 @@ class CountryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'con_code' => 'required|integer',
             'con_name' => 'required|string',
             'is_active' => 'required|integer'
         ]);
@@ -117,6 +118,7 @@ class CountryController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             Country::create([
+                'con_code' => $request->con_code,
                 'con_name' => $request->con_name,
                 'is_active' => $request->is_active,
                 'created_by' => Auth::user()->name,
@@ -151,6 +153,7 @@ class CountryController extends Controller
     public function update(Request $request, Country $country)
     {
         $validator = Validator::make($request->all(), [
+            'con_code' => 'required|integer',
             'con_name' => 'required|string',
             'is_active' => 'required|integer'
         ]);
@@ -160,6 +163,7 @@ class CountryController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $country->update([
+                'con_code' => $request->con_code,
                 'con_name' => $request->con_name,
                 'is_active' => $request->is_active,
                 'updated_by' => Auth::user()->name,

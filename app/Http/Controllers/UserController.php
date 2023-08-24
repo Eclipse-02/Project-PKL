@@ -109,7 +109,6 @@ class UserController extends Controller
                 'created_by' => Auth::user()->name,
                 'updated_by' => Auth::user()->name,
             ]);
-            UserUID::create(['user_id' => $id->coy_id]);
             Alert::toast('Data Created Successfully!', 'success');
             return redirect()->route('users.index');
         }
@@ -179,13 +178,9 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $uid = UserUID::select('user_id')->where('id', $id)->first();
-
-        UserUID::where('id', $id)->delete();
-
-        User::where('coy_id', $uid->user_id)->delete();
+        $user->delete();
 
         return redirect()->route('users.index');
     }

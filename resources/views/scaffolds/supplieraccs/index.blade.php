@@ -21,6 +21,7 @@
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Coy ID</th>
                     <th>Supplier Code</th>
                     <th>Bank Code</th>
                     <th>Acc No</th>
@@ -58,6 +59,10 @@
                     name: "DT_RowIndex",
                     orderable: true,
                     searchable: false
+                },
+                {
+                    data: "coy_id",
+                    name: "coy_id"
                 },
                 {
                     data: "supl_code",

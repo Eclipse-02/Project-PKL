@@ -21,6 +21,7 @@
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Coy ID</th>
                     <th>Key</th>
                     <th>Value</th>
                     <th>Notes</th>
@@ -54,6 +55,10 @@
                     name: "DT_RowIndex",
                     orderable: true,
                     searchable: false
+                },
+                {
+                    data: "coy_id",
+                    name: "coy_id"
                 },
                 {
                     data: "key",

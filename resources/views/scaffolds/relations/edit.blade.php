@@ -15,18 +15,34 @@
             <div class="row mx-2">
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
-                        <label class="form-label">Relation Name</label>
-                        <input type="text" class="form-control" id="rel_name" name="rel_name" placeholder="Relation Name" value="{{ $data->rel_name }}">
+                        <label class="form-label">Relation Code</label>
+                        <input type="text" class="form-control @error('rel_code')is-invalid @enderror" id="rel_code" name="rel_code" placeholder="Relation Code" value="{{ old('rel_code') ? old('rel_code') : $data->rel_code }}">
                     </div>
+                    @error('rel_code')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="col-lg-12 col-md-6">
+                    <div class="form-group">
+                        <label class="form-label">Relation Name</label>
+                        <input type="text" class="form-control @error('rel_name')is-invalid @enderror" id="rel_name" name="rel_name" placeholder="Relation Name" value="{{ old('rel_name') ? old('rel_name') : $data->rel_name }}">
+                    </div>
+                    @error('rel_name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <label class="form-label">Is Active</label>
                     <div class="custom-control custom-radio">
-                        <input class="custom-control-input" id="is_active" value="1" name="is_active" type="radio" {{ $data->is_active == 1 ? 'checked' : '' }}>
+                        <input class="custom-control-input" id="is_active" value="1" name="is_active" type="radio" {{ old('is_active') ? (old('is_active') == 1 ? 'checked' : '') : ($data->is_active == 1 ? 'checked' : '') }}>
                         <label class="custom-control-label" for="Yes">Yes</label>
                     </div>
                     <div class="custom-control custom-radio mb-3">
-                        <input class="custom-control-input" id="is_active" value="0" name="is_active" type="radio" {{ $data->is_active == 0 ? 'checked' : '' }}>
+                        <input class="custom-control-input" id="is_active" value="0" name="is_active" type="radio" {{ old('is_active') ? (old('is_active') == 0 ? 'checked' : '') : ($data->is_active == 0 ? 'checked' : '') }}>
                         <label class="custom-control-label" for="No">No</label>
                     </div>
                     @error('is_active')

@@ -21,6 +21,7 @@
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Coy ID</th>
                     <th>Branch Code</th>
                     <th>Branch Name</th>
                     <th>Branch Address</th>
@@ -62,8 +63,9 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td>
-                        <select data-column="16" class="form-control filter-select">
+                        <select data-column="17" class="form-control filter-select">
                             <option value="">All</option>
                             <option value="1">1</option>
                             <option value="0">0</option>
@@ -97,6 +99,10 @@
                     name: "DT_RowIndex",
                     orderable: true,
                     searchable: false
+                },
+                {
+                    data: "coy_id",
+                    name: "coy_id"
                 },
                 {
                     data: "branch_code",

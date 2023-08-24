@@ -46,6 +46,7 @@ class Kota extends Model
     }
 
     protected $fillable = [
+        'kota_code',
         'kota',
         'prov_code',
         'is_active',

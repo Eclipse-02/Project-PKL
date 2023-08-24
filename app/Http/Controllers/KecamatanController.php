@@ -110,6 +110,7 @@ class KecamatanController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'kec_code' => 'required|integer',
             'kecamatan' => 'required|string',
             'kota_code' => 'required|integer',
             'is_active' => 'required|integer'
@@ -120,6 +121,7 @@ class KecamatanController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             Kecamatan::create([
+                'kec_code' => $request->kec_code,
                 'kecamatan' => $request->kecamatan,
                 'kota_code' => $request->kota_code,
                 'is_active' => $request->is_active,
@@ -156,6 +158,7 @@ class KecamatanController extends Controller
     public function update(Request $request, Kecamatan $kecamatan)
     {
         $validator = Validator::make($request->all(), [
+            'kec_code' => 'required|integer',
             'kecamatan' => 'required|string',
             'kota_code' => 'required|integer',
             'is_active' => 'required|integer'
@@ -166,6 +169,7 @@ class KecamatanController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $kecamatan->update([
+                'kec_code' => $request->kec_code,
                 'kecamatan' => $request->kecamatan,
                 'kota_code' => $request->kota_code,
                 'is_active' => $request->is_active,

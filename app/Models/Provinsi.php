@@ -47,6 +47,7 @@ class Provinsi extends Model
     }
 
     protected $fillable = [
+        'prov_code',
         'provinsi',
         'is_active',
         'created_by',

@@ -14,86 +14,146 @@
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">
                     <label class="form-label">Coy ID</label>
-                    <input type="text" class="form-control form-control-alternative" id="coy_id" name="coy_id" placeholder="Coy ID">
+                    <input type="text" class="form-control @error('coy_id')is-invalid @enderror" id="coy_id" name="coy_id" placeholder="Coy ID" value="{{ old('coy_id') }}">
                 </div>
+                @error('coy_id')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">
                     <label class="form-label">Coy Name</label>
-                    <input type="text" class="form-control form-control-alternative" id="coy_name" name="coy_name" placeholder="Coy Name">
+                    <input type="text" class="form-control @error('coy_name')is-invalid @enderror" id="coy_name" name="coy_name" placeholder="Coy Name" value="{{ old('coy_name') }}">
                 </div>
+                @error('coy_name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">
                     <label class="form-label">Coy Address</label>
-                    <textarea class="form-control" id="coy_addr" name="coy_addr" placeholder="Type your company address..." rows="3"></textarea>
+                    <textarea class="form-control @error('coy_addr')is-invalid @enderror" id="coy_addr" name="coy_addr" placeholder="Type your company address..." rows="3">{{ old('coy_addr') }}</textarea>
+                    @error('coy_addr')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">
                     <label class="form-label">Employee Telephone Area</label>
-                    <input type="text" class="form-control form-control-alternative" id="empl_tlp_area" name="empl_tlp_area" placeholder="Employee Telephone Area">
+                    <input type="text" class="form-control @error('empl_tlp_area')is-invalid @enderror" id="empl_tlp_area" name="empl_tlp_area" placeholder="Employee Telephone Area" value="{{ old('empl_tlp_area') }}">
                 </div>
+                @error('empl_tlp_area')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">
                     <label class="form-label">Employee Telephone</label>
-                    <input type="text" class="form-control form-control-alternative" id="empl_tlp" name="empl_tlp" placeholder="Employee Telephone">
+                    <input type="text" class="form-control @error('empl_tlp')is-invalid @enderror" id="empl_tlp" name="empl_tlp" placeholder="Employee Telephone" value="{{ old('empl_tlp') }}">
                 </div>
+                @error('empl_tlp')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">
                     <label class="form-label">Employee Handphone 1</label>
-                    <input type="text" class="form-control form-control-alternative" id="empl_hp01" name="empl_hp01" placeholder="Employee Phone 1">
+                    <input type="text" class="form-control @error('empl_hp01')is-invalid @enderror" id="empl_hp01" name="empl_hp01" placeholder="Employee Phone 1" value="{{ old('empl_hp01') }}">
                 </div>
+                @error('empl_hp01')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">
                     <label class="form-label">Employee Handphone 2</label>
-                    <input type="text" class="form-control form-control-alternative" id="empl_hp02" name="empl_hp02" placeholder="Employee Phone 2">
+                    <input type="text" class="form-control @error('empl_hp02')is-invalid @enderror" id="empl_hp02" name="empl_hp02" placeholder="Employee Phone 2" value="{{ old('empl_hp02') }}">
                 </div>
+                @error('empl_hp02')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">
                     <label class="form-label">Zip Code</label>
-                    <select class="form-select" id="zip_code" name="zip_code">
-                        <option selected class="text-center">-- Pilih Zip --</option>
+                    <select class="form-select @error('zip_code')is-invalid @enderror" id="zip_code" name="zip_code">
+                        <option class="text-center" selected disabled>-- Pilih Zip --</option>
                         @foreach ($zips as $k)
-                            <option value="{{ $k->sub_zip_code }}">{{ $k->sub_zip_code }} - {{ $k->zip_desc }}</option>
+                            <option value="{{ $k->zip_code }}" {{ old('zip_code') == $k->zip_code ? 'selected' : '' }}>{{ $k->zip_code }} - {{ $k->zip_desc }}</option>
                         @endforeach
                     </select>
+                    @error('zip_code')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">
                     <label class="form-label">Provinsi Code</label>
-                    <select class="form-select" id="prov_code" name="prov_code">
-                        <option selected class="text-center">-- Pilih Provinsi --</option>
+                    <select class="form-select @error('prov_code')is-invalid @enderror" id="prov_code" name="prov_code">
+                        <option class="text-center" selected disabled>-- Pilih Provinsi --</option>
                     </select>
+                    @error('prov_code')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">
                     <label class="form-label">Kota Code</label>
-                    <select class="form-select" id="kota_code" name="kota_code">
-                        <option selected class="text-center">-- Pilih Kota --</option>
+                    <select class="form-select @error('kota_code')is-invalid @enderror" id="kota_code" name="kota_code">
+                        <option class="text-center" selected disabled>-- Pilih Kota --</option>
                     </select>
+                    @error('kota_code')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">
                     <label class="form-label">Kecamatan Code</label>
-                    <select class="form-select" id="kec_code" name="kec_code">
-                        <option selected class="text-center">-- Pilih Kecamatan --</option>
+                    <select class="form-select @error('kec_code')is-invalid @enderror" id="kec_code" name="kec_code">
+                        <option class="text-center" selected disabled>-- Pilih Kecamatan --</option>
                     </select>
+                    @error('kec_code')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">
                     <label class="form-label" class="text-center">Kelurahan Code</label>
-                    <select class="form-select" id="kel_code" name="kel_code">
-                        <option selected class="text-center">-- Pilih Kelurahan --</option>
+                    <select class="form-select @error('kel_code')is-invalid @enderror" id="kel_code" name="kel_code">
+                        <option class="text-center" selected disabled>-- Pilih Kelurahan --</option>
                     </select>
+                    @error('kel_code')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div class="col-lg-12 col-md-6">
                 <button type="submit" class="btn btn-primary w-100">Submit</button>

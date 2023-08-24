@@ -46,6 +46,7 @@ class Kelurahan extends Model
     }
 
     protected $fillable = [
+        'kel_code',
         'kelurahan',
         'kec_code',
         'is_active',

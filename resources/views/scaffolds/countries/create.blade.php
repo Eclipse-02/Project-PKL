@@ -14,18 +14,34 @@
             <div class="row mx-2">
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
-                        <label class="form-label">Country Name</label>
-                        <input type="text" class="form-control" id="con_name" name="con_name" placeholder="Country Name">
+                        <label class="form-label">Country Code</label>
+                        <input type="text" class="form-control @error('con_code')is-invalid @enderror" id="con_code" name="con_code" placeholder="Country Code" value="{{ old('con_code') }}">
                     </div>
+                    @error('con_code')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="col-lg-12 col-md-6">
+                    <div class="form-group">
+                        <label class="form-label">Country Name</label>
+                        <input type="text" class="form-control @error('con_name')is-invalid @enderror" id="con_name" name="con_name" placeholder="Country Name" value="{{ old('con_name') }}">
+                    </div>
+                    @error('con_name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6 mb-3">
                     <label class="form-label">Is Active</label>
                     <div class="custom-control custom-radio">
-                        <input class="custom-control-input" id="is_active" value="1" name="is_active" type="radio">
+                        <input class="custom-control-input" id="is_active" value="1" name="is_active" type="radio" {{ old('is_active') == 1 ? 'checked' : '' }}>
                         <label class="custom-control-label" for="Yes">Yes</label>
                     </div>
                     <div class="custom-control custom-radio">
-                        <input class="custom-control-input" id="is_active" value="0" name="is_active" type="radio">
+                        <input class="custom-control-input" id="is_active" value="0" name="is_active" type="radio" {{ old('is_active') == 0 ? 'checked' : '' }}>
                         <label class="custom-control-label" for="No">No</label>
                     </div>
                     @error('is_active')

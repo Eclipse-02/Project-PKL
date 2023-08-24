@@ -70,7 +70,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $zips = Zip::select('sub_zip_code', 'zip_desc')->get();
+        $zips = Zip::select('zip_code', 'zip_desc')->get();
         $positions = Position::select('poss_code', 'poss_name')->get();
         $branches = Branch::select('branch_code', 'branch_name')->get();
         $coys = Coy::select('coy_id', 'coy_name')->get();
@@ -153,7 +153,7 @@ class EmployeeController extends Controller
     public function edit($employee)
     {
         $data = Employee::where('id', $employee)->first();
-        $zips = Zip::select('sub_zip_code', 'zip_desc')->get();
+        $zips = Zip::select('zip_code', 'zip_desc')->get();
         $positions = Position::select('poss_code', 'poss_name')->get();
         $branches = Branch::select('branch_code', 'branch_name')->get();
         $coys = Coy::select('coy_id', 'coy_name')->get();

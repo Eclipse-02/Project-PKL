@@ -101,7 +101,7 @@ class BankController extends Controller
      */
     public function create()
     {
-        $zips = Zip::select('sub_zip_code', 'zip_desc')->get();
+        $zips = Zip::select('zip_code', 'zip_desc')->get();
         $coys = Coy::select('coy_id', 'coy_name')->get();
         return view('scaffolds.banks.create', compact('zips', 'coys'));
     }
@@ -162,7 +162,7 @@ class BankController extends Controller
     public function edit($bank)
     {
         $data = Bank::where('id', $bank)->first();
-        $zips = Zip::select('sub_zip_code', 'zip_desc')->get();
+        $zips = Zip::select('zip_code', 'zip_desc')->get();
         $coys = Coy::select('coy_id', 'coy_name')->get();
         return view('scaffolds.banks.edit', compact('data', 'zips', 'coys'));
     }

@@ -15,30 +15,56 @@
             <div class="row mx-2">
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
+                        <label class="form-label">Kota Code</label>
+                        <input type="text" class="form-control @error('kota_code')is-invalid @enderror" id="kota_code" name="kota_code" placeholder="kota Code" value="{{ old('kota_code') ? old('kota_code') : $data->kota_code }}">
+                        @error('kota_code')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-6">
+                    <div class="form-group">
                         <label class="form-label">Kota</label>
-                        <input type="text" class="form-control form-control-alternative" id="kota" name="kota" placeholder="Kota" value="{{ $data->kota }}">
+                        <input type="text" class="form-control @error('kota')is-invalid @enderror" id="kota" name="kota" placeholder="Kota" value="{{ old('kota') ? old('kota') : $data->kota }}">
+                        @error('kota')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Provinsi</label>
-                        <select class="form-select" aria-label="Default select example" id="prov_code" name="prov_code">
-                            <option>-- Pilih Provinsi --</option>
+                        <select class="form-select @error('prov_code')is-invalid @enderror" id="prov_code" name="prov_code">
+                            <option class="text-center" disabled>-- Pilih Provinsi --</option>
                             @foreach ($provinsis as $p)
-                                <option value="{{ $p->prov_code }}" {{ $data->prov_code == $p->prov_code ? 'selected' : '' }}>{{ $p->provinsi }}</option>
+                                <option value="{{ $p->prov_code }}" {{ old('prov_code') ? (old('prov_code') == $p->prov_code ? 'selected' : '') : ($data->prov_code == $p->prov_code ? 'selected' : '') }}>{{ $p->provinsi }}</option>
                             @endforeach
                         </select>
+                        @error('prov_code')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
-                <div class="col-lg-12 col-md-6">
+                <div class="col-lg-12 col-md-6 mb-3">
                     <label class="form-label">Is Active</label>
                     <div class="custom-control custom-radio">
-                        <input class="custom-control-input" id="is_active" value="1" name="is_active" type="radio" {{ $data->is_active == 1 ? 'checked' : '' }}>
+                        <input class="custom-control-input" id="is_active" value="1" name="is_active" type="radio" {{ old('is_active') ? (old('is_active') == 1 ? 'checked' : '') : ($data->is_active == 1 ? 'checked' : '') }}>
                         <label class="custom-control-label" for="Yes">Yes</label>
                     </div>
-                    <div class="custom-control custom-radio mb-3">
-                        <input class="custom-control-input" id="is_active" value="0" name="is_active" type="radio" {{ $data->is_active == 0 ? 'checked' : '' }}>
+                    <div class="custom-control custom-radio">
+                        <input class="custom-control-input" id="is_active" value="0" name="is_active" type="radio" {{ old('is_active') ? (old('is_active') == 0 ? 'checked' : '') : ($data->is_active == 0 ? 'checked' : '') }}>
                         <label class="custom-control-label" for="No">No</label>
+                        @error('is_active')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-6">

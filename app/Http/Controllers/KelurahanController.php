@@ -110,6 +110,7 @@ class KelurahanController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'kel_code' => 'required|integer',
             'kelurahan' => 'required|string',
             'kec_code' => 'required|integer',
             'is_active' => 'required|integer'
@@ -120,6 +121,7 @@ class KelurahanController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             Kelurahan::create([
+                'kel_code' => $request->kel_code,
                 'kelurahan' => $request->kelurahan,
                 'kec_code' => $request->kec_code,
                 'is_active' => $request->is_active,
@@ -156,6 +158,7 @@ class KelurahanController extends Controller
     public function update(Request $request, Kelurahan $kelurahan)
     {
         $validator = Validator::make($request->all(), [
+            'kel_code' => 'required|integer',
             'kelurahan' => 'required|string',
             'kec_code' => 'required|integer',
             'is_active' => 'required|integer'
@@ -166,6 +169,7 @@ class KelurahanController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $kelurahan->update([
+                'kel_code' => $request->kel_code,
                 'kelurahan' => $request->kelurahan,
                 'kec_code' => $request->kec_code,
                 'is_active' => $request->is_active,

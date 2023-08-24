@@ -47,6 +47,7 @@ class Zip extends Model
     }
 
     protected $fillable = [
+        'zip_code',
         'sub_zip_code',
         'zip_desc',
         'prov_code',

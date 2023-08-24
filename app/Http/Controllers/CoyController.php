@@ -67,7 +67,7 @@ class CoyController extends Controller
      */
     public function create()
     {
-        $zips = Zip::select('zip_code', 'sub_zip_code', 'zip_desc')->get();
+        $zips = Zip::select('zip_code', 'zip_desc')->get();
         return view('scaffolds.coys.create', compact('zips'));
     }
 
@@ -130,7 +130,7 @@ class CoyController extends Controller
      */
     public function edit($coy)
     {
-        $zips = Zip::select('zip_code', 'sub_zip_code', 'zip_desc')->get();
+        $zips = Zip::select('zip_code', 'zip_desc')->get();
         $data = Coy::where('id', $coy)->first();
         return view('scaffolds.coys.edit', compact('data', 'zips'));
     }

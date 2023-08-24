@@ -118,6 +118,7 @@ class ProvinsiController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'prov_code' => 'required|integer',
             'provinsi' => 'required|string',
             'is_active' => 'required|integer'
         ]);
@@ -127,6 +128,7 @@ class ProvinsiController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             Provinsi::create([
+                'prov_code' => $request->prov_code,
                 'provinsi' => $request->provinsi,
                 'is_active' => $request->is_active,
                 'created_by' => Auth::user()->name,
@@ -161,6 +163,7 @@ class ProvinsiController extends Controller
     public function update(Request $request, Provinsi $provinsi)
     {
         $validator = Validator::make($request->all(), [
+            'prov_code' => 'required|integer',
             'provinsi' => 'required|string',
             'is_active' => 'required|integer'
         ]);
@@ -170,6 +173,7 @@ class ProvinsiController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $provinsi->update([
+                'prov_code' => $request->prov_code,
                 'provinsi' => $request->provinsi,
                 'is_active' => $request->is_active,
                 'updated_by' => Auth::user()->name,

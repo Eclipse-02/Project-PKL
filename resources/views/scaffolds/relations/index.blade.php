@@ -21,6 +21,7 @@
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>Relation Code</th>
                     <th>Relation Name</th>
                     <th>Is Active</th>
                     <th>Created By</th>
@@ -36,8 +37,9 @@
                 <tr>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td>
-                        <select data-column="3" class="form-control filter-select">
+                        <select data-column="4" class="form-control filter-select">
                             <option value="">All</option>
                                 <option value="1">1</option>
                                 <option value="0">0</option>
@@ -71,6 +73,10 @@
                     name: "DT_RowIndex",
                     orderable: true,
                     searchable: false
+                },
+                {
+                    data: "rel_code",
+                    name: "rel_code"
                 },
                 {
                     data: "rel_name",

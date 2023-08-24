@@ -108,6 +108,7 @@ class VaccineController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'vc_code' => 'required|integer',
             'vc_name' => 'required|string',
             'is_active' => 'required|integer'
         ]);
@@ -117,6 +118,7 @@ class VaccineController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             Vaccine::create([
+                'vc_code' => $request->vc_code,
                 'vc_name' => $request->vc_name,
                 'is_active' => $request->is_active,
                 'created_by' => Auth::user()->name,
@@ -151,6 +153,7 @@ class VaccineController extends Controller
     public function update(Request $request, Vaccine $vaccine)
     {
         $validator = Validator::make($request->all(), [
+            'vc_code' => 'required|integer',
             'vc_name' => 'required|string',
             'is_active' => 'required|integer'
         ]);
@@ -160,6 +163,7 @@ class VaccineController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $vaccine->update([
+                'vc_code' => $request->vc_code,
                 'vc_name' => $request->vc_name,
                 'is_active' => $request->is_active,
                 'updated_by' => Auth::user()->name,
