@@ -77,7 +77,7 @@ class Bank extends Model
     }
 
     function zip() {
-        return $this->hasMany(Zip::class, 'zip_code', 'zip_code');
+        return $this->hasOne(Zip::class, 'zip_code', 'zip_code');
     }
 
     function coy() {

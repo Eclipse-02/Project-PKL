@@ -15,23 +15,23 @@
                 <div class="form-group">
                     <label class="form-label">Coy ID</label>
                     <input type="text" class="form-control @error('coy_id')is-invalid @enderror" id="coy_id" name="coy_id" placeholder="Coy ID" value="{{ old('coy_id') }}">
+                    @error('coy_id')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-                @error('coy_id')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
             </div>
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">
                     <label class="form-label">Coy Name</label>
                     <input type="text" class="form-control @error('coy_name')is-invalid @enderror" id="coy_name" name="coy_name" placeholder="Coy Name" value="{{ old('coy_name') }}">
+                    @error('coy_name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-                @error('coy_name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
             </div>
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">
@@ -48,45 +48,45 @@
                 <div class="form-group">
                     <label class="form-label">Employee Telephone Area</label>
                     <input type="text" class="form-control @error('empl_tlp_area')is-invalid @enderror" id="empl_tlp_area" name="empl_tlp_area" placeholder="Employee Telephone Area" value="{{ old('empl_tlp_area') }}">
+                    @error('empl_tlp_area')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-                @error('empl_tlp_area')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
             </div>
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">
                     <label class="form-label">Employee Telephone</label>
                     <input type="text" class="form-control @error('empl_tlp')is-invalid @enderror" id="empl_tlp" name="empl_tlp" placeholder="Employee Telephone" value="{{ old('empl_tlp') }}">
+                    @error('empl_tlp')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-                @error('empl_tlp')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
             </div>
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">
                     <label class="form-label">Employee Handphone 1</label>
                     <input type="text" class="form-control @error('empl_hp01')is-invalid @enderror" id="empl_hp01" name="empl_hp01" placeholder="Employee Phone 1" value="{{ old('empl_hp01') }}">
+                    @error('empl_hp01')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-                @error('empl_hp01')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
             </div>
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">
                     <label class="form-label">Employee Handphone 2</label>
                     <input type="text" class="form-control @error('empl_hp02')is-invalid @enderror" id="empl_hp02" name="empl_hp02" placeholder="Employee Phone 2" value="{{ old('empl_hp02') }}">
+                    @error('empl_hp02')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-                @error('empl_hp02')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
             </div>
             <div class="col-lg-12 col-md-6">
                 <div class="form-group">

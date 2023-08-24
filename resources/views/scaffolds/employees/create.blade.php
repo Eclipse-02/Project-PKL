@@ -217,7 +217,7 @@
                         <select class="form-select @error('zip_code')is-invalid @enderror" id="zip_code" name="zip_code">
                             <option selected class="text-center" selected disabled>-- Pilih Zip --</option>
                             @foreach ($zips as $i)
-                                <option value="{{ $i->zip_code }}" {{ old('zip_code') == $p->zip_code ? 'selected' : '' }}>{{ $i->zip_desc }}</option>
+                                <option value="{{ $i->zip_code }}" {{ old('zip_code') == $i->zip_code ? 'selected' : '' }}>{{ $i->zip_desc }}</option>
                             @endforeach
                         </select>
                         @error('zip_code')

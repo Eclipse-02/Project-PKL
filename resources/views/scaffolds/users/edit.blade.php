@@ -8,7 +8,7 @@
         <a href="{{ route('users.index') }}" class="btn btn-secondary mx-2">Return</a>
     </div>
     <div class="col-lg-12 mb-3">
-        <form action="{{ route('users.update', $data->uid->id) }}" method="post">
+        <form action="{{ route('users.update', $data->id) }}" method="post">
         @csrf
         @method('PUT')
 

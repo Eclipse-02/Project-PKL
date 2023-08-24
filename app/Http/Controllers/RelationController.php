@@ -108,6 +108,7 @@ class RelationController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'rel_code' => 'required|integer',
             'rel_name' => 'required|string',
             'is_active' => 'required|integer'
         ]);
@@ -117,6 +118,7 @@ class RelationController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             Relation::create([
+                'rel_code' => $request->rel_code,
                 'rel_name' => $request->rel_name,
                 'is_active' => $request->is_active,
                 'created_by' => Auth::user()->name,
@@ -151,6 +153,7 @@ class RelationController extends Controller
     public function update(Request $request, Relation $relation)
     {
         $validator = Validator::make($request->all(), [
+            'rel_code' => 'required|integer',
             'rel_name' => 'required|string',
             'is_active' => 'required|integer'
         ]);
@@ -160,6 +163,7 @@ class RelationController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $relation->update([
+                'rel_code' => $request->rel_code,
                 'rel_name' => $request->rel_name,
                 'is_active' => $request->is_active,
                 'updated_by' => Auth::user()->name,

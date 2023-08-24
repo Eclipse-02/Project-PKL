@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid("id");
             $table->string("area_code", 5);
             $table->string("area_name", 60);
-            $table->boolean("is_active")->nullable();
+            $table->string("is_active", 1)->nullable();
             $table->string("created_by");
             $table->string("updated_by");
             $table->timestamps();

@@ -18,7 +18,7 @@ class SupplierSubTypeSeeder extends Seeder
             'id' => Str::uuid(),
             'sub_code' => 1,
             'sub_name' => 'Sub 1',
-            'is_active' => 1,
+            'is_active' => 'Y',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);

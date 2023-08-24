@@ -15,6 +15,7 @@ class KelurahanSeeder extends Seeder
     {
         // Aceh
         $aceh_barat_arongan_malabek = [
+            "",
             "Arongan",
             "Cot Buloh",
             "Cot Kumbang",
@@ -2942,10 +2943,12 @@ class KelurahanSeeder extends Seeder
         // ];
 
         // Aceh
-        foreach ($aceh_barat_arongan_malabek as $a) {
+        for ($i=1; $i < count($aceh_barat_arongan_malabek); $i++) {
             Kelurahan::create([
-                'kelurahan' => $a,
+                'kel_code' => $i,
+                'kelurahan' => $aceh_barat_arongan_malabek[$i],
                 'kec_code' => 1,
+                'is_active' => 'Y',
                 'created_by' => 'Seeder',
                 'updated_by' => 'Seeder',
             ]);

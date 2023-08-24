@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('bank_code', 5);
             $table->string('bank_name', 100);
             $table->string('bank_branch', 100);
-            $table->boolean('is_active');
-            $table->unsignedBigInteger('prov_code')->nullable();
-            $table->unsignedBigInteger('kota_code')->nullable();
-            $table->unsignedBigInteger('kec_code')->nullable();
-            $table->unsignedBigInteger('kel_code')->nullable();
+            $table->string('is_active', 1)->nullable();
+            $table->string('prov_code', 5)->nullable();
+            $table->string('kota_code', 5)->nullable();
+            $table->string('kec_code', 5)->nullable();
+            $table->string('kel_code', 5)->nullable();
             $table->string('zip_code', 5)->nullable();
             $table->string("created_by");
             $table->string("updated_by");

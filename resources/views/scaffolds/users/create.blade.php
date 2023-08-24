@@ -50,7 +50,7 @@
                         <select class="form-select @error('empl_branch')is-invalid @enderror" id="empl_branch" name="empl_branch">
                             <option class="text-center" selected disabled>-- Pilih Employee Branch --</option>
                             @foreach ($branches as $i)
-                                <option value="{{ $i->branch_code }}" {{ old('empl_branch') == $i->empl_branch ? 'selected' : '' }}>{{ $i->branch_name }} / {{ $i->branch_code }}</option>
+                                <option value="{{ $i->branch_code }}" {{ old('empl_branch') == $i->branch_code ? 'selected' : '' }}>{{ $i->branch_name }}</option>
                             @endforeach
                         </select>
                         @error('empl_branch')

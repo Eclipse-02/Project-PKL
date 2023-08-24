@@ -19,7 +19,7 @@ class EduSeeder extends Seeder
             'id' => Str::uuid(),
             'edu_code' => 1,
             'edu_name' => 'Edu 1',
-            'is_active' => 1,
+            'is_active' => 'Y',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);

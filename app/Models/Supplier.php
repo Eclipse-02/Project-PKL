@@ -95,7 +95,11 @@ class Supplier extends Model
     }
 
     function zip() {
-        return $this->hasMany(Zip::class, 'zip_code', 'zip_code');
+        return $this->hasOne(Zip::class, 'zip_code', 'zip_code');
+    }
+
+    function branch() {
+        return $this->hasOne(Branch::class, 'branch_code', 'branch_code');
     }
 
     function position() {

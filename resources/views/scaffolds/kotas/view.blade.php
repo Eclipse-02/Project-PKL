@@ -9,11 +9,11 @@
         </div>
         <div class="col-lg-12 mb-3">
             <dl class="row mx-2">
-                <dt class="col-sm-3">ID</dt>
-                <dd class="col-sm-9">{{ $data->prov_code }}</dd>
-
                 <dt class="col-sm-3">UID</dt>
                 <dd class="col-sm-9">{{ $data->id }}</dd>
+
+                <dt class="col-sm-3">Kota Code</dt>
+                <dd class="col-sm-9">{{ $data->kota_code }}</dd>
 
                 <dt class="col-sm-3">Kota</dt>
                 <dd class="col-sm-9">{{ $data->kota }}</dd>
@@ -22,7 +22,7 @@
                 <dd class="col-sm-9">{{ $data->provinsi->provinsi }} / {{ $data->provinsi->prov_code }}</dd>
 
                 <dt class="col-sm-3">Is Active</dt>
-                <dd class="col-sm-9">{{ $data->is_active == 1 ? "Yes" : "No" }}</dd>
+                <dd class="col-sm-9">{{ $data->is_active == "Y" ? "Yes" : "No" }}</dd>
 
                 <dt class="col-sm-3">Created By</dt>
                 <dd class="col-sm-9">{{ $data->created_by }}</dd>

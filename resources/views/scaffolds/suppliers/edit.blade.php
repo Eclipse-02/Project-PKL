@@ -33,12 +33,12 @@
                     <div class="form-group">
                         <label class="form-label">Supplier Code</label>
                         <input type="text" class="form-control @error('supl_code')is-invalid @enderror" id="supl_code" name="supl_code" placeholder="Supplier Code" value="{{ old('supl_code') ? old('supl_code') : $data->supl_code }}">
+                        @error('supl_code')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('supl_code')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
@@ -59,11 +59,11 @@
                 <div class="col-lg-12 col-md-6 mb-3">
                     <label class="form-label">Is Active</label>
                     <div class="custom-control custom-radio">
-                        <input class="custom-control-input" id="is_active" value="1" name="is_active" type="radio" {{ old('is_active') ? (old('is_active') == 1 ? 'checked' : '') : ($data->is_active == 1 ? 'checked' : '') }}>
+                        <input class="custom-control-input" id="is_active" value="Y" name="is_active" type="radio" {{ old('is_active') ? (old('is_active') == "Y" ? 'checked' : '') : ($data->is_active == "Y" ? 'checked' : '') }}>
                         <label class="custom-control-label" for="Yes">Yes</label>
                     </div>
                     <div class="custom-control custom-radio">
-                        <input class="custom-control-input" id="is_active" value="0" name="is_active" type="radio" {{ old('is_active') ? (old('is_active') == 0 ? 'checked' : '') : ($data->is_active == 0 ? 'checked' : '') }}>
+                        <input class="custom-control-input" id="is_active" value="N" name="is_active" type="radio" {{ old('is_active') ? (old('is_active') == "N" ? 'checked' : '') : ($data->is_active == "N" ? 'checked' : '') }}>
                         <label class="custom-control-label" for="No">No</label>
                     </div>
                     @error('is_active')
@@ -104,12 +104,12 @@
                     <div class="form-group">
                         <label class="form-label">Supplier Name</label>
                         <input type="text" class="form-control @error('supl_name')is-invalid @enderror" id="supl_name" name="supl_name" placeholder="Supplier Name" value="{{ old('supl_name') ? old('supl_name') : $data->supl_name }}">
+                        @error('supl_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('supl_name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
@@ -151,12 +151,12 @@
                         <input type="hidden" name="old_supl_pic_name" value="{{ $data->supl_pic_name }}">
                         <img src="{{ asset('storage/supl-img/' . $data->supl_pic_name) }}" class="supplier-preview img-fluid d-block mb-3" style="height: 200px">
                         <input type="file" class="form-control @error('supl_pic_name')is-invalid @enderror" id="supl_pic_name" name="supl_pic_name" placeholder="Supplier Pic" value="{{ old('supl_pic_name') ? old('supl_pic_name') : $data->supl_pic_name }}">
+                        @error('supl_pic_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('supl_pic_name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
@@ -178,12 +178,12 @@
                     <div class="form-group">
                         <label class="form-label">Supplier ID No</label>
                         <input type="text" class="form-control @error('supl_id_no')is-invalid @enderror" id="supl_id_no" name="supl_id_no" placeholder="Supplier ID No" value="{{ old('supl_id_no') ? old('supl_id_no') : $data->supl_id_no }}">
+                        @error('supl_id_no')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('supl_id_no')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
@@ -200,45 +200,45 @@
                     <div class="form-group">
                         <label class="form-label">Supplier Telephone Area</label>
                         <input type="text" class="form-control @error('supl_tlp_area')is-invalid @enderror" id="supl_tlp_area" name="supl_tlp_area" placeholder="Supplier Telephone Area" value="{{ old('supl_tlp_area') ? old('supl_tlp_area') : $data->supl_tlp_area }}">
+                        @error('supl_tlp_area')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('supl_tlp_area')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Supplier Telephone</label>
                         <input type="text" class="form-control @error('supl_tlp')is-invalid @enderror" id="supl_tlp" name="supl_tlp" placeholder="Supplier Telephone" value="{{ old('supl_tlp') ? old('supl_tlp') : $data->supl_tlp }}">
+                        @error('supl_tlp')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('supl_tlp')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Supplier Handphone 1</label>
                         <input type="text" class="form-control @error('supl_hp01')is-invalid @enderror" id="supl_hp01" name="supl_hp01" placeholder="Supplier Hanphone 1" value="{{ old('supl_hp01') ? old('supl_hp01') : $data->supl_hp01 }}">
+                        @error('supl_hp01')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('supl_hp01')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Supplier Handphone 2</label>
                         <input type="text" class="form-control @error('supl_hp02')is-invalid @enderror" id="supl_hp02" name="supl_hp02" placeholder="Supplier Hanphone 2" value="{{ old('supl_hp02') ? old('supl_hp02') : $data->supl_hp02 }}">
+                        @error('supl_hp02')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('supl_hp02')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
@@ -312,23 +312,23 @@
                     <div class="form-group">
                         <label class="form-label">Supplier NPWP No</label>
                         <input type="text" class="form-control @error('supl_npwp_no')is-invalid @enderror" id="supl_npwp_no" name="supl_npwp_no" placeholder="Supplier NPWP No" value="{{ old('supl_npwp_no') ? old('supl_npwp_no') : $data->supl_npwp_no }}">
+                        @error('supl_npwp_no')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('supl_npwp_no')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Supplier NPWP Name</label>
                         <input type="text" class="form-control @error('supl_npwp_name')is-invalid @enderror" id="supl_npwp_name" name="supl_npwp_name" placeholder="Supplier NPWP Name" value="{{ old('supl_npwp_name') ? old('supl_npwp_name') : $data->supl_npwp_name }}">
+                        @error('supl_npwp_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('supl_npwp_name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
@@ -358,12 +358,12 @@
                         <input type="hidden" name="old_file_name_mou" value="{{ $data->file_name_mou }}">
                         <img src="{{ asset('storage/mous/' . $data->file_name_mou) }}" class="mou-preview img-fluid d-block mb-3" style="height: 200px">
                         <input type="file" class="form-control @error('file_name_mou')is-invalid @enderror" id="file_name_mou" name="file_name_mou" placeholder="File Name MOU" value="{{ old('file_name_mou') ? old('file_name_mou') : $data->file_name_mou }}">
+                        @error('file_name_mou')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('file_name_mou')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
@@ -371,12 +371,12 @@
                         <input type="hidden" name="old_file_name_ktp" value="{{ $data->file_name_ktp }}">
                         <img src="{{ asset('storage/ktps/' . $data->file_name_ktp) }}" class="ktp-preview img-fluid d-block mb-3" style="height: 200px">
                         <input type="file" class="form-control @error('file_name_ktp')is-invalid @enderror" id="file_name_ktp" name="file_name_ktp" placeholder="File Name KTP" value="{{ old('file_name_ktp') ? old('file_name_ktp') : $data->file_name_ktp }}">
+                        @error('file_name_ktp')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('file_name_ktp')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
@@ -384,12 +384,12 @@
                         <input type="hidden" name="old_file_name_npwp" value="{{ $data->file_name_npwp }}">
                         <img src="{{ asset('storage/npwps/' . $data->file_name_npwp) }}" class="npwp-preview img-fluid d-block mb-3" style="height: 200px">
                         <input type="file" class="form-control @error('file_name_npwp')is-invalid @enderror" id="file_name_npwp" name="file_name_npwp" placeholder="File Name NPWP" value="{{ old('file_name_npwp') ? old('file_name_npwp') : $data->file_name_npwp }}">
+                        @error('file_name_npwp')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('file_name_npwp')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <button type="submit" class="btn btn-primary w-100">Submit</button>

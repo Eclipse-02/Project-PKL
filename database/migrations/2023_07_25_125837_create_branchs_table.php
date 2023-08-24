@@ -21,14 +21,14 @@ return new class extends Migration
             $table->string("branch_tlp", 6);
             $table->string("branch_hp01", 10);
             $table->string("branch_hp02", 10);
-            $table->unsignedBigInteger("prov_code"); // fs_mst_provinsi
-            $table->unsignedBigInteger("kota_code"); // fs_mst_kota
-            $table->unsignedBigInteger("kec_code"); // fs_mst_kecamatan
-            $table->unsignedBigInteger("kel_code"); // fs_mst_kelurahan
-            $table->unsignedBigInteger("zip_code"); // fs_mst_zip
+            $table->string("prov_code", 5); // fs_mst_provinsi
+            $table->string("kota_code", 5); // fs_mst_kota
+            $table->string("kec_code", 5); // fs_mst_kecamatan
+            $table->string("kel_code", 5); // fs_mst_kelurahan
+            $table->string("zip_code", 5); // fs_mst_zip
             $table->string("branch_type", 2);
             $table->string("area_code", 5); // fs_mst_area
-            $table->boolean("is_active")->nullable();
+            $table->string("is_active", 1)->nullable();
             $table->string("created_by");
             $table->string("updated_by");
             $table->timestamps();

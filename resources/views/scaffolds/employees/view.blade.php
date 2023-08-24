@@ -9,41 +9,29 @@
         </div>
         <div class="col-lg-12 mb-3">
             <dl class="row mx-2">
-                <dt class="col-sm-3">ID</dt>
-                <dd class="col-sm-9">{{ $data->coy_id }}</dd>
-
                 <dt class="col-sm-3">UID</dt>
                 <dd class="col-sm-9">{{ $data->id }}</dd>
+
+                <dt class="col-sm-3">Coy ID</dt>
+                <dd class="col-sm-9">{{ $data->coy->coy_name }} / {{ $data->coy->coy_id }}</dd>
 
                 <dt class="col-sm-3">Employee ID</dt>
                 <dd class="col-sm-9">{{ $data->empl_id }}</dd>
 
                 <dt class="col-sm-3">Employee Branch</dt>
-                <dd class="col-sm-9">{{ $data->empl_branch }}</dd>
+                <dd class="col-sm-9">{{ $data->branch->branch_name }} / {{ $data->branch->branch_code }}</dd>
 
                 <dt class="col-sm-3">Employee Name</dt>
                 <dd class="col-sm-9">{{ $data->empl_name }}</dd>
 
                 <dt class="col-sm-3">Position Code</dt>
-                <dd class="col-sm-9">{{ $data->position_code }}</dd>
+                <dd class="col-sm-9">{{ $data->position->poss_name }} / {{ $data->position->poss_code }}</dd>
 
                 <dt class="col-sm-3">Employee Up Level</dt>
                 <dd class="col-sm-9">{{ $data->empl_up_level }}</dd>
 
                 <dt class="col-sm-3">Employee Status</dt>
-                <dd class="col-sm-9">{{
-                    if ($data->empl_status == "PB") {
-                        "Probation"
-                    } elseif ($data->empl_status == "PM") {
-                        "Permanen"
-                    } elseif ($data->empl_status == "KT") {
-                        "Kontrak"
-                    } elseif ($data->empl_status == "RS") {
-                        "Resign"
-                    } else {
-                        "PHK"
-                    }
-                }}</dd>
+                <dd class="col-sm-9">@if($data->supl_status == "PB")Probation @elseif($data->supl_status == "PM")Permanent @elseif($data->supl_status == "KT")Kontrak @elseif($data->supl_status == "RS")Resign @else PHK @endif</dd>
 
                 <dt class="col-sm-3">Employee Effect Date</dt>
                 <dd class="col-sm-9">{{ $data->empl_eff_date }}</dd>
@@ -67,19 +55,19 @@
                 <dd class="col-sm-9">{{ $data->empl_hp02 }}</dd>
 
                 <dt class="col-sm-3">Provinsi Code</dt>
-                <dd class="col-sm-9">{{ $data->prov_code }}</dd>
+                <dd class="col-sm-9">{{ $data->provinsi->provinsi }} / {{ $data->provinsi->prov_code }}</dd>
 
                 <dt class="col-sm-3">Kota Code</dt>
-                <dd class="col-sm-9">{{ $data->kota_code }}</dd>
+                <dd class="col-sm-9">{{ $data->kota->kota }} / {{ $data->kota->kota_code }}</dd>
 
                 <dt class="col-sm-3">Kecamatan Code</dt>
-                <dd class="col-sm-9">{{ $data->kec_code }}</dd>
+                <dd class="col-sm-9">{{ $data->kecamatan->kecamatan }} / {{ $data->kecamatan->kec_code }}</dd>
 
                 <dt class="col-sm-3">Kelurahan Code</dt>
-                <dd class="col-sm-9">{{ $data->kel_code }}</dd>
+                <dd class="col-sm-9">{{ $data->kelurahan->kelurahan }} / {{ $data->kelurahan->kel_code }}</dd>
 
                 <dt class="col-sm-3">Zip Code</dt>
-                <dd class="col-sm-9">{{ $data->zip_code }}</dd>
+                <dd class="col-sm-9">{{ $data->zip->zip_desc }} / {{ $data->zip->zip_code }}</dd>
 
                 <dt class="col-sm-3">Created By</dt>
                 <dd class="col-sm-9">{{ $data->created_by }}</dd>

@@ -31,7 +31,7 @@ class BranchSeeder extends Seeder
             'zip_code' => '1',
             'branch_type' => 'HO',
             'area_code' => '1',
-            'is_active' => 1,
+            'is_active' => 'Y',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);

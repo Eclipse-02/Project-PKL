@@ -19,7 +19,7 @@ class EmployeeSeeder extends Seeder
             'coy_id' => '1',
             'id' => Str::uuid(),
             'empl_id' => '1',
-            'empl_branch' => 'JKT',
+            'empl_branch' => '1',
             'empl_nik' => '1234567890123456',
             'empl_name' => 'Udin',
             'position_code' => '1',

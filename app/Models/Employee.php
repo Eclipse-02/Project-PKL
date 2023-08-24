@@ -71,31 +71,31 @@ class Employee extends Model
     ];
 
     function branch() {
-        return $this->hasOne(Branch::class, 'coy_id', 'coy_id');
+        return $this->hasOne(Branch::class, 'branch_code', 'empl_branch');
     }
 
     function position() {
-        return $this->hasOne(Position::class, 'coy_id', 'coy_id');
+        return $this->hasOne(Position::class, 'poss_code', 'position_code');
     }
 
     function provinsi() {
-        return $this->hasOne(Provinsi::class, 'prov_id', 'prov_id');
+        return $this->hasOne(Provinsi::class, 'prov_code', 'prov_code');
     }
 
     function kota() {
-        return $this->hasOne(Kota::class, 'kota_id', 'kota_id');
+        return $this->hasOne(Kota::class, 'kota_code', 'kota_code');
     }
 
     function kecamatan() {
-        return $this->hasOne(Kecamatan::class, 'kec_id', 'kec_id');
+        return $this->hasOne(Kecamatan::class, 'kec_code', 'kec_code');
     }
 
     function kelurahan() {
-        return $this->hasOne(Kelurahan::class, 'kel_id', 'kel_id');
+        return $this->hasOne(Kelurahan::class, 'kel_code', 'kel_code');
     }
 
     function zip() {
-        return $this->hasOne(Zip::class, 'zip_id', 'zip_id');
+        return $this->hasOne(Zip::class, 'zip_code', 'zip_code');
     }
 
     function coy() {

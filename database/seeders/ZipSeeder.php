@@ -23,7 +23,7 @@ class ZipSeeder extends Seeder
             'kota_code' => '1',
             'kec_code' => '1',
             'kel_code' => '1',
-            'is_active' => 1,
+            'is_active' => 'Y',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);

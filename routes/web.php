@@ -227,33 +227,33 @@ Route::middleware('auth')->group(function () {
         });
         // suppliersubtype scaffold
         Route::group(['prefix' => 'suppliersubtypes'], function () {
-            Route::get('/', [suppliersubtypeController::class, 'index'])->name('suppliersubtypes.index')->middleware('permission:supplier-sub-type-read');
-            Route::post('/', [suppliersubtypeController::class, 'store'])->name('suppliersubtypes.store');
-            Route::get('/create', [suppliersubtypeController::class, 'create'])->name('suppliersubtypes.create')->middleware('permission:supplier-sub-type-create');
-            Route::get('/{suppliersubtype}', [suppliersubtypeController::class, 'show'])->name('suppliersubtypes.show')->middleware('permission:supplier-sub-type-read');
-            Route::match(['put', 'patch'],'/{suppliersubtype}', [suppliersubtypeController::class, 'update'])->name('suppliersubtypes.update');
-            Route::delete('/{suppliersubtype}', [suppliersubtypeController::class, 'destroy'])->name('suppliersubtypes.destroy')->middleware('permission:supplier-sub-type-delete');
-            Route::get('/{suppliersubtype}/edit', [suppliersubtypeController::class, 'edit'])->name('suppliersubtypes.edit')->middleware('permission:supplier-sub-type-update');
+            Route::get('/', [SupplierSubTypeController::class, 'index'])->name('suppliersubtypes.index')->middleware('permission:supplier-sub-type-read');
+            Route::post('/', [SupplierSubTypeController::class, 'store'])->name('suppliersubtypes.store');
+            Route::get('/create', [SupplierSubTypeController::class, 'create'])->name('suppliersubtypes.create')->middleware('permission:supplier-sub-type-create');
+            Route::get('/{suppliersubtype}', [SupplierSubTypeController::class, 'show'])->name('suppliersubtypes.show')->middleware('permission:supplier-sub-type-read');
+            Route::match(['put', 'patch'],'/{suppliersubtype}', [SupplierSubTypeController::class, 'update'])->name('suppliersubtypes.update');
+            Route::delete('/{suppliersubtype}', [SupplierSubTypeController::class, 'destroy'])->name('suppliersubtypes.destroy')->middleware('permission:supplier-sub-type-delete');
+            Route::get('/{suppliersubtype}/edit', [SupplierSubTypeController::class, 'edit'])->name('suppliersubtypes.edit')->middleware('permission:supplier-sub-type-update');
         });
         // supplier scaffold
         Route::group(['prefix' => 'suppliers'], function () {
-            Route::get('/', [supplierController::class, 'index'])->name('suppliers.index')->middleware('permission:supplier-read');
-            Route::post('/', [supplierController::class, 'store'])->name('suppliers.store');
-            Route::get('/create', [supplierController::class, 'create'])->name('suppliers.create')->middleware('permission:supplier-create');
-            Route::get('/{supplier}', [supplierController::class, 'show'])->name('suppliers.show')->middleware('permission:supplier-read');
-            Route::match(['put', 'patch'],'/{supplier}', [supplierController::class, 'update'])->name('suppliers.update');
-            Route::delete('/{supplier}', [supplierController::class, 'destroy'])->name('suppliers.destroy')->middleware('permission:supplier-delete');
-            Route::get('/{supplier}/edit', [supplierController::class, 'edit'])->name('suppliers.edit')->middleware('permission:supplier-update');
+            Route::get('/', [SupplierController::class, 'index'])->name('suppliers.index')->middleware('permission:supplier-read');
+            Route::post('/', [SupplierController::class, 'store'])->name('suppliers.store');
+            Route::get('/create', [SupplierController::class, 'create'])->name('suppliers.create')->middleware('permission:supplier-create');
+            Route::get('/{supplier}', [SupplierController::class, 'show'])->name('suppliers.show')->middleware('permission:supplier-read');
+            Route::match(['put', 'patch'],'/{supplier}', [SupplierController::class, 'update'])->name('suppliers.update');
+            Route::delete('/{supplier}', [SupplierController::class, 'destroy'])->name('suppliers.destroy')->middleware('permission:supplier-delete');
+            Route::get('/{supplier}/edit', [SupplierController::class, 'edit'])->name('suppliers.edit')->middleware('permission:supplier-update');
         });
         // supplieracc scaffold
         Route::group(['prefix' => 'supplieraccs'], function () {
-            Route::get('/', [supplieraccController::class, 'index'])->name('supplieraccs.index')->middleware('permission:supplier-acc-read');
-            Route::post('/', [supplieraccController::class, 'store'])->name('supplieraccs.store');
-            Route::get('/create', [supplieraccController::class, 'create'])->name('supplieraccs.create')->middleware('permission:supplier-acc-create');
-            Route::get('/{supplieracc}', [supplieraccController::class, 'show'])->name('supplieraccs.show')->middleware('permission:supplier-acc-read');
-            Route::match(['put', 'patch'],'/{supplieracc}', [supplieraccController::class, 'update'])->name('supplieraccs.update');
-            Route::delete('/{supplieracc}', [supplieraccController::class, 'destroy'])->name('supplieraccs.destroy')->middleware('permission:supplier-acc-delete');
-            Route::get('/{supplieracc}/edit', [supplieraccController::class, 'edit'])->name('supplieraccs.edit')->middleware('permission:supplier-acc-update');
+            Route::get('/', [SupplierAccController::class, 'index'])->name('supplieraccs.index')->middleware('permission:supplier-acc-read');
+            Route::post('/', [SupplierAccController::class, 'store'])->name('supplieraccs.store');
+            Route::get('/create', [SupplierAccController::class, 'create'])->name('supplieraccs.create')->middleware('permission:supplier-acc-create');
+            Route::get('/{supplieracc}', [SupplierAccController::class, 'show'])->name('supplieraccs.show')->middleware('permission:supplier-acc-read');
+            Route::match(['put', 'patch'],'/{supplieracc}', [SupplierAccController::class, 'update'])->name('supplieraccs.update');
+            Route::delete('/{supplieracc}', [SupplierAccController::class, 'destroy'])->name('supplieraccs.destroy')->middleware('permission:supplier-acc-delete');
+            Route::get('/{supplieracc}/edit', [SupplierAccController::class, 'edit'])->name('supplieraccs.edit')->middleware('permission:supplier-acc-update');
         });
     });
 });

@@ -100,11 +100,11 @@
                 <div class="col-lg-12 col-md-6 mb-3">
                     <label class="form-label">Is Active</label>
                     <div class="custom-control custom-radio">
-                        <input class="custom-control-input" id="is_active" value="1" name="is_active" type="radio" {{ old('is_active') == 1 ? 'checked' : '' }}>
+                        <input class="custom-control-input" id="is_active" value="Y" name="is_active" type="radio" {{ old('is_active') == "Y" ? 'checked' : '' }}>
                         <label class="custom-control-label" for="Yes">Yes</label>
                     </div>
                     <div class="custom-control custom-radio">
-                        <input class="custom-control-input" id="is_active" value="0" name="is_active" type="radio" {{ old('is_active') == 0 ? 'checked' : '' }}>
+                        <input class="custom-control-input" id="is_active" value="N" name="is_active" type="radio" {{ old('is_active') == "N" ? 'checked' : '' }}>
                         <label class="custom-control-label" for="No">No</label>
                     </div>
                     @error('is_active')
@@ -136,6 +136,7 @@
 
     $('#prov_code').change(function() {
         var prov_code = $(this).val();
+        console.log(prov_code);
 
         $('#kota_code').empty();
         $('#kec_code').empty();

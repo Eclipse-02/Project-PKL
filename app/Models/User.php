@@ -59,6 +59,10 @@ class User extends Authenticatable implements LaratrustUser, MustVerifyEmail
      */
     protected $fillable = [
         'coy_id',
+        'empl_id',
+        'empl_branch',
+        'max_session',
+        'expired_pwd',
         'name',
         'email',
     ];
@@ -89,15 +93,11 @@ class User extends Authenticatable implements LaratrustUser, MustVerifyEmail
     ];
 
     function branch() {
-        return $this->hasOne(Branch::class, 'coy_id', 'coy_id');
+        return $this->hasOne(Branch::class, 'branch_code', 'empl_branch');
     }
 
     function employee() {
-        return $this->hasOne(Employee::class, 'coy_id', 'coy_id');
-    }
-
-    function uid() {
-        return $this->hasOne(UserUID::class, 'user_id', 'coy_id');
+        return $this->hasOne(Employee::class, 'empl_id', 'empl_id');
     }
 
     function coy() {

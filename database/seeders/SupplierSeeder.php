@@ -43,7 +43,7 @@ class SupplierSeeder extends Seeder
             'file_name_mou' => 'this is a image',
             'file_name_ktp' => 'this is a image',
             'file_name_npwp' => 'this is a image',
-            'is_active' => 1,
+            'is_active' => 'Y',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);

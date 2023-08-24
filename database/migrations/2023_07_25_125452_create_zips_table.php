@@ -16,11 +16,11 @@ return new class extends Migration
             $table->uuid("id");
             $table->string("sub_zip_code", 5);
             $table->string("zip_desc", 100);
-            $table->unsignedBigInteger("prov_code"); // fs_mst_provinsi
-            $table->unsignedBigInteger("kota_code"); // fs_mst_kota
-            $table->unsignedBigInteger("kec_code"); // fs_mst_kecamatan
-            $table->unsignedBigInteger("kel_code"); // fs_mst_kelurahan
-            $table->boolean("is_active")->nullable()->default(0);
+            $table->string("prov_code", 5); // fs_mst_provinsi
+            $table->string("kota_code", 5); // fs_mst_kota
+            $table->string("kec_code", 5); // fs_mst_kecamatan
+            $table->string("kel_code", 5); // fs_mst_kelurahan
+            $table->string("is_active", 1)->nullable()->default(0);
             $table->string("created_by");
             $table->string("updated_by");
             $table->timestamps();

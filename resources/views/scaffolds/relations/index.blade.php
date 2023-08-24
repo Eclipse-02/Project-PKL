@@ -41,8 +41,8 @@
                     <td>
                         <select data-column="4" class="form-control filter-select">
                             <option value="">All</option>
-                                <option value="1">1</option>
-                                <option value="0">0</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
                         </select>
                     </td>
                     <td></td>
@@ -65,7 +65,7 @@
             serverSide: true,
             scrollX: true,
             ajax: {
-                "url": "{{ route('countries.index') }}",
+                "url": "{{ route('relations.index') }}",
 				"type": "GET"
             },
             columns: [{

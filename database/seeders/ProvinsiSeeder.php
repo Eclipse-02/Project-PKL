@@ -13,6 +13,7 @@ class ProvinsiSeeder extends Seeder
     public function run(): void
     {
         $data = [
+            "",
             "Aceh",
             "Sumatera Utara",
             "Sumatera Selatan",
@@ -53,9 +54,11 @@ class ProvinsiSeeder extends Seeder
             "Papua Barat Daya",
         ];
 
-        foreach ($data as $d) {
+        for ($i=1; $i < count($data); $i++) {
             Provinsi::create([
-                'provinsi' => $d,
+                'prov_code' => $i,
+                'provinsi' => $data[$i],
+                'is_active' => 'Y',
                 'created_by' => 'Seeder',
                 'updated_by' => 'Seeder',
             ]);

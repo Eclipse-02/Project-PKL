@@ -13,7 +13,7 @@
                 <dd class="col-sm-9">{{ $data->id }}</dd>
 
                 <dt class="col-sm-3">Coy ID</dt>
-                <dd class="col-sm-9">{{ $data->coy_id }}</dd>
+                <dd class="col-sm-9">{{ $data->coy->coy_name }} / {{ $data->coy->coy_id }}</dd>
 
                 <dt class="col-sm-3">Area Code</dt>
                 <dd class="col-sm-9">{{ $data->area_code }}</dd>
@@ -22,7 +22,7 @@
                 <dd class="col-sm-9">{{ $data->area_name }}</dd>
 
                 <dt class="col-sm-3">Is Active</dt>
-                <dd class="col-sm-9">{{ $data->is_active == 1 ? "Yes" : "No" }}</dd>
+                <dd class="col-sm-9">{{ $data->is_active == "Y" ? "Yes" : "No" }}</dd>
 
                 <dt class="col-sm-3">Created By</dt>
                 <dd class="col-sm-9">{{ $data->created_by }}</dd>

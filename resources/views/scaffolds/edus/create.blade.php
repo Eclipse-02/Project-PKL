@@ -32,32 +32,32 @@
                     <div class="form-group">
                         <label class="form-label">Edu Code</label>
                         <input type="text" class="form-control @error('edu_code')is-invalid @enderror" id="edu_code" name="edu_code" placeholder="Edu Code" value="{{ old('edu_code') }}">
+                        @error('edu_code')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('edu_code')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Edu Name</label>
                         <input type="text" class="form-control @error('edu_name')is-invalid @enderror" id="edu_name" name="edu_name" placeholder="Edu Name" value="{{ old('edu_name') }}">
+                        @error('edu_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('edu_name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6 mb-3">
                     <label class="form-label">Is Active</label>
                     <div class="custom-control custom-radio">
-                        <input class="custom-control-input" id="is_active" value="1" name="is_active" type="radio" {{ old('is_active') == 1 ? 'checked' : '' }}>
+                        <input class="custom-control-input" id="is_active" value="Y" name="is_active" type="radio" {{ old('is_active') == "Y" ? 'checked' : '' }}>
                         <label class="custom-control-label" for="Yes">Yes</label>
                     </div>
                     <div class="custom-control custom-radio">
-                        <input class="custom-control-input" id="is_active" value="0" name="is_active" type="radio" {{ old('is_active') == 0 ? 'checked' : '' }}>
+                        <input class="custom-control-input" id="is_active" value="N" name="is_active" type="radio" {{ old('is_active') == "N" ? 'checked' : '' }}>
                         <label class="custom-control-label" for="No">No</label>
                     </div>
                     @error('is_active')

@@ -39,8 +39,8 @@
                     <td>
                         <select data-column="3" class="form-control filter-select">
                             <option value="">All</option>
-                                <option value="1">1</option>
-                                <option value="0">0</option>
+                                <option value="Y">Yes</option>
+                                <option value="N">No</option>
                         </select>
                     </td>
                     <td></td>

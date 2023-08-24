@@ -16,10 +16,10 @@ return new class extends Migration
             $table->uuid('id');
             $table->string('supl_code', 10);
             $table->string('branch_code', 5)->nullable();
-            $table->boolean('is_active');
+            $table->string('is_active', 1)->nullable();
             $table->string('supl_status', 2)->default('NW')->nullable();
             $table->string('supl_name', 100);
-            $table->boolean('supl_type')->nullable();
+            $table->string('supl_type', 1)->nullable();
             $table->unsignedBigInteger('supl_sub_type')->nullable();
             $table->string('supl_pic_name')->nullable();
             $table->string('poss_code', 5)->nullable();
@@ -29,10 +29,10 @@ return new class extends Migration
             $table->string('supl_tlp', 6)->nullable();
             $table->string('supl_hp01', 10)->nullable();
             $table->string('supl_hp02', 10)->nullable();
-            $table->unsignedBigInteger('prov_code')->nullable();
-            $table->unsignedBigInteger('kota_code')->nullable();
-            $table->unsignedBigInteger('kec_code')->nullable();
-            $table->unsignedBigInteger('kel_code')->nullable();
+            $table->string('prov_code', 5)->nullable();
+            $table->string('kota_code', 5)->nullable();
+            $table->string('kec_code', 5)->nullable();
+            $table->string('kel_code', 5)->nullable();
             $table->string('zip_code', 5)->nullable();
             $table->string('supl_npwp_no', 20)->nullable();
             $table->string('supl_npwp_name', 100)->nullable();

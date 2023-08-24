@@ -9,11 +9,11 @@
         </div>
         <div class="col-lg-12 mb-3">
             <dl class="row mx-2">
-                <dt class="col-sm-3">ID</dt>
-                <dd class="col-sm-9">{{ $data->coy_id }}</dd>
-
                 <dt class="col-sm-3">UID</dt>
                 <dd class="col-sm-9">{{ $data->id }}</dd>
+
+                <dt class="col-sm-3">Coy ID</dt>
+                <dd class="col-sm-9">{{ $data->coy->coy_name }} / {{ $data->coy->coy_id }}</dd>
 
                 <dt class="col-sm-3">Key</dt>
                 <dd class="col-sm-9">{{ $data->key }}</dd>

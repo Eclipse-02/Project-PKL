@@ -18,7 +18,7 @@ class CountrySeeder extends Seeder
             'id' => Str::uuid(),
             'con_code' => 1,
             'con_name' => 'Indonesia',
-            'is_active' => 1,
+            'is_active' => 'Y',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);

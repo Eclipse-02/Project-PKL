@@ -13,7 +13,7 @@
                 <dd class="col-sm-9">{{ $data->id }}</dd>
 
                 <dt class="col-sm-3">Coy ID</dt>
-                <dd class="col-sm-9"> {{ $data->coy->coy_name }} / {{ $data->coy->coy_id }}</dd>
+                <dd class="col-sm-9">{{ $data->coy->coy_name }} / {{ $data->coy->coy_id }}</dd>
 
                 <dt class="col-sm-3">Branch Code</dt>
                 <dd class="col-sm-9">{{ $data->branch_code }}</dd>
@@ -48,8 +48,8 @@
                 <dt class="col-sm-3">Kelurahan Code</dt>
                 <dd class="col-sm-9">{{ $data->kelurahan->kelurahan }} / {{ $data->kel_code }}</dd>
 
-                {{-- <dt class="col-sm-3">Zip Code</dt>
-                <dd class="col-sm-9">{{ $data->zip->zip_desc }} / {{ $data->zip->sub_zip_code }}</dd> --}}
+                <dt class="col-sm-3">Zip Code</dt>
+                <dd class="col-sm-9">{{ $data->zip->zip_desc }} / {{ $data->zip->sub_zip_code }}</dd>
 
                 <dt class="col-sm-3">Branch Type</dt>
                 <dd class="col-sm-9">{{ $data->branch_type == 'HO' ? 'Head Office' : 'Branch' }}</dd>
@@ -58,7 +58,7 @@
                 <dd class="col-sm-9">{{ $data->area_code }}</dd>
 
                 <dt class="col-sm-3">Is Active</dt>
-                <dd class="col-sm-9">{{ $data->is_active == 1 ? "Yes" : "No" }}</dd>
+                <dd class="col-sm-9">{{ $data->is_active == "Y" ? "Yes" : "No" }}</dd>
 
                 <dt class="col-sm-3">Created By</dt>
                 <dd class="col-sm-9">{{ $data->created_by }}</dd>

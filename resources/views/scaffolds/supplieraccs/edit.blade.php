@@ -64,34 +64,34 @@
                     <div class="form-group">
                         <label class="form-label">Acc No</label>
                         <input type="text" class="form-control @error('acc_no')is-invalid @enderror" id="acc_no" name="acc_no" placeholder="Acc No" value="{{ old('acc_no') ? old('acc_no') : $data->acc_no }}">
+                        @error('acc_no')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('acc_no')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Acc Name</label>
                         <input type="text" class="form-control @error('acc_name')is-invalid @enderror" id="acc_name" name="acc_name" placeholder="Acc Name" value="{{ old('acc_name') ? old('acc_name') : $data->acc_name }}">
+                        @error('acc_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('acc_name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">
                         <label class="form-label">Acc Description</label>
                         <textarea class="form-control @error('acc_desc')is-invalid @enderror" rows="3" id="acc_desc" name="acc_desc" placeholder="Acc Description">{{ old('acc_desc') ? old('acc_desc') : $data->acc_desc }}</textarea>
+                        @error('acc_desc')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    @error('acc_desc')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
                 <div class="col-lg-12 col-md-6">
                     <div class="form-group">

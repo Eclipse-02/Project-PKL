@@ -19,7 +19,7 @@ class PositionSeeder extends Seeder
             'id' => Str::uuid(),
             'poss_code' => '1',
             'poss_name' => 'Jakarta',
-            'is_active' => 1,
+            'is_active' => 'Y',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);

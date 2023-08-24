@@ -213,7 +213,7 @@ class ZipController extends Controller
 
     public function api(Request $request)
     {
-        $data = Zip::select('sub_zip_code', 'zip_desc', 'prov_code', 'kota_code', 'kec_code', 'kel_code')->where('sub_zip_code', $request->code)->first();
+        $data = Zip::select('sub_zip_code', 'zip_desc', 'prov_code', 'kota_code', 'kec_code', 'kel_code')->where('zip_code', $request->code)->first();
 
         return response()->json($data);
     }

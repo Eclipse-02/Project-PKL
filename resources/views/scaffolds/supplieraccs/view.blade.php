@@ -9,17 +9,17 @@
         </div>
         <div class="col-lg-12 mb-3">
             <dl class="row mx-2">
-                {{-- <dt class="col-sm-3">ID</dt>
-                <dd class="col-sm-9">{{ $data->prov_code }}</dd> --}}
-
                 <dt class="col-sm-3">UID</dt>
                 <dd class="col-sm-9">{{ $data->id }}</dd>
 
+                <dt class="col-sm-3">Coy ID</dt>
+                <dd class="col-sm-9">{{ $data->coy->coy_name }} / {{ $data->coy->coy_id }}</dd>
+
                 <dt class="col-sm-3">Supplier Code</dt>
-                <dd class="col-sm-9">{{ $data->supplier->supl_code }} / {{ $data->supplier->supl_name }}</dd>
+                <dd class="col-sm-9">{{ $data->supplier->supl_name }} / {{ $data->supplier->supl_code }}</dd>
 
                 <dt class="col-sm-3">Bank Code</dt>
-                <dd class="col-sm-9">{{ $data->bank->bank_code }} / {{ $data->bank->bank_name }}</dd>
+                <dd class="col-sm-9">{{ $data->bank->bank_name }} / {{ $data->bank->bank_code }}</dd>
 
                 <dt class="col-sm-3">Acc No</dt>
                 <dd class="col-sm-9">{{ $data->acc_no }}</dd>
@@ -34,21 +34,7 @@
                 <dd class="col-sm-9">{{ $data->acc_curr }}</dd>
 
                 <dt class="col-sm-3">Acc Status</dt>
-                <dd class="col-sm-9">
-                    {{ 
-                        if ($data->acc_status == "NW") {
-                            Baru Disimpan
-                        } else if ($data->acc_status == "NA") {
-                            Need Approval
-                        } else if ($data->acc_status == "AP") {
-                            Approved
-                        } else if ($data->acc_status == "CL") {
-                            Close
-                        } else {
-                            Reject
-                        }
-                    }}
-                </dd>
+                <dd class="col-sm-9">@if($data->supl_status == "NW")Baru Disimpan @elseif($data->supl_status == "NA")Need Approval @elseif($data->supl_status == "AP")Approved @elseif($data->supl_status == "CL")Close @else Reject @endif</dd>
 
                 <dt class="col-sm-3">Created By</dt>
                 <dd class="col-sm-9">{{ $data->created_by }}</dd>

@@ -18,7 +18,7 @@ class VaccineSeeder extends Seeder
             'id' => Str::uuid(),
             'vc_code' => 1,
             'vc_name' => 'Vaccine 1',
-            'is_active' => 1,
+            'is_active' => 'Y',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);

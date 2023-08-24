@@ -137,7 +137,7 @@
             @endpermission
             @permission('userrole-create|userrole-delete|userrole-read|userrole-update')
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('userroles/roles-assignment') ? 'active' : '' }}" href="{{ url('userroles/role-assignment') }}">
+                <a class="nav-link {{ request()->is('userroles/roles-assignment') ? 'active' : '' }}" href="{{ url('userroles/roles-assignment') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-user-tag text-danger text-sm opacity-10"></i>
@@ -247,7 +247,7 @@
             @endpermission
             @permission('supplier-sub-type-create|supplier-sub-type-delete|supplier-sub-type-read|supplier-sub-type-update')
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('suppliersubtypes*') ? 'active' : '' }}" href="{{ route('suppliersubtypes.index') }}">
+                <a class="nav-link {{ request()->is('suppliersubtypes/*') ? 'active' : '' }}" href="{{ route('suppliersubtypes.index') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
@@ -258,7 +258,7 @@
             @endpermission
             @permission('supplier-create|supplier-delete|supplier-read|supplier-update')
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('suppliers*') ? 'active' : '' }}" href="{{ route('suppliers.index') }}">
+                <a class="nav-link {{ request()->is('suppliers/*') ? 'active' : '' }}" href="{{ route('suppliers.index') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
@@ -269,7 +269,7 @@
             @endpermission
             @permission('supplier-acc-create|supplier-acc-delete|supplier-acc-read|supplier-acc-update')
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('supplieraccs*') ? 'active' : '' }}" href="{{ route('supplieraccs.index') }}">
+                <a class="nav-link {{ request()->is('supplieraccs/*') ? 'active' : '' }}" href="{{ route('supplieraccs.index') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>

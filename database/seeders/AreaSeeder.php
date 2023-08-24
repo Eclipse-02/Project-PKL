@@ -19,7 +19,7 @@ class AreaSeeder extends Seeder
             'id' => Str::uuid(),
             'area_code' => '1',
             'area_name' => 'Jakarta',
-            'is_active' => 1,
+            'is_active' => 'Y',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);

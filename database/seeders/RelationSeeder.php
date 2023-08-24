@@ -18,7 +18,7 @@ class RelationSeeder extends Seeder
             'id' => Str::uuid(),
             'rel_code' => 1,
             'rel_name' => 'Relation 1',
-            'is_active' => 1,
+            'is_active' => 'Y',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);

@@ -76,4 +76,8 @@ class Coy extends Model
     function kelurahan() {
         return $this->hasOne(Kelurahan::class, 'kel_code', 'kel_code');
     }
+
+    function zip() {
+        return $this->hasOne(Zip::class, 'zip_code', 'zip_code');
+    }
 }

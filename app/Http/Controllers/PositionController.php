@@ -111,7 +111,7 @@ class PositionController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'coy_id' => 'required|integer',
-            'poss_code' => 'required|string',
+            'poss_code' => 'required|integer',
             'poss_name' => 'required|string',
             'is_active' => 'required|integer'
         ]);
@@ -159,7 +159,7 @@ class PositionController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'coy_id' => 'required|integer',
-            'poss_code' => 'required|string',
+            'poss_code' => 'required|integer',
             'poss_name' => 'required|string',
             'is_active' => 'required|integer'
         ]);

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('id');
             $table->string('edu_code', 5);
             $table->string('edu_name', 100);
-            $table->boolean('is_active');
+            $table->string('is_active', 1)->nullable();
             $table->string("created_by");
             $table->string("updated_by");
             $table->timestamps();

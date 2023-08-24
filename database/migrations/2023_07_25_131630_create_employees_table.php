@@ -28,10 +28,10 @@ return new class extends Migration
             $table->string("empl_tlp", 6)->nullable();
             $table->string("empl_hp01", 10)->nullable();
             $table->string("empl_hp02", 10)->nullable();
-            $table->unsignedBigInteger("prov_code")->nullable(); // fs_mst_provinsi
-            $table->unsignedBigInteger("kota_code")->nullable(); // fs_mst_kota
-            $table->unsignedBigInteger("kec_code")->nullable(); // fs_mst_kecamatan
-            $table->unsignedBigInteger("kel_code")->nullable(); // fs_mst_kelurahan
+            $table->string("prov_code", 5)->nullable(); // fs_mst_provinsi
+            $table->string("kota_code", 5)->nullable(); // fs_mst_kota
+            $table->string("kec_code", 5)->nullable(); // fs_mst_kecamatan
+            $table->string("kel_code", 5)->nullable(); // fs_mst_kelurahan
             $table->string("zip_code", 5)->nullable(); // fs_mst_zip
             $table->string("created_by");
             $table->string("updated_by");

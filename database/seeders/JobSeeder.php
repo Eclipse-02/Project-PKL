@@ -19,7 +19,7 @@ class JobSeeder extends Seeder
             'id' => Str::uuid(),
             'job_code' => 1,
             'job_name' => 'Job 1',
-            'is_active' => 1,
+            'is_active' => 'Y',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);

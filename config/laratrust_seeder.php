@@ -17,8 +17,8 @@ return [
         'office' => [
             'provinsi' => 'c,r,u,d',
             'kota' => 'c,r,u,d',
-            'kec' => 'c,r,u,d',
-            'kel' => 'c,r,u,d',
+            'kecamatan' => 'c,r,u,d',
+            'kelurahan' => 'c,r,u,d',
             'zip' => 'c,r,u,d',
             'branch' => 'c,r,u,d',
             'area' => 'c,r,u,d',
