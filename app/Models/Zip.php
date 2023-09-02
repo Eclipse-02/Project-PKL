@@ -11,7 +11,7 @@ class Zip extends Model
 {
     use HasFactory;
 
-/**
+    /**
      * The "booting" function of model
      *
      * @return void

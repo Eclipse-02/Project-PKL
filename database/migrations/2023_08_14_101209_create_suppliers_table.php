@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('suppliers', function (Blueprint $table) {
             $table->string("coy_id", 5);
             $table->uuid('id');
-            $table->string('supl_code', 10);
+            $table->string('supl_code', 10)->unique();
             $table->string('branch_code', 5)->nullable();
             $table->string('is_active', 1)->nullable();
             $table->string('supl_status', 2)->default('NW')->nullable();
@@ -48,7 +48,10 @@ return new class extends Migration
             $table->foreign("kota_code")->references('kota_code')->on('kotas')->onDelete('cascade');
             $table->foreign("kec_code")->references('kec_code')->on('kecamatans')->onDelete('cascade');
             $table->foreign("kel_code")->references('kel_code')->on('kelurahans')->onDelete('cascade');
+            $table->foreign("zip_code")->references('kel_code')->on('kelurahans')->onDelete('cascade');
             $table->foreign("poss_code")->references('poss_code')->on('positions')->onDelete('cascade');
+            $table->foreign("branch_code")->references('branch_code')->on('branches')->onDelete('cascade');
+            $table->foreign("coy_id")->references('coy_id')->on('coys')->onDelete('cascade');
         });
     }
 

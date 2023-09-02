@@ -135,7 +135,7 @@
                 </a>
             </li>
             @endpermission
-            @permission('userrole-create|userrole-delete|userrole-read|userrole-update')
+            @permission('user-role-create|user-role-delete|user-role-read|user-role-update')
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('userroles/roles-assignment') ? 'active' : '' }}" href="{{ url('userroles/roles-assignment') }}">
                     <div
@@ -146,14 +146,25 @@
                 </a>
             </li>
             @endpermission
-            @permission('rolepermission-create|rolepermission-delete|rolepermission-read|rolepermission-update')
+            @permission('role-create|role-delete|role-read|role-update')
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('userroles/roles') ? 'active' : '' }}" href="{{ url('userroles/roles') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-user-tag text-danger text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Role Permission</span>
+                    <span class="nav-link-text ms-1">Role</span>
+                </a>
+            </li>
+            @endpermission
+            @permission('user-role-create|user-role-delete|user-role-read|user-role-update')
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('userroles/userroles') ? 'active' : '' }}" href="{{ route('userroles.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-user-tag text-danger text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Role</span>
                 </a>
             </li>
             @endpermission
@@ -275,6 +286,28 @@
                         <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Supplier Acc</span>
+                </a>
+            </li>
+            @endpermission
+            @permission('package-create|package-delete|package-read|package-update')
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('packages/*') ? 'active' : '' }}" href="{{ route('packages.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Package</span>
+                </a>
+            </li>
+            @endpermission
+            @permission('register-package-create|register-package-delete|register-package-read|register-package-update')
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('registerpackages/*') ? 'active' : '' }}" href="{{ route('registerpackages.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Register Package</span>
                 </a>
             </li>
             @endpermission

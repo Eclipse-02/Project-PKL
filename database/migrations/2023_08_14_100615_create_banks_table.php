@@ -30,6 +30,8 @@ return new class extends Migration
             $table->foreign("kota_code")->references('kota_code')->on('kotas')->onDelete('cascade');
             $table->foreign("kec_code")->references('kec_code')->on('kecamatans')->onDelete('cascade');
             $table->foreign("kel_code")->references('kel_code')->on('kelurahans')->onDelete('cascade');
+            $table->foreign("zip_code")->references('zip_code')->on('zips')->onDelete('cascade');
+            $table->foreign("coy_id")->references('coy_id')->on('coys')->onDelete('cascade');
         });
     }
 

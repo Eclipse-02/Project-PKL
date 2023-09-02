@@ -1,6 +1,6 @@
 @extends('dashboard.master')
 
-@section('title', "Edit {$modelKey}")
+@section('title', "Edit User Role")
 
 @section('content')
 <div class="row">

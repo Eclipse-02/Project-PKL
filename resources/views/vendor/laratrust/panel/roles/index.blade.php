@@ -1,6 +1,6 @@
 @extends('dashboard.master')
 
-@section('title', 'Roles Permissions')
+@section('title', 'Roles')
 
 @section('content')
 <div class="row">

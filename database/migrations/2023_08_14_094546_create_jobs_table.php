@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->string("coy_id", 5);
             $table->uuid('id');
-            $table->string('job_code', 5);
+            $table->string('job_code', 5)->unique();
             $table->string('job_name', 100);
             $table->string('is_active', 1)->nullable();
             $table->string("created_by");
             $table->string("updated_by");
             $table->timestamps();
+            $table->foreign("coy_id")->references('coy_id')->on('coys')->onDelete('cascade');
         });
     }
 

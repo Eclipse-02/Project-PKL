@@ -14,16 +14,19 @@ return new class extends Migration
         Schema::create('utilities', function (Blueprint $table) {
             $table->string("coy_id", 5);
             $table->uuid("id");
+            $table->string("seqn_code", 4);
             $table->string("branch_code", 5); // fs_mst_branch
             $table->bigInteger("start_value");
             $table->bigInteger("last_value");
             $table->bigInteger("max_value");
             $table->integer("increment_by");
             $table->string("description", 50);
-            $table->boolean("is_cycle")->nullable();
+            $table->string("is_cycle", 1)->default('M');
             $table->string("created_by");
             $table->string("updated_by");
             $table->timestamps();
+            $table->foreign("coy_id")->references('coy_id')->on('coys')->onDelete('cascade');
+            $table->foreign("branch_code")->references('branch_code')->on('branches')->onDelete('cascade');
         });
     }
 

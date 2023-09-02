@@ -75,6 +75,14 @@ return [
         public_path('storage/ktps') => storage_path('supl/files/ktps'),
         public_path('storage/mous') => storage_path('supl/files/mous'),
         public_path('storage/npwps') => storage_path('supl/files/npwps'),
+        public_path('storage/pkg-imgs') => storage_path('pkg/pkg-img'),
+        public_path('storage/reg/full-name') => storage_path('reg/full-name'),
+        public_path('storage/reg/half-name') => storage_path('reg/half-name'),
+        public_path('storage/reg/pass-name') => storage_path('reg/pass-name'),
+        public_path('storage/reg/yb-name') => storage_path('reg/yb-name'),
+        public_path('storage/reg/id-name') => storage_path('reg/id-name'),
+        public_path('storage/reg/kk-name') => storage_path('reg/kk-name'),
+        public_path('storage/reg/akta-n-name') => storage_path('reg/akta-n-name'),
+        public_path('storage/reg/akta-l-name') => storage_path('reg/akta-l-name'),
     ],
-
 ];

@@ -1,29 +1,31 @@
 <?php
 
-use App\Http\Controllers\AreaController;
-use App\Http\Controllers\BankController;
-use App\Http\Controllers\BranchController;
-use App\Http\Controllers\CountryController;
-use App\Http\Controllers\CoyController;
-use App\Http\Controllers\EduController;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\JobController;
-use App\Http\Controllers\KecamatanController;
-use App\Http\Controllers\KelurahanController;
-use App\Http\Controllers\KotaController;
-use App\Http\Controllers\ParameterController;
-use App\Http\Controllers\PositionController;
-use App\Http\Controllers\ProvinsiController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\RelationController;
-use App\Http\Controllers\SupplierAccController;
-use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\SupplierSubTypeController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\VaccineController;
-use App\Http\Controllers\ZipController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CoyController;
+use App\Http\Controllers\EduController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\ZipController;
+use App\Http\Controllers\AreaController;
+use App\Http\Controllers\BankController;
+use App\Http\Controllers\KotaController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\PackageController;
+use App\Http\Controllers\VaccineController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\PositionController;
+use App\Http\Controllers\ProvinsiController;
+use App\Http\Controllers\RelationController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\KecamatanController;
+use App\Http\Controllers\KelurahanController;
+use App\Http\Controllers\ParameterController;
+use App\Http\Controllers\SupplierAccController;
+use App\Http\Controllers\RegisterPackageController;
+use App\Http\Controllers\SupplierSubTypeController;
+use App\Http\Controllers\UserRoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -125,6 +127,16 @@ Route::middleware('auth')->group(function () {
             Route::delete('/{user}', [UserController::class, 'destroy'])->name('users.destroy')->middleware('permission:user-delete');
             Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit')->middleware('permission:user-update');
         });
+        // userrole scaffold
+        Route::group(['prefix' => 'userroles/userroles'], function () {
+            Route::get('/', [UserRoleController::class, 'index'])->name('userroles.index')->middleware('permission:user-read');
+            Route::post('/', [UserRoleController::class, 'store'])->name('userroles.store');
+            Route::get('/create', [UserRoleController::class, 'create'])->name('userroles.create')->middleware('permission:user-create');
+            Route::get('/{userrole}', [UserRoleController::class, 'show'])->name('userroles.show')->middleware('permission:user-read');
+            Route::match(['put', 'patch'],'/{userrole}', [UserRoleController::class, 'update'])->name('userroles.update');
+            Route::delete('/{userrole}', [UserRoleController::class, 'destroy'])->name('userroles.destroy')->middleware('permission:user-delete');
+            Route::get('/{userrole}/edit', [UserRoleController::class, 'edit'])->name('userroles.edit')->middleware('permission:user-update');
+        });
         // employee scaffold
         Route::group(['prefix' => 'employees'], function () {
             Route::get('/', [EmployeeController::class, 'index'])->name('employees.index')->middleware('permission:employee-read');
@@ -196,14 +208,14 @@ Route::middleware('auth')->group(function () {
             Route::get('/{edu}/edit', [EduController::class, 'edit'])->name('edus.edit')->middleware('permission:edu-update');
         });
         // country scaffold
-        Route::group(['prefix' => 'countrys'], function () {
-            Route::get('/', [CountryController::class, 'index'])->name('countrys.index')->middleware('permission:country-read');
-            Route::post('/', [CountryController::class, 'store'])->name('countrys.store');
-            Route::get('/create', [CountryController::class, 'create'])->name('countrys.create')->middleware('permission:country-create');
-            Route::get('/{country}', [CountryController::class, 'show'])->name('countrys.show')->middleware('permission:country-read');
-            Route::match(['put', 'patch'],'/{country}', [CountryController::class, 'update'])->name('countrys.update');
-            Route::delete('/{country}', [CountryController::class, 'destroy'])->name('countrys.destroy')->middleware('permission:country-delete');
-            Route::get('/{country}/edit', [CountryController::class, 'edit'])->name('countrys.edit')->middleware('permission:country-update');
+        Route::group(['prefix' => 'countries'], function () {
+            Route::get('/', [CountryController::class, 'index'])->name('countries.index')->middleware('permission:country-read');
+            Route::post('/', [CountryController::class, 'store'])->name('countries.store');
+            Route::get('/create', [CountryController::class, 'create'])->name('countries.create')->middleware('permission:country-create');
+            Route::get('/{country}', [CountryController::class, 'show'])->name('countries.show')->middleware('permission:country-read');
+            Route::match(['put', 'patch'],'/{country}', [CountryController::class, 'update'])->name('countries.update');
+            Route::delete('/{country}', [CountryController::class, 'destroy'])->name('countries.destroy')->middleware('permission:country-delete');
+            Route::get('/{country}/edit', [CountryController::class, 'edit'])->name('countries.edit')->middleware('permission:country-update');
         });
         // relation scaffold
         Route::group(['prefix' => 'relations'], function () {
@@ -254,6 +266,29 @@ Route::middleware('auth')->group(function () {
             Route::match(['put', 'patch'],'/{supplieracc}', [SupplierAccController::class, 'update'])->name('supplieraccs.update');
             Route::delete('/{supplieracc}', [SupplierAccController::class, 'destroy'])->name('supplieraccs.destroy')->middleware('permission:supplier-acc-delete');
             Route::get('/{supplieracc}/edit', [SupplierAccController::class, 'edit'])->name('supplieraccs.edit')->middleware('permission:supplier-acc-update');
+        });
+        // package scaffold
+        Route::group(['prefix' => 'packages'], function () {
+            Route::get('/', [PackageController::class, 'index'])->name('packages.index')->middleware('permission:package-read');
+            Route::post('/', [PackageController::class, 'store'])->name('packages.store');
+            Route::get('/create', [PackageController::class, 'create'])->name('packages.create')->middleware('permission:package-create');
+            Route::get('/{package}', [PackageController::class, 'show'])->name('packages.show')->middleware('permission:package-read');
+            Route::match(['put', 'patch'],'/{package}', [PackageController::class, 'update'])->name('packages.update');
+            Route::delete('/{package}', [PackageController::class, 'destroy'])->name('packages.destroy')->middleware('permission:package-delete');
+            Route::get('/{package}/edit', [PackageController::class, 'edit'])->name('packages.edit')->middleware('permission:package-update');
+        });
+        // registerpackage scaffold
+        Route::group(['prefix' => 'registerpackages'], function () {
+            Route::get('/', [RegisterPackageController::class, 'index'])->name('registerpackages.index')->middleware('permission:register-package-read');
+            Route::post('/', [RegisterPackageController::class, 'store'])->name('registerpackages.store');
+            Route::get('/create', [RegisterPackageController::class, 'create'])->name('registerpackages.create')->middleware('permission:register-package-create');
+            Route::get('/{registerpackage}', [RegisterPackageController::class, 'show'])->name('registerpackages.show')->middleware('permission:register-package-read');
+            Route::match(['put', 'patch'],'/{registerpackage}', [RegisterPackageController::class, 'update'])->name('registerpackages.update');
+            Route::delete('/{registerpackage}', [RegisterPackageController::class, 'destroy'])->name('registerpackages.destroy')->middleware('permission:register-package-delete');
+            Route::get('/{registerpackage}/edit', [RegisterPackageController::class, 'edit'])->name('registerpackages.edit')->middleware('permission:register-package-update');
+        });
+        Route::get('routes', function () {
+            return view('scaffolds/index');
         });
     });
 });

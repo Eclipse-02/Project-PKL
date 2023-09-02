@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('branches', function (Blueprint $table) {
             $table->string("coy_id", 5);
             $table->uuid("id");
-            $table->string("branch_code", 5);
+            $table->string("branch_code", 5)->unique();
             $table->string("branch_name", 60);
             $table->string("branch_addr", 200);
             $table->string("branch_tlp_area", 5);
@@ -37,6 +37,8 @@ return new class extends Migration
             $table->foreign("kota_code")->references('kota_code')->on('kotas')->onDelete('cascade');
             $table->foreign("kec_code")->references('kec_code')->on('kecamatans')->onDelete('cascade');
             $table->foreign("kel_code")->references('kel_code')->on('kelurahans')->onDelete('cascade');
+            $table->foreign("zip_code")->references('zip_code')->on('zips')->onDelete('cascade');
+            // $table->foreign("area_code")->references("area_code")->on('areas')->onDelete('cascade');
         });
     }
 

@@ -106,7 +106,7 @@ class ZipController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
+    {
         $validator = Validator::make($request->all(), [
             'zip_code' => 'required|integer',
             'sub_zip_code' => 'required|integer',

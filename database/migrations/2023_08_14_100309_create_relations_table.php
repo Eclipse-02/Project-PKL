@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('relations', function (Blueprint $table) {
-            $table->string('rel_code', 5);
+            $table->string('rel_code', 5)->unique();
             $table->uuid('id');
             $table->string('rel_name', 100);
             $table->string('is_active', 1)->nullable();

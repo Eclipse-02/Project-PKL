@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string("created_by");
             $table->string("updated_by");
             $table->timestamps();
+            $table->foreign("supl_code")->references('supl_code')->on('suppliers')->onDelete('cascade');
+            $table->foreign("coy_id")->references('coy_id')->on('coys')->onDelete('cascade');
         });
     }
 
