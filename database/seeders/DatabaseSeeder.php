@@ -33,5 +33,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SupplierSubTypeSeeder::class);
         $this->call(SupplierSeeder::class);
         $this->call(SupplierAccSeeder::class);
+        $this->call(UtiltySeeder::class);
     }
 }

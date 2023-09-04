@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
         User::factory()->create([
             'coy_id' => 1,
             'empl_id' => 1,
+            'empl_branch' => 1,
             'id' => Str::uuid(),
             'name' => 'Konsumen',
             'email' => 'konsumen@gmail.com',
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
         User::factory()->create([
             'coy_id' => 1,
             'empl_id' => 2,
+            'empl_branch' => 1,
             'id' => Str::uuid(),
             'name' => 'Office',
             'email' => 'office@gmail.com',
@@ -40,6 +42,7 @@ class UserSeeder extends Seeder
         User::factory()->create([
             'coy_id' => 1,
             'empl_id' => 3,
+            'empl_branch' => 1,
             'id' => Str::uuid(),
             'name' => 'Agen',
             'email' => 'agen@gmail.com',
