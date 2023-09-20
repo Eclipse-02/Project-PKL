@@ -19,6 +19,13 @@
     <link href="{{ asset('dash/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('dash/assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <!-- intervention -->
     <link rel="stylesheet" href="{{ asset('css/imgareaselect-animated.css') }}" />
 </head>
@@ -47,9 +54,7 @@
         </div>
     </main>
     <div class="fixed-plugin">
-        <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-            <i class="fa fa-cog py-2"> </i>
-        </a>
+        
         <div class="card shadow-lg">
             <div class="card-header pb-0 pt-3 ">
                 <div class="float-start">
@@ -136,11 +141,13 @@
         </div>
     </div>
     <!--   Core JS Files   -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
     <script src="{{ asset('dash/assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('dash/assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('dash/assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('dash/assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('js/dev/locations.js') }}"></script>
+    <script src="{{ asset('js/dev/formats.js') }}"></script>
     <!-- Datatables -->
     <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
@@ -184,91 +191,6 @@
 
     @include('sweetalert::alert')
 
-    {{-- <script type="text/javascript">
-        $(document).ready(function() {
-            // Prov
-            fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`)
-                .then(response => response.json())
-                .then(
-                    provinces => provinces.forEach(element => {
-                        $("#sel_prov").append("<option value='" + element.id + "'>" + element.name +
-                            "</option>");
-                    })
-                );
-
-            // Kab/Kota
-            $('#sel_prov').change(function() {
-                var prov_id = $(this).val();
-
-                $('#sel_kab').empty();
-                $('#sel_kec').empty();
-                $('#sel_kel').empty();
-                $('#sel_kab').prop('disabled', false);
-                $('#sel_kec').prop('disabled', true);
-                $('#sel_kel').prop('disabled', true);
-
-                $("#sel_kab").append(
-                    "<option selected class='text-center'>-- Pilih Kabupaten/Kota --</option>");
-                $("#sel_kec").append(
-                    "<option selected class='text-center'>-- Pilih Kabupaten/Kota Terlebih Dahulu --</option>"
-                );
-                $("#sel_kel").append(
-                    "<option selected class='text-center'>-- Pilih Kecamatan Terlebih Dahulu --</option>"
-                );
-
-                fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/` + prov_id + `.json`)
-                    .then(response => response.json())
-                    .then(
-                        regencies => regencies.forEach(element => {
-                            $("#sel_kab").append("<option value='" + element.id + "'>" + element.name +
-                                "</option>");
-                        })
-                    );
-            });
-
-            // Kec
-            $('#sel_kab').change(function() {
-                var kab_id = $(this).val();
-
-                $('#sel_kec').empty();
-                $('#sel_kel').empty();
-                $('#sel_kec').prop('disabled', false);
-                $('#sel_kel').prop('disabled', true);
-
-                $("#sel_kec").append("<option selected class='text-center'>-- Pilih Kecamatan --</option>");
-                $("#sel_kel").append(
-                    "<option selected class='text-center'>-- Pilih Kecamatan Terlebih Dahulu --</option>"
-                );
-
-                fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/districts/` + kab_id + `.json`)
-                    .then(response => response.json())
-                    .then(
-                        districts => districts.forEach(element => {
-                            $("#sel_kec").append("<option value='" + element.id + "'>" + element.name +
-                                "</option>");
-                        })
-                    );
-            });
-
-            // Kel
-            $('#sel_kec').change(function() {
-                var kec_id = $(this).val();
-
-                $('#sel_kel').empty();
-                $('#sel_kel').prop('disabled', false);
-
-                $("#sel_kel").append("<option selected class='text-center'>-- Pilih Kelurahan --</option>");
-                fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/villages/` + kec_id + `.json`)
-                    .then(response => response.json())
-                    .then(
-                        villages => villages.forEach(element => {
-                            $("#sel_kel").append("<option value='" + element.id + "'>" + element.name +
-                                "</option>");
-                        })
-                    );
-            });
-        });
-    </script> --}}
     @yield('scripts')
 </body>
 

@@ -286,6 +286,7 @@ Route::middleware('auth')->group(function () {
             Route::match(['put', 'patch'],'/{registerpackage}', [RegisterPackageController::class, 'update'])->name('registerpackages.update');
             Route::delete('/{registerpackage}', [RegisterPackageController::class, 'destroy'])->name('registerpackages.destroy')->middleware('permission:register-package-delete');
             Route::get('/{registerpackage}/edit', [RegisterPackageController::class, 'edit'])->name('registerpackages.edit')->middleware('permission:register-package-update');
+            Route::post('/export', [RegisterPackageController::class, 'export'])->name('registerpackages.export')->middleware('permission:register-package-update');
         });
         Route::get('routes', function () {
             return view('scaffolds/index');

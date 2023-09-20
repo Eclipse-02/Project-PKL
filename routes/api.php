@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KotaController;
 use App\Http\Controllers\ProvinsiController;
+use App\Http\Controllers\RegisterPackageController;
 use App\Http\Controllers\ZipController;
 
 /*
@@ -29,4 +30,5 @@ Route::group(['prefix' => 'v1'], function() {
     Route::get('kecamatans', [KecamatanController::class, 'api'])->name('kecamatans.api');
     Route::get('kelurahans', [KelurahanController::class, 'api'])->name('kelurahans.api');
     Route::get('zips', [ZipController::class, 'api'])->name('zips.api');
+    Route::get('register', [RegisterPackageController::class, 'api'])->name('register.api');
 });

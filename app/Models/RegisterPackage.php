@@ -106,6 +106,8 @@ class RegisterPackage extends Model
         'appl_is_kk_name',
         'appl_is_akta_n_name',
         'appl_is_akta_l_name',
+        'appl_addr',
+        'appl_posting_date',
         'created_by',
         'updated_by',
     ];

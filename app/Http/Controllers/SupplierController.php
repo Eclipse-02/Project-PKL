@@ -9,6 +9,7 @@ use App\Models\Position;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use App\Models\SupplierSubType;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -152,10 +153,10 @@ class SupplierController extends Controller
             Alert::toast('Oops, Something Wrong Happened!', 'error');
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
-            $request->file('supl_pic_name')->move(storage_path('supl/supl-img'), $request->file('supl_pic_name')->getClientOriginalName());
-            $request->file('file_name_mou')->move(storage_path('supl/files/mous'), $request->file('file_name_mou')->getClientOriginalName());
-            $request->file('file_name_ktp')->move(storage_path('supl/files/ktps'), $request->file('file_name_ktp')->getClientOriginalName());
-            $request->file('file_name_npwp')->move(storage_path('supl/files/npwps'), $request->file('file_name_npwp')->getClientOriginalName());
+            $request->file('supl_pic_name')->move(storage_path('supl/files/supl-img'), 'supl_pic_name-' . Carbon::now()->format('yyyy_dd_mm'));
+            $request->file('file_name_mou')->move(storage_path('supl/files/mous'), 'file_name_mou-' . Carbon::now()->format('yyyy_dd_mm'));
+            $request->file('file_name_ktp')->move(storage_path('supl/files/ktps'), 'file_name_ktp-' . Carbon::now()->format('yyyy_dd_mm'));
+            $request->file('file_name_npwp')->move(storage_path('supl/files/npwps'), 'file_name_npwp-' . Carbon::now()->format('yyyy_dd_mm'));
             Supplier::create([
                 'coy_id' => $request->coy_id,
                 'supl_code' => $request->supl_code,
@@ -165,7 +166,7 @@ class SupplierController extends Controller
                 'supl_name' => $request->supl_name,
                 'supl_type' => $request->supl_type,
                 'supl_sub_type' => $request->supl_sub_type,
-                'supl_pic_name' => $request->file('supl_pic_name')->getClientOriginalName(),
+                'supl_pic_name' => 'supl_pic_name-' . Carbon::now()->format('yyyy_dd_mm'),
                 'poss_code' => $request->poss_code,
                 'supl_id_no' => $request->supl_id_no,
                 'supl_addr' => $request->supl_addr,
@@ -181,9 +182,9 @@ class SupplierController extends Controller
                 'supl_npwp_no' => $request->supl_npwp_no,
                 'supl_npwp_name' => $request->supl_npwp_name,
                 'supl_npwp_addr' => $request->supl_npwp_addr,
-                'file_name_mou' => $request->file('file_name_mou')->getClientOriginalName(),
-                'file_name_ktp' => $request->file('file_name_ktp')->getClientOriginalName(),
-                'file_name_npwp' => $request->file('file_name_npwp')->getClientOriginalName(),
+                'file_name_mou' => 'file_name_mou-' . Carbon::now()->format('yyyy_dd_mm'),
+                'file_name_ktp' => 'file_name_ktp-' . Carbon::now()->format('yyyy_dd_mm'),
+                'file_name_npwp' => 'file_name_npwp-' . Carbon::now()->format('yyyy_dd_mm'),
                 'supl_desc' => $request->supl_desc,
                 'created_by' => Auth::user()->name,
                 'updated_by' => Auth::user()->name,
@@ -262,26 +263,26 @@ class SupplierController extends Controller
         } else {
             if ($request->file('supl_pic_name')) {
                 unlink(storage_path('supl/supl-img/' . $request->old_supl_pic_name));
-                $request->file('supl_pic_name')->move(storage_path('supl/supl-img'), $request->file('supl_pic_name')->getClientOriginalName());
-                $supplier->update(['supl_pic_name' => $request->file('supl_pic_name')->getClientOriginalName()]);
+                $request->file('supl_pic_name')->move(storage_path('supl/supl-img'), 'supl_pic_name-' . Carbon::now()->format('yyyy_dd_mm'));
+                $supplier->update(['supl_pic_name' => 'supl_pic_name-' . Carbon::now()->format('yyyy_dd_mm')]);
             }
             
             if ($request->file('file_name_mou')) {
                 unlink(storage_path('supl/files/mous/' . $request->old_file_name_mou));
-                $request->file('file_name_mou')->move(storage_path('supl/files/mous'), $request->file('file_name_mou')->getClientOriginalName());
-                $supplier->update(['file_name_mou' => $request->file('file_name_mou')->getClientOriginalName()]);
+                $request->file('file_name_mou')->move(storage_path('supl/files/mous'), 'file_name_mou-' . Carbon::now()->format('yyyy_dd_mm'));
+                $supplier->update(['file_name_mou' => 'file_name_mou-' . Carbon::now()->format('yyyy_dd_mm')]);
             }
             
             if ($request->file('file_name_ktp')) {
                 unlink(storage_path('supl/files/ktps/' . $request->old_file_name_ktp));
-                $request->file('file_name_ktp')->move(storage_path('supl/files/ktps'), $request->file('file_name_ktp')->getClientOriginalName());
-                $supplier->update(['file_name_ktp' => $request->file('file_name_ktp')->getClientOriginalName()]);
+                $request->file('file_name_ktp')->move(storage_path('supl/files/ktps'), 'file_name_ktp-' . Carbon::now()->format('yyyy_dd_mm'));
+                $supplier->update(['file_name_ktp' => 'file_name_ktp-' . Carbon::now()->format('yyyy_dd_mm')]);
             }
             
             if ($request->file('file_name_npwp')) {
                 unlink(storage_path('supl/files/npwps/' . $request->old_file_name_npwp));
-                $request->file('file_name_npwp')->move(storage_path('supl/files/npwps'), $request->file('file_name_npwp')->getClientOriginalName());
-                $supplier->update(['file_name_npwp' => $request->file('file_name_npwp')->getClientOriginalName()]);
+                $request->file('file_name_npwp')->move(storage_path('supl/files/npwps'), 'file_name_npwp-' . Carbon::now()->format('yyyy_dd_mm'));
+                $supplier->update(['file_name_npwp' => 'file_name_npwp-' . Carbon::now()->format('yyyy_dd_mm')]);
             }
 
             $supplier->update([

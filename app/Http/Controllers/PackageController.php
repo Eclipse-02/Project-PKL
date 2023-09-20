@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Coy;
 use App\Models\Package;
-use App\Models\PackageDetail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\PackageDetail;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -141,7 +142,7 @@ class PackageController extends Controller
             Alert::toast('Oops, Something Wrong Happened!', 'error');
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
-            $request->file('pkg_image')->move(storage_path('pkg/pkg-img'), $request->file('pkg_image')->getClientOriginalName());
+            $request->file('pkg_image')->move(storage_path('pkg/pkg-img'), 'pkg_image-' . Carbon::now()->format('yyyy_dd_mm'));
             Package::create([
                 'coy_id' => $request->coy_id,
                 'pkg_code' => $request->pkg_code,
@@ -152,7 +153,7 @@ class PackageController extends Controller
                 'pkg_price_agent' => $pkg_price_agent,
                 'pkg_start' => $request->pkg_start,
                 'pkg_closed' => $request->pkg_closed,
-                'pkg_image' => $request->file('pkg_image')->getClientOriginalName(),
+                'pkg_image' => 'pkg_image-' . Carbon::now()->format('yyyy_dd_mm'),
                 'pkg_status' => $request->pkg_status,
                 'pkg_is_display' => $request->pkg_is_display,
                 'created_by' => Auth::user()->name,
@@ -230,8 +231,8 @@ class PackageController extends Controller
         } else {
             if ($request->file('pkg_image')) {
                 unlink(storage_path('pkg/pkg-img/' . $request->old_pkg_image));
-                $request->file('pkg_image')->move(storage_path('pkg/pkg-img'), $request->file('pkg_image')->getClientOriginalName());
-                $package->update(['pkg_image' => $request->file('pkg_image')->getClientOriginalName()]);
+                $request->file('pkg_image')->move(storage_path('pkg/pkg-img'), 'pkg_image-' . Carbon::now()->format('yyyy_dd_mm'));
+                $package->update(['pkg_image' => 'pkg_image-' . Carbon::now()->format('yyyy_dd_mm')]);
             }
 
             Package::where('id', $package)

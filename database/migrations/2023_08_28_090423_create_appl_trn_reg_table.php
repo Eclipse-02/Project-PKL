@@ -25,16 +25,15 @@ return new class extends Migration
             $table->string('appl_id_no', 60);
             $table->string('appl_birth_place', 60);
             $table->date('appl_birth_date');
+            $table->string("appl_addr", 200);
             $table->string("prov_code", 5);
             $table->string("kota_code", 5);
             $table->string("kec_code", 5);
             $table->string("kel_code", 5);
-            $table->string("zip_code", 5);
             $table->string('appl_status', 1);
             $table->string("con_code", 5);
             $table->string("edu_code", 5);
             $table->string("job_code", 5);
-            $table->string("branch_code", 5);
             $table->string("appl_fth_name", 60);
             $table->string("rel_code", 5);
             $table->string("appl_mahram", 60);
@@ -64,14 +63,16 @@ return new class extends Migration
             $table->string("appl_is_copy_pass", 1);
             $table->string("appl_is_copy_akta_n", 1);
             $table->string("appl_is_copy_akta_l", 1);
-            $table->binary("appl_is_img_full_name");
-            $table->binary("appl_is_img_half_name");
-            $table->binary("appl_is_pass_name");
-            $table->binary("appl_is_yb_name");
-            $table->binary("appl_is_id_name");
-            $table->binary("appl_is_kk_name");
-            $table->binary("appl_is_akta_n_name");
-            $table->binary("appl_is_akta_l_name");
+            $table->string("appl_is_img_full_name", 32);
+            $table->string("appl_is_img_half_name", 32);
+            $table->string("appl_is_pass_name", 32);
+            $table->string("appl_is_copy_pass_name", 32);
+            $table->string("appl_is_yb_name", 32);
+            $table->string("appl_is_id_name", 32);
+            $table->string("appl_is_kk_name", 32);
+            $table->string("appl_is_akta_n_name", 32);
+            $table->string("appl_is_akta_l_name", 32);
+            $table->date('appl_posting_date')->default(0);
             $table->string("created_by", 12);
             $table->string("updated_by", 15);
             $table->timestamps();
@@ -80,13 +81,11 @@ return new class extends Migration
             $table->foreign("kota_code")->references('kota_code')->on('kotas')->onDelete('cascade');
             $table->foreign("kec_code")->references('kec_code')->on('kecamatans')->onDelete('cascade');
             $table->foreign("kel_code")->references('kel_code')->on('kelurahans')->onDelete('cascade');
-            $table->foreign("zip_code")->references('zip_code')->on('zips')->onDelete('cascade');
             $table->foreign("con_code")->references('con_code')->on('countries')->onDelete('cascade');
             $table->foreign("job_code")->references('job_code')->on('jobs')->onDelete('cascade');
             $table->foreign("edu_code")->references('edu_code')->on('edus')->onDelete('cascade');
             $table->foreign("rel_code")->references('rel_code')->on('relations')->onDelete('cascade');
             $table->foreign("supl_code")->references('supl_code')->on('suppliers')->onDelete('cascade');
-            $table->foreign("branch_code")->references('branch_code')->on('branches')->onDelete('cascade');
         });
     }
 
