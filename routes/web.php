@@ -2,30 +2,30 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CoyController;
-use App\Http\Controllers\EduController;
-use App\Http\Controllers\JobController;
-use App\Http\Controllers\ZipController;
-use App\Http\Controllers\AreaController;
-use App\Http\Controllers\BankController;
-use App\Http\Controllers\KotaController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\BranchController;
-use App\Http\Controllers\CountryController;
-use App\Http\Controllers\PackageController;
-use App\Http\Controllers\VaccineController;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\PositionController;
-use App\Http\Controllers\ProvinsiController;
-use App\Http\Controllers\RelationController;
-use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\KecamatanController;
-use App\Http\Controllers\KelurahanController;
-use App\Http\Controllers\ParameterController;
-use App\Http\Controllers\SupplierAccController;
-use App\Http\Controllers\RegisterPackageController;
-use App\Http\Controllers\SupplierSubTypeController;
-use App\Http\Controllers\UserRoleController;
+use App\Http\Controllers\Master\CoyController;
+use App\Http\Controllers\Master\EduController;
+use App\Http\Controllers\Master\JobController;
+use App\Http\Controllers\Master\ZipController;
+use App\Http\Controllers\Master\AreaController;
+use App\Http\Controllers\Master\BankController;
+use App\Http\Controllers\Master\KotaController;
+use App\Http\Controllers\Master\UserController;
+use App\Http\Controllers\Master\BranchController;
+use App\Http\Controllers\Master\CountryController;
+use App\Http\Controllers\Master\PackageController;
+use App\Http\Controllers\Master\VaccineController;
+use App\Http\Controllers\Master\EmployeeController;
+use App\Http\Controllers\Master\PositionController;
+use App\Http\Controllers\Master\ProvinsiController;
+use App\Http\Controllers\Master\RelationController;
+use App\Http\Controllers\Master\SupplierController;
+use App\Http\Controllers\Master\KecamatanController;
+use App\Http\Controllers\Master\KelurahanController;
+use App\Http\Controllers\Master\ParameterController;
+use App\Http\Controllers\Master\SupplierAccController;
+use App\Http\Controllers\Master\RegisterPackageController;
+use App\Http\Controllers\Master\SupplierSubTypeController;
+use App\Http\Controllers\Master\UserRoleController;
 
 /*
 |--------------------------------------------------------------------------

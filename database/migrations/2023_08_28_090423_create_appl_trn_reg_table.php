@@ -72,7 +72,7 @@ return new class extends Migration
             $table->string("appl_is_kk_name", 32);
             $table->string("appl_is_akta_n_name", 32);
             $table->string("appl_is_akta_l_name", 32);
-            $table->date('appl_posting_date')->default(0);
+            $table->date('appl_posting_date')->nullable();
             $table->string("created_by", 12);
             $table->string("updated_by", 15);
             $table->timestamps();

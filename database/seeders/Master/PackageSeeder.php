@@ -1,0 +1,34 @@
+<?php
+
+namespace Database\Seeders\Master;
+
+use App\Models\Master\Package as MasterPackage;
+use Illuminate\Support\Str;
+use Illuminate\Database\Seeder;
+
+class PackageSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        MasterPackage::create([
+            "coy_id" => "1",
+            "id" => Str::uuid(),
+            "pkg_code" => "122",
+            "pkg_name" => "Test",
+            "pkg_desc" => "Test",
+            "pkg_price" => "20000000",
+            "pkg_price_limit" => "25000000",
+            "pkg_price_agent" => "100000",
+            "pkg_start" => "2023-08-20",
+            "pkg_closed" => "2023-09-20",
+            "pkg_image" => "Test",
+            "pkg_status" => "AC",
+            "pkg_is_display" => "Y",
+            "created_by" => "Seeder",
+            "updated_by" => "Seeder",
+        ]);
+    }
+}

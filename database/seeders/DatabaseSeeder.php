@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\Finance\AccountSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,29 +12,42 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Role
         $this->call(LaratrustSeeder::class);
-        $this->call(ProvinsiSeeder::class);
-        $this->call(KotaSeeder::class);
-        $this->call(KecamatanSeeder::class);
-        $this->call(KelurahanSeeder::class);
-        $this->call(ZipSeeder::class);
-        $this->call(CoySeeder::class);
-        $this->call(BranchSeeder::class);
-        $this->call(AreaSeeder::class);
-        $this->call(PositionSeeder::class);
-        $this->call(EmployeeSeeder::class);
+
+        // Master
+        $this->call([
+            Master\ProvinsiSeeder::class,
+            Master\KotaSeeder::class,
+            Master\KecamatanSeeder::class,
+            Master\KelurahanSeeder::class,
+            Master\ZipSeeder::class,
+            Master\CoySeeder::class,
+            Master\BranchSeeder::class,
+            Master\AreaSeeder::class,
+            Master\PositionSeeder::class,
+            Master\EmployeeSeeder::class,
+            Master\ParameterSeeder::class,
+            Master\VaccineSeeder::class,
+            Master\JobSeeder::class,
+            Master\EduSeeder::class,
+            Master\CountrySeeder::class,
+            Master\RelationSeeder::class,
+            Master\BankSeeder::class,
+            Master\SupplierSubTypeSeeder::class,
+            Master\SupplierSeeder::class,
+            Master\SupplierAccSeeder::class,
+            Master\UtiltySeeder::class,
+            Master\PackageSeeder::class,
+            Master\RegisterPackageSeeder::class,
+        ]);
+
+        // User
         $this->call(UserSeeder::class);
-        $this->call(ParameterSeeder::class);
-        $this->call(VaccineSeeder::class);
-        $this->call(JobSeeder::class);
-        $this->call(EduSeeder::class);
-        $this->call(CountrySeeder::class);
-        $this->call(RelationSeeder::class);
-        $this->call(BankSeeder::class);
-        $this->call(SupplierSubTypeSeeder::class);
-        $this->call(SupplierSeeder::class);
-        $this->call(SupplierAccSeeder::class);
-        $this->call(UtiltySeeder::class);
-        $this->call(PackageSeeder::class);
+
+        // Finance
+        $this->call([
+            AccountSeeder::class,
+        ]);
     }
 }
