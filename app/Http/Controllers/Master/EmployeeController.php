@@ -63,7 +63,7 @@ class EmployeeController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.employees.index');
+        return view('scaffolds.master.employees.index');
     }
 
     /**
@@ -75,7 +75,7 @@ class EmployeeController extends Controller
         $positions = Position::select('poss_code', 'poss_name')->get();
         $branches = Branch::select('branch_code', 'branch_name')->get();
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.employees.create',  compact('zips', 'positions', 'branches', 'coys'));
+        return view('scaffolds.master.employees.create',  compact('zips', 'positions', 'branches', 'coys'));
     }
 
     /**
@@ -145,7 +145,7 @@ class EmployeeController extends Controller
     public function show($employee)
     {
         $data = Employee::where('id', $employee)->first();
-        return view('scaffolds.employees.view', compact('data'));
+        return view('scaffolds.master.employees.view', compact('data'));
     }
 
     /**
@@ -158,7 +158,7 @@ class EmployeeController extends Controller
         $positions = Position::select('poss_code', 'poss_name')->get();
         $branches = Branch::select('branch_code', 'branch_name')->get();
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.employees.edit', compact('data', 'zips', 'positions', 'branches', 'coys'));
+        return view('scaffolds.master.employees.edit', compact('data', 'zips', 'positions', 'branches', 'coys'));
     }
 
     /**

@@ -62,7 +62,7 @@ class UserController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.users.index');
+        return view('scaffolds.master.users.index');
     }
 
     /**
@@ -73,7 +73,7 @@ class UserController extends Controller
         $employees = Employee::select('empl_id', 'empl_name')->get();
         $branches = Branch::select('branch_code', 'branch_name')->get();
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.users.create', compact('employees', 'branches', 'coys'));
+        return view('scaffolds.master.users.create', compact('employees', 'branches', 'coys'));
     }
 
     /**
@@ -119,7 +119,7 @@ class UserController extends Controller
     public function show($user)
     {
         $data = User::first();
-        return view('scaffolds.users.view', compact('data'));
+        return view('scaffolds.master.users.view', compact('data'));
     }
 
     /**
@@ -131,7 +131,7 @@ class UserController extends Controller
         $employees = Employee::select('empl_id', 'empl_name')->get();
         $branches = Branch::select('branch_code', 'branch_name')->get();
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.users.edit', compact('data', 'employees', 'branches', 'coys'));
+        return view('scaffolds.master.users.edit', compact('data', 'employees', 'branches', 'coys'));
     }
 
     /**

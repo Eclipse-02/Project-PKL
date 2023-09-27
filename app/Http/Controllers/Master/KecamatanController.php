@@ -93,7 +93,7 @@ class KecamatanController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.kecamatans.index');
+        return view('scaffolds.master.kecamatans.index');
     }
 
     /**
@@ -102,7 +102,7 @@ class KecamatanController extends Controller
     public function create()
     {
         $kotas = Kota::select('kota_code', 'kota')->get();
-        return view('scaffolds.kecamatans.create', compact('kotas'));
+        return view('scaffolds.master.kecamatans.create', compact('kotas'));
     }
 
     /**
@@ -140,7 +140,7 @@ class KecamatanController extends Controller
     public function show($kecamatan)
     {
         $data = Kecamatan::where('id', $kecamatan)->first();
-        return view('scaffolds.kecamatans.view', compact('data'));
+        return view('scaffolds.master.kecamatans.view', compact('data'));
     }
 
     /**
@@ -150,7 +150,7 @@ class KecamatanController extends Controller
     {
         $data = Kecamatan::where('id', $kecamatan)->first();
         $kotas = Kota::select('kota_code', 'kota')->get();
-        return view('scaffolds.kecamatans.edit', compact('data', 'kotas'));
+        return view('scaffolds.master.kecamatans.edit', compact('data', 'kotas'));
     }
 
     /**

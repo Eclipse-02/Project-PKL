@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\KecamatanController;
-use App\Http\Controllers\KelurahanController;
+use App\Http\Controllers\Master\KecamatanController;
+use App\Http\Controllers\Master\KelurahanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\KotaController;
-use App\Http\Controllers\ProvinsiController;
-use App\Http\Controllers\RegisterPackageController;
-use App\Http\Controllers\ZipController;
+use App\Http\Controllers\Master\KotaController;
+use App\Http\Controllers\Master\ProvinsiController;
+use App\Http\Controllers\Master\RegisterPackageController;
+use App\Http\Controllers\Master\ZipController;
 
 /*
 |--------------------------------------------------------------------------

@@ -92,7 +92,7 @@ class VaccineController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.vaccines.index');
+        return view('scaffolds.master.vaccines.index');
     }
 
     /**
@@ -100,7 +100,7 @@ class VaccineController extends Controller
      */
     public function create()
     {
-        return view('scaffolds.vaccines.create');
+        return view('scaffolds.master.vaccines.create');
     }
 
     /**
@@ -136,7 +136,7 @@ class VaccineController extends Controller
     public function show($vaccine)
     {
         $data = Vaccine::where('id', $vaccine)->first();
-        return view('scaffolds.vaccines.view', compact('data'));
+        return view('scaffolds.master.vaccines.view', compact('data'));
     }
 
     /**
@@ -145,7 +145,7 @@ class VaccineController extends Controller
     public function edit($vaccine)
     {
         $data = Vaccine::where('id', $vaccine)->first();
-        return view('scaffolds.vaccines.edit', compact('data'));
+        return view('scaffolds.master.vaccines.edit', compact('data'));
     }
 
     /**

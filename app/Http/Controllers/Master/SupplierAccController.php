@@ -95,7 +95,7 @@ class SupplierAccController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.supplieraccs.index');
+        return view('scaffolds.master.supplieraccs.index');
     }
 
     /**
@@ -106,7 +106,7 @@ class SupplierAccController extends Controller
         $suppliers = Supplier::select('supl_code', 'supl_name')->get();
         $banks = Bank::select('bank_code', 'bank_name')->get();
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.supplieraccs.create', compact('suppliers', 'banks', 'coys'));
+        return view('scaffolds.master.supplieraccs.create', compact('suppliers', 'banks', 'coys'));
     }
 
     /**
@@ -154,7 +154,7 @@ class SupplierAccController extends Controller
         $data = SupplierAcc::where('id', $supplierAcc)->first();
         $suppliers = Supplier::select('supl_code', 'supl_name')->get();
         $banks = Bank::select('bank_code', 'bank_name')->get();
-        return view('scaffolds.supplieraccs.view', compact('data', 'suppliers', 'banks'));
+        return view('scaffolds.master.supplieraccs.view', compact('data', 'suppliers', 'banks'));
     }
 
     /**
@@ -166,7 +166,7 @@ class SupplierAccController extends Controller
         $$suppliers = Supplier::select('supl_code', 'supl_name')->get();
         $banks = Bank::select('bank_code', 'bank_name')->get();
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.supplieraccs.edit', compact('data', 'suppliers', 'banks', 'coys'));
+        return view('scaffolds.master.supplieraccs.edit', compact('data', 'suppliers', 'banks', 'coys'));
     }
 
     /**

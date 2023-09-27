@@ -60,7 +60,7 @@ class ParameterController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.parameters.index');
+        return view('scaffolds.master.parameters.index');
     }
 
     /**
@@ -69,7 +69,7 @@ class ParameterController extends Controller
     public function create()
     {
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.parameters.create', compact('coys'));
+        return view('scaffolds.master.parameters.create', compact('coys'));
     }
 
     /**
@@ -107,7 +107,7 @@ class ParameterController extends Controller
     public function show($parameter)
     {
         $data = Parameter::where('id', $parameter)->first();
-        return view('scaffolds.parameters.view', compact('data'));
+        return view('scaffolds.master.parameters.view', compact('data'));
     }
 
     /**
@@ -117,7 +117,7 @@ class ParameterController extends Controller
     {
         $data = Parameter::where('id', $parameter)->first();
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.parameters.edit', compact('data', 'coys'));
+        return view('scaffolds.master.parameters.edit', compact('data', 'coys'));
     }
 
     /**

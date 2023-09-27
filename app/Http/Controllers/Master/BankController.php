@@ -94,7 +94,7 @@ class BankController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.banks.index');
+        return view('scaffolds.master.banks.index');
     }
 
     /**
@@ -104,7 +104,7 @@ class BankController extends Controller
     {
         $zips = Zip::select('zip_code', 'zip_desc')->get();
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.banks.create', compact('zips', 'coys'));
+        return view('scaffolds.master.banks.create', compact('zips', 'coys'));
     }
 
     /**
@@ -154,7 +154,7 @@ class BankController extends Controller
     public function show($bank)
     {
         $data = Bank::where('id', $bank)->first();
-        return view('scaffolds.banks.view', compact('data'));
+        return view('scaffolds.master.banks.view', compact('data'));
     }
 
     /**
@@ -165,7 +165,7 @@ class BankController extends Controller
         $data = Bank::where('id', $bank)->first();
         $zips = Zip::select('zip_code', 'zip_desc')->get();
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.banks.edit', compact('data', 'zips', 'coys'));
+        return view('scaffolds.master.banks.edit', compact('data', 'zips', 'coys'));
     }
 
     /**

@@ -93,7 +93,7 @@ class KelurahanController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.kelurahans.index');
+        return view('scaffolds.master.kelurahans.index');
     }
 
     /**
@@ -102,7 +102,7 @@ class KelurahanController extends Controller
     public function create()
     {
         $kecamatans = Kecamatan::select('kec_code', 'kecamatan')->get();
-        return view('scaffolds.kelurahans.create', compact('kecamatans'));
+        return view('scaffolds.master.kelurahans.create', compact('kecamatans'));
     }
 
     /**
@@ -140,7 +140,7 @@ class KelurahanController extends Controller
     public function show($kelurahan)
     {
         $data = Kelurahan::where('id', $kelurahan)->first();
-        return view('scaffolds.kelurahans.view', compact('data'));
+        return view('scaffolds.master.kelurahans.view', compact('data'));
     }
 
     /**
@@ -150,7 +150,7 @@ class KelurahanController extends Controller
     {
         $data = Kelurahan::where('id', $kelurahan)->first();
         $kecamatans = Kecamatan::select('kec_code', 'kecamatan')->get();
-        return view('scaffolds.kelurahans.edit', compact('data', 'kecamatans'));
+        return view('scaffolds.master.kelurahans.edit', compact('data', 'kecamatans'));
     }
 
     /**

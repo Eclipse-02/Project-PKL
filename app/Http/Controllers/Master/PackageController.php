@@ -99,7 +99,7 @@ class PackageController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.packages.index');
+        return view('scaffolds.master.packages.index');
     }
 
     /**
@@ -108,7 +108,7 @@ class PackageController extends Controller
     public function create()
     {
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.packages.create', compact('coys'));
+        return view('scaffolds.master.packages.create', compact('coys'));
     }
 
     /**
@@ -183,7 +183,7 @@ class PackageController extends Controller
         $data = Package::join('appl_trn_pkg_dtls', 'appl_trn_pkg.pkg_code', '=', 'appl_trn_pkg_dtls.pkg_code')
         ->select('appl_trn_pkg.coy_id', 'appl_trn_pkg.id', 'appl_trn_pkg.pkg_code', 'appl_trn_pkg.pkg_name', 'appl_trn_pkg.pkg_desc', 'appl_trn_pkg.pkg_price', 'appl_trn_pkg.pkg_price_limit', 'appl_trn_pkg.pkg_price_agent', 'appl_trn_pkg.pkg_start', 'appl_trn_pkg.pkg_closed', 'appl_trn_pkg.pkg_image', 'appl_trn_pkg.pkg_is_display', 'appl_trn_pkg_dtls.dtl_sq_no', 'appl_trn_pkg_dtls.dtl_desc', 'appl_trn_pkg_dtls.dtl_price', 'appl_trn_pkg_dtls.pkg_status', 'appl_trn_pkg.created_by', 'appl_trn_pkg.updated_by', 'appl_trn_pkg.created_at', 'appl_trn_pkg.updated_at')
         ->first();
-        return view('scaffolds.packages.view', compact('data'));
+        return view('scaffolds.master.packages.view', compact('data'));
     }
 
     /**
@@ -195,7 +195,7 @@ class PackageController extends Controller
         ->select('appl_trn_pkg.coy_id', 'appl_trn_pkg.id', 'appl_trn_pkg.pkg_code', 'appl_trn_pkg.pkg_name', 'appl_trn_pkg.pkg_desc', 'appl_trn_pkg.pkg_price', 'appl_trn_pkg.pkg_price_limit', 'appl_trn_pkg.pkg_price_agent', 'appl_trn_pkg.pkg_start', 'appl_trn_pkg.pkg_closed', 'appl_trn_pkg.pkg_image', 'appl_trn_pkg.pkg_is_display', 'appl_trn_pkg_dtls.dtl_sq_no', 'appl_trn_pkg_dtls.dtl_desc', 'appl_trn_pkg_dtls.dtl_price', 'appl_trn_pkg_dtls.pkg_status', 'appl_trn_pkg.created_by', 'appl_trn_pkg.updated_by', 'appl_trn_pkg.created_at', 'appl_trn_pkg.updated_at')
         ->first();
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.packages.edit', compact('data', 'coys'));
+        return view('scaffolds.master.packages.edit', compact('data', 'coys'));
     }
 
     /**

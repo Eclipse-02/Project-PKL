@@ -60,7 +60,7 @@ class CoyController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.coys.index');
+        return view('scaffolds.master.coys.index');
     }
 
     /**
@@ -69,7 +69,7 @@ class CoyController extends Controller
     public function create()
     {
         $zips = Zip::select('zip_code', 'zip_desc')->get();
-        return view('scaffolds.coys.create', compact('zips'));
+        return view('scaffolds.master.coys.create', compact('zips'));
     }
 
     /**
@@ -123,7 +123,7 @@ class CoyController extends Controller
     public function show($coy)
     {
         $data = Coy::where('id', $coy)->first();
-        return view('scaffolds.coys.view', compact('data'));
+        return view('scaffolds.master.coys.view', compact('data'));
     }
 
     /**
@@ -133,7 +133,7 @@ class CoyController extends Controller
     {
         $zips = Zip::select('zip_code', 'zip_desc')->get();
         $data = Coy::where('id', $coy)->first();
-        return view('scaffolds.coys.edit', compact('data', 'zips'));
+        return view('scaffolds.master.coys.edit', compact('data', 'zips'));
     }
 
     /**

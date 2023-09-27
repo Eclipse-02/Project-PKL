@@ -93,7 +93,7 @@ class JobController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.jobs.index');
+        return view('scaffolds.master.jobs.index');
     }
 
     /**
@@ -102,7 +102,7 @@ class JobController extends Controller
     public function create()
     {
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.jobs.create', compact('coys'));
+        return view('scaffolds.master.jobs.create', compact('coys'));
     }
 
     /**
@@ -140,7 +140,7 @@ class JobController extends Controller
     public function show($job)
     {
         $data = Job::where('id', $job)->first();
-        return view('scaffolds.jobs.view', compact('data'));
+        return view('scaffolds.master.jobs.view', compact('data'));
     }
 
     /**
@@ -150,7 +150,7 @@ class JobController extends Controller
     {
         $data = Job::where('id', $job)->first();
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.jobs.edit', compact('data', 'coys'));
+        return view('scaffolds.master.jobs.edit', compact('data', 'coys'));
     }
 
     /**

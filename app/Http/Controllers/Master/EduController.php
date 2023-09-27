@@ -93,7 +93,7 @@ class EduController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.edus.index');
+        return view('scaffolds.master.edus.index');
     }
 
     /**
@@ -102,7 +102,7 @@ class EduController extends Controller
     public function create()
     {
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.edus.create', compact('coys'));
+        return view('scaffolds.master.edus.create', compact('coys'));
     }
 
     /**
@@ -140,7 +140,7 @@ class EduController extends Controller
     public function show($edu)
     {
         $data = Edu::where('id', $edu)->first();
-        return view('scaffolds.edus.view', compact('data'));
+        return view('scaffolds.master.edus.view', compact('data'));
     }
 
     /**
@@ -150,7 +150,7 @@ class EduController extends Controller
     {
         $data = Edu::where('id', $edu)->first();
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.edus.edit', compact('data', 'coys'));
+        return view('scaffolds.master.edus.edit', compact('data', 'coys'));
     }
 
     /**

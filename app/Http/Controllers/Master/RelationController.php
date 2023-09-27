@@ -92,7 +92,7 @@ class RelationController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.relations.index');
+        return view('scaffolds.master.relations.index');
     }
 
     /**
@@ -100,7 +100,7 @@ class RelationController extends Controller
      */
     public function create()
     {
-        return view('scaffolds.relations.create');
+        return view('scaffolds.master.relations.create');
     }
 
     /**
@@ -136,7 +136,7 @@ class RelationController extends Controller
     public function show($relation)
     {
         $data = Relation::where('id', $relation)->first();
-        return view('scaffolds.relations.view', compact('data'));
+        return view('scaffolds.master.relations.view', compact('data'));
     }
 
     /**
@@ -145,7 +145,7 @@ class RelationController extends Controller
     public function edit($relation)
     {
         $data = Relation::where('id', $relation)->first();
-        return view('scaffolds.relations.edit', compact('data'));
+        return view('scaffolds.master.relations.edit', compact('data'));
     }
 
     /**

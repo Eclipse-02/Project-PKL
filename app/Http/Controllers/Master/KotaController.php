@@ -93,7 +93,7 @@ class KotaController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.kotas.index');
+        return view('scaffolds.master.kotas.index');
     }
 
     /**
@@ -102,7 +102,7 @@ class KotaController extends Controller
     public function create()
     {
         $provinsis = Provinsi::select('prov_code', 'provinsi')->get();
-        return view('scaffolds.kotas.create', compact('provinsis'));
+        return view('scaffolds.master.kotas.create', compact('provinsis'));
     }
 
     /**
@@ -140,7 +140,7 @@ class KotaController extends Controller
     public function show($kota)
     {
         $data = Kota::where('id', $kota)->first();
-        return view('scaffolds.kotas.view', compact('data'));
+        return view('scaffolds.master.kotas.view', compact('data'));
     }
 
     /**
@@ -150,7 +150,7 @@ class KotaController extends Controller
     {
         $data = Kota::where('id', $kota)->first();
         $provinsis = Provinsi::select('prov_code', 'provinsi')->get();
-        return view('scaffolds.kotas.edit', compact('data', 'provinsis'));
+        return view('scaffolds.master.kotas.edit', compact('data', 'provinsis'));
     }
 
     /**

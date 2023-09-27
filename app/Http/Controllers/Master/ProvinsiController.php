@@ -92,7 +92,7 @@ class ProvinsiController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.provinsis.index');
+        return view('scaffolds.master.provinsis.index');
     }
 
     // public function exportExcel() 
@@ -110,7 +110,7 @@ class ProvinsiController extends Controller
      */
     public function create()
     {
-        return view('scaffolds.provinsis.create');
+        return view('scaffolds.master.provinsis.create');
     }
 
     /**
@@ -146,7 +146,7 @@ class ProvinsiController extends Controller
     public function show($provinsi)
     {
         $data = Provinsi::where('id', $provinsi)->first();
-        return view('scaffolds.provinsis.view', compact('data'));
+        return view('scaffolds.master.provinsis.view', compact('data'));
     }
 
     /**
@@ -155,7 +155,7 @@ class ProvinsiController extends Controller
     public function edit($provinsi)
     {
         $data = Provinsi::where('id', $provinsi)->first();
-        return view('scaffolds.provinsis.edit', compact('data'));
+        return view('scaffolds.master.provinsis.edit', compact('data'));
     }
 
     /**

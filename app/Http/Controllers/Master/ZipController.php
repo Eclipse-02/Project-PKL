@@ -92,7 +92,7 @@ class ZipController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.zips.index');
+        return view('scaffolds.master.zips.index');
     }
 
     /**
@@ -100,7 +100,7 @@ class ZipController extends Controller
      */
     public function create()
     {
-        return view('scaffolds.zips.create');
+        return view('scaffolds.master.zips.create');
     }
 
     /**
@@ -146,7 +146,7 @@ class ZipController extends Controller
     public function show($zip)
     {
         $data = Zip::where('id', $zip)->first();
-        return view('scaffolds.zips.view', compact('data'));
+        return view('scaffolds.master.zips.view', compact('data'));
     }
 
     /**
@@ -155,7 +155,7 @@ class ZipController extends Controller
     public function edit($zip)
     {
         $data = Zip::where('id', $zip)->first();
-        return view('scaffolds.zips.edit', compact('data'));
+        return view('scaffolds.master.zips.edit', compact('data'));
     }
 
     /**

@@ -92,7 +92,7 @@ class SupplierSubTypeController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.suppliersubtypes.index');
+        return view('scaffolds.master.suppliersubtypes.index');
     }
 
     /**
@@ -100,7 +100,7 @@ class SupplierSubTypeController extends Controller
      */
     public function create()
     {
-        return view('scaffolds.suppliersubtypes.create');
+        return view('scaffolds.master.suppliersubtypes.create');
     }
 
     /**
@@ -136,7 +136,7 @@ class SupplierSubTypeController extends Controller
     public function show($supplierSubType)
     {
         $data = SupplierSubType::where('id', $supplierSubType)->first();
-        return view('scaffolds.suppliersubtypes.view', compact('data'));
+        return view('scaffolds.master.suppliersubtypes.view', compact('data'));
     }
 
     /**
@@ -145,7 +145,7 @@ class SupplierSubTypeController extends Controller
     public function edit($supplierSubType)
     {
         $data = SupplierSubType::where('id', $supplierSubType)->first();
-        return view('scaffolds.suppliersubtypes.edit', compact('data'));
+        return view('scaffolds.master.suppliersubtypes.edit', compact('data'));
     }
 
     /**

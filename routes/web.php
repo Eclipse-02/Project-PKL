@@ -1,7 +1,10 @@
 <?php
 
+// Default route files
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+// Master controller
 use App\Http\Controllers\Master\CoyController;
 use App\Http\Controllers\Master\EduController;
 use App\Http\Controllers\Master\JobController;
@@ -26,6 +29,10 @@ use App\Http\Controllers\Master\SupplierAccController;
 use App\Http\Controllers\Master\RegisterPackageController;
 use App\Http\Controllers\Master\SupplierSubTypeController;
 use App\Http\Controllers\Master\UserRoleController;
+
+// Finance controller
+use App\Http\Controllers\Finance\AccountController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -288,8 +295,28 @@ Route::middleware('auth')->group(function () {
             Route::get('/{registerpackage}/edit', [RegisterPackageController::class, 'edit'])->name('registerpackages.edit')->middleware('permission:register-package-update');
             Route::post('/export', [RegisterPackageController::class, 'export'])->name('registerpackages.export')->middleware('permission:register-package-update');
         });
-        Route::get('routes', function () {
-            return view('scaffolds/index');
+        // registerpackage scaffold
+        Route::group(['prefix' => 'registerpackages'], function () {
+            Route::get('/', [RegisterPackageController::class, 'index'])->name('registerpackages.index')->middleware('permission:register-package-read');
+            Route::post('/', [RegisterPackageController::class, 'store'])->name('registerpackages.store');
+            Route::get('/create', [RegisterPackageController::class, 'create'])->name('registerpackages.create')->middleware('permission:register-package-create');
+            Route::get('/{registerpackage}', [RegisterPackageController::class, 'show'])->name('registerpackages.show')->middleware('permission:register-package-read');
+            Route::match(['put', 'patch'],'/{registerpackage}', [RegisterPackageController::class, 'update'])->name('registerpackages.update');
+            Route::delete('/{registerpackage}', [RegisterPackageController::class, 'destroy'])->name('registerpackages.destroy')->middleware('permission:register-package-delete');
+            Route::get('/{registerpackage}/edit', [RegisterPackageController::class, 'edit'])->name('registerpackages.edit')->middleware('permission:register-package-update');
+            Route::post('/export', [RegisterPackageController::class, 'export'])->name('registerpackages.export')->middleware('permission:register-package-update');
+        });
+
+        /* Master scaffolds */
+        // account scaffold
+        Route::group(['prefix' => 'accounts'], function () {
+            Route::get('/', [AccountController::class, 'index'])->name('accounts.index')->middleware('permission:register-package-read');
+            Route::post('/', [AccountController::class, 'store'])->name('accounts.store');
+            Route::get('/create', [AccountController::class, 'create'])->name('accounts.create')->middleware('permission:register-package-create');
+            Route::get('/{account}', [AccountController::class, 'show'])->name('accounts.show')->middleware('permission:register-package-read');
+            Route::match(['put', 'patch'],'/{account}', [AccountController::class, 'update'])->name('accounts.update');
+            Route::delete('/{account}', [AccountController::class, 'destroy'])->name('accounts.destroy')->middleware('permission:register-package-delete');
+            Route::get('/{account}/edit', [AccountController::class, 'edit'])->name('accounts.edit')->middleware('permission:register-package-update');
         });
     });
 });

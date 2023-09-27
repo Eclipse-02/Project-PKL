@@ -93,7 +93,7 @@ class PositionController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.positions.index');
+        return view('scaffolds.master.positions.index');
     }
 
     /**
@@ -102,7 +102,7 @@ class PositionController extends Controller
     public function create()
     {
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.positions.create', compact('coys'));
+        return view('scaffolds.master.positions.create', compact('coys'));
     }
 
     /**
@@ -140,7 +140,7 @@ class PositionController extends Controller
     public function show($position)
     {
         $data = Position::where('id', $position)->first();
-        return view('scaffolds.positions.view', compact('data'));
+        return view('scaffolds.master.positions.view', compact('data'));
     }
 
     /**
@@ -150,7 +150,7 @@ class PositionController extends Controller
     {
         $data = Position::where('id', $position)->first();
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.positions.edit', compact('data', 'coys'));
+        return view('scaffolds.master.positions.edit', compact('data', 'coys'));
     }
 
     /**

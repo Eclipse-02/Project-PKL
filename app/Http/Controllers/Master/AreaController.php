@@ -93,7 +93,7 @@ class AreaController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.areas.index');
+        return view('scaffolds.master.areas.index');
     }
 
     /**
@@ -102,7 +102,7 @@ class AreaController extends Controller
     public function create()
     {
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.areas.create', compact('coys'));
+        return view('scaffolds.master.areas.create', compact('coys'));
     }
 
     /**
@@ -140,7 +140,7 @@ class AreaController extends Controller
     public function show($area)
     {
         $data = Area::where('id', $area)->first();
-        return view('scaffolds.areas.view', compact('data'));
+        return view('scaffolds.master.areas.view', compact('data'));
     }
 
     /**
@@ -150,7 +150,7 @@ class AreaController extends Controller
     {
         $data = Area::where('id', $area)->first();
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.areas.edit', compact('data', 'coys'));
+        return view('scaffolds.master.areas.edit', compact('data', 'coys'));
     }
 
     /**

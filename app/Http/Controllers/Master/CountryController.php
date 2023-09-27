@@ -92,7 +92,7 @@ class CountryController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.countries.index');
+        return view('scaffolds.master.countries.index');
     }
 
     /**
@@ -100,7 +100,7 @@ class CountryController extends Controller
      */
     public function create()
     {
-        return view('scaffolds.countries.create');
+        return view('scaffolds.master.countries.create');
     }
 
     /**
@@ -136,7 +136,7 @@ class CountryController extends Controller
     public function show($country)
     {
         $data = Country::where('id', $country)->first();
-        return view('scaffolds.countries.view', compact('data'));
+        return view('scaffolds.master.countries.view', compact('data'));
     }
 
     /**
@@ -145,7 +145,7 @@ class CountryController extends Controller
     public function edit($country)
     {
         $data = Country::where('id', $country)->first();
-        return view('scaffolds.countries.edit', compact('data'));
+        return view('scaffolds.master.countries.edit', compact('data'));
     }
 
     /**

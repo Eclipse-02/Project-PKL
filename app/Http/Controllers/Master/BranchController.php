@@ -95,7 +95,7 @@ class BranchController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.branchs.index');
+        return view('scaffolds.master.branchs.index');
     }
 
     /**
@@ -106,7 +106,7 @@ class BranchController extends Controller
         $zips = Zip::select('zip_code', 'zip_desc')->get();
         $areas = Area::select('area_code', 'area_name')->get();
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.branchs.create', compact('zips', 'areas', 'coys'));
+        return view('scaffolds.master.branchs.create', compact('zips', 'areas', 'coys'));
     }
 
     /**
@@ -169,7 +169,7 @@ class BranchController extends Controller
     {
         $data = Branch::where('id', $branch)->first();
         // dd($data);
-        return view('scaffolds.branchs.view', compact('data'));
+        return view('scaffolds.master.branchs.view', compact('data'));
     }
 
     /**
@@ -181,7 +181,7 @@ class BranchController extends Controller
         $areas = Area::select('area_code', 'area_name')->get();
         $zips = Zip::select('zip_code', 'zip_desc')->get();
         $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.branchs.edit', compact('data', 'areas', 'zips', 'coys'));
+        return view('scaffolds.master.branchs.edit', compact('data', 'areas', 'zips', 'coys'));
     }
 
     /**

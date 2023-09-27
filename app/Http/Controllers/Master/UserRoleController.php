@@ -25,7 +25,7 @@ class UserRoleController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.userroles.index');
+        return view('scaffolds.master.userroles.index');
     }
 
     /**

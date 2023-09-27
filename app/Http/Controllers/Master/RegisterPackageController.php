@@ -100,7 +100,7 @@ class RegisterPackageController extends Controller
                     ->make(true);
         }
         $suppliers = Supplier::select('supl_code', 'supl_name')->get();
-        return view('scaffolds.registerpackages.index', compact('suppliers'));
+        return view('scaffolds.master.registerpackages.index', compact('suppliers'));
     }
 
     public function export(Request $request)
@@ -123,7 +123,7 @@ class RegisterPackageController extends Controller
         $relations = Relation::select('rel_code', 'rel_name')->get();
         $suppliers = Supplier::select('supl_code', 'supl_name')->get();
         $vaccines = Vaccine::select('vc_code', 'vc_name')->get();
-        return view('scaffolds.registerpackages.create', compact('coys', 'packages', 'countries', 'edus', 'jobs', 'relations', 'suppliers', 'vaccines', 'prov'));
+        return view('scaffolds.master.registerpackages.create', compact('coys', 'packages', 'countries', 'edus', 'jobs', 'relations', 'suppliers', 'vaccines', 'prov'));
     }
 
     /**
@@ -313,7 +313,7 @@ class RegisterPackageController extends Controller
     public function show($registerPackage)
     {
         $data = RegisterPackage::first();
-        return view('scaffolds.registerpackages.view', compact('data'));
+        return view('scaffolds.master.registerpackages.view', compact('data'));
     }
 
     /**
@@ -332,7 +332,7 @@ class RegisterPackageController extends Controller
             $relations = Relation::select('rel_code', 'rel_name')->get();
             $suppliers = Supplier::select('supl_code', 'supl_name')->get();
             $vaccines = Vaccine::select('vc_code', 'vc_name')->get();
-            return view('scaffolds.registerpackages.edit', compact('data', 'coys', 'packages', 'countries', 'edus', 'jobs', 'relations', 'suppliers', 'vaccines', 'prov'));
+            return view('scaffolds.master.registerpackages.edit', compact('data', 'coys', 'packages', 'countries', 'edus', 'jobs', 'relations', 'suppliers', 'vaccines', 'prov'));
         } else {
             Alert::toast('The selected file already posted!', 'error');
             return redirect()->back();
