@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('fin_mst_trxdtl', function (Blueprint $table) {
             $table->string('coy_id', 5);
-            $table->string('trxdtl_code', 30)->unique();
+            $table->string('trxdtl_code', 30)->primary();
             $table->uuid('id');
             $table->string('trxdtl_desc', 100);
             $table->string('trxdtl_flag', 1);

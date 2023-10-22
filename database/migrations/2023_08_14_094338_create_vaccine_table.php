@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('vaccines', function (Blueprint $table) {
-            $table->string('vc_code', 5);
+            $table->string('vc_code', 5)->primary();
             $table->uuid('id');
             $table->string('vc_name', 100);
             $table->string('is_active', 1)->nullable();

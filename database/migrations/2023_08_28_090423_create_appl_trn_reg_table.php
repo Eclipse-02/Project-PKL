@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('appl_trn_reg', function (Blueprint $table) {
             $table->string('coy_id', 5);
             $table->uuid('id');
-            $table->string('appl_no', 30);
+            $table->string('appl_no', 30)->primary();
             $table->string('pkg_code', 30);
             $table->string('appl_st', 2)->default('NW');
             $table->date('appl_date');
@@ -41,7 +41,7 @@ return new class extends Migration
             $table->string("appl_pass_name", 60);
             $table->date("appl_pass_iss_date");
             $table->date("appl_pass_exp_date");
-            $table->string("appl_pass_iss_palace", 30);
+            $table->string("appl_pass_iss_place", 30);
             $table->string("appl_vac_name_id", 60);
             $table->string("vc_code_01", 5);
             $table->date("appl_vac_id_date_01");

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('gl_mst_account', function (Blueprint $table) {
             $table->string('coy_id', 5);
-            $table->string('glacct_code', 8)->unique()->nullable();
+            $table->string('glacct_code', 8)->primary()->nullable();
             $table->uuid('id');
             $table->string('glacct_description', 100);
             $table->string('glacct_acct_type', 1);
@@ -21,9 +21,9 @@ return new class extends Migration
             $table->string('glacct_acct_enable', 1);
             $table->string('glacct_acct_flag', 1);
             $table->string('glacct_acct_default', 30)->nullable();
-            $table->string('glacct_acct_parent', 8)->nullable();
-            $table->string('glacct_rpt_flag', 1)->nullable();
-            $table->string('glacct_segment1_allow', 30)->nullable();
+            $table->string('glacct_acct_parent', 8)->nullable()->default(null);
+            $table->string('glacct_rpt_flag', 1)->nullable()->default('N');
+            $table->string('glacct_segment1_allow', 30)->nullable()->default('ALL');
             $table->string("created_by", 12);
             $table->string("updated_by", 15);
             $table->timestamps();

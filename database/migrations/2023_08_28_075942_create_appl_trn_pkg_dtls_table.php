@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('appl_trn_pkg_dtls', function (Blueprint $table) {
             $table->string('coy_id', 5);
             $table->uuid('id');
-            $table->string('pkg_code', 30);
+            $table->string('pkg_code', 30)->primary();
             $table->integer('dtl_sq_no');
             $table->string('dtl_desc', 200);
             $table->bigInteger('dtl_price');

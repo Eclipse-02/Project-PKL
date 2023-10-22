@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('banks', function (Blueprint $table) {
             $table->string("coy_id", 5);
             $table->uuid('id');
-            $table->string('bank_code', 5);
+            $table->string('bank_code', 5)->primary();
             $table->string('bank_name', 100);
             $table->string('bank_branch', 100);
             $table->string('is_active', 1)->nullable();

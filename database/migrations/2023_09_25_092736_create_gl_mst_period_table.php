@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gl_period', function (Blueprint $table) {
+        Schema::create('gl_mst_period', function (Blueprint $table) {
             $table->string('coy_id', 5);
-            $table->string('period_name', 6)->unique();
+            $table->string('period_name', 6)->primary();
             $table->uuid('id');
             $table->string('period_status', 2);
             $table->string('period_year', 4);

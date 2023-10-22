@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('supplier_accs', function (Blueprint $table) {
             $table->string("coy_id", 5);
             $table->uuid('id');
-            $table->string('supl_code', 10);
+            $table->string('supl_code', 10)->primary();
             $table->string('bank_code', 5);
             $table->string('acc_no', 30)->nullable();
             $table->string('acc_name', 100)->nullable();

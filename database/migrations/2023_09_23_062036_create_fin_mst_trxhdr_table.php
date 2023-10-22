@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('fin_mst_trxhdr', function (Blueprint $table) {
             $table->string('coy_id', 5);
-            $table->string('param_code', 10)->unique();
+            $table->string('param_code', 10)->primary();
             $table->uuid('id');
             $table->string('param_desc', 60);
             $table->string('param_status', 5);

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('fin_mst_trx', function (Blueprint $table) {
             $table->string('coy_id', 5);
-            $table->string('trx_code', 10)->unique();
+            $table->string('trx_code', 10)->primary();
             $table->uuid('id');
             $table->string('trx_desc', 60);
             $table->string('trx_type', 5);

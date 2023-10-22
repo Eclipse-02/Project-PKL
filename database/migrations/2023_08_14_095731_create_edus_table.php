@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('edus', function (Blueprint $table) {
             $table->string("coy_id", 5);
             $table->uuid('id');
-            $table->string('edu_code', 5)->unique();
+            $table->string('edu_code', 5)->primary();
             $table->string('edu_name', 100);
             $table->string('is_active', 1)->nullable();
             $table->string("created_by");

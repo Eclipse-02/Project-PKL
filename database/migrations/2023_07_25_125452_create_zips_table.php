@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('zips', function (Blueprint $table) {
-            $table->string("zip_code", 5)->unique();
+            $table->string("zip_code", 5)->primary();
             $table->uuid("id");
             $table->string("sub_zip_code", 5);
             $table->string("zip_desc", 100);

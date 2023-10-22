@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('appl_trn_pkg', function (Blueprint $table) {
             $table->string('coy_id', 5);
             $table->uuid('id');
-            $table->string('pkg_code', 30);
+            $table->string('pkg_code', 30)->primary();
             $table->string('pkg_name', 60);
             $table->string('pkg_desc', 200);
             $table->integer('pkg_price');

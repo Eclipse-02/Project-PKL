@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('suppliers', function (Blueprint $table) {
             $table->string("coy_id", 5);
             $table->uuid('id');
-            $table->string('supl_code', 10)->unique();
+            $table->string('supl_code', 10)->primary();
             $table->string('branch_code', 5)->nullable();
             $table->string('is_active', 1)->nullable();
             $table->string('supl_status', 2)->default('NW')->nullable();
@@ -38,9 +38,9 @@ return new class extends Migration
             $table->string('supl_npwp_name', 100)->nullable();
             $table->string('supl_npwp_addr', 200);
             $table->string('supl_desc', 200)->nullable();
-            $table->binary('file_name_mou')->nullable();
-            $table->binary('file_name_ktp')->nullable();
-            $table->binary('file_name_npwp')->nullable();
+            $table->string('file_name_mou')->nullable();
+            $table->string('file_name_ktp')->nullable();
+            $table->string('file_name_npwp')->nullable();
             $table->string("created_by");
             $table->string("updated_by");
             $table->timestamps();

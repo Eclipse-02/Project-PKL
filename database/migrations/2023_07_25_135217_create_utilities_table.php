@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('utilities', function (Blueprint $table) {
             $table->string("coy_id", 5);
             $table->uuid("id");
-            $table->string("seqn_code", 4);
+            $table->string("seqn_code", 4)->primary();
             $table->string("branch_code", 5); // fs_mst_branch
             $table->bigInteger("start_value");
             $table->bigInteger("last_value");

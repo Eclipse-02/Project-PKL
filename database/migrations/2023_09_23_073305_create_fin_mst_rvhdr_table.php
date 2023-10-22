@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('fin_mst_rvhdr', function (Blueprint $table) {
             $table->string('coy_id', 5);
-            $table->string('rvmst_code', 30)->unique();
+            $table->string('rvmst_code', 30)->primary();
             $table->uuid('id');
             $table->string('rvmst_dsply_code', 30);
             $table->string('rvmst_desc', 100);

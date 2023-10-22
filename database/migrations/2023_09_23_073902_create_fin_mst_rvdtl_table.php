@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('fin_mst_rvdtl', function (Blueprint $table) {
             $table->string('coy_id', 5);
             $table->uuid('id');
-            $table->string('rmst_code', 30)->unique();
+            $table->string('rmst_code', 30)->unique()->primary();
             $table->string('trxdtl_code', 30)->unique();
             $table->string('status', 2);
             $table->string("created_by", 12);
