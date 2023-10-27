@@ -22,7 +22,20 @@ class SupplierAccSeeder extends Seeder
             'acc_name' => 'ACC 1',
             'acc_desc' => 'desc 1',
             'acc_curr' => 'IDR',
-            'acc_status' => 'CL',
+            'acc_status' => 'NW',
+            'created_by' => 'Seeder',
+            'updated_by' => 'Seeder',
+        ]);
+        MasterSupplierAcc::create([
+            'coy_id' => 1,
+            'id' => Str::uuid(),
+            'supl_code' => 2,
+            'bank_code' => 2,
+            'acc_no' => '2',
+            'acc_name' => 'ACC 2',
+            'acc_desc' => 'desc 2',
+            'acc_curr' => 'USD',
+            'acc_status' => 'NA',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);

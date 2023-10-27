@@ -30,5 +30,22 @@ class CoySeeder extends Seeder
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);
+        MasterCoy::create([
+            'coy_id' => 2,
+            'id' => Str::uuid(),
+            'coy_name' => 'Vision Entrepise',
+            'coy_addr' => 'Bandung',
+            'empl_tlp_area' => '022',
+            'empl_tlp' => '35487',
+            'empl_hp01' => '0234781320',
+            'empl_hp02' => '0234781320',
+            'prov_code' => '1',
+            'kota_code' => '1',
+            'kec_code' => '2',
+            'kel_code' => '1',
+            'zip_code' => '2',
+            'created_by' => 'Seeder',
+            'updated_by' => 'Seeder',
+        ]);
     }
 }

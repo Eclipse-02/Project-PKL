@@ -14,15 +14,48 @@ class PackageDetailSeeder extends Seeder
     public function run(): void
     {
         MasterPackageDetail::create([
-            'coy_id' => 1,
-            'id' => Str::uuid(),
-            'pkg_code' => '122',
-            'dtl_sq_no' => '1',
-            'dtl_desc' => 'Test',
-            'dtl_price' => '10000000',
-            'pkg_status' => 'NW',
-            "created_by" => 'Seeder',
-            "updated_by" => 'Seeder',
+            "coy_id" => "1",
+            "id" => Str::uuid(),
+            "pkg_code" => "1",
+            "dtl_sq_no" => 01,
+            "dtl_desc" => "Test",
+            "dtl_price" => "20000000",
+            "pkg_status" => "NA",
+            "created_by" => "Seeder",
+            "updated_by" => "Seeder",
+        ]);
+        MasterPackageDetail::create([
+            "coy_id" => "1",
+            "id" => Str::uuid(),
+            "pkg_code" => "2",
+            "dtl_sq_no" => 01,
+            "dtl_desc" => "Test",
+            "dtl_price" => "20000000",
+            "pkg_status" => "NA",
+            "created_by" => "Seeder",
+            "updated_by" => "Seeder",
+        ]);
+        MasterPackageDetail::create([
+            "coy_id" => "1",
+            "id" => Str::uuid(),
+            "pkg_code" => "3",
+            "dtl_sq_no" => 01,
+            "dtl_desc" => "Test",
+            "dtl_price" => "20000000",
+            "pkg_status" => "NA",
+            "created_by" => "Seeder",
+            "updated_by" => "Seeder",
+        ]);
+        MasterPackageDetail::create([
+            "coy_id" => "1",
+            "id" => Str::uuid(),
+            "pkg_code" => "4",
+            "dtl_sq_no" => 01,
+            "dtl_desc" => "Test",
+            "dtl_price" => "20000000",
+            "pkg_status" => "NA",
+            "created_by" => "Seeder",
+            "updated_by" => "Seeder",
         ]);
     }
 }

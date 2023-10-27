@@ -21,5 +21,21 @@ class CountrySeeder extends Seeder
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);
+        MasterCountry::create([
+            'id' => Str::uuid(),
+            'con_code' => 2,
+            'con_name' => 'Malaysia',
+            'is_active' => 'Y',
+            'created_by' => 'Seeder',
+            'updated_by' => 'Seeder',
+        ]);
+        MasterCountry::create([
+            'id' => Str::uuid(),
+            'con_code' => 3,
+            'con_name' => 'Singapore',
+            'is_active' => 'N',
+            'created_by' => 'Seeder',
+            'updated_by' => 'Seeder',
+        ]);
     }
 }

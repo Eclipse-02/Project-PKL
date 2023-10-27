@@ -16,8 +16,24 @@ class RelationSeeder extends Seeder
         MasterRelation::create([
             'id' => Str::uuid(),
             'rel_code' => 1,
-            'rel_name' => 'Relation 1',
+            'rel_name' => 'Jakarta',
             'is_active' => 'Y',
+            'created_by' => 'Seeder',
+            'updated_by' => 'Seeder',
+        ]);
+        MasterRelation::create([
+            'id' => Str::uuid(),
+            'rel_code' => 2,
+            'rel_name' => 'Bandung',
+            'is_active' => 'Y',
+            'created_by' => 'Seeder',
+            'updated_by' => 'Seeder',
+        ]);
+        MasterRelation::create([
+            'id' => Str::uuid(),
+            'rel_code' => 3,
+            'rel_name' => 'Bogor',
+            'is_active' => 'N',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);

@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
             Master\BranchSeeder::class,
             Master\AreaSeeder::class,
             Master\PositionSeeder::class,
+            UserSeeder::class,
             Master\EmployeeSeeder::class,
-            Master\ParameterSeeder::class,
             Master\VaccineSeeder::class,
             Master\JobSeeder::class,
             Master\EduSeeder::class,
@@ -39,11 +39,9 @@ class DatabaseSeeder extends Seeder
             Master\SupplierAccSeeder::class,
             Master\UtiltySeeder::class,
             Master\PackageSeeder::class,
+            Master\PackageDetailSeeder::class,
             Master\RegisterPackageSeeder::class,
         ]);
-
-        // User
-        $this->call(UserSeeder::class);
 
         // Finance
         $this->call([

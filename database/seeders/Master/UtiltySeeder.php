@@ -25,5 +25,18 @@ class UtiltySeeder extends Seeder
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ]);
+        MasterUtility::create([
+            'coy_id' => 2,
+            'seqn_code' => 'another',
+            'branch_code' => 1,
+            'start_value' => 1,
+            'last_value' => 1,
+            'max_value' => 100,
+            'increment_by' => 1,
+            'description' => 'another',
+            'is_cycle' => 'Y',
+            'created_by' => 'Seeder',
+            'updated_by' => 'Seeder',
+        ]);
     }
 }
