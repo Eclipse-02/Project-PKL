@@ -1,13 +1,19 @@
 <?php
 
-use App\Http\Controllers\Master\KecamatanController;
-use App\Http\Controllers\Master\KelurahanController;
+// Default route files
+
+// Master controllers
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Master\KecamatanController;
+use App\Http\Controllers\Master\KelurahanController;
 use App\Http\Controllers\Master\KotaController;
 use App\Http\Controllers\Master\ProvinsiController;
 use App\Http\Controllers\Master\RegisterPackageController;
 use App\Http\Controllers\Master\ZipController;
+
+// Finance controllers
+use App\Http\Controllers\Finance\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,4 +37,5 @@ Route::group(['prefix' => 'v1'], function() {
     Route::get('kelurahans', [KelurahanController::class, 'api'])->name('kelurahans.api');
     Route::get('zips', [ZipController::class, 'api'])->name('zips.api');
     Route::get('register', [RegisterPackageController::class, 'api'])->name('register.api');
+    Route::get('accounts', [AccountController::class, 'api'])->name('accounts.api');
 });
