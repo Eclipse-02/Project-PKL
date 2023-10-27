@@ -3,7 +3,7 @@
 namespace App\Exports;
 
 use Carbon\Carbon;
-use App\Models\RegisterPackage;
+use App\Models\Master\RegisterPackage;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use Maatwebsite\Excel\Concerns\FromQuery;
@@ -345,22 +345,6 @@ class RegisterPackageExport implements FromQuery, WithCustomStartCell, WithColum
 
     public function query()
     {
-        // dd(RegisterPackage::join('coys', 'appl_trn_reg.coy_id', '=', 'coys.coy_id')
-        // ->join('provinsis', 'appl_trn_reg.prov_code', '=', 'provinsis.prov_code')
-        // ->join('kotas', 'appl_trn_reg.kota_code', '=', 'kotas.kota_code')
-        // ->join('kecamatans', 'appl_trn_reg.kec_code', '=', 'kecamatans.kec_code')
-        // ->join('kelurahans', 'appl_trn_reg.kel_code', '=', 'kelurahans.kel_code')
-        // ->join('countries', 'appl_trn_reg.con_code', '=', 'countries.con_code')
-        // ->join('jobs', 'appl_trn_reg.job_code', '=', 'jobs.job_code')
-        // ->join('edus', 'appl_trn_reg.edu_code', '=', 'edus.edu_code')
-        // ->join('relations', 'appl_trn_reg.rel_code', '=', 'relations.rel_code')
-        // ->join('suppliers', 'appl_trn_reg.supl_code', '=', 'suppliers.supl_code')
-        // ->join('vaccines as vc_01', 'appl_trn_reg.vc_code_01', '=', 'vc_01.vc_code')
-        // ->join('vaccines as vc_02', 'appl_trn_reg.vc_code_02', '=', 'vc_02.vc_code')
-        // ->join('vaccines as vc_03', 'appl_trn_reg.vc_code_03', '=', 'vc_03.vc_code')
-        // ->join('vaccines as vc_04', 'appl_trn_reg.vc_code_04', '=', 'vc_04.vc_code')
-        // ->select('appl_trn_reg.appl_gender', 'appl_trn_reg.appl_title', 'appl_trn_reg.appl_id_type', 'appl_trn_reg.appl_id_no', 'appl_trn_reg.appl_name', 'appl_trn_reg.appl_gender', 'appl_trn_reg.appl_birth_place', 'appl_trn_reg.appl_birth_date', 'appl_trn_reg.appl_addr', 'appl_trn_reg.appl_gender', 'provinsis.provinsi', 'kotas.kota', 'kecamatans.kecamatan', 'kelurahans.kelurahan', 'appl_trn_reg.appl_status', 'countries.con_name', 'edus.edu_name', 'jobs.job_name', 'appl_trn_reg.appl_fth_name', 'appl_trn_reg.appl_mahram', 'appl_trn_reg.appl_pass_no', 'appl_trn_reg.appl_pass_name', 'appl_trn_reg.appl_pass_iss_date', 'appl_trn_reg.appl_pass_exp_date', 'appl_trn_reg.appl_pass_iss_palace', 'appl_trn_reg.appl_vac_name_id', 'vc_01.vc_name as vc_name_01', 'vc_02.vc_name as vc_name_02', 'vc_03.vc_name as vc_name_03', 'vc_04.vc_name as vc_name_04', 'appl_trn_reg.appl_vac_id_date_01', 'appl_trn_reg.appl_vac_id_date_02', 'appl_trn_reg.appl_vac_id_date_03', 'appl_trn_reg.appl_vac_id_date_04', 'appl_trn_reg.appl_tlp', 'appl_trn_reg.appl_email', 'appl_trn_reg.appl_is_img_full', 'appl_trn_reg.appl_is_img_half', 'appl_trn_reg.appl_is_pass', 'appl_trn_reg.appl_is_yb', 'suppliers.supl_name', 'appl_trn_reg.appl_is_copy_id', 'appl_trn_reg.appl_is_copy_kk', 'appl_trn_reg.appl_is_copy_pass', 'appl_trn_reg.appl_is_copy_akta_n', 'appl_trn_reg.appl_is_copy_akta_l',)
-        // ->whereBetween('appl_trn_reg.appl_date', ["$this->start_date", $this->end_date])->get());
         return RegisterPackage::join('coys', 'appl_trn_reg.coy_id', '=', 'coys.coy_id')
         ->join('provinsis', 'appl_trn_reg.prov_code', '=', 'provinsis.prov_code')
         ->join('kotas', 'appl_trn_reg.kota_code', '=', 'kotas.kota_code')
@@ -375,7 +359,7 @@ class RegisterPackageExport implements FromQuery, WithCustomStartCell, WithColum
         ->join('vaccines as vc_02', 'appl_trn_reg.vc_code_02', '=', 'vc_02.vc_code')
         ->join('vaccines as vc_03', 'appl_trn_reg.vc_code_03', '=', 'vc_03.vc_code')
         ->join('vaccines as vc_04', 'appl_trn_reg.vc_code_04', '=', 'vc_04.vc_code')
-        ->select('appl_trn_reg.appl_gender', 'appl_trn_reg.appl_title', 'appl_trn_reg.appl_id_type', 'appl_trn_reg.appl_id_no', 'appl_trn_reg.appl_name', 'appl_trn_reg.appl_gender', 'appl_trn_reg.appl_birth_place', 'appl_trn_reg.appl_birth_date', 'appl_trn_reg.appl_addr', 'appl_trn_reg.appl_gender', 'provinsis.provinsi', 'kotas.kota', 'kecamatans.kecamatan', 'kelurahans.kelurahan', 'appl_trn_reg.appl_status', 'countries.con_name', 'edus.edu_name', 'jobs.job_name', 'appl_trn_reg.appl_fth_name', 'appl_trn_reg.appl_mahram', 'appl_trn_reg.appl_pass_no', 'appl_trn_reg.appl_pass_name', 'appl_trn_reg.appl_pass_iss_date', 'appl_trn_reg.appl_pass_exp_date', 'appl_trn_reg.appl_pass_iss_palace', 'appl_trn_reg.appl_vac_name_id', 'vc_01.vc_name as vc_name_01', 'vc_02.vc_name as vc_name_02', 'vc_03.vc_name as vc_name_03', 'vc_04.vc_name as vc_name_04', 'appl_trn_reg.appl_vac_id_date_01', 'appl_trn_reg.appl_vac_id_date_02', 'appl_trn_reg.appl_vac_id_date_03', 'appl_trn_reg.appl_vac_id_date_04', 'appl_trn_reg.appl_tlp', 'appl_trn_reg.appl_email', 'appl_trn_reg.appl_is_img_full', 'appl_trn_reg.appl_is_img_half', 'appl_trn_reg.appl_is_pass', 'appl_trn_reg.appl_is_yb', 'suppliers.supl_name', 'appl_trn_reg.appl_is_copy_id', 'appl_trn_reg.appl_is_copy_kk', 'appl_trn_reg.appl_is_copy_pass', 'appl_trn_reg.appl_is_copy_akta_n', 'appl_trn_reg.appl_is_copy_akta_l',)
+        ->select('appl_trn_reg.appl_gender', 'appl_trn_reg.appl_title', 'appl_trn_reg.appl_id_type', 'appl_trn_reg.appl_id_no', 'appl_trn_reg.appl_name', 'appl_trn_reg.appl_gender', 'appl_trn_reg.appl_birth_place', 'appl_trn_reg.appl_birth_date', 'appl_trn_reg.appl_addr', 'appl_trn_reg.appl_gender', 'provinsis.provinsi', 'kotas.kota', 'kecamatans.kecamatan', 'kelurahans.kelurahan', 'appl_trn_reg.appl_status', 'countries.con_name', 'edus.edu_name', 'jobs.job_name', 'appl_trn_reg.appl_fth_name', 'appl_trn_reg.appl_mahram', 'appl_trn_reg.appl_pass_no', 'appl_trn_reg.appl_pass_name', 'appl_trn_reg.appl_pass_iss_date', 'appl_trn_reg.appl_pass_exp_date', 'appl_trn_reg.appl_pass_iss_place', 'appl_trn_reg.appl_vac_name_id', 'vc_01.vc_name as vc_name_01', 'vc_02.vc_name as vc_name_02', 'vc_03.vc_name as vc_name_03', 'vc_04.vc_name as vc_name_04', 'appl_trn_reg.appl_vac_id_date_01', 'appl_trn_reg.appl_vac_id_date_02', 'appl_trn_reg.appl_vac_id_date_03', 'appl_trn_reg.appl_vac_id_date_04', 'appl_trn_reg.appl_tlp', 'appl_trn_reg.appl_email', 'appl_trn_reg.appl_is_img_full', 'appl_trn_reg.appl_is_img_half', 'appl_trn_reg.appl_is_pass', 'appl_trn_reg.appl_is_yb', 'suppliers.supl_name', 'appl_trn_reg.appl_is_copy_id', 'appl_trn_reg.appl_is_copy_kk', 'appl_trn_reg.appl_is_copy_pass', 'appl_trn_reg.appl_is_copy_akta_n', 'appl_trn_reg.appl_is_copy_akta_l',)
         ->whereBetween('appl_trn_reg.appl_date', ["$this->start_date", $this->end_date]);
     }
 
@@ -442,7 +426,7 @@ class RegisterPackageExport implements FromQuery, WithCustomStartCell, WithColum
             $row->appl_pass_name,
             $pass_iss_date,
             $pass_exp_date,
-            $row->appl_pass_iss_palace,
+            $row->appl_pass_iss_place,
             $row->appl_vac_name_id,
             $row->vc_name_01,
             $vac_id_date_01,

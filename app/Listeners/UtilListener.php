@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\Utils;
-use App\Models\Utility;
+use App\Models\Master\Utility;
 
 class UtilListener
 {
