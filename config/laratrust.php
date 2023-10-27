@@ -220,7 +220,7 @@ return [
              * If the message content is empty it won't be added to the redirection.
              */
             'redirect' => [
-                'url' => '/home',
+                'url' => '/dashboard',
                 'message' => [
                     'key' => 'error',
                     'content' => '',
@@ -304,7 +304,7 @@ return [
         | will be accessible from.
         |
         */
-        'path' => 'userroles',
+        'path' => 'others/accounts',
 
         /*
         |--------------------------------------------------------------------------
