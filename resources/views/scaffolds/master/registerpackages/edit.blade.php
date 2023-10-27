@@ -1,1287 +1,1819 @@
 @extends('dashboard.master')
 
-@section('title', 'Update Register Package')
+@section('title', 'Registrasi Paket')
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 mb-3">
-        <a href="{{ route('registerpackages.index') }}" class="btn btn-secondary mx-2">Return</a>
-    </div>
-    <div class="col-lg-12 mb-3">
-        <form action="{{ route('registerpackages.update', $data->id) }}" method="post" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
+    <!--start::Col-->
+    <div class="col-xxl-12">
+        <!--begin::Card-->
+        <div class="card">
+            <!--begin::Card header-->
+            <div class="card-header">
+                <!--begin::Card title-->
+                <div class="card-title m-0 flex-column">
+                    <h3 class="fw-bolder m-0">Edit Data</h3>
+                    <div class="text-muted fs-7 fw-bold">Edit Data</div>
+                </div>
+                <!--end::Card title-->
+                <!--start::Button-->
+                <!--start::Action-->
+                <a href="{{ route('registerpackages.index') }}" class="btn btn-flex btn-light btn-light btn-active-primary fw-bolder align-self-center">
+                    <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr002.svg-->
+                    <span class="svg-icon svg-icon-muted svg-icon-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M9.60001 11H21C21.6 11 22 11.4 22 12C22 12.6 21.6 13 21 13H9.60001V11Z" fill="black"/>
+                            <path opacity="0.3" d="M9.6 20V4L2.3 11.3C1.9 11.7 1.9 12.3 2.3 12.7L9.6 20Z" fill="black"/>
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->Return</a>
+                <!--end::Button-->
+                <!--end::Action-->
+            </div>
+            <!--end::Card header-->
+            <!--begin::Stepper-->
+            <div class="stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid pt-10" id="kt_stepper_example_vertical" data-kt-stepper="true">
+                <!--begin::Aside-->
+                <div class="d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px">
+                    <!--begin::Nav-->
+                    <div class="stepper-nav ps-lg-10">
+                        <!--begin::Step 1-->
+                        <div class="stepper-item current" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+                            <!--begin::Line-->
+                            <div class="stepper-line w-40px"></div>
+                            <!--end::Line-->
+                            <!--begin::Icon-->
+                            <div class="stepper-icon w-40px h-40px">
+                                <i class="stepper-check fas fa-check"></i>
+                                <span class="stepper-number">1</span>
+                            </div>
+                            <!--end::Icon-->
+                            <!--begin::Label-->
+                            <div class="stepper-label">
+                                <h3 class="stepper-title">Basic Info</h3>
+                                <div class="stepper-desc">Informasi Dasar</div>
+                            </div>
+                            <!--end::Label-->
+                        </div>
+                        <!--end::Step 1-->
+                        <!--begin::Step 2-->
+                        <div class="stepper-item" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+                            <!--begin::Line-->
+                            <div class="stepper-line w-40px"></div>
+                            <!--end::Line-->
+                            <!--begin::Icon-->
+                            <div class="stepper-icon w-40px h-40px">
+                                <i class="stepper-check fas fa-check"></i>
+                                <span class="stepper-number">2</span>
+                            </div>
+                            <!--begin::Icon-->
+                            <!--begin::Label-->
+                            <div class="stepper-label">
+                                <h3 class="stepper-title">Personal Data</h3>
+                                <div class="stepper-desc">Data Pribadi</div>
+                            </div>
+                            <!--begin::Label-->
+                        </div>
+                        <!--end::Step 2-->
+                        <!--begin::Step 3-->
+                        <div class="stepper-item" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+                            <!--begin::Line-->
+                            <div class="stepper-line w-40px"></div>
+                            <!--end::Line-->
+                            <!--begin::Icon-->
+                            <div class="stepper-icon w-40px h-40px">
+                                <i class="stepper-check fas fa-check"></i>
+                                <span class="stepper-number">3</span>
+                            </div>
+                            <!--end::Icon-->
+                            <!--begin::Label-->
+                            <div class="stepper-label">
+                                <h3 class="stepper-title">Passport</h3>
+                                <div class="stepper-desc">Paspor</div>
+                            </div>
+                            <!--end::Label-->
+                        </div>
+                        <!--end::Step 3-->
+                        <!--begin::Step 4-->
+                        <div class="stepper-item" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+                            <!--begin::Line-->
+                            <div class="stepper-line w-40px"></div>
+                            <!--end::Line-->
+                            <!--begin::Icon-->
+                            <div class="stepper-icon w-40px h-40px">
+                                <i class="stepper-check fas fa-check"></i>
+                                <span class="stepper-number">4</span>
+                            </div>
+                            <!--end::Icon-->
+                            <!--begin::Label-->
+                            <div class="stepper-label">
+                                <h3 class="stepper-title">Vaccines</h3>
+                                <div class="stepper-desc">Data Vaksin</div>
+                            </div>
+                            <!--end::Label-->
+                        </div>
+                        <!--end::Step 4-->
+                        <!--begin::Step 5-->
+                        <div class="stepper-item" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+                            <!--begin::Line-->
+                            <div class="stepper-line w-40px"></div>
+                            <!--end::Line-->
+                            <!--begin::Icon-->
+                            <div class="stepper-icon w-40px h-40px">
+                                <i class="stepper-check fas fa-check"></i>
+                                <span class="stepper-number">5</span>
+                            </div>
+                            <!--end::Icon-->
+                            <!--begin::Label-->
+                            <div class="stepper-label">
+                                <h3 class="stepper-title">Data Completion</h3>
+                                <div class="stepper-desc">Kelengkapan Data</div>
+                            </div>
+                            <!--end::Label-->
+                        </div>
+                    </div>
+                    <!--end::Nav-->
+                </div>
+                <!--begin::Content-->
+                <div class="flex-row-fluid py-lg-5 px-lg-15">
+                    <!--begin::Form-->
+                    <form class="form w-lg-500px mx-auto" action="{{ route('registerpackages.update', $data->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
 
-        <div class="row mx-2">
-            <div class="row g-2 align-items-center">
-                <div class="col-2 text-end">
-                    <label for="coy_id" class="col-form-label">No Aplikasi</label>
-                </div>
-                <div class="col-5">
-                    <input type="text" class="form-control @error('coy_id')is-invalid @enderror"
-                            id="coy_id" name="coy_id" placeholder="Applicant Name"
-                            value="{{ $data->coy_id }}">
-                </div>
-                <div class="col-2 text-end">
-                    <label for="appl_st" class="col-form-label">Aplikasi Status</label>
-                </div>
-                <div class="col-3">
-                    <input type="text" class="form-control @error('appl_st')is-invalid @enderror"
-                        id="appl_st" name="appl_st" placeholder="Applicant Name" value="{{ $data->appl_st == 'NW' ? 'New' : 'Accepted' }}">
+                        <!--begin::Group-->
+                        <div class="mb-5">
+                            <!--begin::Step 1-->
+                            <div class="current" data-kt-stepper-element="content">
+                                <div class="w-100">
+                                    <!--begin::Input group-->
+                                    <div class="row mb-10">
+                                        <!--begin::Col-->
+                                        <div class="col-6 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="form-label required">No Aplikasi</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <input class="form-control form-control form-control-solid @error('appl_no')is-invalid @enderror" type="text" name="appl_no" value="{{ $data->appl_no }}" readonly="readonly" />
+                                            <!--end::Input-->
+
+                                            <!--begin::Error-->
+                                            @error('appl_no')
+                                                <span class="invalid-feedback d-block" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <!--end::Error-->
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-6 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="form-label required">Aplikasi Status</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <input class="form-control form-control form-control-solid @error('appl_st')is-invalid @enderror" type="text" name="appl_st" value="{{ $data->appl_st == 'NW' ? 'New' : '' }}" readonly="readonly" />
+                                            <!--end::Input-->
+
+                                            <!--begin::Error-->
+                                            @error('appl_st')
+                                                <span class="invalid-feedback d-block" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <!--end::Error-->
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-10">
+                                        <!--begin::Col-->
+                                        <div class="col-6 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="form-label required">Paket Produk</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <select class="form-select form-select-solid @error('pkg_code')is-invalid @enderror" name="pkg_code" id="pkg_code" data-control="select2" data-placeholder="Pilih Paket">
+                                                <option></option>
+                                                @foreach ($packages as $i)
+                                                    <option value="{{ $i->pkg_code }}" {{ old('pkg_code') ? (old('pkg_code') == $i->pkg_code ? 'selected' : '') : ($data->pkg_code == $i->pkg_code ? 'selected' : '') }}>{{ $i->pkg_name }}</option>
+                                                @endforeach
+                                            </select>
+                                            <!--end::Input-->
+
+                                            <!--begin::Error-->
+                                            @error('pkg_code')
+                                                <span class="invalid-feedback d-block" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <!--end::Error-->
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-6 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="form-label required">Tanggal Aplikasi</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <input class="form-control form-control form-control-solid @error('appl_date')is-invalid @enderror" type="text" name="appl_date" value="{{ Carbon\Carbon::parse($data->appl_date)->isoFormat('dddd, D MMMM Y') }}" readonly="readonly" />
+                                            <!--end::Input-->
+
+                                            <!--begin::Error-->
+                                            @error('appl_date')
+                                                <span class="invalid-feedback d-block" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <!--end::Error-->
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Nama Konsumen</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Textarea-->
+                                        <input class="form-control form-control form-control-solid @error('appl_name')is-invalid @enderror" type="text" name="appl_name" value="{{ old('appl_name') ? old('appl_name') : $data->appl_name }}" />
+                                        <!--end::Textarea-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_name')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Title</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Textarea-->
+                                        <select class="form-select form-select-solid @error('appl_title')is-invalid @enderror" name="appl_title" id="appl_title" data-control="select2" data-placeholder="Pilih Title">
+                                            <option></option>
+                                            <option value="Mr" {{ old('appl_title') ? (old('appl_title') == 'MR' ? 'selected' : '') : ($data->appl_title == 'MR' ? 'selected' : '') }}>Mr</option>
+                                            <option value="Mrs" {{ old('appl_title') ? (old('appl_title') == 'MRS' ? 'selected' : '') : ($data->appl_title == 'MRS' ? 'selected' : '') }}>Mrs</option>
+                                            <option value="Ms" {{ old('appl_title') ? (old('appl_title') == 'MS' ? 'selected' : '') : ($data->appl_title == 'MS' ? 'selected' : '') }}>Ms</option>
+                                        </select>
+                                        <!--end::Textarea-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_title')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                            </div>
+                            <!--begin::Step 1-->
+
+                            <!--begin::Step 2-->
+                            <div data-kt-stepper-element="content">
+                                <div class="w-100">
+                                    <!--begin::Input group-->
+                                    <div class="row mb-10">
+                                        <!--begin::Col-->
+                                        <div class="col-6 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="form-label required">Jenis Kelamin</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <select class="form-select form-select-solid @error('appl_gender')is-invalid @enderror" name="appl_gender" id="appl_gender" data-control="select2" data-placeholder="Pilih Jenis Kelamin">
+                                                <option></option>
+                                                <option value="1" {{ old('appl_gender') ? (old('appl_gender') == '1' ? 'selected' : '') : ($data->appl_gender == '1' ? 'selected' : '') }}>Laki-Laki</option>
+                                                <option value="2" {{ old('appl_gender') ? (old('appl_gender') == '2' ? 'selected' : '') : ($data->appl_gender == '2' ? 'selected' : '') }}>Perempuan</option>
+                                            </select>
+                                            <!--end::Input-->
+
+                                            <!--begin::Error-->
+                                            @error('appl_gender')
+                                                <span class="invalid-feedback d-block" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <!--end::Error-->
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-6 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="form-label required">Status</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <select class="form-select form-select-solid @error('appl_status')is-invalid @enderror" name="appl_status" id="appl_status" data-control="select2" data-placeholder="Pilih Status">
+                                                <option></option>
+                                                <option value="1" {{ old('appl_status') ? (old('appl_status') == '1' ? 'selected' : '') : ($data->appl_status == '1' ? 'selected' : '') }}>Kawin</option>
+                                                <option value="2" {{ old('appl_status') ? (old('appl_status') == '2' ? 'selected' : '') : ($data->appl_status == '2' ? 'selected' : '') }}>Belum Kawin</option>
+                                                <option value="3" {{ old('appl_status') ? (old('appl_status') == '3' ? 'selected' : '') : ($data->appl_status == '3' ? 'selected' : '') }}>Cerai</option>
+                                            </select>
+                                            <!--end::Input-->
+
+                                            <!--begin::Error-->
+                                            @error('appl_status')
+                                                <span class="invalid-feedback d-block" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <!--end::Error-->
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Tipe ID</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('appl_id_type')is-invalid @enderror" name="appl_id_type" id="appl_id_type" data-control="select2" data-placeholder="Tipe ID">
+                                            <option></option>
+                                            <option value="1" {{ old('appl_id_type') ? (old('appl_id_type') == '1' ? 'selected' : '') : ($data->appl_id_type == '1' ? 'selected' : '') }}>KTP</option>
+                                            <option value="2" {{ old('appl_id_type') ? (old('appl_id_type') == '2' ? 'selected' : '') : ($data->appl_id_type == '2' ? 'selected' : '') }}>SIM</option>
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_id_type')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">No ID</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_id_no')is-invalid @enderror" type="text" name="appl_id_no" value="{{ old('appl_id_no') ? old('appl_id_no') : $data->appl_id_no }}" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_id_no')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-10">
+                                        <!--begin::Col-->
+                                        <div class="col-6 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="form-label required">Tempat Lahir</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <input class="form-control form-control form-control-solid @error('appl_birth_place')is-invalid @enderror" type="text" name="appl_birth_place" value="{{ old('appl_birth_place') ? old('appl_birth_place') : $data->appl_birth_place }}" />
+                                            <!--end::Input-->
+
+                                            <!--begin::Error-->
+                                            @error('appl_birth_place')
+                                                <span class="invalid-feedback d-block" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <!--end::Error-->
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-6 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="form-label required">Tanggal Lahir</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input-->
+                                            <input class="form-control form-control form-control-solid @error('appl_birth_date')is-invalid @enderror" type="text" name="appl_birth_date" value="{{ old('appl_birth_date') ? old('appl_birth_date') : $data->appl_birth_date }}" />
+                                            <!--end::Input-->
+
+                                            <!--begin::Error-->
+                                            @error('appl_birth_date')
+                                                <span class="invalid-feedback d-block" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <!--end::Error-->
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Alamat</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Textarea-->
+                                        <textarea class="form-control form-control form-control-solid @error('appl_addr')is-invalid @enderror" name="appl_addr" data-kt-autosize="true">{{ old('appl_addr') ? old('appl_addr') : $data->appl_addr }}</textarea>
+                                        <!--end::Textarea-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_addr')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Provinsi</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('prov_code')is-invalid @enderror" name="prov_code" id="prov_code" data-control="select2" data-placeholder="Pilih Provinsi">
+                                            <option></option>
+                                            @foreach ($provinsis as $i)
+                                                <option value="{{ $i->prov_code }}" {{ old('prov_code') ? (old('prov_code') == $i->prov_code ? 'selected' : '') : ($data->prov_code == $i->prov_code ? 'selected' : '') }}>{{ $i->provinsi }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('prov_code')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Kota</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('kota_code')is-invalid @enderror" name="kota_code" id="kota_code">
+                                            <option> Terlebih Dahulu</option>
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('kota_code')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Kecamatan</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('kec_code')is-invalid @enderror" name="kec_code" id="kec_code">
+                                            <option> Terlebih Dahulu</option>
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('kec_code')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Kelurahan</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('kel_code')is-invalid @enderror" name="kel_code" id="kel_code">
+                                            <option> Terlebih Dahulu</option>
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('kel_code')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Warga Negara</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('con_code')is-invalid @enderror" name="con_code" id="con_code" data-control="select2" data-placeholder="Pilih Warga Negara">
+                                            <option> Negara</option>
+                                            @foreach ($countries as $i)
+                                                <option value="{{ $i->con_code }}" {{ old('con_code') ? (old('con_code') == $i->con_code ? 'selected' : '') : ($data->con_code == $i->con_code ? 'selected' : '') }}>{{ $i->con_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('con_code')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Pendidikan</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('edu_code')is-invalid @enderror" name="edu_code" id="edu_code" data-control="select2" data-placeholder="Pilih Pendidikan">
+                                            <option></option>
+                                            @foreach ($edus as $i)
+                                                <option value="{{ $i->edu_code }}" {{ old('edu_code') ? (old('edu_code') == $i->edu_code ? 'selected' : '') : ($data->edu_code == $i->edu_code ? 'selected' : '') }}>{{ $i->edu_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('edu_code')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Jabatan</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('job_code')is-invalid @enderror" name="job_code" id="job_code" data-control="select2" data-placeholder="Pilih Jabatan">
+                                            <option></option>
+                                            @foreach ($jobs as $i)
+                                                <option value="{{ $i->job_code }}" {{ old('job_code') ? (old('job_code') == $i->job_code ? 'selected' : '') : ($data->job_code == $i->job_code ? 'selected' : '') }}>{{ $i->job_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('job_code')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Nama Orang Tua</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_fth_name')is-invalid @enderror" type="text" name="appl_fth_name" value="{{ old('appl_fth_name') ? old('appl_fth_name') : $data->appl_fth_name }}" />
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('appl_fth_name')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Relasi</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('rel_code')is-invalid @enderror" name="rel_code" id="rel_code" data-control="select2" data-placeholder="Pilih Relasi">
+                                            <option></option>
+                                            @foreach ($relations as $i)
+                                                <option value="{{ $i->rel_code }}" {{ old('rel_code') ? (old('rel_code') == $i->rel_code ? 'selected' : '') : ($data->rel_code == $i->rel_code ? 'selected' : '') }}>{{ $i->rel_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('rel_code')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                            </div>
+                            <!--begin::Step 2-->
+
+                            <!--begin::Step 3-->
+                            <div data-kt-stepper-element="content">
+                                <div class="w-100">
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Mahram</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_mahram')is-invalid @enderror" type="text" name="appl_mahram" value="{{ old('appl_mahram') ? old('appl_mahram') : $data->appl_mahram }}" />
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('appl_mahram')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">No Passport</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid text-uppercase @error('appl_pass_no')is-invalid @enderror" type="text" name="appl_pass_no" value="{{ old('appl_pass_no') ? old('appl_pass_no') : $data->appl_pass_no }}" />
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('appl_pass_no')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Nama Passport</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_pass_name')is-invalid @enderror" type="text" name="appl_pass_name" value="{{ old('appl_pass_name') ? old('appl_pass_name') : $data->appl_pass_name }}" />
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('appl_pass_name')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Issue Date</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_pass_iss_date')is-invalid @enderror" type="text" name="appl_pass_iss_date" value="{{ old('appl_pass_iss_date') ? old('appl_pass_iss_date') : $data->appl_pass_iss_date }}" />
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('appl_pass_iss_date')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Expired Date</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_pass_exp_date')is-invalid @enderror" type="text" name="appl_pass_exp_date" value="{{ old('appl_pass_exp_date') ? old('appl_pass_exp_date') : $data->appl_pass_exp_date }}" />
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('appl_pass_exp_date')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Issued Place</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_pass_iss_place')is-invalid @enderror" type="text" name="appl_pass_iss_place" value="{{ old('appl_pass_iss_place') ? old('appl_pass_iss_place') : $data->appl_pass_iss_place }}" />
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('appl_pass_iss_place')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                            </div>
+                            <!--begin::Step 3-->
+
+                            <!--begin::Step 4-->
+                            <div data-kt-stepper-element="content">
+                                <div class="w-100">
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Nama Di Kartu</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_vac_name_id')is-invalid @enderror" type="text" name="appl_vac_name_id" id="appl_vac_name_id" value="{{ old('appl_vac_name_id') ? old('appl_vac_name_id') : $data->appl_vac_name_id }}" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_vac_name_id')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--start::Separator-->
+                                    <div class="mb-5">
+                                        <label class="form-label fw-bolder">Vaksin 1</label>
+                                        <div class="separator border-2"></div>
+                                    </div>
+                                    <!--end::Separator-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Nama Vaksin</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('vc_code_01')is-invalid @enderror" name="vc_code_01" data-control="select2" data-placeholder="Pilih Vaksin">
+                                            <option></option>
+                                            @foreach ($vaccines as $i)
+                                                <option value="{{ $i->vc_code }}" {{ old('vc_code_01') ? (old('vc_code_01') == $i->vc_code ? 'selected' : '') : ($data->vc_code_01 == $i->vc_code ? 'selected' : '') }}>{{ $i->vc_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('vc_code_01')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Tanggal Vaksin</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_vac_id_date_01')is-invalid @enderror vac" type="text" name="appl_vac_id_date_01" value="{{ old('appl_vac_id_date_01') ? old('appl_vac_id_date_01') : $data->appl_vac_id_date_01 }}" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_vac_id_date_01')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--start::Separator-->
+                                    <div class="mb-5">
+                                        <label class="form-label fw-bolder">Vaksin 2</label>
+                                        <div class="separator border-2"></div>
+                                    </div>
+                                    <!--end::Separator-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Nama Vaksin</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('vc_code_02')is-invalid @enderror" name="vc_code_02" data-control="select2" data-placeholder="Pilih Vaksin">
+                                            <option></option>
+                                            @foreach ($vaccines as $i)
+                                                <option value="{{ $i->vc_code }}" {{ old('vc_code_02') ? (old('vc_code_02') == $i->vc_code ? 'selected' : '') : ($data->vc_code_02 == $i->vc_code ? 'selected' : '') }}>{{ $i->vc_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('vc_code_02')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Tanggal Vaksin</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_vac_id_date_02')is-invalid @enderror vac" type="text" name="appl_vac_id_date_02" value="{{ old('appl_vac_id_date_02') ? old('appl_vac_id_date_02') : $data->appl_vac_id_date_02 }}" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_vac_id_date_02')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--start::Separator-->
+                                    <div class="mb-5">
+                                        <label class="form-label fw-bolder">Vaksin 3</label>
+                                        <div class="separator border-2"></div>
+                                    </div>
+                                    <!--end::Separator-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Nama Vaksin</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('vc_code_03')is-invalid @enderror" name="vc_code_03" data-control="select2" data-placeholder="Pilih Vaksin">
+                                            <option></option>
+                                            @foreach ($vaccines as $i)
+                                                <option value="{{ $i->vc_code }}" {{ old('vc_code_03') ? (old('vc_code_03') == $i->vc_code ? 'selected' : '') : ($data->vc_code_03 == $i->vc_code ? 'selected' : '') }}>{{ $i->vc_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('vc_code_03')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Tanggal Vaksin</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_vac_id_date_03')is-invalid @enderror vac" type="text" name="appl_vac_id_date_03" value="{{ old('appl_vac_id_date_03') ? old('appl_vac_id_date_03') : $data->appl_vac_id_date_03 }}" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_vac_id_date_03')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--start::Separator-->
+                                    <div class="mb-5">
+                                        <label class="form-label fw-bolder">Vaksin 4</label>
+                                        <div class="separator border-2"></div>
+                                    </div>
+                                    <!--end::Separator-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Nama Vaksin</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('vc_code_04')is-invalid @enderror" name="vc_code_04" data-control="select2" data-placeholder="Pilih Vaksin">
+                                            <option></option>
+                                            @foreach ($vaccines as $i)
+                                                <option value="{{ $i->vc_code }}" {{ old('vc_code_04') ? (old('vc_code_04') == $i->vc_code ? 'selected' : '') : ($data->vc_code_04 == $i->vc_code ? 'selected' : '') }}>{{ $i->vc_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('vc_code_04')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Tanggal Vaksin</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_vac_id_date_04')is-invalid @enderror vac" type="text" name="appl_vac_id_date_04" value="{{ old('appl_vac_id_date_04') ? old('appl_vac_id_date_04') : $data->appl_vac_id_date_04 }}" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_vac_id_date_04')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                            </div>
+                            <!--begin::Step 4-->
+
+                            <!--begin::Step 5-->
+                            <div data-kt-stepper-element="content">
+                                <div class="w-100">
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Jemaah Dari</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('supl_code')is-invalid @enderror" name="supl_code" data-control="select2" data-placeholder="Pilih Jemaah">
+                                            <option></option>
+                                            @foreach ($suppliers as $i)
+                                                <option value="{{ $i->supl_code }}" {{ old('supl_code') ? (old('supl_code') == $i->supl_code ? 'selected' : '') : ($data->supl_code == $i->supl_code ? 'selected' : '') }}>{{ $i->supl_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('supl_code')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">No Telp</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_tlp')is-invalid @enderror" type="text" name="appl_tlp" value="{{ old('appl_tlp') ? old('appl_tlp') : $data->appl_tlp }}" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_tlp')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Email</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_email')is-invalid @enderror" type="text" name="appl_email" value="{{ old('appl_email') ? old('appl_email') : $data->appl_email }}" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_email')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <div>
+                                            <label class="form-label required">Foto Full?</label>
+                                        </div>
+                                        <!--end::Label-->
+
+                                        <!--begin::Radio Button-->
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input class="form-check-input" type="radio" value="Y" id="appl_is_img_full" name="appl_is_img_full" {{ old('appl_is_img_full') ? (old('appl_is_img_full') == 'Y' ? 'checked' : '') : ($data->appl_is_img_full == 'Y' ? 'checked' : '') }} />
+                                            <label class="form-check-label" for="appl_is_img_full">
+                                                Ya
+                                            </label>
+                                        </div>
+                                        <!--end::Radio Button-->
+                                        <!--begin::Radio Button-->
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input class="form-check-input" type="radio" value="N" id="appl_is_img_full" name="appl_is_img_full" {{ old('appl_is_img_full') ? (old('appl_is_img_full') == 'N' ? 'checked' : '') : ($data->appl_is_img_full == 'N' ? 'checked' : '') }} />
+                                            <label class="form-check-label" for="appl_is_img_full">
+                                                Tidak
+                                            </label>
+                                        </div>
+                                        <!--end::Radio Button-->
+                                        <!--begin::Error-->
+                                        @error('appl_is_img_full')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">File</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_is_img_full_name')is-invalid @enderror" type="file" name="appl_is_img_full_name" id="appl_is_img_full_name" disabled='disabled' />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_is_img_full_name')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <div>
+                                            <label class="form-label required">Foto Setengah?</label>
+                                        </div>
+                                        <!--end::Label-->
+
+                                        <!--begin::Radio Button-->
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input class="form-check-input" type="radio" value="Y" id="appl_is_img_half" name="appl_is_img_half" {{ old('appl_is_img_half') ? (old('appl_is_img_half') == 'Y' ? 'checked' : '') : ($data->appl_is_img_half == 'Y' ? 'checked' : '') }} />
+                                            <label class="form-check-label" for="appl_is_img_half">
+                                                Ya
+                                            </label>
+                                        </div>
+                                        <!--end::Radio Button-->
+                                        <!--begin::Radio Button-->
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input class="form-check-input" type="radio" value="N" id="appl_is_img_half" name="appl_is_img_half" {{ old('appl_is_img_half') ? (old('appl_is_img_half') == 'N' ? 'checked' : '') : ($data->appl_is_img_half == 'N' ? 'checked' : '') }} />
+                                            <label class="form-check-label" for="appl_is_img_half">
+                                                Tidak
+                                            </label>
+                                        </div>
+                                        <!--end::Radio Button-->
+                                        <!--begin::Error-->
+                                        @error('appl_is_img_half')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">File</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_is_img_half_name')is-invalid @enderror" type="file" name="appl_is_img_half_name" id="appl_is_img_half_name" disabled="disabled" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_is_img_half_name')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <div>
+                                            <label class="form-label required">Fisik Passport?</label>
+                                        </div>
+                                        <!--end::Label-->
+
+                                        <!--begin::Radio Button-->
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input class="form-check-input" type="radio" value="Y" id="appl_is_pass" name="appl_is_pass" {{ old('appl_is_pass') ? (old('appl_is_pass') == 'Y' ? 'checked' : '') : ($data->appl_is_pass == 'Y' ? 'checked' : '') }} />
+                                            <label class="form-check-label" for="appl_is_pass">
+                                                Ya
+                                            </label>
+                                        </div>
+                                        <!--end::Radio Button-->
+                                        <!--begin::Radio Button-->
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input class="form-check-input" type="radio" value="N" id="appl_is_pass" name="appl_is_pass" {{ old('appl_is_pass') ? (old('appl_is_pass') == 'N' ? 'checked' : '') : ($data->appl_is_pass == 'N' ? 'checked' : '') }} />
+                                            <label class="form-check-label" for="appl_is_pass">
+                                                Tidak
+                                            </label>
+                                        </div>
+                                        <!--end::Radio Button-->
+                                        <!--begin::Error-->
+                                        @error('appl_is_pass')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">File</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_is_pass_name')is-invalid @enderror" type="file" name="appl_is_pass_name" id="appl_is_pass_name" disabled="disabled" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_is_pass_name')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <div>
+                                            <label class="form-label required">Buku Kuning?</label>
+                                        </div>
+                                        <!--end::Label-->
+
+                                        <!--begin::Radio Button-->
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input class="form-check-input" type="radio" value="Y" id="appl_is_yb" name="appl_is_yb" {{ old('appl_is_yb') ? (old('appl_is_yb') == 'Y' ? 'checked' : '') : ($data->appl_is_yb == 'Y' ? 'checked' : '') }} />
+                                            <label class="form-check-label" for="appl_is_yb">
+                                                Ya
+                                            </label>
+                                        </div>
+                                        <!--end::Radio Button-->
+                                        <!--begin::Radio Button-->
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input class="form-check-input" type="radio" value="N" id="appl_is_yb" name="appl_is_yb" {{ old('appl_is_yb') ? (old('appl_is_yb') == 'N' ? 'checked' : '') : ($data->appl_is_yb == 'N' ? 'checked' : '') }} />
+                                            <label class="form-check-label" for="appl_is_yb">
+                                                Tidak
+                                            </label>
+                                        </div>
+                                        <!--end::Radio Button-->
+                                        <!--begin::Error-->
+                                        @error('appl_is_yb')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">File</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_is_yb_name')is-invalid @enderror" type="file" name="appl_is_yb_name" id="appl_is_yb_name" disabled="disabled" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_is_yb_name')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <div>
+                                            <label class="form-label required">Copy KTP?</label>
+                                        </div>
+                                        <!--end::Label-->
+
+                                        <!--begin::Radio Button-->
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input class="form-check-input" type="radio" value="Y" id="appl_is_copy_id" name="appl_is_copy_id" {{ old('appl_is_copy_id') ? (old('appl_is_copy_id') == 'Y' ? 'checked' : '') : ($data->appl_is_copy_id == 'Y' ? 'checked' : '') }} />
+                                            <label class="form-check-label" for="appl_is_copy_id">
+                                                Ya
+                                            </label>
+                                        </div>
+                                        <!--end::Radio Button-->
+                                        <!--begin::Radio Button-->
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input class="form-check-input" type="radio" value="N" id="appl_is_copy_id" name="appl_is_copy_id" {{ old('appl_is_copy_id') ? (old('appl_is_copy_id') == 'N' ? 'checked' : '') : ($data->appl_is_copy_id == 'N' ? 'checked' : '') }} />
+                                            <label class="form-check-label" for="appl_is_copy_id">
+                                                Tidak
+                                            </label>
+                                        </div>
+                                        <!--end::Radio Button-->
+                                        <!--begin::Error-->
+                                        @error('appl_is_copy_id')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">File</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_is_id_name')is-invalid @enderror" type="file" name="appl_is_id_name" id="appl_is_id_name" disabled="disabled" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_is_id_name')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <div>
+                                            <label class="form-label required">Copy KK?</label>
+                                        </div>
+                                        <!--end::Label-->
+
+                                        <!--begin::Radio Button-->
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input class="form-check-input" type="radio" value="Y" id="appl_is_copy_kk" name="appl_is_copy_kk" {{ old('appl_is_copy_kk') ? (old('appl_is_copy_kk') == 'Y' ? 'checked' : '') : ($data->appl_is_copy_kk == 'Y' ? 'checked' : '') }} />
+                                            <label class="form-check-label" for="appl_is_copy_kk">
+                                                Ya
+                                            </label>
+                                        </div>
+                                        <!--end::Radio Button-->
+                                        <!--begin::Radio Button-->
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input class="form-check-input" type="radio" value="N" id="appl_is_copy_kk" name="appl_is_copy_kk" {{ old('appl_is_copy_kk') ? (old('appl_is_copy_kk') == 'N' ? 'checked' : '') : ($data->appl_is_copy_kk == 'N' ? 'checked' : '') }} />
+                                            <label class="form-check-label" for="appl_is_copy_kk">
+                                                Tidak
+                                            </label>
+                                        </div>
+                                        <!--end::Radio Button-->
+                                        <!--begin::Error-->
+                                        @error('appl_is_copy_kk')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">File</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_is_kk_name')is-invalid @enderror" type="file" name="appl_is_kk_name" id="appl_is_kk_name" disabled="disabled" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_is_kk_name')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <div>
+                                            <label class="form-label required">Copy Passport?</label>
+                                        </div>
+                                        <!--end::Label-->
+
+                                        <!--begin::Radio Button-->
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input class="form-check-input" type="radio" value="Y" id="appl_is_copy_pass" name="appl_is_copy_pass" {{ old('appl_is_copy_pass') ? (old('appl_is_copy_pass') == 'Y' ? 'checked' : '') : ($data->appl_is_copy_pass == 'Y' ? 'checked' : '') }} />
+                                            <label class="form-check-label" for="appl_is_copy_pass">
+                                                Ya
+                                            </label>
+                                        </div>
+                                        <!--end::Radio Button-->
+                                        <!--begin::Radio Button-->
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input class="form-check-input" type="radio" value="N" id="appl_is_copy_pass" name="appl_is_copy_pass" {{ old('appl_is_copy_pass') ? (old('appl_is_copy_pass') == 'N' ? 'checked' : '') : ($data->appl_is_copy_pass == 'N' ? 'checked' : '') }} />
+                                            <label class="form-check-label" for="appl_is_copy_pass">
+                                                Tidak
+                                            </label>
+                                        </div>
+                                        <!--end::Radio Button-->
+                                        <!--begin::Error-->
+                                        @error('appl_is_copy_pass')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">File</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_is_copy_pass_name')is-invalid @enderror" type="file" name="appl_is_copy_pass_name" id="appl_is_copy_pass_name" disabled="disabled" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_is_copy_pass_name')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <div>
+                                            <label class="form-label required">Copy Akta N?</label>
+                                        </div>
+                                        <!--end::Label-->
+
+                                        <!--begin::Radio Button-->
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input class="form-check-input" type="radio" value="Y" id="appl_is_copy_akta_n" name="appl_is_copy_akta_n" {{ old('appl_is_copy_akta_n') ? (old('appl_is_copy_akta_n') == 'Y' ? 'checked' : '') : ($data->appl_is_copy_akta_n == 'Y' ? 'checked' : '') }} />
+                                            <label class="form-check-label" for="appl_is_copy_akta_n">
+                                                Ya
+                                            </label>
+                                        </div>
+                                        <!--end::Radio Button-->
+                                        <!--begin::Radio Button-->
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input class="form-check-input" type="radio" value="N" id="appl_is_copy_akta_n" name="appl_is_copy_akta_n" {{ old('appl_is_copy_akta_n') ? (old('appl_is_copy_akta_n') == 'N' ? 'checked' : '') : ($data->appl_is_copy_akta_n == 'N' ? 'checked' : '') }} />
+                                            <label class="form-check-label" for="appl_is_copy_akta_n">
+                                                Tidak
+                                            </label>
+                                        </div>
+                                        <!--end::Radio Button-->
+                                        <!--begin::Error-->
+                                        @error('appl_is_copy_akta_n')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">File</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_is_akta_n_name')is-invalid @enderror" type="file" name="appl_is_akta_n_name" id="appl_is_akta_n_name" disabled="disabled" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_is_akta_n_name')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <div>
+                                            <label class="form-label required">Copy Akta Lahir?</label>
+                                        </div>
+                                        <!--end::Label-->
+
+                                        <!--begin::Radio Button-->
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input class="form-check-input" type="radio" value="Y" id="appl_is_copy_akta_l" name="appl_is_copy_akta_l" {{ old('appl_is_copy_akta_l') ? (old('appl_is_copy_akta_l') == 'Y' ? 'checked' : '') : ($data->appl_is_copy_akta_l == 'Y' ? 'checked' : '') }} />
+                                            <label class="form-check-label" for="appl_is_copy_akta_l">
+                                                Ya
+                                            </label>
+                                        </div>
+                                        <!--end::Radio Button-->
+                                        <!--begin::Radio Button-->
+                                        <div class="form-check form-check-inline mb-3">
+                                            <input class="form-check-input" type="radio" value="N" id="appl_is_copy_akta_l" name="appl_is_copy_akta_l" {{ old('appl_is_copy_akta_l') ? (old('appl_is_copy_akta_l') == 'N' ? 'checked' : '') : ($data->appl_is_copy_akta_l == 'N' ? 'checked' : '') }} />
+                                            <label class="form-check-label" for="appl_is_copy_akta_l">
+                                                Tidak
+                                            </label>
+                                        </div>
+                                        <!--end::Radio Button-->
+                                        <!--begin::Error-->
+                                        @error('appl_is_copy_akta_l')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">File</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('appl_is_akta_l_name')is-invalid @enderror" type="file" name="appl_is_akta_l_name" id="appl_is_akta_l_name" disabled="disabled" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('appl_is_akta_l_name')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                            </div>
+                            <!--begin::Step 5-->
+                        </div>
+                        <!--end::Group-->
+
+                        <!--begin::Actions-->
+                        <div class="d-flex flex-stack">
+                            <!--begin::Wrapper-->
+                            <div class="me-2">
+                                <button type="button" class="btn btn-light btn-active-light-primary" data-kt-stepper-action="previous">
+                                    Kembali
+                                </button>
+                            </div>
+                            <!--end::Wrapper-->
+
+                            <!--begin::Wrapper-->
+                            <div>
+                                <button type="submit" class="btn btn-primary" data-kt-stepper-action="submit">
+                                    <span class="indicator-label">
+                                        Simpan
+                                    </span>
+                                    <span class="indicator-progress">
+                                        Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                </button>
+
+                                <button type="button" class="btn btn-primary" data-kt-stepper-action="next">
+                                    Lanjut
+                                </button>
+                            </div>
+                            <!--end::Wrapper-->
+                        </div>
+                        <!--end::Actions-->
+                    </form>
+                    <!--end::Form-->
                 </div>
             </div>
-            <div class="row g-2 align-items-center">
-                <div class="col-2 text-end">
-                    <label for="pkg_code" class="col-form-label">Paket Produk</label>
-                </div>
-                <div class="col-5">
-                    <select class="form-select @error('pkg_code')is-invalid @enderror" id="pkg_code"
-                        name="pkg_code">
-                        <option class="text-center" selected disabled>-- Pilih Paket Produk --</option>
-                        @foreach ($packages as $k)
-                            <option value="{{ $k->pkg_code }}"
-                                {{ $data->pkg_code == $k->pkg_code ? 'selected' : '' }}>{{ $k->pkg_name }}
-                                {{ $k->pkg_code }}</option>
-                        @endforeach
-                    </select>
-                    @error('pkg_code')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="col-2 text-end">
-                    <label for="appl_date" class="col-form-label">Tgl. Aplikasi</label>
-                </div>
-                <div class="col-3">
-                    <input type="date" class="form-control @error('appl_date')is-invalid @enderror"
-                        id="appl_date" name="appl_date" placeholder="Applicant Date"
-                        value="{{ $data->appl_date }}">
-                    @error('appl_date')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
-            <div class="row g-2 align-items-center">
-                <div class="col-2 text-end">
-                    <label for="appl_name" class="col-form-label">Nama Konsumen</label>
-                </div>
-                <div class="col-5">
-                    <input type="text" class="form-control @error('appl_name')is-invalid @enderror"
-                        id="appl_name" name="appl_name" placeholder="Applicant Name"
-                        value="{{ $data->appl_name }}">
-                    @error('appl_name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
-            <div class="row g-2 align-items-center">
-                <div class="col-2 text-end">
-                    <label for="appl_title" class="col-form-label">Title</label>
-                </div>
-                <div class="col-5">
-                    <select class="form-select @error('appl_title')is-invalid @enderror" id="appl_title"
-                        name="appl_title">
-                        <option class="text-center" selected disabled>-- Pilih Title --</option>
-                            <option value="MR" {{ $data->appl_title == 'MR' ? 'selected' : '' }}>Mr</option>
-                            <option value="MRS" {{ $data->appl_title == 'MRS' ? 'selected' : '' }}>Mrs</option>
-                            <option value="MS" {{ $data->appl_title == 'MS' ? 'selected' : '' }}>Ms</option>
-                    </select>
-                </div>
-            </div>
-            <div class="accordion border border-dark rounded my-3" id="accordionRegisterPackage">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <div class="d-flex justify-content-between">
-                            <button class="accordion-button collapsed pribadi" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false"
-                                aria-controls="collapseOne">
-                                <strong>Data Pribadi</strong>
-                            </button>
-                            <i class="fas fa-chevron-down fa-xs prbd d-flex align-items-center me-4"></i>
-                        </div>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse"
-                        data-bs-parent="#accordionRegisterPackage">
-                        <div class="accordion-body">
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_gender" class="col-form-label">Jenis Kelamin</label>
-                                </div>
-                                <div class="col-5">
-                                    <select class="form-select @error('appl_gender')is-invalid @enderror" id="appl_gender" name="appl_gender">
-                                        <option class="text-center" selected disabled>-- Pilih Jenis Kelamin --</option>
-                                            <option value="1" {{ $data->appl_gender == 1 ? 'selected' : '' }}>Laki-laki</option>
-                                            <option value="2" {{ $data->appl_gender == 2 ? 'selected' : '' }}>Perempuan</option>
-                                    </select>
-                                    @error('appl_gender')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="col-2 text-end">
-                                    <label for="appl_status" class="col-form-label">Status</label>
-                                </div>
-                                <div class="col-3">
-                                    <select class="form-select @error('appl_status')is-invalid @enderror" id="appl_status" name="appl_status">
-                                        <option class="text-center" selected disabled>-- Pilih Status --</option>
-                                            <option value="1" {{ $data->appl_status == 1 ? 'selected' : '' }}>Kawin</option>
-                                            <option value="2" {{ $data->appl_status == 2 ? 'selected' : '' }}>Belum Kawin</option>
-                                            <option value="3" {{ $data->appl_status == 3 ? 'selected' : '' }}>Cerai</option>
-                                    </select>
-                                    @error('appl_status')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_id_type" class="col-form-label">Tipe ID</label>
-                                </div>
-                                <div class="col-5">
-                                    <select class="form-select @error('appl_id_type')is-invalid @enderror" id="appl_id_type" name="appl_id_type">
-                                        <option class="text-center" selected disabled>-- Pilih Tipe ID --</option>
-                                            <option value="1" {{ $data->appl_id_type == 1 ? 'selected' : '' }}>KTP</option>
-                                            <option value="2" {{ $data->appl_id_type == 2 ? 'selected' : '' }}>SIM</option>
-                                    </select>
-                                    @error('appl_id_type')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_id_no" class="col-form-label">No ID</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="text" class="form-control @error('appl_id_no')is-invalid @enderror"
-                                        id="appl_id_no" name="appl_id_no" placeholder="Applicant ID No"
-                                        value="{{ $data->appl_id_no }}">
-                                    @error('appl_id_no')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_birth_place" class="col-form-label">Tempat Lahir</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="text" class="form-control @error('appl_birth_place')is-invalid @enderror"
-                                        id="appl_birth_place" name="appl_birth_place" placeholder="Applicant Birth Place"
-                                        value="{{ $data->appl_birth_place }}">
-                                    @error('appl_birth_place')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="col-2 text-end">
-                                    <label for="appl_birth_date" class="col-form-label">Tgl. Lahir</label>
-                                </div>
-                                <div class="col-3">
-                                    <input type="date" class="form-control @error('appl_birth_date')is-invalid @enderror"
-                                        id="appl_birth_date" name="appl_birth_date" placeholder="Applicant Birth Place"
-                                        value="{{ $data->appl_birth_date }}">
-                                    @error('appl_birth_date')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_addr" class="col-form-label">Alamat</label>
-                                </div>
-                                <div class="col-5">
-                                    <textarea class="form-control @error('appl_addr')is-invalid @enderror" id="appl_addr" name="appl_addr" placeholder="Alamat">{{ $data->appl_addr }}</textarea>
-                                    @error('appl_addr')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="prov_code" class="col-form-label">Provinsi</label>
-                                </div>
-                                <div class="col-5">
-                                    <select class="form-select @error('prov_code')is-invalid @enderror" id="prov_code"
-                                        name="prov_code">
-                                        <option class="text-center" selected disabled>-- Pilih Provinsi --</option>
-                                        @foreach ($prov as $i)
-                                            <option value="{{ $i->prov_code }}"
-                                                {{ $data->prov_code == $i->prov_code ? 'selected' : '' }}>{{ $i->provinsi }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('prov_code')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="kota_code" class="col-form-label">Kota</label>
-                                </div>
-                                <div class="col-5">
-                                    <select class="form-select @error('kota_code')is-invalid @enderror" id="kota_code"
-                                        name="kota_code">
-                                        <option class="text-center" selected disabled>-- Pilih Kota --</option>
-                                    </select>
-                                    @error('kota_code')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="kec_code" class="col-form-label">Kecamatan</label>
-                                </div>
-                                <div class="col-5">
-                                    <select class="form-select @error('kec_code')is-invalid @enderror" id="kec_code"
-                                        name="kec_code">
-                                        <option class="text-center" selected disabled>-- Pilih Kecamatan --</option>
-                                    </select>
-                                    @error('kec_code')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="kel_code" class="col-form-label">Kelurahan</label>
-                                </div>
-                                <div class="col-5">
-                                    <select class="form-select @error('kel_code')is-invalid @enderror" id="kel_code"
-                                        name="kel_code">
-                                        <option class="text-center" selected disabled>-- Pilih Kelurahan --</option>
-                                    </select>
-                                    @error('kel_code')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="con_code" class="col-form-label">Warga Negara</label>
-                                </div>
-                                <div class="col-5">
-                                    <select class="form-select @error('con_code')is-invalid @enderror" id="con_code"
-                                        name="con_code">
-                                        <option selected class="text-center" selected disabled>-- Pilih Warga Negara --</option>
-                                        @foreach ($countries as $i)
-                                            <option value="{{ $i->con_code }}" {{ $data->con_code == $i->con_code ? 'selected' : '' }}>{{ $i->con_name }} / {{ $i->con_code }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('con_code')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="edu_code" class="col-form-label">Pendidikan</label>
-                                </div>
-                                <div class="col-5">
-                                    <select class="form-select @error('edu_code')is-invalid @enderror" id="edu_code"
-                                        name="edu_code">
-                                        <option selected class="text-center" selected disabled>-- Pilih Pendidikan --</option>
-                                        @foreach ($edus as $i)
-                                            <option value="{{ $i->edu_code }}"
-                                                {{ $data->edu_code == $i->edu_code ? 'selected' : '' }}>{{ $i->edu_name }} / {{ $i->edu_code }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('edu_code')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="job_code" class="col-form-label">Jabatan</label>
-                                </div>
-                                <div class="col-5">
-                                    <select class="form-select @error('job_code')is-invalid @enderror" id="job_code"
-                                        name="job_code">
-                                        <option selected class="text-center" selected disabled>-- Pilih Jabatan --</option>
-                                        @foreach ($jobs as $i)
-                                            <option value="{{ $i->job_code }}"
-                                                {{ $data->job_code == $i->job_code ? 'selected' : '' }}>{{ $i->job_name }} / {{ $i->job_code }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('job_code')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_fth_name" class="col-form-label">Nama Orang Tua</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="text" class="form-control @error('appl_fth_name')is-invalid @enderror"
-                                        id="appl_fth_name" name="appl_fth_name" placeholder="Applicant Father Name"
-                                        value="{{ $data->appl_fth_name }}">
-                                    @error('appl_fth_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="rel_code" class="col-form-label">Relasi</label>
-                                </div>
-                                <div class="col-5">
-                                    <select class="form-select @error('rel_code')is-invalid @enderror" id="rel_code"
-                                        name="rel_code">
-                                        <option selected class="text-center" selected disabled>-- Pilih Relasi --</option>
-                                        @foreach ($relations as $i)
-                                            <option value="{{ $i->rel_code }}"
-                                                {{ $data->rel_code == $i->rel_code ? 'selected' : '' }}>{{ $i->rel_name }} / {{ $i->rel_code }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('rel_code')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <div class="d-flex justify-content-between">
-                            <button class="accordion-button collapsed pass" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
-                                aria-controls="collapseTwo">
-                                <strong>Passport</strong>
-                            </button>
-                            <i class="fas fa-chevron-down fa-xs pss d-flex align-items-center me-4"></i>
-                        </div>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse"
-                        data-bs-parent="#accordionRegisterPackage">
-                        <div class="accordion-body">
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_mahram" class="col-form-label">Mahram</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="text" class="form-control @error('appl_mahram')is-invalid @enderror"
-                                        id="appl_mahram" name="appl_mahram" placeholder="Applicant Mahram"
-                                        value="{{ $data->appl_mahram }}">
-                                    @error('appl_mahram')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_pass_no" class="col-form-label">No. Passport</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="text" class="form-control @error('appl_pass_no')is-invalid @enderror"
-                                        id="appl_pass_no" name="appl_pass_no" placeholder="Applicant Pass No"
-                                        value="{{ $data->appl_pass_no }}">
-                                    @error('appl_pass_no')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_pass_name" class="col-form-label">Nama Passport</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="text" class="form-control @error('appl_pass_name')is-invalid @enderror"
-                                        id="appl_pass_name" name="appl_pass_name" placeholder="Applicant Pass Name"
-                                        value="{{ $data->appl_pass_name }}">
-                                    @error('appl_pass_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_pass_iss_date" class="col-form-label">Issue Date</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="date" class="form-control @error('appl_pass_iss_date')is-invalid @enderror"
-                                        id="appl_pass_iss_date" name="appl_pass_iss_date" placeholder="Applicant Pass ISS Date"
-                                        value="{{ $data->appl_pass_iss_date }}">
-                                    @error('appl_pass_iss_date')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_pass_exp_date" class="col-form-label">Expired Date</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="date" class="form-control @error('appl_pass_exp_date')is-invalid @enderror"
-                                        id="appl_pass_exp_date" name="appl_pass_exp_date"
-                                        placeholder="Applicant Pass Expired Date" value="{{ $data->appl_pass_exp_date }}">
-                                    @error('appl_pass_exp_date')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_pass_iss_palace" class="col-form-label">Issued Place</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="text" class="form-control @error('appl_pass_iss_palace')is-invalid @enderror"
-                                        id="appl_pass_iss_palace" name="appl_pass_iss_palace"
-                                        placeholder="Applicant Pass ISS Palace" value="{{ $data->appl_pass_iss_palace }}">
-                                    @error('appl_pass_iss_palace')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <div class="d-flex justify-content-between">
-                            <button class="accordion-button collapsed vac" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
-                                aria-controls="collapseThree">
-                                <strong>Data Vaksin</strong>
-                            </button>
-                            <i class="fas fa-chevron-down fa-xs vc d-flex align-items-center me-4"></i>
-                        </div>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse"
-                        data-bs-parent="#accordionRegisterPackage">
-                        <div class="accordion-body">
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_vac_name_id" class="col-form-label">Nama di Kartu</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="text" class="form-control @error('appl_vac_name_id')is-invalid @enderror"
-                                        id="appl_vac_name_id" name="appl_vac_name_id" placeholder="Applicant Vaccine Name ID"
-                                        value="{{ $data->appl_vac_name_id }}">
-                                    @error('appl_vac_name_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="my-2">
-                                <p class="mb-1 text-primary">Vaksin 1</p>
-                                <div style="border: 1px solid black; width: 100%" class="my-1"></div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="vc_code_01" class="col-form-label">Nama Vaksin</label>
-                                </div>
-                                <div class="col-5">
-                                    <select class="form-select @error('vc_code_01')is-invalid @enderror" id="vc_code_01"
-                                        name="vc_code_01">
-                                        <option selected class="text-center" selected disabled>-- Pilih Vaccine Code --</option>
-                                        @foreach ($vaccines as $i)
-                                            <option value="{{ $i->vc_code }}" {{ $data->vc_code_01 == $i->vc_code ? 'selected' : '' }}>{{ $i->vc_name }} / {{ $i->vc_code }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('vc_code_01')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_vac_id_date_01" class="col-form-label">Tanggal Vaksin</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="date" class="form-control @error('appl_vac_id_date_01')is-invalid @enderror"
-                                        id="appl_vac_id_date_01" name="appl_vac_id_date_01"
-                                        placeholder="Applicant Vaccine ID Date 01" value="{{ $data->appl_vac_id_date_01 }}">
-                                    @error('appl_vac_id_date_01')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="my-2">
-                                <p class="mb-1 text-primary">Vaksin 2</p>
-                                <div style="border: 1px solid black; width: 100%" class="my-1"></div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="vc_code_02" class="col-form-label">Nama Vaksin</label>
-                                </div>
-                                <div class="col-5">
-                                    <select class="form-select @error('vc_code_02')is-invalid @enderror" id="vc_code_02"
-                                        name="vc_code_02">
-                                        <option selected class="text-center" selected disabled>-- Pilih Vaccine Code --</option>
-                                        @foreach ($vaccines as $i)
-                                            <option value="{{ $i->vc_code }}" {{ $data->vc_code_02 == $i->vc_code ? 'selected' : '' }}>{{ $i->vc_name }} / {{ $i->vc_code }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('vc_code_02')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_vac_id_date_02" class="col-form-label">Tanggal Vaksin</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="date" class="form-control @error('appl_vac_id_date_02')is-invalid @enderror"
-                                        id="appl_vac_id_date_02" name="appl_vac_id_date_02"
-                                        placeholder="Applicant Vaccine ID Date 02" value="{{ $data->appl_vac_id_date_02 }}">
-                                    @error('appl_vac_id_date_02')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="my-2">
-                                <p class="mb-1 text-primary">Vaksin 3</p>
-                                <div style="border: 1px solid black; width: 100%" class="my-1"></div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="vc_code_03" class="col-form-label">Nama Vaksin</label>
-                                </div>
-                                <div class="col-5">
-                                    <select class="form-select @error('vc_code_03')is-invalid @enderror" id="vc_code_03"
-                                        name="vc_code_03">
-                                        <option selected class="text-center" selected disabled>-- Pilih Vaccine Code --</option>
-                                        @foreach ($vaccines as $i)
-                                            <option value="{{ $i->vc_code }}" {{ $data->vc_code_03 == $i->vc_code ? 'selected' : '' }}>{{ $i->vc_name }} / {{ $i->vc_code }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('vc_code_03')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_vac_id_date_03" class="col-form-label">Tanggal Vaksin</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="date" class="form-control @error('appl_vac_id_date_03')is-invalid @enderror"
-                                        id="appl_vac_id_date_03" name="appl_vac_id_date_03"
-                                        placeholder="Applicant Vaccine ID Date 03" value="{{ $data->appl_vac_id_date_03 }}">
-                                    @error('appl_vac_id_date_03')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="my-2">
-                                <p class="mb-1 text-primary">Vaksin 4</p>
-                                <div style="border: 1px solid black; width: 100%" class="my-1"></div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="vc_code_04" class="col-form-label">Nama Vaksin</label>
-                                </div>
-                                <div class="col-5">
-                                    <select class="form-select @error('vc_code_04')is-invalid @enderror" id="vc_code_04"
-                                        name="vc_code_04">
-                                        <option selected class="text-center" selected disabled>-- Pilih Vaccine Code --</option>
-                                        @foreach ($vaccines as $i)
-                                            <option value="{{ $i->vc_code }}" {{ $data->vc_code_04 == $i->vc_code ? 'selected' : '' }}>{{ $i->vc_name }} / {{ $i->vc_code }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('vc_code_04')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_vac_id_date_04" class="col-form-label">Tanggal Vaksin</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="date" class="form-control @error('appl_vac_id_date_04')is-invalid @enderror"
-                                        id="appl_vac_id_date_04" name="appl_vac_id_date_04"
-                                        placeholder="Applicant Vaccine ID Date 04" value="{{ $data->appl_vac_id_date_04 }}">
-                                    @error('appl_vac_id_date_04')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <div class="d-flex justify-content-between">
-                            <button class="accordion-button collapsed data" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
-                                aria-controls="collapseFour">
-                                <strong>Kelengkapan Data</strong>
-                            </button>
-                            <i class="fas fa-chevron-down fa-xs dt d-flex align-items-center me-4"></i>
-                        </div>
-                    </h2>
-                    <div id="collapseFour" class="accordion-collapse collapse"
-                        data-bs-parent="#accordionRegisterPackage">
-                        <div class="accordion-body">
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="supl_code" class="col-form-label">Jemaah dari</label>
-                                </div>
-                                <div class="col-5">
-                                    <select class="form-select @error('supl_code')is-invalid @enderror" id="supl_code"
-                                        name="supl_code">
-                                        <option selected class="text-center" selected disabled>-- Pilih Jemaah --</option>
-                                        @foreach ($suppliers as $i)
-                                            <option value="{{ $i->supl_code }}" {{ $data->supl_code == $i->supl_code ? 'selected' : '' }}>{{ $i->supl_name }} / {{ $i->supl_code }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('supl_code')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_tlp" class="col-form-label">No. Telp</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="text" class="form-control @error('appl_tlp')is-invalid @enderror"
-                                        id="appl_tlp" name="appl_tlp" placeholder="Package Telephone"
-                                        value="{{ $data->appl_tlp }}">
-                                    @error('appl_tlp')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_email" class="col-form-label">Email</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="text" class="form-control @error('appl_email')is-invalid @enderror"
-                                        id="appl_email" name="appl_email" placeholder="Package Telephone"
-                                        value="{{ $data->appl_email }}">
-                                    @error('appl_email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_is_img_full" class="col-form-label">Foto Full</label>
-                                </div>
-                                <div class="col-5">
-                                    <div class="custom-control custom-radio form-check-inline ms-2">
-                                        <input class="custom-control-input" id="appl_is_img_full" value="Y"
-                                            name="appl_is_img_full" type="radio"
-                                            {{ $data->appl_is_img_full == 'Y' ? 'checked' : '' }}>
-                                        <label class="custom-control-label">Yes</label>
-                                    </div>
-                                    <div class="custom-control custom-radio form-check-inline">
-                                        <input class="custom-control-input" id="appl_is_img_full" value="N"
-                                            name="appl_is_img_full" type="radio"
-                                            {{ $data->appl_is_img_full == 'N' ? 'checked' : '' }}>
-                                        <label class="custom-control-label">No</label>
-                                    </div>
-                                    @error('appl_is_img_full')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_is_img_full_name" class="col-form-label">File</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="file"
-                                        class="form-control @error('appl_is_img_full_name')is-invalid @enderror"
-                                        id="appl_is_img_full_name" name="appl_is_img_full_name" placeholder="Supplier Pic"
-                                        value="{{ $data->appl_is_img_full_name }}">
-                                    @error('appl_is_img_full_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_is_img_half" class="col-form-label">Foto Setengah</label>
-                                </div>
-                                <div class="col-5">
-                                    <div class="custom-control custom-radio form-check-inline ms-2">
-                                        <input class="custom-control-input" id="appl_is_img_half" value="Y"
-                                            name="appl_is_img_half" type="radio"
-                                            {{ $data->appl_is_img_half == 'Y' ? 'checked' : '' }}>
-                                        <label class="custom-control-label">Yes</label>
-                                    </div>
-                                    <div class="custom-control custom-radio form-check-inline">
-                                        <input class="custom-control-input" id="appl_is_img_half" value="N"
-                                            name="appl_is_img_half" type="radio"
-                                            {{ $data->appl_is_img_half == 'N' ? 'checked' : '' }}>
-                                        <label class="custom-control-label">No</label>
-                                    </div>
-                                    @error('appl_is_img_half')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_is_img_half_name" class="col-form-label">File</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="file"
-                                        class="form-control @error('appl_is_img_half_name')is-invalid @enderror"
-                                        id="appl_is_img_half_name" name="appl_is_img_half_name" placeholder="Supplier Pic"
-                                        value="{{ $data->appl_is_img_half_name }}">
-                                    @error('appl_is_img_half_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_is_pass" class="col-form-label">Fisik Passport</label>
-                                </div>
-                                <div class="col-5">
-                                    <div class="custom-control custom-radio form-check-inline ms-2">
-                                        <input class="custom-control-input" id="appl_is_pass" value="Y"
-                                            name="appl_is_pass" type="radio"
-                                            {{ $data->appl_is_pass == 'Y' ? 'checked' : '' }}>
-                                        <label class="custom-control-label">Yes</label>
-                                    </div>
-                                    <div class="custom-control custom-radio form-check-inline">
-                                        <input class="custom-control-input" id="appl_is_pass" value="N"
-                                            name="appl_is_pass" type="radio"
-                                            {{ $data->appl_is_pass == 'N' ? 'checked' : '' }}>
-                                        <label class="custom-control-label">No</label>
-                                    </div>
-                                    @error('appl_is_pass')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_is_pass_name" class="col-form-label">File</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="file"
-                                        class="form-control @error('appl_is_pass_name')is-invalid @enderror"
-                                        id="appl_is_pass_name" name="appl_is_pass_name" placeholder="Supplier Pic"
-                                        value="{{ $data->appl_is_pass_name }}">
-                                    @error('appl_is_pass_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_is_yb" class="col-form-label">Buku Kuning</label>
-                                </div>
-                                <div class="col-5">
-                                    <div class="custom-control custom-radio form-check-inline ms-2">
-                                        <input class="custom-control-input" id="appl_is_yb" value="Y"
-                                            name="appl_is_yb" type="radio"
-                                            {{ $data->appl_is_yb == 'Y' ? 'checked' : '' }}>
-                                        <label class="custom-control-label">Yes</label>
-                                    </div>
-                                    <div class="custom-control custom-radio form-check-inline">
-                                        <input class="custom-control-input" id="appl_is_yb" value="N"
-                                            name="appl_is_yb" type="radio"
-                                            {{ $data->appl_is_yb == 'N' ? 'checked' : '' }}>
-                                        <label class="custom-control-label">No</label>
-                                    </div>
-                                    @error('appl_is_yb')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_is_yb_name" class="col-form-label">File</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="file"
-                                        class="form-control @error('appl_is_yb_name')is-invalid @enderror"
-                                        id="appl_is_yb_name" name="appl_is_yb_name" placeholder="Supplier Pic"
-                                        value="{{ $data->appl_is_yb_name }}">
-                                    @error('appl_is_yb_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_is_copy_id" class="col-form-label">Foto KTP</label>
-                                </div>
-                                <div class="col-5">
-                                    <div class="custom-control custom-radio form-check-inline ms-2">
-                                        <input class="custom-control-input" id="appl_is_copy_id" value="Y"
-                                            name="appl_is_copy_id" type="radio"
-                                            {{ $data->appl_is_copy_id == 'Y' ? 'checked' : '' }}>
-                                        <label class="custom-control-label">Yes</label>
-                                    </div>
-                                    <div class="custom-control custom-radio form-check-inline">
-                                        <input class="custom-control-input" id="appl_is_copy_id" value="N"
-                                            name="appl_is_copy_id" type="radio"
-                                            {{ $data->appl_is_copy_id == 'N' ? 'checked' : '' }}>
-                                        <label class="custom-control-label">No</label>
-                                    </div>
-                                    @error('appl_is_copy_id')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_is_id_name" class="col-form-label">File</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="file"
-                                        class="form-control @error('appl_is_id_name')is-invalid @enderror"
-                                        id="appl_is_id_name" name="appl_is_id_name" placeholder="Supplier Pic"
-                                        value="{{ $data->appl_is_id_name }}">
-                                    @error('appl_is_id_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_is_copy_kk" class="col-form-label">Copy KK</label>
-                                </div>
-                                <div class="col-5">
-                                    <div class="custom-control custom-radio form-check-inline ms-2">
-                                        <input class="custom-control-input" id="appl_is_copy_kk" value="Y"
-                                            name="appl_is_copy_kk" type="radio"
-                                            {{ $data->appl_is_copy_kk == 'Y' ? 'checked' : '' }}>
-                                        <label class="custom-control-label">Yes</label>
-                                    </div>
-                                    <div class="custom-control custom-radio form-check-inline">
-                                        <input class="custom-control-input" id="appl_is_copy_kk" value="N"
-                                            name="appl_is_copy_kk" type="radio"
-                                            {{ $data->appl_is_copy_kk == 'N' ? 'checked' : '' }}>
-                                        <label class="custom-control-label">No</label>
-                                    </div>
-                                    @error('appl_is_copy_kk')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_is_kk_name" class="col-form-label">File</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="file"
-                                        class="form-control @error('appl_is_kk_name')is-invalid @enderror"
-                                        id="appl_is_kk_name" name="appl_is_kk_name" placeholder="Supplier Pic"
-                                        value="{{ $data->appl_is_kk_name }}">
-                                    @error('appl_is_kk_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_is_copy_pass" class="col-form-label">Copy Passport</label>
-                                </div>
-                                <div class="col-5">
-                                    <div class="custom-control custom-radio form-check-inline ms-2">
-                                        <input class="custom-control-input" id="appl_is_copy_pass" value="Y"
-                                            name="appl_is_copy_pass" type="radio"
-                                            {{ $data->appl_is_copy_pass == 'Y' ? 'checked' : '' }}>
-                                        <label class="custom-control-label">Yes</label>
-                                    </div>
-                                    <div class="custom-control custom-radio form-check-inline">
-                                        <input class="custom-control-input" id="appl_is_copy_pass" value="N"
-                                            name="appl_is_copy_pass" type="radio"
-                                            {{ $data->appl_is_copy_pass == 'N' ? 'checked' : '' }}>
-                                        <label class="custom-control-label">No</label>
-                                    </div>
-                                    @error('appl_is_copy_pass')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_is_copy_pass_name" class="col-form-label">File</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="file"
-                                        class="form-control @error('appl_is_copy_pass_name')is-invalid @enderror"
-                                        id="appl_is_copy_pass_name" name="appl_is_copy_pass_name" placeholder="Supplier Pic"
-                                        value="{{ $data->appl_is_copy_pass_name }}">
-                                    @error('appl_is_copy_pass_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_is_copy_akta_n" class="col-form-label">Copy Akta N</label>
-                                </div>
-                                <div class="col-5">
-                                    <div class="custom-control custom-radio form-check-inline ms-2">
-                                        <input class="custom-control-input" id="appl_is_copy_akta_n" value="Y"
-                                            name="appl_is_copy_akta_n" type="radio"
-                                            {{ $data->appl_is_copy_akta_n == 'Y' ? 'checked' : '' }}>
-                                        <label class="custom-control-label">Yes</label>
-                                    </div>
-                                    <div class="custom-control custom-radio form-check-inline">
-                                        <input class="custom-control-input" id="appl_is_copy_akta_n" value="N"
-                                            name="appl_is_copy_akta_n" type="radio"
-                                            {{ $data->appl_is_copy_akta_n == 'N' ? 'checked' : '' }}>
-                                        <label class="custom-control-label">No</label>
-                                    </div>
-                                    @error('appl_is_copy_akta_n')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_is_akta_n_name" class="col-form-label">File</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="file"
-                                        class="form-control @error('appl_is_akta_n_name')is-invalid @enderror"
-                                        id="appl_is_akta_n_name" name="appl_is_akta_n_name" placeholder="Supplier Pic"
-                                        value="{{ $data->appl_is_akta_n_name }}">
-                                    @error('appl_is_akta_n_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_is_copy_akta_l" class="col-form-label">Copy Akta Lahir</label>
-                                </div>
-                                <div class="col-5">
-                                    <div class="custom-control custom-radio form-check-inline ms-2">
-                                        <input class="custom-control-input" id="appl_is_copy_akta_l" value="Y"
-                                            name="appl_is_copy_akta_l" type="radio"
-                                            {{ $data->appl_is_copy_akta_l == 'Y' ? 'checked' : '' }}>
-                                        <label class="custom-control-label">Yes</label>
-                                    </div>
-                                    <div class="custom-control custom-radio form-check-inline">
-                                        <input class="custom-control-input" id="appl_is_copy_akta_l" value="N"
-                                            name="appl_is_copy_akta_l" type="radio"
-                                            {{ $data->appl_is_copy_akta_l == 'N' ? 'checked' : '' }}>
-                                        <label class="custom-control-label">No</label>
-                                    </div>
-                                    @error('appl_is_copy_akta_l')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3 align-items-center">
-                                <div class="col-2 text-end">
-                                    <label for="appl_is_akta_l_name" class="col-form-label">File</label>
-                                </div>
-                                <div class="col-5">
-                                    <input type="file"
-                                        class="form-control @error('appl_is_akta_l_name')is-invalid @enderror"
-                                        id="appl_is_akta_l_name" name="appl_is_akta_l_name" placeholder="Supplier Pic"
-                                        value="{{ $data->appl_is_akta_l_name }}">
-                                    @error('appl_is_akta_l_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @if ($data->appl_st == 'NW')
-                <div class="col-lg-6 col-md-6">
-                    <button type="submit" class="btn btn-primary w-100" name="action" value="submit">Submit</button>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <button type="submit" class="btn btn-warning w-100" name="action" value="post">Post</button>
-                </div>
-            @else
-                <div class="col-lg-6 col-md-6">
-                    <button type="submit" class="btn btn-primary w-100" name="action" value="submit">Submit</button>
-                </div>
-            @endif
+            <!--end::Stepper-->
         </div>
-        </form>
+        <!--end::Card-->
     </div>
-</div>
+    <!--end::Col-->
 @endsection
 
 @section('scripts')
 <script type="text/javascript">
-    $('#coy_id').attr("style", "pointer-events: none; background-color: lightgray;");
-    $('#appl_date').attr("style", "pointer-events: none; background-color: lightgray;");
-    $('#appl_st').attr("style", "pointer-events: none; background-color: lightgray;");
-    $('#appl_id_no').attr("style", "pointer-events: none; background-color: lightgray;");
-    $('#appl_is_img_full_name').attr("style", "pointer-events: none; background-color: lightgray;");
-    $('#appl_is_img_half_name').attr("style", "pointer-events: none; background-color: lightgray;");
-    $('#appl_is_pass_name').attr("style", "pointer-events: none; background-color: lightgray;");
-    $('#appl_is_copy_pass_name').attr("style", "pointer-events: none; background-color: lightgray;");
-    $('#appl_is_yb_name').attr("style", "pointer-events: none; background-color: lightgray;");
-    $('#appl_is_id_name').attr("style", "pointer-events: none; background-color: lightgray;");
-    $('#appl_is_kk_name').attr("style", "pointer-events: none; background-color: lightgray;");
-    $('#appl_is_akta_n_name').attr("style", "pointer-events: none; background-color: lightgray;");
-    $('#appl_is_akta_l_name').attr("style", "pointer-events: none; background-color: lightgray;");
 
-    window.onload = callLocations({{ $data->kota_code }}, {{ $data->kec_code }}, {{ $data->kel_code }});
+    $(document).ready(function() {
+        if ($('[name="appl_id_type"]').val() == "") {
+            $('[name="appl_id_no"]').attr('disabled', true);
+        }
+        if (!$('[name="appl_is_img_full"]:checked').val()) {
+            $('[name="appl_is_img_full_name"]').attr('disabled', true);
+        }
+        if (!$('[name="appl_is_img_half"]:checked').val()) {
+            $('[name="appl_is_img_half_name"]').attr('disabled', true);
+        }
+        if (!$('[name="appl_is_pass"]:checked').val()) {
+            $('[name="appl_is_pass_name"]').attr('disabled', true);
+        }
+        if (!$('[name="appl_is_yb"]:checked').val()) {
+            $('[name="appl_is_yb_name"]').attr('disabled', true);
+        }
+        if (!$('[name="appl_is_copy_id"]:checked').val()) {
+            $('[name="appl_is_id_name"]').attr('disabled', true);
+        }
+        if (!$('[name="appl_is_copy_kk"]:checked').val()) {
+            $('[name="appl_is_kk_name"]').attr('disabled', true);
+        }
+        if (!$('[name="appl_is_copy_pass"]:checked').val()) {
+            $('[name="appl_is_copy_pass_name"]').attr('disabled', true);
+        }
+        if (!$('[name="appl_is_copy_akta_n"]:checked').val()) {
+            $('[name="appl_is_akta_n_name"]').attr('disabled', true);
+        }
+        if (!$('[name="appl_is_copy_akta_l"]:checked').val()) {
+            $('[name="appl_is_akta_l_name"]').attr('disabled', true);
+        }
+    });
+    $('form').on('change', '[name="appl_id_type"]', function() {
+        if ($('[name="appl_id_type"]').val() == '') {
+            $('[name="appl_id_no"]').attr('disabled', true);
+        } else {
+            $('[name="appl_id_no"]').attr('disabled', false);
+        }
+    });
 
-    window.onload = function() {
-            if ($('#appl_id_type').val()) {
-                $('#appl_id_no').attr("style", "");
-                var appl_id_no = document.getElementById('appl_id_no');
+    $('form').on('click', '[name="appl_is_img_full"]', function() {
+        console.log($('[name="appl_is_img_full"]:checked').val());
+        if ($('[name="appl_is_img_full"]:checked').val() == 'Y') {
+            $('[name="appl_is_img_full_name"]').attr('disabled', false);
+        } else {
+            $('[name="appl_is_img_full_name"]').attr('disabled', true);
+        }
+    });
 
-                appl_id_no.value = formatID(appl_id_no.value);
-            }
+    $('form').on('click', '[name="appl_is_img_half"]', function() {
+        console.log($('[name="appl_is_img_half"]:checked').val());
+        if ($('[name="appl_is_img_half"]:checked').val() == 'Y') {
+            $('[name="appl_is_img_half_name"]').attr('disabled', false);
+        } else {
+            $('[name="appl_is_img_half_name"]').attr('disabled', true);
+        }
+    });
 
-            if ($('input:radio[name=appl_id_type]:checked').val()) {
-                $('#appl_is_img_full_name').attr("style", "");
-            } else {
-                $('#appl_is_img_full_name').attr("style", "pointer-events: none; background-color: lightgray;");
-            }
+    $('form').on('click', '[name="appl_is_pass"]', function() {
+        console.log($('[name="appl_is_pass"]:checked').val());
+        if ($('[name="appl_is_pass"]:checked').val() == 'Y') {
+            $('[name="appl_is_pass_name"]').attr('disabled', false);
+        } else {
+            $('[name="appl_is_pass_name"]').attr('disabled', true);
+        }
+    });
 
-            if ($('input:radio[name=appl_is_img_full]:checked').val() == 'Y') {
-                $('#appl_is_img_full_name').attr("style", "");
-            } else {
-                $('#appl_is_img_full_name').attr("style", "pointer-events: none; background-color: lightgray;");
-            }
+    $('form').on('click', '[name="appl_is_yb"]', function() {
+        console.log($('[name="appl_is_yb"]:checked').val());
+        if ($('[name="appl_is_yb"]:checked').val() == 'Y') {
+            $('[name="appl_is_yb_name"]').attr('disabled', false);
+        } else {
+            $('[name="appl_is_yb_name"]').attr('disabled', true);
+        }
+    });
 
-            if ($('input:radio[name=appl_is_img_half]:checked').val() == 'Y') {
-                $('#appl_is_img_half_name').attr("style", "");
-            } else {
-                $('#appl_is_img_half_name').attr("style", "pointer-events: none; background-color: lightgray;");
-            }
+    $('form').on('click', '[name="appl_is_copy_id"]', function() {
+        console.log($('[name="appl_is_copy_id"]:checked').val());
+        if ($('[name="appl_is_copy_id"]:checked').val() == 'Y') {
+            $('[name="appl_is_id_name"]').attr('disabled', false);
+        } else {
+            $('[name="appl_is_id_name"]').attr('disabled', true);
+        }
+    });
 
-            if ($('input:radio[name=appl_is_yb]:checked').val() == 'Y') {
-                $('#appl_is_yb_name').attr("style", "");
-            } else {
-                $('#appl_is_yb_name').attr("style", "pointer-events: none; background-color: lightgray;");
-            }
+    $('form').on('click', '[name="appl_is_copy_kk"]', function() {
+        console.log($('[name="appl_is_copy_kk"]:checked').val());
+        if ($('[name="appl_is_copy_kk"]:checked').val() == 'Y') {
+            $('[name="appl_is_kk_name"]').attr('disabled', false);
+        } else {
+            $('[name="appl_is_kk_name"]').attr('disabled', true);
+        }
+    });
 
-            if ($('input:radio[name=appl_is_copy_id]:checked').val() == 'Y') {
-                $('#appl_is_id_name').attr("style", "");
-            } else {
-                $('#appl_is_id_name').attr("style", "pointer-events: none; background-color: lightgray;");
-            }
+    $('form').on('click', '[name="appl_is_copy_pass"]', function() {
+        console.log($('[name="appl_is_copy_pass"]:checked').val());
+        if ($('[name="appl_is_copy_pass"]:checked').val() == 'Y') {
+            $('[name="appl_is_copy_pass_name"]').attr('disabled', false);
+        } else {
+            $('[name="appl_is_copy_pass_name"]').attr('disabled', true);
+        }
+    });
 
-            if ($('input:radio[name=appl_is_copy_kk]:checked').val() == 'Y') {
-                $('#appl_is_kk_name').attr("style", "");
-            } else {
-                $('#appl_is_kk_name').attr("style", "pointer-events: none; background-color: lightgray;");
-            }
+    $('form').on('click', '[name="appl_is_copy_akta_n"]', function() {
+        console.log($('[name="appl_is_copy_akta_n"]:checked').val());
+        if ($('[name="appl_is_copy_akta_n"]:checked').val() == 'Y') {
+            $('[name="appl_is_akta_n_name"]').attr('disabled', false);
+        } else {
+            $('[name="appl_is_akta_n_name"]').attr('disabled', true);
+        }
+    });
 
-            if ($('input:radio[name=appl_is_pass]:checked').val() == 'Y') {
-                $('#appl_is_pass_name').attr("style", "");
-            } else {
-                $('#appl_is_pass_name').attr("style", "pointer-events: none; background-color: lightgray;");
-            }
+    $('form').on('click', '[name="appl_is_copy_akta_l"]', function() {
+        console.log($('[name="appl_is_copy_akta_l"]:checked').val());
+        if ($('[name="appl_is_copy_akta_l"]:checked').val() == 'Y') {
+            $('[name="appl_is_akta_l_name"]').attr('disabled', false);
+        } else {
+            $('[name="appl_is_akta_l_name"]').attr('disabled', true);
+        }
+    });
 
-            if ($('input:radio[name=appl_is_copy_pass]:checked').val() == 'Y') {
-                $('#appl_is_copy_pass_name').attr("style", "");
-            } else {
-                $('#appl_is_copy_pass_name').attr("style", "pointer-events: none; background-color: lightgray;");
-            }
+    Inputmask("9999-9999-9999-9999", {
+        "numericInput": true
+    }).mask("[name='appl_id_no']");
 
-            if ($('input:radio[name=appl_is_copy_akta_n]:checked').val() == 'Y') {
-                $('#appl_is_akta_n_name').attr("style", "");
-            } else {
-                $('#appl_is_akta_n_name').attr("style", "pointer-events: none; background-color: lightgray;");
-            }
+    Inputmask({
+        "mask": "a 9999999",
+        "placeholder": "X 0000000"
+    }).mask("[name='appl_pass_no']");
 
-            if ($('input:radio[name=appl_is_copy_akta_l]:checked').val() == 'Y') {
-                $('#appl_is_akta_l_name').attr("style", "");
-            } else {
-                $('#appl_is_akta_l_name').attr("style", "pointer-events: none; background-color: lightgray;");
+    $("[name='appl_birth_date']").daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minYear: 1901,
+        maxYear: parseInt(moment().format("YYYY"),10),
+        opens: 'right',
+        drops: 'auto',
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
+    });
+
+    $("[name='appl_pass_iss_date']").daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minYear: 1901,
+        maxYear: parseInt(moment().format("YYYY"),10),
+        opens: 'right',
+        drops: 'auto',
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
+    });
+
+    $("[name='appl_pass_exp_date']").daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minYear: 1901,
+        maxYear: parseInt(moment().format("YYYY"),10),
+        opens: 'right',
+        drops: 'auto',
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
+    });
+
+    $(".vac").daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minYear: 1901,
+        maxYear: parseInt(moment().format("YYYY"),10),
+        opens: 'right',
+        drops: 'auto',
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
+    });
+
+    Inputmask({
+        mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]",
+        greedy: false,
+        onBeforePaste: function (pastedValue, opts) {
+            pastedValue = pastedValue.toLowerCase();
+            return pastedValue.replace("mailto:", "");
+        },
+        definitions: {
+            "*": {
+                validator: '[0-9A-Za-z!#$%&"*+/=?^_`{|}~\-]',
+                cardinality: 1,
+                casing: "lower"
             }
         }
+    }).mask("[name='appl_email']");
 
-        $('#appl_id_type').change(function() {
-            $('#appl_id_no').attr("style", "");
-            var appl_id_no = document.getElementById('appl_id_no');
-
-            appl_id_no.addEventListener('keyup', function(e) {
-                appl_id_no.value = formatID(this.value);
-            });
-        })
-
-        $('input:radio[name=appl_is_img_full]').change(function() {
-            if ($(this).val() == 'Y') {
-                $('#appl_is_img_full_name').attr("style", "");
-            } else {
-                $('#appl_is_img_full_name').attr("style", "pointer-events: none; background-color: lightgray;");
-            }
-        })
-
-        $('input:radio[name=appl_is_img_half]').change(function() {
-            if ($(this).val() == 'Y') {
-                $('#appl_is_img_half_name').attr("style", "");
-            } else {
-                $('#appl_is_img_half_name').attr("style", "pointer-events: none; background-color: lightgray;");
-            }
-        })
-
-        $('input:radio[name=appl_is_yb]').change(function() {
-            if ($(this).val() == 'Y') {
-                $('#appl_is_yb_name').attr("style", "");
-            } else {
-                $('#appl_is_yb_name').attr("style", "pointer-events: none; background-color: lightgray;");
-            }
-        })
-
-        $('input:radio[name=appl_is_copy_id]').change(function() {
-            if ($(this).val() == 'Y') {
-                $('#appl_is_id_name').attr("style", "");
-            } else {
-                $('#appl_is_id_name').attr("style", "pointer-events: none; background-color: lightgray;");
-            }
-        })
-
-        $('input:radio[name=appl_is_copy_kk]').change(function() {
-            if ($(this).val() == 'Y') {
-                $('#appl_is_kk_name').attr("style", "");
-            } else {
-                $('#appl_is_kk_name').attr("style", "pointer-events: none; background-color: lightgray;");
-            }
-        })
-
-        $('input:radio[name=appl_is_copy_pass]').change(function() {
-            if ($(this).val() == 'Y') {
-                $('#appl_is_copy_pass_name').attr("style", "");
-            } else {
-                $('#appl_is_copy_pass_name').attr("style", "pointer-events: none; background-color: lightgray;");
-            }
-        })
-
-        $('input:radio[name=appl_is_pass]').change(function() {
-            if ($(this).val() == 'Y') {
-                $('#appl_is_pass_name').attr("style", "");
-            } else {
-                $('#appl_is_pass_name').attr("style", "pointer-events: none; background-color: lightgray;");
-            }
-        })
-
-        $('input:radio[name=appl_is_copy_akta_n]').change(function() {
-            if ($(this).val() == 'Y') {
-                $('#appl_is_akta_n_name').attr("style", "");
-            } else {
-                $('#appl_is_akta_n_name').attr("style", "pointer-events: none; background-color: lightgray;");
-            }
-        })
-
-        $('input:radio[name=appl_is_copy_akta_l]').change(function() {
-            if ($(this).val() == 'Y') {
-                $('#appl_is_akta_l_name').attr("style", "");
-            } else {
-                $('#appl_is_akta_l_name').attr("style", "pointer-events: none; background-color: lightgray;");
-            }
-        });
 </script>
 @endsection

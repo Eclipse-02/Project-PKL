@@ -5,12 +5,14 @@
 @section('content')
     <div class="row">
         <div class="col-md-6">
-            <div class="p-3 border border-secondary rounded vh-100">
+            <div class="p-3 border border-secondary rounded vh-100" style="overflow: scroll">
                 <ul id="tree1">
                     @foreach ($accounts as $account)
                         <li>
-                            <span id="icon"></span>
-                            {{ $account->glacct_description }}
+                            @if (count($account->childs))
+                                <i class="ni ni-bold-right" aria-hidden="true"></i>
+                            @endif
+                            <button id="code" value="{{ $account->glacct_code }}" style="white-space: nowrap">{{ $account->glacct_code }} - {{ $account->glacct_description }}</button>
                             @if (count($account->childs))
                                 @include('scaffolds.finance.accounts.manageChild', [
                                     'childs' => $account->childs,
@@ -25,29 +27,11 @@
             <form action="{{ route('accounts.store') }}" method="POST" class="row">
                 @csrf
 
-                @if ($message = Session::get('success'))
-                    <div class="alert alert-success alert-block">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <strong>{{ $message }}</strong>
-                    </div>
-                @endif
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label class="form-label">No Aplikasi</label>
-                        <input type="text" class="form-control @error('coy_id')is-invalid @enderror" id="coy_id"
-                            name="coy_id" placeholder="Area Code" value="{{ auth()->user()->coy_id }}">
-                        @error('coy_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
                 <div class="col-md-12">
                     <div class="form-group">
                         <label class="form-label">Kode</label>
                         <input type="text" class="form-control @error('glacct_code')is-invalid @enderror" id="glacct_code"
-                            name="glacct_code" placeholder="Area Code" value="">
+                            name="glacct_code" placeholder="8 Digits" value="">
                         @error('glacct_code')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -153,7 +137,7 @@
                     <div class="form-group">
                         <label class="form-label">Parent</label>
                         <input type="text" class="form-control @error('glacct_acct_parent')is-invalid @enderror" id="glacct_acct_parent"
-                            name="glacct_acct_parent" placeholder="Parent" value="">
+                            name="glacct_acct_parent" placeholder="8 Digits" value="">
                         @error('glacct_acct_parent')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -167,6 +151,9 @@
                         <select class="form-select @error('glacct_segment1_allow')is-invalid @enderror" id="glacct_segment1_allow" name="glacct_segment1_allow">
                             <option class="text-center" selected disabled>-- Pilih Outlet --</option>
                                 <option value="ALL">ALL</option>
+                                @foreach ($branches as $i)
+                                    <option value="{{ $i->branch_code }}">{{ $i->branch_name }}</option>
+                                @endforeach
                         </select>
                         @error('glacct_segment1_allow')
                             <span class="invalid-feedback" role="alert">
@@ -175,6 +162,9 @@
                         @enderror
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary text-center w-100">Create</button>
+                </div>
             </form>
         </div>
     </div>
@@ -182,11 +172,12 @@
 
 @section('scripts')
     <script type="text/javascript">
+    $(document).ready(function() {
         $.fn.extend({
             treed: function(o) {
 
-                var openedClass = 'fa-solid fa-circle-plus';
-                var closedClass = 'fa-solid fa-circle-minus';
+                var openedClass = 'ni-bold-down';
+                var closedClass = 'ni-bold-right';
 
                 if (typeof o != 'undefined') {
                     if (typeof o.openedClass != 'undefined') {
@@ -196,13 +187,6 @@
                         closedClass = o.closedClass;
                     }
                 };
-                $('#icon').toggle(function() {
-                    $('#icon').removeClass(openedClass);
-                    $('#icon').addClass(closedClass);
-                }, function() {
-                    $('#icon').removeClass(closedClass);
-                    $('#icon').addClass(openedClass);
-                });
                 /* initialize each of the top levels */
                 var tree = $(this);
                 tree.addClass("tree");
@@ -212,27 +196,15 @@
                     branch.addClass('branch');
                     branch.on('click', function(e) {
                         if (this == e.target) {
-                            var icon = $(this).children('span:first');
+                            var icon = $(this).children('i:first');
+                            icon.toggleClass(openedClass + " " + closedClass);
                             $(this).children().children().toggle();
                         }
                     })
                     branch.children().children().toggle();
                 });
-                /* fire event from the dynamically added icon */
-                tree.find('.branch .indicator').each(function() {
-                    $(this).on('click', function() {
-                        $(this).closest('li').click();
-                    });
-                });
-                /* fire event to open branch if the li contains an anchor instead of text */
-                tree.find('.branch>a').each(function() {
-                    $(this).on('click', function(e) {
-                        $(this).closest('li').click();
-                        e.preventDefault();
-                    });
-                });
                 /* fire event to open branch if the li contains a button instead of text */
-                tree.find('.branch>button').each(function() {
+                tree.find('.branch>svg').each(function() {
                     $(this).on('click', function(e) {
                         $(this).closest('li').click();
                         e.preventDefault();
@@ -242,5 +214,24 @@
         });
         /* Initialization of treeviews */
         $('#tree1').treed();
+
+        $(document).on('click', '#code', function() {
+            var code = $(this).val();
+            var url = "http://127.0.0.1:8000/api/v1/accounts?glacct_code=" + code;
+            $.get(url, function(data) {
+                var account = data.data;
+                $('#glacct_code').val(account.glacct_code);
+                $('#glacct_description').val(account.glacct_description);
+                $('#glacct_acct_type').val(account.glacct_acct_type);
+                $('#glacct_acct_summ').val(account.glacct_acct_summ);
+                $('#glacct_acct_enable').val(account.glacct_acct_enable);
+                $('#glacct_acct_flag').val(account.glacct_acct_flag);
+                $('#glacct_acct_default').val(account.glacct_acct_default);
+                $('#glacct_acct_parent').val(account.glacct_acct_parent);
+                $('#glacct_rpt_flag').val(account.glacct_rpt_flag);
+                $('#glacct_segment1_allow').val(account.glacct_segment1_allow);
+            });
+        });
+    });
     </script>
 @endsection

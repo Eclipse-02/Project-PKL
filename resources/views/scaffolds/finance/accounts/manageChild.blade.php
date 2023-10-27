@@ -1,10 +1,10 @@
 <ul>
     @foreach ($childs as $child)
-        <li>
+        <li style="white-space: nowrap">
             @if (count($child->childs))
-                <span id="icon"></span>
+                <i class="ni ni-bold-right" aria-hidden="true"></i>
             @endif
-            {{ $child->glacct_description }}
+            <button id="code" value="{{ $child->glacct_code }}">{{ $child->glacct_code }} - {{ $child->glacct_description }}</button>
             @if (count($child->childs))
                 @include('scaffolds.finance.accounts.manageChild', ['childs' => $child->childs])
             @endif

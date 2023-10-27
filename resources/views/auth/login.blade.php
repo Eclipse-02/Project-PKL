@@ -1,147 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
+	<!--begin::Head-->
+	<head><base href="master/html/theme/dist/">
+		<title>Metronic - the world's #1 selling Bootstrap Admin Theme Ecosystem for HTML, Vue, React, Angular &amp; Laravel by Keenthemes</title>
+		<meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
+		<meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta charset="utf-8" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
+		<meta property="og:url" content="https://keenthemes.com/metronic" />
+		<meta property="og:site_name" content="Keenthemes | Metronic" />
+		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+		<link rel="shortcut icon" href="{{ asset('master/html/theme/dist/assets/media/logos/favicon.ico') }}" />
+		<!--begin::Fonts-->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+		<!--end::Fonts-->
+		<!--begin::Global Stylesheets Bundle(used by all pages)-->
+		<link href="{{ asset('master/html/theme/dist/assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('master/html/theme/dist/assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+		<!--end::Global Stylesheets Bundle-->
+	</head>
+	<!--end::Head-->
+	<!--begin::Body-->
+	<body id="kt_body" class="bg-body">
+		<!--begin::Main-->
+		<div class="d-flex flex-column flex-root">
+			<!--begin::Authentication - Sign-in -->
+			<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(assets/media/illustrations/sketchy-1/14.png">
+				<!--begin::Content-->
+				<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
+					<!--begin::Logo-->
+					<a href="{{ route('welcome') }}" class="mb-12">
+						<img alt="Logo" src="{{ asset('master/html/theme/dist/assets/media/logos/logo-1.svg') }}" class="h-40px" />
+					</a>
+					<!--end::Logo-->
+					<!--begin::Wrapper-->
+					<div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
+						<!--begin::Form-->
+						<form class="form w-100" action="{{ route('login') }}" method="POST">
+							@csrf
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('dash/assets/img/apple-icon.png') }}">
-    <link rel="icon" type="image/png" href="{{ asset('dash/assets/img/favicon.png') }}">
-    <title>
-        Travel | Login
-    </title>
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <!-- Nucleo Icons -->
-    <link href="{{ asset('dash/assets/css/nucleo-icons.css') }}" rel="stylesheet" />
-    <link href="{{ asset('dash/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="{{ asset('dash/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
-    <!-- CSS Files -->
-    <link id="pagestyle" href="{{ asset('dash/assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
-</head>
-
-<body class="">
-    <main class="main-content  mt-0">
-        <section>
-            <div class="page-header min-vh-100">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
-                            <nav
-                                class="navbar navbar-expand-lg position-absolute top-0 z-index-3 shadow-none my-3 navbar-transparent mt-4">
-                                <div class="container">
-                                    <button class="navbar-toggler shadow-none ms-2" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#navigation"
-                                        aria-controls="navigation" aria-expanded="false"
-                                        aria-label="Toggle navigation">
-                                        <span class="navbar-toggler-icon mt-2">
-                                            <span class="navbar-toggler-bar bar1"></span>
-                                            <span class="navbar-toggler-bar bar2"></span>
-                                            <span class="navbar-toggler-bar bar3"></span>
-                                        </span>
-                                    </button>
-                                    <div class="collapse navbar-collapse" id="navigation">
-                                        <ul class="navbar-nav mx-auto">
-                                            <li class="nav-item">
-                                                <a class="nav-link me-2 text-dark" href="{{ route('register') }}">
-                                                    <i class="fas fa-user-circle opacity-6  me-1 text-dark"></i>
-                                                    Sign Up
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link me-2 text-dark" href="{{ route('login') }}">
-                                                    <i class="fas fa-key opacity-6  me-1 text-dark"></i>
-                                                    Sign In
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <ul class="d-lg-block d-none text-center m-0" style="width: 20vw">
-                                        <a href="{{ route('welcome') }}"
-                                            class="btn btn-sm mb-0 me-1 bg-gradient-light">Return to The Main
-                                            Page</a>
-                                    </ul>
-                                </div>
-                            </nav>
-                            <div class="card card-plain">
-                                <div class="card-header pb-0 text-start">
-                                    <h4 class="font-weight-bolder">Sign In</h4>
-                                    <p class="mb-0">Silahkan masukkan password dan email anda</p>
-                                </div>
-                                <div class="card-body">
-                                    <form role="form" action="{{ route('login') }}" method="POST">
-                                        @csrf
-
-                                        <div class="mb-3">
-                                            <input type="email"
-                                                class="form-control form-control-lg @error('email') is-invalid @enderror"
-                                                placeholder="Email" aria-label="Email" name="email"
-                                                value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <input type="password"
-                                                class="form-control form-control-lg @error('password') is-invalid @enderror"
-                                                placeholder="Password" aria-label="Password" name="password" required
-                                                autocomplete="current-password">
-                                            @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" name="remember"
-                                                id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="remember">Ingat Saya</label>
-                                        </div>
-                                        <div class="text-center">
-                                            <button type="submit"
-                                                class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-                            <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
-                                style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg');
-          background-size: cover;">
-                                <span class="mask bg-gradient-primary opacity-6"></span>
-                                <h4 class="mt-5 text-white font-weight-bolder position-relative">Travel</h4>
-                                {{-- <p class="text-white position-relative">My POS (Point of Sales) adalah suatu sistem yang digunakan dalam kebutuhan berbagai macam usaha bisnis ritel untuk dapat mempermudah proses transaksi jual beli secara cepat, aman, dan sistematis.</p> --}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    <!--   Core JS Files   -->
-    <script src="{{ asset('dash/assets/js/core/popper.min.js') }}"></script>
-    <script src="{{ asset('dash/assets/js/core/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('dash/assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('dash/assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
-    <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-                damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
-    </script>
-    <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="{{ asset('dash/assets/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
-</body>
-
+							<!--begin::Heading-->
+							<div class="text-center mb-10">
+								<!--begin::Title-->
+								<h1 class="text-dark mb-3">Sign In to Metronic</h1>
+								<!--end::Title-->
+								<!--begin::Link-->
+								<div class="text-gray-400 fw-bold fs-4 mb-5">New Here?
+								<a href="{{ route('register') }}" class="link-primary fw-bolder">Create an Account</a></div>
+								<!--end::Link-->
+								<!--start::User Account-->
+								<div class="card card-flush shadow-sm mb-5">
+									<div class="card-header">
+										<h3 class="card-title">Test Account</h3>
+									</div>
+									<div class="card-body py-5 text-start">
+										<p>Email: <b>office@gmail.com</b></p>
+										<p>Password: <b>office</b></p>
+									</div>
+								</div>
+								<!--end::User Account-->
+							</div>
+							<!--begin::Heading-->
+							<!--begin::Input group-->
+							<div class="fv-row mb-10">
+								<!--begin::Label-->
+								<label class="form-label fs-6 fw-bolder text-dark">Email</label>
+								<!--end::Label-->
+								<!--begin::Input-->
+								<input class="form-control form-control-lg form-control-solid @error('email')is-invalid @enderror" type="text" name="email" autocomplete="off" value="{{ old('email') }}" />
+								<!--end::Input-->
+								<!--begin::Error-->
+								@error('email')
+									<span class="invalid-feedback" role="alert">
+										<strong>{{ $message }}</strong>
+									</span>
+								@enderror
+								<!--end::Error-->
+							</div>
+							<!--end::Input group-->
+							<!--begin::Input group-->
+							<div class="fv-row mb-10">
+								<!--begin::Wrapper-->
+								<div class="d-flex flex-stack mb-2">
+									<!--begin::Label-->
+									<label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
+									<!--end::Label-->
+									<!--begin::Link-->
+									<a href="#" class="link-primary fs-6 fw-bolder">Forgot Password ?</a>
+									<!--end::Link-->
+								</div>
+								<!--end::Wrapper-->
+								<!--begin::Input-->
+								<input class="form-control form-control-lg form-control-solid @error('password')is-invalid @enderror" type="password" name="password" autocomplete="off" />
+								<!--end::Input-->
+								<!--begin::Error-->
+								@error('password')
+									<span class="invalid-feedback" role="alert">
+										<strong>{{ $message }}</strong>
+									</span>
+								@enderror
+								<!--end::Error-->
+							</div>
+							<!--end::Input group-->
+							<!--begin::Actions-->
+							<div class="text-center">
+								<!--begin::Submit button-->
+								<button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
+									<span class="indicator-label">Continue</span>
+									<span class="indicator-progress">Please wait...
+									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+								</button>
+								<!--end::Submit button-->
+								<!--begin::Separator-->
+								{{-- <div class="text-center text-muted text-uppercase fw-bolder mb-5">or</div> --}}
+								<!--end::Separator-->
+								<!--begin::Google link-->
+								{{-- <a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">
+								<img alt="Logo" src="{{ asset('master/html/theme/dist/assets/media/svg/brand-logos/google-icon.svg') }}" class="h-20px me-3" />Continue with Google</a> --}}
+								<!--end::Google link-->
+								<!--begin::Google link-->
+								{{-- <a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100 mb-5">
+								<img alt="Logo" src="{{ asset('master/html/theme/dist/assets/media/svg/brand-logos/facebook-4.svg') }}" class="h-20px me-3" />Continue with Facebook</a> --}}
+								<!--end::Google link-->
+								<!--begin::Google link-->
+								{{-- <a href="#" class="btn btn-flex flex-center btn-light btn-lg w-100">
+								<img alt="Logo" src="{{ asset('master/html/theme/dist/assets/media/svg/brand-logos/apple-black.svg') }}" class="h-20px me-3" />Continue with Apple</a> --}}
+								<!--end::Google link-->
+							</div>
+							<!--end::Actions-->
+						</form>
+						<!--end::Form-->
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Content-->
+				<!--begin::Footer-->
+				<div class="d-flex flex-center flex-column-auto p-10">
+					<!--begin::Links-->
+					<div class="d-flex align-items-center fw-bold fs-6">
+						<a href="https://github.com/Eclipse-02" class="text-muted text-hover-primary px-2">About</a>
+						<a href="mailto:rafaumar22@gmail.com" class="text-muted text-hover-primary px-2">Contact</a>
+						<a href="#" class="text-muted text-hover-primary px-2">Follow</a>
+					</div>
+					<!--end::Links-->
+				</div>
+				<!--end::Footer-->
+			</div>
+			<!--end::Authentication - Sign-in-->
+		</div>
+		<!--end::Main-->
+		<script>var hostUrl = "assets/";</script>
+		<!--begin::Javascript-->
+		<!--begin::Global Javascript Bundle(used by all pages)-->
+		<script src="{{ asset('master/html/theme/dist/assets/plugins/global/plugins.bundle.js') }}"></script>
+		<script src="{{ asset('master/html/theme/dist/assets/js/scripts.bundle.js') }}"></script>
+		<!--end::Global Javascript Bundle-->
+		<!--begin::Page Custom Javascript(used by this page)-->
+		<script src="{{ asset('master/html/theme/dist/assets/js/custom/authentication/sign-in/general.js') }}"></script>
+		@include('sweetalert::alert')
+		<!--end::Page Custom Javascript-->
+		<!--end::Javascript-->
+	</body>
+	<!--end::Body-->
 </html>

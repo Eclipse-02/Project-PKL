@@ -1,262 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
+	<!--begin::Head-->
+	<head>
+		<title>Metronic - @yield('title')</title>
+		<meta name="csrf-token" content="{{ csrf_token() }}">
+		<meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
+		<meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta charset="utf-8" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
+		<meta property="og:url" content="https://keenthemes.com/metronic" />
+		<meta property="og:site_name" content="Keenthemes | Metronic" />
+		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+		<link rel="shortcut icon" href="{{ asset('master/html/theme/dist/assets/media/logos/favicon.ico') }}" />
+		<!--begin::Fonts-->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+		<!--end::Fonts-->
+		<!--begin::Global Stylesheets Bundle(used by all pages)-->
+		<link href="{{ asset('master/html/theme/dist/assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('master/html/theme/dist/assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+		<!--end::Global Stylesheets Bundle-->
+		<!--begin::Page Custom Sytlesheets(used by scaffolds)-->
+		<link href="{{ asset('master/html/theme/dist/assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css"/>
+		<!--end::Page Custom Sytlesheets(used by scaffolds)-->
+		<!--start::DataTable custom styles-->
+		<style>
+			#DataTables_Table_0_wrapper .row {
+				margin-bottom: 0.75rem!important;
+				margin-right: 1.25rem!important;
+				margin-left: 1.25rem!important;
+			}
+		</style>
+		<!--end::DataTable custom styles-->
+	</head>
+	<!--end::Head-->
+	<!--begin::Body-->
+	<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
+		<!--begin::Main-->
+		<!--begin::Root-->
+		<div class="d-flex flex-column flex-root">
+			<!--begin::Page-->
+			<div class="page d-flex flex-row flex-column-fluid">
+				@include('dashboard.sidebar')
+				<!--begin::Wrapper-->
+				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+					<!--begin::Header-->
+					<div id="kt_header" style="" class="header align-items-stretch">
+						<!--begin::Container-->
+						<div class="container-fluid d-flex align-items-stretch justify-content-between">
+							<!--begin::Aside mobile toggle-->
+							<div class="d-flex align-items-center d-lg-none ms-n3 me-1" title="Show aside menu">
+								<div class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px" id="kt_aside_mobile_toggle">
+									<!--begin::Svg Icon | path: icons/duotune/abstract/abs015.svg-->
+									<span class="svg-icon svg-icon-2x mt-1">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+											<path d="M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z" fill="black" />
+											<path opacity="0.3" d="M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z" fill="black" />
+										</svg>
+									</span>
+									<!--end::Svg Icon-->
+								</div>
+							</div>
+							<!--end::Aside mobile toggle-->
+							<!--begin::Mobile logo-->
+							<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
+								<a href="{{ route('dashboard') }}" class="d-lg-none">
+									<img alt="Logo" src="{{ asset('master/html/theme/dist/assets/media/logos/logo-2.svg') }}" class="h-30px" />
+								</a>
+							</div>
+							<!--end::Mobile logo-->
+							<!--begin::Wrapper-->
+							<div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
+								@include('dashboard.navbar')
+							</div>
+							<!--end::Wrapper-->
+						</div>
+						<!--end::Container-->
+					</div>
+					<!--end::Header-->
+					<!--begin::Content-->
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+						<!--begin::Post-->
+						<div class="post d-flex flex-column-fluid" id="kt_post">
+							<!--begin::Container-->
+							<div id="kt_content_container" class="container-xxl">
+								<!--begin::Row-->
+								<div class="row gy-5 g-xl-8">
+									@yield('content')
+								</div>
+                                <!--end::Row-->
+							</div>
+							<!--end::Container-->
+						</div>
+						<!--end::Post-->
+					</div>
+					<!--end::Content-->
+					<!--begin::Footer-->
+					@include('dashboard.footer')
+					<!--end::Footer-->
+				</div>
+				<!--end::Wrapper-->
+			</div>
+			<!--end::Page-->
+		</div>
+		<!--end::Root-->
+		<!--begin::Scrolltop-->
+		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+			<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+			<span class="svg-icon">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+					<rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
+					<path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
+				</svg>
+			</span>
+			<!--end::Svg Icon-->
+		</div>
+		<!--end::Scrolltop-->
+        <!--begin::Sign Out Form-->
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+        <!--end::Sign Out Form-->
+		<!--end::Main-->
+		<script>var hostUrl = "master/html/theme/dist/assets/";</script>
+		<!--begin::Javascript-->
+		<!--begin::Global Javascript Bundle(used by all pages)-->
+		<script src="{{ asset('master/html/theme/dist/assets/plugins/global/plugins.bundle.js') }}"></script>
+		<script src="{{ asset('master/html/theme/dist/assets/js/scripts.bundle.js') }}"></script>
+		<!--end::Global Javascript Bundle-->
+		<!--begin::Page Custom Javascript(used by this page)-->
+		<script src="{{ asset('master/html/theme/dist/assets/js/custom/widgets.js') }}"></script>
+		<!--end::Page Custom Javascript-->
+        <!--begin::Page Custom Javascript(used by scaffolds)-->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script src="{{ asset('js/dev/alerts.js') }}"></script>
+		<script src="{{ asset('js/dev/formats.js') }}"></script>
+		<script src="{{ asset('js/dev/locations.js') }}"></script>
+		<script src="{{ asset('master/html/theme/dist/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+		@include('sweetalert::alert')
+		<script type="text/javascript">
+			// csrf token
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('dash/assets/img/apple-icon.png') }}">
-    <link rel="icon" type="image/png" href="dash/assets/img/favicon.png">
-    <title>
-        Argon Dashboard | @yield('title')
-    </title>
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <!-- Nucleo Icons -->
-    <link href="{{ asset('dash/assets/css/nucleo-icons.css') }}" rel="stylesheet" />
-    <link href="{{ asset('dash/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="{{ asset('dash/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
-    <!-- CSS Files -->
-    <link id="pagestyle" href="{{ asset('dash/assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    <!-- intervention -->
-    <link rel="stylesheet" href="{{ asset('css/imgareaselect-animated.css') }}" />
-    <style>
-    .tree, .tree ul {
-        margin:0;
-        padding:0;
-        list-style:none
-    }
-    .tree ul {
-        margin-left:1em;
-        position:relative
-    }
-    .tree ul ul {
-        margin-left:.5em
-    }
-    .tree ul:before {
-        content:"";
-        display:block;
-        width:0;
-        position:absolute;
-        top:0;
-        bottom:0;
-        left:0;
-        border-left:1px solid
-    }
-    .tree li {
-        margin:0;
-        padding:0 1em;
-        line-height:2em;
-        color:#369;
-        font-weight:700;
-        position:relative
-    }
-    .tree ul li:before {
-        content:"";
-        display:block;
-        width:10px;
-        height:0;
-        border-top:1px solid;
-        margin-top:-1px;
-        position:absolute;
-        top:1em;
-        left:0
-    }
-    .tree ul li:last-child:before {
-        background:#fff;
-        height:auto;
-        top:1em;
-        bottom:0
-    }
-    .indicator {
-        margin-right:5px;
-    }
-    .tree li a {
-        text-decoration: none;
-        color:#369;
-    }
-    .tree li button, .tree li button:active, .tree li button:focus {
-        text-decoration: none;
-        color:#369;
-        border:none;
-        background:transparent;
-        margin:0px 0px 0px 0px;
-        padding:0px 0px 0px 0px;
-        outline: 0;
-    }
-    </style>
-</head>
+			$(document).ready(function() {
 
-<body class="g-sidenav-show   bg-gray-100">
-    <div class="min-height-300 bg-primary position-absolute w-100"></div>
-    @include('dashboard.sidebar')
-    <main class="main-content position-relative border-radius-lg ">
-        <!-- Navbar -->
-        @include('dashboard.navbar')
-        <!-- End Navbar -->
-        <div class="container-fluid py-4">
-            <div class="row mt-4">
-                <div class="col-lg-12 mb-lg-0 mb-4">
-                    <div class="card z-index-2 h-100">
-                        <div class="card-header pb-0 pt-3 bg-transparent">
-                            <h3 class="text-capitalize">@yield('title')</h3>
-                        </div>
-                        <div class="card-body p-3">
-                            @yield('content')
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @include('dashboard.footer')
-        </div>
-    </main>
-    <div class="fixed-plugin">
-        
-        <div class="card shadow-lg">
-            <div class="card-header pb-0 pt-3 ">
-                <div class="float-start">
-                    <h5 class="mt-3 mb-0">Argon Configurator</h5>
-                    <p>See our dashboard options.</p>
-                </div>
-                <div class="float-end mt-4">
-                    <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-                        <i class="fa fa-close"></i>
-                    </button>
-                </div>
-                <!-- End Toggle Button -->
-            </div>
-            <hr class="horizontal dark my-1">
-            <div class="card-body pt-sm-3 pt-0 overflow-auto">
-                <!-- Sidebar Backgrounds -->
-                <div>
-                    <h6 class="mb-0">Sidebar Colors</h6>
-                </div>
-                <a href="javascript:void(0)" class="switch-trigger background-color">
-                    <div class="badge-colors my-2 text-start">
-                        <span class="badge filter bg-gradient-primary active" data-color="primary"
-                            onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-dark" data-color="dark"
-                            onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-info" data-color="info"
-                            onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-success" data-color="success"
-                            onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-warning" data-color="warning"
-                            onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-danger" data-color="danger"
-                            onclick="sidebarColor(this)"></span>
-                    </div>
-                </a>
-                <!-- Sidenav Type -->
-                <div class="mt-3">
-                    <h6 class="mb-0">Sidenav Type</h6>
-                    <p class="text-sm">Choose between 2 different sidenav types.</p>
-                </div>
-                <div class="d-flex">
-                    <button class="btn bg-gradient-primary w-100 px-3 mb-2 active me-2" data-class="bg-white"
-                        onclick="sidebarType(this)">White</button>
-                    <button class="btn bg-gradient-primary w-100 px-3 mb-2" data-class="bg-default"
-                        onclick="sidebarType(this)">Dark</button>
-                </div>
-                <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
-                <!-- Navbar Fixed -->
-                <div class="d-flex my-3">
-                    <h6 class="mb-0">Navbar Fixed</h6>
-                    <div class="form-check form-switch ps-0 ms-auto my-auto">
-                        <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed"
-                            onclick="navbarFixed(this)">
-                    </div>
-                </div>
-                <hr class="horizontal dark my-sm-4">
-                <div class="mt-2 mb-5 d-flex">
-                    <h6 class="mb-0">Light / Dark</h6>
-                    <div class="form-check form-switch ps-0 ms-auto my-auto">
-                        <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version"
-                            onclick="darkMode(this)">
-                    </div>
-                </div>
-                <a class="btn bg-gradient-dark w-100" href="https://www.creative-tim.com/product/argon-dashboard">Free
-                    Download</a>
-                <a class="btn btn-outline-dark w-100"
-                    href="https://www.creative-tim.com/learning-lab/bootstrap/license/argon-dashboard">View
-                    documentation</a>
-                <div class="w-100 text-center">
-                    <a class="github-button" href="https://github.com/creativetimofficial/argon-dashboard"
-                        data-icon="octicon-star" data-size="large" data-show-count="true"
-                        aria-label="Star creativetimofficial/argon-dashboard on GitHub">Star</a>
-                    <h6 class="mt-3">Thank you for sharing!</h6>
-                    <a href="https://twitter.com/intent/tweet?text=Check%20Argon%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fargon-dashboard"
-                        class="btn btn-dark mb-0 me-2" target="_blank">
-                        <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
-                    </a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/argon-dashboard"
-                        class="btn btn-dark mb-0 me-2" target="_blank">
-                        <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Share
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--   Core JS Files   -->
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
-    <script src="{{ asset('dash/assets/js/core/popper.min.js') }}"></script>
-    <script src="{{ asset('dash/assets/js/core/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('dash/assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('dash/assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('js/dev/locations.js') }}"></script>
-    <script src="{{ asset('js/dev/formats.js') }}"></script>
-    <!-- Datatables -->
-    <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
-    <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-                damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
-    </script>
-    <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="{{ asset('dash/assets/js/argon-dashboard.min.js?v=2.0.4') }}"></script>
-    <script src="{{ asset('js/jquery.imgareaselect.dev.js') }}"></script>
-    <script type="text/javascript">
-        jQuery(function($) {
-            var p = $("#previewimage");
+				// Datatable delete function
+				$('.table').on('click', '.delete[data-remote]', function(e) {
+					e.preventDefault();
+					$.ajaxSetup({
+						headers: {
+							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						}
+					});
+					var url = $(this).data('remote');
+					// confirm then
+					$.ajax({
+						url: url,
+						type: 'DELETE',
+						dataType: 'json',
+						data: {
+							method: '_DELETE',
+							submit: true
+						}
+					}).always(function(data) {
+						$('.table').DataTable().draw(false);
+					});
+				});
 
-            $("body").on("change", ".image", function() {
-                var imageReader = new FileReader();
-                imageReader.readAsDataURL(document.querySelector("#image").files[0]);
-
-                imageReader.onload = function(oFREvent) {
-                    p.attr('src', oFREvent.target.result).fadeIn();
-                };
-            });
-
-            $('#previewimage').imgAreaSelect({
-                onSelectEnd: function(img, selection) {
-                    $('input[name="x1"]').val(selection.x1);
-                    $('input[name="y1"]').val(selection.y1);
-                    $('input[name="w"]').val(selection.width);
-                    $('input[name="h"]').val(selection.height);
-                }
-            });
-        });
-    </script>
-
-    @include('sweetalert::alert')
-
-    @yield('scripts')
-</body>
-
+				@if($errors->any())
+				// PopUp modal if there is any errors
+				$('#create_modal').modal('show');
+				@endif
+			});
+		</script>
+        @yield('scripts')
+        <!--end::Page Custom Javascript-->
+		<!--end::Javascript-->
+	</body>
+	<!--end::Body-->
 </html>

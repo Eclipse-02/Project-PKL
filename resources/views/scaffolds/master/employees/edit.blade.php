@@ -1,361 +1,683 @@
 @extends('dashboard.master')
 
-@section('title', 'Update Employee')
+@section('title', 'Karyawan')
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 mb-3">
-        <a href="{{ route('employees.index') }}" class="btn btn-secondary mx-2">Return</a>
-    </div>
-    <div class="col-lg-12 mb-3">
-        <form action="{{ route('employees.update', $data->id) }}" method="post">
-        @csrf
-        @method('PUT')
+    <!--start::Col-->
+    <div class="col-xxl-12">
+        <!--begin::Card-->
+        <div class="card">
+            <!--begin::Card header-->
+            <div class="card-header">
+                <!--begin::Card title-->
+                <div class="card-title m-0 flex-column">
+                    <h3 class="fw-bolder m-0">Edit Data</h3>
+                    <div class="text-muted fs-7 fw-bold">Edit Data</div>
+                </div>
+                <!--end::Card title-->
+                <!--start::Button-->
+                <!--start::Action-->
+                <a href="{{ route('employees.index') }}" class="btn btn-flex btn-light btn-light btn-active-primary fw-bolder align-self-center">
+                    <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr002.svg-->
+                    <span class="svg-icon svg-icon-muted svg-icon-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M9.60001 11H21C21.6 11 22 11.4 22 12C22 12.6 21.6 13 21 13H9.60001V11Z" fill="black"/>
+                            <path opacity="0.3" d="M9.6 20V4L2.3 11.3C1.9 11.7 1.9 12.3 2.3 12.7L9.6 20Z" fill="black"/>
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->Return</a>
+                <!--end::Button-->
+                <!--end::Action-->
+            </div>
+            <!--end::Card header-->
+            <!--begin::Stepper-->
+            <div class="stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid mt-10" id="kt_stepper_example_vertical" data-kt-stepper="true">
+                <!--begin::Aside-->
+                <div class="d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px">
+                    <!--begin::Nav-->
+                    <div class="stepper-nav ps-lg-10">
+                        <!--begin::Step 1-->
+                        <div class="stepper-item current" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+                            <!--begin::Line-->
+                            <div class="stepper-line w-40px"></div>
+                            <!--end::Line-->
+                            <!--begin::Icon-->
+                            <div class="stepper-icon w-40px h-40px">
+                                <i class="stepper-check fas fa-check"></i>
+                                <span class="stepper-number">1</span>
+                            </div>
+                            <!--end::Icon-->
+                            <!--begin::Label-->
+                            <div class="stepper-label">
+                                <h3 class="stepper-title">Basic Info</h3>
+                                <div class="stepper-desc">Informasi Dasar</div>
+                            </div>
+                            <!--end::Label-->
+                        </div>
+                        <!--end::Step 1-->
+                        <!--begin::Step 2-->
+                        <div class="stepper-item" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+                            <!--begin::Line-->
+                            <div class="stepper-line w-40px"></div>
+                            <!--end::Line-->
+                            <!--begin::Icon-->
+                            <div class="stepper-icon w-40px h-40px">
+                                <i class="stepper-check fas fa-check"></i>
+                                <span class="stepper-number">2</span>
+                            </div>
+                            <!--begin::Icon-->
+                            <!--begin::Label-->
+                            <div class="stepper-label">
+                                <h3 class="stepper-title">Contacts</h3>
+                                <div class="stepper-desc">Informasi Kontak Cabang</div>
+                            </div>
+                            <!--begin::Label-->
+                        </div>
+                        <!--end::Step 2-->
+                        <!--begin::Step 3-->
+                        <div class="stepper-item" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+                            <!--begin::Line-->
+                            <div class="stepper-line w-40px"></div>
+                            <!--end::Line-->
+                            <!--begin::Icon-->
+                            <div class="stepper-icon w-40px h-40px">
+                                <i class="stepper-check fas fa-check"></i>
+                                <span class="stepper-number">3</span>
+                            </div>
+                            <!--end::Icon-->
+                            <!--begin::Label-->
+                            <div class="stepper-label">
+                                <h3 class="stepper-title">Region</h3>
+                                <div class="stepper-desc">Informasi Mengenai Lokasi</div>
+                            </div>
+                            <!--end::Label-->
+                        </div>
+                        <!--end::Step 3-->
+                        <!--begin::Step 4-->
+                        <div class="stepper-item" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+                            <!--begin::Line-->
+                            <div class="stepper-line w-40px"></div>
+                            <!--end::Line-->
+                            <!--begin::Icon-->
+                            <div class="stepper-icon w-40px h-40px">
+                                <i class="stepper-check fas fa-check"></i>
+                                <span class="stepper-number">4</span>
+                            </div>
+                            <!--end::Icon-->
+                            <!--begin::Label-->
+                            <div class="stepper-label">
+                                <h3 class="stepper-title">Status</h3>
+                                <div class="stepper-desc">Status Karyawan</div>
+                            </div>
+                            <!--end::Label-->
+                        </div>
+                        <!--end::Step 4-->
+                    </div>
+                    <!--end::Nav-->
+                </div>
+                <!--begin::Content-->
+                <div class="flex-row-fluid py-lg-5 px-lg-15">
+                    <!--begin::Form-->
+                    <form class="form w-lg-500px mx-auto" action="{{ route('employees.update', $data->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
 
-            <div class="row mx-2">
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Coy ID</label>
-                        <select class="form-select @error('coy_id')is-invalid @enderror" id="coy_id" name="coy_id">
-                            <option class="text-center" disabled>-- Pilih Coy ID --</option>
-                            @foreach ($coys as $k)
-                                <option value="{{ $k->coy_id }}" {{ old('coy_id') ? (old('coy_id') == $k->coy_id ? 'selected' : '') : ($data->coy_id == $k->coy_id ? 'selected' : '') }}>{{ $k->coy_name }}</option>
-                            @endforeach
-                        </select>
-                        @error('coy_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Employee ID</label>
-                        <input type="text" class="form-control @error('empl_id')is-invalid @enderror" id="empl_id" name="empl_id" placeholder="Employee ID" value="{{ old('empl_id') ? old('empl_id') : $data->empl_id }}">
-                        @error('empl_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Employee Branch</label>
-                        <select class="form-select @error('empl_branch')is-invalid @enderror" id="empl_branch" name="empl_branch">
-                            <option class="text-center" disabled>-- Pilih Branch --</option>
-                            @foreach ($branches as $i)
-                                <option value="{{ $i->branch_code }}" {{ old('empl_branch') ? (old('empl_branch') == $i->branch_code ? 'selected' : '') : ($data->empl_branch == $i->branch_code ? 'selected' : '') }}>{{ $i->branch_name }}</option>
-                            @endforeach
-                        </select>
-                        @error('empl_branch')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Employee NIK</label>
-                        <input type="text" class="form-control @error('empl_nik')is-invalid @enderror" id="empl_nik" name="empl_nik" placeholder="Employee NIK" value="{{ old('empl_nik') ? old('empl_nik') : $data->empl_nik }}">
-                        @error('empl_nik')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Employee Name</label>
-                        <input type="text" class="form-control @error('empl_name')is-invalid @enderror" id="empl_name" name="empl_name" placeholder="Employee Name" value="{{ old('empl_name') ? old('empl_name') : $data->empl_name }}">
-                        @error('empl_name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Position</label>
-                        <select class="form-select @error('position_code')is-invalid @enderror" id="position_code" name="position_code">
-                            <option class="text-center" disabled>-- Pilih Position --</option>
-                            @foreach ($positions as $i)
-                                <option value="{{ $i->poss_code }}" {{ old('position_code') ? (old('position_code') == $i->poss_code ? 'selected' : '') : ($data->position_code == $i->poss_code ? 'selected' : '') }}>{{ $i->poss_name }}</option>
-                            @endforeach
-                        </select>
-                        @error('position_code')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Employee Up Level</label>
-                        <input type="text" class="form-control @error('empl_up_level')is-invalid @enderror" id="empl_up_level" name="empl_up_level" placeholder="Employee Up Level"  value="{{ old('empl_up_level') ? old('empl_up_level') : $data->empl_up_level }}">
-                        @error('empl_up_level')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6 mb-3">
-                    <div class="form-group">
-                        <label class="form-label">Status</label>
-                        <div class="custom-control custom-radio">
-                            <input class="custom-control-input" id="empl_status" value="PB" name="empl_status" type="radio" {{ old('empl_status') ? (old('empl_status') == "PB" ? 'checked' : '') : ($data->empl_status == "PB" ? 'checked' : '') }}>
-                            <label class="custom-control-label" for="empl_status">Probation</label>
+                        <!--begin::Group-->
+                        <div class="mb-5">
+                            <!--begin::Step 1-->
+                            <div class="current" data-kt-stepper-element="content">
+                                <div class="w-100">
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Kode</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('empl_id')is-invalid @enderror" type="text" name="empl_id" value="{{ old('empl_id') ? old('empl_id') : $data->empl_id }}" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('empl_id')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Nama</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('empl_name')is-invalid @enderror" type="text" name="empl_name" value="{{ old('empl_name') ? old('empl_name') : $data->empl_name }}" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('empl_name')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="d-flex align-items-center fs-5 mb-2">
+                                            <span class="required">NIK</span>
+                                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Diisi 16 Digit"></i>
+                                        </label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('empl_nik')is-invalid @enderror" type="text" name="empl_nik" value="{{ old('empl_nik') ? old('empl_nik') : $data->empl_nik }}" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('empl_nik')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Cabang</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('empl_branch')is-invalid @enderror" name="empl_branch" id="empl_branch" data-control="select2" data-placeholder="Pilih Cabang">
+                                            <option></option>
+                                            @foreach ($branches as $i)
+                                                <option value="{{ $i->branch_code }}" {{ old('empl_branch') ? (old('empl_branch') == $i->branch_code ? 'selected' : '') : ($data->empl_branch == $i->branch_code ? 'selected' : '') }}>{{ $i->branch_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('empl_branch')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Posisi</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('position_code')is-invalid @enderror" name="position_code" id="position_code" data-control="select2" data-placeholder="Pilih Posisi">
+                                            <option></option>
+                                            @foreach ($positions as $i)
+                                                <option value="{{ $i->poss_code }}" {{ old('position_code') ? (old('position_code') == $i->poss_code ? 'selected' : '') : ($data->position_code == $i->poss_code ? 'selected' : '') }}>{{ $i->poss_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('position_code')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label">Bawahan Dari</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('empl_up_level')is-invalid @enderror" name="empl_up_level" id="empl_up_level" data-control="select2" data-placeholder="Pilih Karyawan">
+                                            <option></option>
+                                            @foreach ($employees as $i)
+                                                <option value="{{ $i->empl_id }}" {{ old('empl_up_level') ? (old('empl_up_level') == $i->empl_id ? 'selected' : '') : ($data->empl_up_level == $i->empl_id ? 'selected' : '') }}>{{ $i->empl_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('empl_up_level')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                            </div>
+                            <!--begin::Step 1-->
+
+                            <!--begin::Step 2-->
+                            <div data-kt-stepper-element="content">
+                                <div class="w-100">
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Email</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('empl_email')is-invalid @enderror" type="text" name="empl_email" value="{{ old('empl_email') ? old('empl_email') : $data->empl_email }}" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('empl_email')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Alamat</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Textarea-->
+                                        <textarea class="form-control form-control form-control-solid @error('empl_addr')is-invalid @enderror" name="empl_addr" data-kt-autosize="true">{{ old('empl_addr') ? old('empl_addr') : $data->empl_addr }}</textarea>
+                                        <!--end::Textarea-->
+
+                                        <!--begin::Error-->
+                                        @error('empl_addr')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">No Area</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('empl_tlp_area')is-invalid @enderror" type="text" name="empl_tlp_area" value="{{ old('empl_tlp_area') ? old('empl_tlp_area') : $data->empl_tlp_area }}" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('empl_tlp_area')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">No Telp</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('empl_tlp')is-invalid @enderror" type="text" name="empl_tlp" value="{{ old('empl_tlp') ? old('empl_tlp') : $data->empl_tlp }}" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('empl_tlp')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">No HP 1</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('empl_hp01')is-invalid @enderror" type="text" name="empl_hp01" value="{{ old('empl_hp01') ? old('empl_hp01') : $data->empl_hp01 }}" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('empl_hp01')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">No HP 2</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('empl_hp02')is-invalid @enderror" type="text" name="empl_hp02" value="{{ old('empl_hp02') ? old('empl_hp02') : $data->empl_hp02 }}" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('empl_hp02')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                            </div>
+                            <!--begin::Step 2-->
+
+                            <!--begin::Step 3-->
+                            <div data-kt-stepper-element="content">
+                                <div class="w-100">
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Provinsi</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('prov_code')is-invalid @enderror" name="prov_code" id="prov_code" data-control="select2" data-placeholder="Pilih Provinsi">
+                                            <option></option>
+                                            @foreach ($provinsis as $i)
+                                                <option value="{{ $i->prov_code }}" {{ old('prov_code') ? (old('prov_code') == $i->prov_code ? 'selected' : '') : ($data->prov_code == $i->prov_code ? 'selected' : '') }}>{{ $i->provinsi }}</option>
+                                            @endforeach
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('prov_code')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Kota</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('kota_code')is-invalid @enderror" name="kota_code" id="kota_code">
+                                            <option></option>
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('kota_code')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Kecamatan</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('kec_code')is-invalid @enderror" name="kec_code" id="kec_code">
+                                            <option></option>
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('kec_code')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Kelurahan</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('kel_code')is-invalid @enderror" name="kel_code" id="kel_code">
+                                            <option></option>
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('kel_code')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Kode Pos</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('zip_code')is-invalid @enderror" name="zip_code" id="zip_code">
+                                            <option></option>
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('zip_code')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                            </div>
+                            <!--begin::Step 3-->
+
+                            <!--begin::Step 4-->
+                            <div data-kt-stepper-element="content">
+                                <div class="w-100">
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Status</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <select class="form-select form-select-solid @error('empl_status')is-invalid @enderror" name="empl_status" id="empl_status" data-control="select2" data-placeholder="Pilih Status">
+                                            <option></option>
+                                            <option value="PB" {{ old('empl_status') ? (old('empl_status') == "PB" ? 'selected' : '') : ($data->empl_status == "PB" ? 'selected' : '') }}>Probation</option>
+                                            <option value="PM" {{ old('empl_status') ? (old('empl_status') == "PM" ? 'selected' : '') : ($data->empl_status == "PM" ? 'selected' : '') }}>Permanent</option>
+                                            <option value="KT" {{ old('empl_status') ? (old('empl_status') == "KT" ? 'selected' : '') : ($data->empl_status == "KT" ? 'selected' : '') }}>Kontrak</option>
+                                            <option value="RS" {{ old('empl_status') ? (old('empl_status') == "RS" ? 'selected' : '') : ($data->empl_status == "RS" ? 'selected' : '') }}>Resign</option>
+                                            <option value="PK" {{ old('empl_status') ? (old('empl_status') == "PK" ? 'selected' : '') : ($data->empl_status == "PK" ? 'selected' : '') }}>PHK</option>
+                                        </select>
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('empl_status')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Tanggal Berlaku</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('empl_eff_date')is-invalid @enderror" type="text" name="empl_eff_date" value="{{ old('empl_eff_date') ? Carbon\Carbon::parse(old('empl_eff_date'))->format('Y-m-d') : Carbon\Carbon::parse($data->empl_eff_date)->format('Y-m-d') }}" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('empl_eff_date')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                            </div>
+                            <!--begin::Step 4-->
                         </div>
-                        <div class="custom-control custom-radio">
-                            <input class="custom-control-input" id="empl_status" value="PM" name="empl_status" type="radio" {{ old('empl_status') ? (old('empl_status') == "PM" ? 'checked' : '') : ($data->empl_status == "PM" ? 'checked' : '') }}>
-                            <label class="custom-control-label" for="empl_status">Permanen</label>
+                        <!--end::Group-->
+
+                        <!--begin::Actions-->
+                        <div class="d-flex flex-stack">
+                            <!--begin::Wrapper-->
+                            <div class="me-2">
+                                <button type="button" class="btn btn-light btn-active-light-primary" data-kt-stepper-action="previous">
+                                    Kembali
+                                </button>
+                            </div>
+                            <!--end::Wrapper-->
+
+                            <!--begin::Wrapper-->
+                            <div>
+                                <button type="submit" class="btn btn-primary" data-kt-stepper-action="submit">
+                                    <span class="indicator-label">
+                                        Simpan
+                                    </span>
+                                    <span class="indicator-progress">
+                                        Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                </button>
+
+                                <button type="button" class="btn btn-primary" data-kt-stepper-action="next">
+                                    Lanjut
+                                </button>
+                            </div>
+                            <!--end::Wrapper-->
                         </div>
-                        <div class="custom-control custom-radio">
-                            <input class="custom-control-input" id="empl_status" value="KT" name="empl_status" type="radio" {{ old('empl_status') ? (old('empl_status') == "KT" ? 'checked' : '') : ($data->empl_status == "KT" ? 'checked' : '') }}>
-                            <label class="custom-control-label" for="empl_status">Kontrak</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input class="custom-control-input" id="empl_status" value="RS" name="empl_status" type="radio" {{ old('empl_status') ? (old('empl_status') == "RS" ? 'checked' : '') : ($data->empl_status == "RS" ? 'checked' : '') }}>
-                            <label class="custom-control-label" for="empl_status">Resign</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input class="custom-control-input" id="empl_status" value="PK" name="empl_status" type="radio" {{ old('empl_status') ? (old('empl_status') == "PK" ? 'checked' : '') : ($data->empl_status == "PK" ? 'checked' : '') }}>
-                            <label class="custom-control-label" for="empl_status">PHK</label>
-                        </div>
-                        @error('empl_status')
-                            <span class="invalid-feedback d-block" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Effect Date</label>
-                        <input type="date" class="form-control @error('empl_eff_date')is-invalid @enderror" id="empl_eff_date" name="empl_eff_date" placeholder="Effect Date" value="{{ old('empl_eff_date') ? old('empl_eff_date') : $data->empl_eff_date }}">
-                        @error('empl_eff_date')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Email</label>
-                        <input type="text" class="form-control @error('empl_email')is-invalid @enderror" id="empl_email" name="empl_email" placeholder="Email" value="{{ old('empl_email') ? old('empl_email') : $data->empl_email }}">
-                        @error('empl_email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Address</label>
-                        <textarea class="form-control @error('empl_addr')is-invalid @enderror" rows="3" placeholder="Employee address..." id="empl_addr" name="empl_addr">{{ old('empl_addr') ? old('empl_addr') : $data->empl_addr }}</textarea>
-                        @error('empl_addr')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Telephone Area</label>
-                        <input type="text" class="form-control @error('empl_tlp_area')is-invalid @enderror" id="empl_tlp_area" name="empl_tlp_area" placeholder="Telephone Area" value="{{ old('empl_tlp_area') ? old('empl_tlp_area') : $data->empl_tlp_area }}">
-                        @error('empl_tlp_area')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Telephone</label>
-                        <input type="text" class="form-control @error('empl_tlp')is-invalid @enderror" id="empl_tlp" name="empl_tlp" placeholder="Telephone" value="{{ old('empl_tlp') ? old('empl_tlp') : $data->empl_tlp }}">
-                        @error('empl_tlp')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Hanphone 1</label>
-                        <input type="text" class="form-control @error('empl_hp01')is-invalid @enderror" id="empl_hp01" name="empl_hp01" placeholder="Hanphone 1" value="{{ old('empl_hp01') ? old('empl_hp01') : $data->empl_hp01 }}">
-                        @error('empl_hp01')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Handphone 2</label>
-                        <input type="text" class="form-control @error('empl_hp02')is-invalid @enderror" id="empl_hp02" name="empl_hp02" placeholder="Handphone 2" value="{{ old('empl_hp02') ? old('empl_hp02') : $data->empl_hp02 }}">
-                        @error('empl_hp02')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Zip</label>
-                        <select class="form-select @error('kota_code')is-invalid @enderror" id="zip_code" name="zip_code">
-                            <option class="text-center" disabled>-- Pilih Zip --</option>
-                            @foreach ($zips as $i)
-                                <option value="{{ $i->zip_code }}" {{ old('zip_code') ? (old('zip_code') == $i->zip_code ? 'selected' : '') : ($data->zip_code == $i->zip_code ? 'selected' : '') }}>{{ $i->zip_desc }}</option>
-                            @endforeach
-                        </select>
-                        @error('kota_code')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Provinsi</label>
-                        <select class="form-select @error('prov_code')is-invalid @enderror" id="prov_code" name="prov_code">
-                            <option class="text-center" disabled>-- Pilih Provinsi --</option>
-                        </select>
-                        @error('prov_code')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Kota</label>
-                        <select class="form-select @error('kota_code')is-invalid @enderror" id="kota_code" name="kota_code">
-                            <option class="text-center" disabled>-- Pilih Kota --</option>
-                        </select>
-                        @error('kota_code')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Kecamatan</label>
-                        <select class="form-select @error('kec_code')is-invalid @enderror" id="kec_code" name="kec_code">
-                            <option class="text-center" disabled>-- Pilih Kecamatan --</option>
-                        </select>
-                        @error('kec_code')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <div class="form-group">
-                        <label class="form-label">Kelurahan</label>
-                        <select class="form-select @error('kel_code')is-invalid @enderror" id="kel_code" name="kel_code">
-                            <option class="text-center" disabled>-- Pilih Kelurahan --</option>
-                        </select>
-                        @error('kel_code')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-6">
-                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                        <!--end::Actions-->
+                    </form>
+                    <!--end::Form-->
                 </div>
             </div>
-        </form>
+            <!--end::Stepper-->
+        </div>
+        <!--end::Card-->
     </div>
-</div>
+    <!--end::Col-->
 @endsection
 
 @section('scripts')
 <script type="text/javascript">
-    $('#prov_code').attr("style", "pointer-events: none; background-color: lightgray;");
-    $('#kota_code').attr("style", "pointer-events: none; background-color: lightgray;");
-    $('#kec_code').attr("style", "pointer-events: none; background-color: lightgray;");
-    $('#kel_code').attr("style", "pointer-events: none; background-color: lightgray;");
 
-    // $('#zip_code').change(function() {
-        var zip_code = $('#zip_code').find(':selected').val();
-        console.log(zip_code);
+    callLocations({{ $data->prov_code }}, {{ $data->kota_code }}, {{ $data->kec_code }}, {{ $data->kel_code }}, {{ $data->zip_code }});
 
-        fetch(`http://127.0.0.1:8000/api/v1/zips?code=` + zip_code)
-            .then(response => response.json())
-            .then(zip => fetch(`http://127.0.0.1:8000/api/v1/provinsis`)
-                        .then(response => response.json())
-                        .then(
-                            prov => prov.forEach(element => {
-                                console.log(zip.prov_code);
-                                if (zip.prov_code == element.prov_code) {
-                                    $("#prov_code").append("<option value='" + element.prov_code + "' selected>" + element.provinsi +
-                                    "</option>");
-                                }
-                            })
-                        )
-                    );
+    // Stepper element
+    var element = document.querySelector("#kt_stepper_example_vertical");
 
-        fetch(`http://127.0.0.1:8000/api/v1/zips?code=` + zip_code)
-            .then(response => response.json())
-            .then(zip => fetch(`http://127.0.0.1:8000/api/v1/kotas?code=` + zip.prov_code)
-                        .then(response => response.json())
-                        .then(
-                            kota => kota.forEach(element => {
-                                if (zip.kota_code == element.kota_code) {
-                                    $("#kota_code").append("<option value='" + element.kota_code + "' selected>" + element.kota +
-                                    "</option>");
-                                }
-                            })
-                        )
-                    );
+    // Initialize Stepper
+    var stepper = new KTStepper(element);
 
-        fetch(`http://127.0.0.1:8000/api/v1/zips?code=` + zip_code)
-            .then(response => response.json())
-            .then(zip => fetch(`http://127.0.0.1:8000/api/v1/kecamatans?code=` + zip.kota_code)
-                        .then(response => response.json())
-                        .then(
-                            kec => kec.forEach(element => {
-                                if (zip.kec_code == element.kec_code) {
-                                    $("#kec_code").append("<option value='" + element.kec_code + "' selected>" + element.kecamatan +
-                                    "</option>");
-                                }
-                            })
-                        )
-                    );
+    // Handle next step
+    stepper.on("kt.stepper.next", function (stepper) {
+        stepper.goNext(); // go next step
+    });
 
-        fetch(`http://127.0.0.1:8000/api/v1/zips?code=` + zip_code)
-            .then(response => response.json())
-            .then(zip => fetch(`http://127.0.0.1:8000/api/v1/kelurahans?code=` + zip.kec_code)
-                        .then(response => response.json())
-                        .then(
-                            kel => kel.forEach(element => {
-                                if (zip.kel_code == element.kel_code) {
-                                    $("#kel_code").append("<option value='" + element.kel_code + "' selected>" + element.kelurahan +
-                                    "</option>");
-                                }
-                            })
-                        )
-                    );
-    // });
+    // Handle previous step
+    stepper.on("kt.stepper.previous", function (stepper) {
+        stepper.goPrevious(); // go previous step
+    });
+
+    // Handle navigation click
+    stepper.on("kt.stepper.click", function (stepper) {
+        stepper.goTo(stepper.getClickedStepIndex()); // go to clicked step
+    });
+
+    // Handle submit button
+    stepper.on("kt.stepper.changed", function(stepper) {
+        if (stepper.getCurrentStepIndex() === 4) {
+            document.querySelector('[data-kt-stepper-action="submit"]').classList.remove("d-none")
+            document.querySelector('[data-kt-stepper-action="submit"]').classList.add("d-inline-block")
+            document.querySelector('[data-kt-stepper-action="next"]').classList.add("d-none")
+        } else {
+            document.querySelector('[data-kt-stepper-action="submit"]').classList.add("d-none")
+            document.querySelector('[data-kt-stepper-action="submit"]').classList.remove("d-inline-block")
+            document.querySelector('[data-kt-stepper-action="next"]').classList.remove("d-none")
+        }
+    });
+
+    $("[name='empl_eff_date']").daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minYear: 1901,
+        maxYear: parseInt(moment().format("YYYY"),10),
+        opens: 'right',
+        drops: 'auto',
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
+    });
+
+    Inputmask({
+        mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]",
+        greedy: false,
+        onBeforePaste: function (pastedValue, opts) {
+            pastedValue = pastedValue.toLowerCase();
+            return pastedValue.replace("mailto:", "");
+        },
+        definitions: {
+            "*": {
+                validator: '[0-9A-Za-z!#$%&"*+/=?^_`{|}~\-]',
+                cardinality: 1,
+                casing: "lower"
+            }
+        }
+    }).mask("[name='empl_email']");
+
+    Inputmask({
+        "mask" : "123XXXXXXXXXXXXX",
+        "placeholder": "9999999999999999",
+    }).mask("[name='empl_nik']");
+
 </script>
 @endsection

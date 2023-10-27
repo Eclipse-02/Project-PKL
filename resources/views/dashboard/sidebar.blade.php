@@ -1,317 +1,305 @@
-<aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
-    id="sidenav-main">
-    <div class="sidenav-header">
-        <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
-            aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html "
-            target="_blank">
-            <img src="{{ asset('dash/assets/img/logo-ct-dark.png') }}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">Argon Dashboard 2</span>
+<!--begin::Aside-->
+<div id="kt_aside" class="aside aside-dark aside-hoverable" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">
+    <!--begin::Brand-->
+    <div class="aside-logo flex-column-auto" id="kt_aside_logo">
+        <!--begin::Logo-->
+        <a href="{{ route('dashboard') }}">
+            <img alt="Logo" src="{{ asset('master/html/theme/dist/assets/media/logos/logo-1-dark.svg') }}" class="h-25px logo" />
         </a>
+        <!--end::Logo-->
+        <!--begin::Aside toggler-->
+        <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="aside-minimize">
+            <!--begin::Svg Icon | path: icons/duotune/arrows/arr079.svg-->
+            <span class="svg-icon svg-icon-1 rotate-180">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path opacity="0.5" d="M14.2657 11.4343L18.45 7.25C18.8642 6.83579 18.8642 6.16421 18.45 5.75C18.0358 5.33579 17.3642 5.33579 16.95 5.75L11.4071 11.2929C11.0166 11.6834 11.0166 12.3166 11.4071 12.7071L16.95 18.25C17.3642 18.6642 18.0358 18.6642 18.45 18.25C18.8642 17.8358 18.8642 17.1642 18.45 16.75L14.2657 12.5657C13.9533 12.2533 13.9533 11.7467 14.2657 11.4343Z" fill="black" />
+                    <path d="M8.2657 11.4343L12.45 7.25C12.8642 6.83579 12.8642 6.16421 12.45 5.75C12.0358 5.33579 11.3642 5.33579 10.95 5.75L5.40712 11.2929C5.01659 11.6834 5.01659 12.3166 5.40712 12.7071L10.95 18.25C11.3642 18.6642 12.0358 18.6642 12.45 18.25C12.8642 17.8358 12.8642 17.1642 12.45 16.75L8.2657 12.5657C7.95328 12.2533 7.95328 11.7467 8.2657 11.4343Z" fill="black" />
+                </svg>
+            </span>
+            <!--end::Svg Icon-->
+        </div>
+        <!--end::Aside toggler-->
     </div>
-    <hr class="horizontal dark mt-0">
-    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
-        <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-                <a class="nav-link {{ request()->is('dashboard*') ? 'active' : '' }}" href="{{ route('dashboard') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+    <!--end::Brand-->
+    <!--begin::Aside menu-->
+    <div class="aside-menu flex-column-fluid">
+        <!--begin::Aside Menu-->
+        <div class="hover-scroll-overlay-y my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside_menu" data-kt-scroll-offset="0">
+            <!--begin::Menu-->
+            <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true">
+                <div class="menu-item">
+                    <div class="menu-content pb-2">
+                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">Dashboard</span>
                     </div>
-                    <span class="nav-link-text ms-1">Dashboard</span>
-                </a>
-            </li>
-            @role('office')
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Master Setup</h6>
-            </li>
-            @permission('provinsi-create|provinsi-delete|provinsi-read|provinsi-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('provinsis*') ? 'active' : '' }}" href="{{ route('provinsis.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-square-pin text-primary text-sm opacity-10"></i>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link{{ request()->is('dashboard') ? ' active' : '' }}" href="{{ route('dashboard') }}">
+                        <span class="menu-icon">
+                            <i class="bi bi-house fs-3"></i>
+                        </span>
+                        <span class="menu-title">Dashboard</span>
+                    </a>
+                </div>
+                @role('office')
+                <div class="menu-item">
+                    <div class="menu-content pb-2">
+                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">Office</span>
                     </div>
-                    <span class="nav-link-text ms-1">Provinsi</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('kota-create|kota-delete|kota-read|kota-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('kotas*') ? 'active' : '' }}" href="{{ route('kotas.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-square-pin text-secondary text-sm opacity-10"></i>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion{{ request()->is('others/*') ? ' hover show' : '' }}">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                            <i class="bi bi-back fs-3"></i>
+                        </span>
+                        <span class="menu-title">Others</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion menu-active-bg{{ request()->is('others/locations/*') ? ' show' : '' }}">
+                        <div data-kt-menu-trigger="click" class="menu-item{{ request()->is('others/locations/*') ? ' here show' : '' }} menu-accordion">
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <i class="bi bi-map fs-3"></i>
+                                </span>
+                                <span class="menu-title">Lokasi</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('others/locations/provinsis*') ? ' active' : '' }}" href="{{ route('provinsis.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Provinsi</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('others/locations/kotas*') ? ' active' : '' }}" href="{{ route('kotas.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Kota</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('others/locations/kecamatans*') ? ' active' : '' }}" href="{{ route('kecamatans.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Kecamatan</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('others/locations/kelurahans*') ? ' active' : '' }}" href="{{ route('kelurahans.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Kelurahan</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('others/locations/zips*') ? ' active' : '' }}" href="{{ route('zips.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Kode Pos</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('others/branches*') ? ' active' : '' }}" href="{{ route('branches.index') }}">
+                                <span class="menu-icon">
+                                    <i class="bi bi-bezier fs-3"></i>
+                                </span>
+                                <span class="menu-title">Cabang</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('others/areas*') ? ' active' : '' }}" href="{{ route('areas.index') }}">
+                                <span class="menu-icon">
+                                    <i class="bi bi-crosshair fs-3"></i>
+                                </span>
+                                <span class="menu-title">Area</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('others/positions*') ? ' active' : '' }}" href="{{ route('positions.index') }}">
+                                <span class="menu-icon">
+                                    <i class="bi bi-person-badge fs-3"></i>
+                                </span>
+                                <span class="menu-title">Jabatan</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('others/employees*') ? ' active' : '' }}" href="{{ route('employees.index') }}">
+                                <span class="menu-icon">
+                                    <i class="bi bi-people fs-3"></i>
+                                </span>
+                                <span class="menu-title">Karyawan</span>
+                            </a>
+                        </div>
+                        <div data-kt-menu-trigger="click" class="menu-item{{ request()->is('others/accounts/*') ? ' here show' : '' }} menu-accordion">
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <i class="bi bi-person-circle fs-3"></i>
+                                </span>
+                                <span class="menu-title">Akun</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('others/accounts/users*') ? ' active' : '' }}" href="{{ route('users.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">User</span>
+                                    </a>
+                                </div>
+                                {{-- <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('others/accounts/permissions*') ? ' active' : '' }}" href="{{ route('laratrust.permissions.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Permissions</span>
+                                    </a>
+                                </div> --}}
+                                {{-- <div csup --}}
+                                <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('others/accounts/roles-assignment*') ? ' active' : '' }}" href="{{ route('laratrust.roles-assignment.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Roles Assignment</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('others/companies*') ? ' active' : '' }}" href="{{ route('companies.index') }}">
+                                <span class="menu-icon">
+                                    <i class="bi bi-buildings fs-3"></i>
+                                </span>
+                                <span class="menu-title">Perusahaan</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('others/vaccines*') ? ' active' : '' }}" href="{{ route('vaccines.index') }}">
+                                <span class="menu-icon">
+                                    <i class="bi bi-capsule fs-3"></i>
+                                </span>
+                                <span class="menu-title">Vaksin</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('others/jobs*') ? ' active' : '' }}" href="{{ route('jobs.index') }}">
+                                <span class="menu-icon">
+                                    <i class="bi bi-briefcase fs-3"></i>
+                                </span>
+                                <span class="menu-title">Pekerjaan</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('others/educations*') ? ' active' : '' }}" href="{{ route('educations.index') }}">
+                                <span class="menu-icon">
+                                    <i class="bi bi-mortarboard fs-3"></i>
+                                </span>
+                                <span class="menu-title">Edukasi</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('others/countries*') ? ' active' : '' }}" href="{{ route('countries.index') }}">
+                                <span class="menu-icon">
+                                    <i class="bi bi-globe fs-3"></i>
+                                </span>
+                                <span class="menu-title">Negara</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('others/relations*') ? ' active' : '' }}" href="{{ route('relations.index') }}">
+                                <span class="menu-icon">
+                                    <i class="bi bi-link fs-3"></i>
+                                </span>
+                                <span class="menu-title">Relasi</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('others/banks*') ? ' active' : '' }}" href="{{ route('banks.index') }}">
+                                <span class="menu-icon">
+                                    <i class="bi bi-bank fs-3"></i>
+                                </span>
+                                <span class="menu-title">Bank</span>
+                            </a>
+                        </div>
                     </div>
-                    <span class="nav-link-text ms-1">Kota</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('kecamatan-create|kecamatan-delete|kecamatan-read|kecamatan-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('kecamatans*') ? 'active' : '' }}" href="{{ route('kecamatans.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-square-pin text-info text-sm opacity-10"></i>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion{{ request()->is('suppliers/*') ? ' hover show' : '' }}">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                            <i class="bi bi-truck fs-3"></i>
+                        </span>
+                        <span class="menu-title">Pemasok</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion menu-active-bg{{ request()->is('suppliers/*') ? ' show' : '' }}">
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('suppliers/suppliersubtypes*') ? ' active' : '' }}" href="{{ route('suppliersubtypes.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Sub Tipe</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('suppliers/main*') ? ' active' : '' }}" href="{{ route('suppliers.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Utama</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('suppliers/supplieraccs*') ? ' active' : '' }}" href="{{ route('supplieraccs.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Konfirmasi</span>
+                            </a>
+                        </div>
                     </div>
-                    <span class="nav-link-text ms-1">Kecamatan</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('kelurahan-create|kelurahan-delete|kelurahan-read|kelurahan-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('kelurahans*') ? 'active' : '' }}" href="{{ route('kelurahans.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-square-pin text-warning text-sm opacity-10"></i>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion{{ request()->is('packages/*') ? ' hover show' : '' }}">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                            <i class="bi bi-box-seam fs-3"></i>
+                        </span>
+                        <span class="menu-title">Paket</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion menu-active-bg{{ request()->is('packages/*') ? ' show' : '' }}">
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('packages/package*') ? ' active' : '' }}" href="{{ route('packages.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Membuat Paket</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('packages/registerpackages*') ? ' active' : '' }}" href="{{ route('registerpackages.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Registrasi Paket</span>
+                            </a>
+                        </div>
                     </div>
-                    <span class="nav-link-text ms-1">Kelurahan</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('zip-create|zip-delete|zip-read|zip-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('zips*') ? 'active' : '' }}" href="{{ route('zips.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-map-big text-success text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Zip</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('area-create|area-delete|area-read|area-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('areas*') ? 'active' : '' }}" href="{{ route('areas.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-ungroup text-danger text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Area</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('branch-create|branch-delete|branch-read|branch-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('branchs*') ? 'active' : '' }}" href="{{ route('branchs.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-vector text-dark text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Branch</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('position-create|position-delete|position-read|position-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('positions*') ? 'active' : '' }}" href="{{ route('positions.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-chart-bar-32 text-primary text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Position</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('employee-create|employee-delete|employee-read|employee-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('employees*') ? 'active' : '' }}" href="{{ route('employees.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-user-tie text-secondary text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Employee</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('user-create|user-delete|user-read|user-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="{{ route('users.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-users text-success text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">User</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('user-role-create|user-role-delete|user-role-read|user-role-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('userroles/roles-assignment') ? 'active' : '' }}" href="{{ url('userroles/roles-assignment') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-user-tag text-danger text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">User Role</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('role-create|role-delete|role-read|role-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('userroles/roles') ? 'active' : '' }}" href="{{ url('userroles/roles') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-user-tag text-danger text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Role</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('user-role-create|user-role-delete|user-role-read|user-role-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('userroles/userroles') ? 'active' : '' }}" href="{{ route('userroles.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-user-tag text-danger text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Role</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('parameter-create|parameter-delete|parameter-read|parameter-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('parameters*') ? 'active' : '' }}" href="{{ route('parameters.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Parameter</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('coy-create|coy-delete|coy-read|coy-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('coys*') ? 'active' : '' }}" href="{{ route('coys.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Coy</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('vaccine-create|vaccine-delete|vaccine-read|vaccine-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('vaccines*') ? 'active' : '' }}" href="{{ route('vaccines.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Vaccine</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('job-create|job-delete|job-read|job-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('jobs*') ? 'active' : '' }}" href="{{ route('jobs.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Job</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('edu-create|edu-delete|edu-read|edu-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('edus*') ? 'active' : '' }}" href="{{ route('edus.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Edu</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('country-create|country-delete|country-read|country-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('countries*') ? 'active' : '' }}" href="{{ route('countries.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Country</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('relation-create|relation-delete|relation-read|relation-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('relations*') ? 'active' : '' }}" href="{{ route('relations.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Relation</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('bank-create|bank-delete|bank-read|bank-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('banks*') ? 'active' : '' }}" href="{{ route('banks.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Bank</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('supplier-sub-type-create|supplier-sub-type-delete|supplier-sub-type-read|supplier-sub-type-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('suppliersubtypes/*') ? 'active' : '' }}" href="{{ route('suppliersubtypes.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Supplier Sub Type</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('supplier-create|supplier-delete|supplier-read|supplier-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('suppliers/*') ? 'active' : '' }}" href="{{ route('suppliers.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Supplier</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('supplier-acc-create|supplier-acc-delete|supplier-acc-read|supplier-acc-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('supplieraccs/*') ? 'active' : '' }}" href="{{ route('supplieraccs.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Supplier Acc</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('package-create|package-delete|package-read|package-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('packages/*') ? 'active' : '' }}" href="{{ route('packages.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Package</span>
-                </a>
-            </li>
-            @endpermission
-            @permission('register-package-create|register-package-delete|register-package-read|register-package-update')
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('registerpackages/*') ? 'active' : '' }}" href="{{ route('registerpackages.index') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fas fa-sliders-h text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Register Package</span>
-                </a>
-            </li>
-            @endpermission
-            @endrole
-        </ul>
+                </div>
+                @endrole
+            </div>
+            <!--end::Menu-->
+        </div>
+        <!--end::Aside Menu-->
     </div>
-</aside>
+    <!--end::Aside menu-->
+</div>
+<!--end::Aside-->
