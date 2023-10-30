@@ -295,6 +295,7 @@
                     </div>
                 </div>
                 @endrole
+                @role('agen')
                 <div class="menu-item">
                     <div class="menu-content pb-2">
                         <span class="menu-section text-muted text-uppercase fs-8 ls-1">Agen</span>
@@ -308,6 +309,7 @@
                         <span class="menu-title">Registrasi Paket</span>
                     </a>
                 </div>
+                @endrole
             </div>
             <!--end::Menu-->
         </div>
