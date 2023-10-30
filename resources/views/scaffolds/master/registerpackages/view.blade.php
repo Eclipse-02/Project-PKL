@@ -15,7 +15,7 @@
             <!--end::Card title-->
             <!--start::Button-->
             <!--start::Action-->
-            <a href="{{ route('registerpackages.index') }}" class="btn btn-flex btn-light btn-light btn-active-primary fw-bolder align-self-center">
+            <a href="@role('office'){{ route('registerpackages.index') }}@endrole @role('agen'){{ route('agen.registerpackages.index') }}@endrole" class="btn btn-flex btn-light btn-light btn-active-primary fw-bolder align-self-center">
                 <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr002.svg-->
                 <span class="svg-icon svg-icon-muted svg-icon-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

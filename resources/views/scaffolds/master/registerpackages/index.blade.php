@@ -21,9 +21,11 @@
                             @csrf
                             <div class="d-flex align-items-center py-1">
                                 <!--begin::Button-->
+                                @role('office')
                                 <input type="hidden" id="start_date" name="start_date">
                                 <input type="hidden" id="end_date" name="end_date">
                                 <button type="submit" class="btn btn-sm btn-success me-4">Export</button>
+                                @endrole
                                 <!--end::Button-->
                                 <!--begin::Wrapper-->
                                 <div class="me-4">
@@ -280,7 +282,7 @@
                         <!--begin::Content-->
                         <div class="flex-row-fluid py-lg-5 px-lg-15">
                             <!--begin::Form-->
-                            <form class="form w-lg-500px mx-auto" action="{{ route('registerpackages.store') }}" method="POST" enctype="multipart/form-data">
+                            <form class="form w-lg-500px mx-auto" action="@role('office'){{ route('registerpackages.store') }}@endrole @role('agen'){{ route('agen.registerpackages.store') }}@endrole" method="POST" enctype="multipart/form-data">
                                 @csrf
 
                                 <!--begin::Group-->
@@ -1802,7 +1804,7 @@
         serverSide: true,
         scrollX: true,
         ajax: {
-            "url": "{{ route('registerpackages.index') }}",
+            "url": "@role('office'){{ route('registerpackages.index') }}@endrole @role('agen'){{ route('agen.registerpackages.index') }}@endrole",
             "data": function(data){
                 data.from_date = $('#daterange').data('daterangepicker').startDate.format('YYYY-MM-DD');
                 data.to_date = $('#daterange').data('daterangepicker').endDate.format('YYYY-MM-DD');

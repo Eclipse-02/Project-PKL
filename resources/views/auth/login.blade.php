@@ -57,8 +57,17 @@
 										<h3 class="card-title">Test Account</h3>
 									</div>
 									<div class="card-body py-5 text-start">
-										<p>Email: <b>office@gmail.com</b></p>
-										<p>Password: <b>office</b></p>
+										<div class="mb-3">
+											<h5>User Office</h5>
+											<p>Email: <b>office@gmail.com</b></p>
+											<p>Password: <b>office</b></p>
+										</div>
+										<div class="separator border-3 my-3"></div>
+										<div class="mb-3">
+											<h5>User Agen</h5>
+											<p>Email: <b>agen@gmail.com</b></p>
+											<p>Password: <b>agen</b></p>
+										</div>
 									</div>
 								</div>
 								<!--end::User Account-->

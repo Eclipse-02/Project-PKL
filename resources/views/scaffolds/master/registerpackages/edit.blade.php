@@ -17,7 +17,7 @@
                 <!--end::Card title-->
                 <!--start::Button-->
                 <!--start::Action-->
-                <a href="{{ route('registerpackages.index') }}" class="btn btn-flex btn-light btn-light btn-active-primary fw-bolder align-self-center">
+                <a href="@role('office'){{ route('registerpackages.index') }}@endrole @role('agen'){{ route('agen.registerpackages.index') }}@endrole" class="btn btn-flex btn-light btn-light btn-active-primary fw-bolder align-self-center">
                     <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr002.svg-->
                     <span class="svg-icon svg-icon-muted svg-icon-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -136,7 +136,7 @@
                 <!--begin::Content-->
                 <div class="flex-row-fluid py-lg-5 px-lg-15">
                     <!--begin::Form-->
-                    <form class="form w-lg-500px mx-auto" action="{{ route('registerpackages.update', $data->id) }}" method="POST" enctype="multipart/form-data">
+                    <form class="form w-lg-500px mx-auto" action="@role('office'){{ route('registerpackages.update', $data->id) }}@endrole @role('agen'){{ route('agen.registerpackages.update', $data->id) }}@endrole" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 

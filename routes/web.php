@@ -394,6 +394,23 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
                 });
             });
         });
+
+        Route::middleware('role:agen')->group(function () {
+
+            // registerpackage scaffold
+            Route::group(['prefix' => 'registerpackages'], function () {
+                Route::get('/', [RegisterPackageController::class, 'index'])->name('agen.registerpackages.index')->middleware('permission:register-package-read');
+                Route::post('/', [RegisterPackageController::class, 'store'])->name('agen.registerpackages.store');
+                Route::get('/create', [RegisterPackageController::class, 'create'])->name('agen.registerpackages.create')->middleware('permission:register-package-create');
+                Route::get('/{registerpackage}', [RegisterPackageController::class, 'show'])->name('agen.registerpackages.show')->middleware('permission:register-package-read');
+                Route::match(['put', 'patch'],'/{registerpackage}', [RegisterPackageController::class, 'update'])->name('agen.registerpackages.update');
+                Route::delete('/{registerpackage}', [RegisterPackageController::class, 'destroy'])->name('agen.registerpackages.destroy')->middleware('permission:register-package-delete');
+                Route::get('/{registerpackage}/edit', [RegisterPackageController::class, 'edit'])->name('agen.registerpackages.edit')->middleware('permission:register-package-update');
+                Route::post('/export', [RegisterPackageController::class, 'export'])->name('agen.registerpackages.export')->middleware('permission:register-package-update');
+            });
+
+        });
+
     });
 
     Route::get('password/expired', [UserController::class, 'expired'])->name('password.expired');

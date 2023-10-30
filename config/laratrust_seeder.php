@@ -45,6 +45,7 @@ return [
             'transaction' => 'c,r,u,d',
         ],
         'agen' => [
+            'register-package' => 'c,r,u,d',
         ],
     ],
 

@@ -295,6 +295,19 @@
                     </div>
                 </div>
                 @endrole
+                <div class="menu-item">
+                    <div class="menu-content pb-2">
+                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">Agen</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link{{ request()->is('registerpackages') ? ' active' : '' }}" href="{{ route('agen.registerpackages.index') }}">
+                        <span class="menu-icon">
+                            <i class="bi bi-box-seam fs-3"></i>
+                        </span>
+                        <span class="menu-title">Registrasi Paket</span>
+                    </a>
+                </div>
             </div>
             <!--end::Menu-->
         </div>
