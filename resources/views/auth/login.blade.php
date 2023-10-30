@@ -32,7 +32,7 @@
 				<!--begin::Content-->
 				<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
 					<!--begin::Logo-->
-					<a href="{{ route('welcome') }}" class="mb-12">
+					<a href="{{ route('landing.main.welcome') }}" class="mb-12">
 						<img alt="Logo" src="{{ asset('master/html/theme/dist/assets/media/logos/logo-1.svg') }}" class="h-40px" />
 					</a>
 					<!--end::Logo-->

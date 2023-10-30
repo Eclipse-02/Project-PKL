@@ -43,7 +43,7 @@ $('#prov_code').change(function() {
     $('#zip_code').select2({
         placeholder: 'Pilih Kecamatan Terlebih Dahulu'
     });
-    fetch(`http://127.0.0.1:8000/api/v1/kotas?code=` + prov_code)
+    fetch(`http://travel/api/v1/kotas?code=` + prov_code)
         .then(response => response.json())
         .then(
             kota => kota.forEach(element => {
@@ -78,7 +78,7 @@ $('#kota_code').change(function() {
     $('#zip_code').select2({
         placeholder: 'Pilih Kecamatan Terlebih Dahulu'
     });
-    fetch(`http://127.0.0.1:8000/api/v1/kecamatans?code=` + kota_code)
+    fetch(`http://travel/api/v1/kecamatans?code=` + kota_code)
         .then(response => response.json())
         .then(
             kecamatan => kecamatan.forEach(element => {
@@ -107,7 +107,7 @@ $('#kec_code').change(function() {
     $('#zip_code').select2({
         placeholder: 'Pilih Kode Pos'
     });
-    fetch(`http://127.0.0.1:8000/api/v1/kelurahans?code=` + kec_code)
+    fetch(`http://travel/api/v1/kelurahans?code=` + kec_code)
         .then(response => response.json())
         .then(
             kelurahan => kelurahan.forEach(element => {
@@ -116,7 +116,7 @@ $('#kec_code').change(function() {
             })
         );
 
-    fetch(`http://127.0.0.1:8000/api/v1/zips?code=` + kec_code)
+    fetch(`http://travel/api/v1/zips?code=` + kec_code)
         .then(response => response.json())
         .then(
             zip => zip.forEach(element => {
@@ -129,7 +129,7 @@ $('#kec_code').change(function() {
 // for edit page
 function callLocations(prov_code = '', kota_code = '', kec_code = '', kel_code = '', zip_code = '') {
     console.log(prov_code);
-    fetch(`http://127.0.0.1:8000/api/v1/kotas?code=` + prov_code)
+    fetch(`http://travel/api/v1/kotas?code=` + prov_code)
     .then(response => response.json())
     .then(kota => kota.forEach(element => {
             if (element.kota_code == kota_code) {
@@ -142,7 +142,7 @@ function callLocations(prov_code = '', kota_code = '', kec_code = '', kel_code =
         })
     );
 
-    fetch(`http://127.0.0.1:8000/api/v1/kecamatans?code=` + kota_code)
+    fetch(`http://travel/api/v1/kecamatans?code=` + kota_code)
     .then(response => response.json())
     .then(kec => kec.forEach(element => {
             if (element.kec_code == kec_code) {
@@ -155,7 +155,7 @@ function callLocations(prov_code = '', kota_code = '', kec_code = '', kel_code =
         })
     );
 
-    fetch(`http://127.0.0.1:8000/api/v1/kelurahans?code=` + kec_code)
+    fetch(`http://travel/api/v1/kelurahans?code=` + kec_code)
     .then(response => response.json())
     .then(
         kel => kel.forEach(element => {
@@ -169,7 +169,7 @@ function callLocations(prov_code = '', kota_code = '', kec_code = '', kel_code =
         })
     );
 
-    fetch(`http://127.0.0.1:8000/api/v1/zips?code=` + kec_code)
+    fetch(`http://travel/api/v1/zips?code=` + kec_code)
     .then(response => response.json())
     .then(
         zip => zip.forEach(element => {

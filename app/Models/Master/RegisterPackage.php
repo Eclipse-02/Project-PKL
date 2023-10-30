@@ -112,10 +112,6 @@ class RegisterPackage extends Model
         'updated_by',
     ];
 
-    function coy() {
-        return $this->belongsTo(Coy::class, 'coy_id', 'coy_id');
-    }
-
     function provinsi() {
         return $this->belongsTo(Provinsi::class, 'prov_code', 'prov_code');
     }
@@ -129,7 +125,7 @@ class RegisterPackage extends Model
     }
 
     function kelurahan() {
-        return $this->belongsTo(kelurahan::class, 'kel_code', 'kel_code');
+        return $this->belongsTo(Kelurahan::class, 'kel_code', 'kel_code');
     }
 
     function zip() {
@@ -158,5 +154,9 @@ class RegisterPackage extends Model
 
     function branch() {
         return $this->belongsTo(Branch::class, 'branch_code', 'branch_code');
+    }
+
+    function package() {
+        return $this->belongsTo(Package::class, 'pkg_code', 'pkg_code');
     }
 }

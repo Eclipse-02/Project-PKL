@@ -24,7 +24,7 @@ class User extends Authenticatable implements LaratrustUser, MustVerifyEmail
         parent::boot();
 
         static::creating(function ($model) {
-            if ( ! $model->getKey()) {
+            if ( ! $model->id) {
                 $model->id = (string) Str::uuid();
             }
         });
@@ -93,15 +93,15 @@ class User extends Authenticatable implements LaratrustUser, MustVerifyEmail
     ];
 
     function branch() {
-        return $this->hasOne(Branch::class, 'branch_code', 'empl_branch');
+        return $this->hasOne(Master\Branch::class, 'branch_code', 'empl_branch');
     }
 
     function employee() {
-        return $this->hasOne(Employee::class, 'empl_id', 'empl_id');
+        return $this->hasOne(Master\Employee::class, 'empl_id', 'empl_id');
     }
 
     function coy() {
-        return $this->belongsTo(Coy::class, 'coy_id', 'coy_id');
+        return $this->belongsTo(Master\Coy::class, 'coy_id', 'coy_id');
     }
 
 }

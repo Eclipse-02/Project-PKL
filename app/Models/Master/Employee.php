@@ -70,6 +70,10 @@ class Employee extends Model
             'updated_by',
     ];
 
+    function up() {
+        return $this->hasOne(Employee::class, 'empl_up_level', 'empl_id');
+    }
+
     function branch() {
         return $this->hasOne(Branch::class, 'branch_code', 'empl_branch');
     }

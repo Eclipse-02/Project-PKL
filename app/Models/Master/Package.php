@@ -64,7 +64,7 @@ class Package extends Model
         'updated_by',
     ];
 
-    function coy() {
-        return $this->belongsTo(Coy::class, 'coy_id', 'coy_id');
+    function detail() {
+        return $this->belongsTo(PackageDetail::class, 'pkg_code', 'pkg_code');
     }
 }

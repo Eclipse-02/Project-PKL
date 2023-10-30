@@ -36,8 +36,6 @@ use App\Http\Controllers\Finance\TransactionController;
 use App\Http\Controllers\Finance\TransactionDetailController;
 use App\Http\Controllers\Finance\InvoiceController;
 
-use App\Http\Controllers\WelcomeController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,13 +46,6 @@ use App\Http\Controllers\WelcomeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
-Route::group(['prefix' => 'package'], function () {
-    Route::post('/', [WelcomeController::class, 'store'])->name('welcome.store');
-    Route::get('/create', [WelcomeController::class, 'create'])->name('welcome.create');
-    Route::get('/{package}', [WelcomeController::class, 'show'])->name('welcome.show');
-});
 
 // currently Logged in user can access 
 Route::middleware(['auth', 'auth.session'])->group(function () {

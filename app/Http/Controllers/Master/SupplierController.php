@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
-use App\Models\Master\Coy;
-use App\Models\Master\Zip;
 use App\Models\Master\Branch;
 use App\Models\Master\Position;
+use App\Models\Master\Provinsi;
 use App\Models\Master\Supplier;
+use App\Models\Master\SupplierAcc;
 use App\Models\Master\SupplierSubType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,71 +23,88 @@ class SupplierController extends Controller
      */
     public function index(Request $request)
     {
+        $branches = Branch::where('coy_id', Auth::user()->coy_id)->select('branch_code', 'branch_name')->get();
+        $supplierSubTypes = SupplierSubType::select('sub_code', 'sub_name')->get();
+        $positions = Position::where('coy_id', Auth::user()->coy_id)->select('poss_code', 'poss_name')->get();
+        $provinsis = Provinsi::select('prov_code', 'provinsi')->get();
         if ($request->ajax()) {
-            $data = Supplier::all();
+            $data = Supplier::where('coy_id', Auth::user()->coy_id)->get();
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
 
-                        if ($row->is_active == 1) {
+                        if ($row->is_active == 'Y') {
                             $btn = '
-                            <form action="suppliers/'.$row->id.'" method="POST">
+                            <form action="main/'.$row->id.'" method="POST" class="text-center">
 
-                                <a class="btn btn-info" href="suppliers/'.$row->id.'" >
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
-                                        <style>svg{fill:#ffffff}</style>
-                                        <path d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z"/>
-                                    </svg>
-                                </svg>
+                                <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-md me-1" href="main/'.$row->id.'" >
+                                    <!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen004.svg-->
+                                    <span class="svg-icon svg-icon-muted svg-icon-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M21.7 18.9L18.6 15.8C17.9 16.9 16.9 17.9 15.8 18.6L18.9 21.7C19.3 22.1 19.9 22.1 20.3 21.7L21.7 20.3C22.1 19.9 22.1 19.3 21.7 18.9Z" fill="black"/>
+                                    <path opacity="0.3" d="M11 20C6 20 2 16 2 11C2 6 6 2 11 2C16 2 20 6 20 11C20 16 16 20 11 20ZM11 4C7.1 4 4 7.1 4 11C4 14.9 7.1 18 11 18C14.9 18 18 14.9 18 11C18 7.1 14.9 4 11 4ZM8 11C8 9.3 9.3 8 11 8C11.6 8 12 7.6 12 7C12 6.4 11.6 6 11 6C8.2 6 6 8.2 6 11C6 11.6 6.4 12 7 12C7.6 12 8 11.6 8 11Z" fill="black"/>
+                                    </svg></span>
+                                    <!--end::Svg Icon-->
                                 </a>
 
-                                <a class="btn btn-primary" href="suppliers/'.$row->id.'/edit" >
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                                </svg>
+                                <a class="btn btn-icon btn-bg-light btn-active-color-warning btn-md me-1" href="main/'.$row->id.'/edit" >
+                                    <!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen055.svg-->
+                                    <span class="svg-icon svg-icon-muted svg-icon-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z" fill="black"/>
+                                    <path d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z" fill="black"/>
+                                    <path d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z" fill="black"/>
+                                    </svg></span>
+                                    <!--end::Svg Icon-->
                                 </a>
 
                                 '.csrf_field().'
                                 '.method_field("DELETE").'
+                                <input type="hidden" id="swal_name_val" value="'.$row->job_name.'">
 
-                                <button type="submit" class="btn btn-danger">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
-                                        <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm101.8-262.2L295.6 256l62.2 62.2c4.7 4.7 4.7 12.3 0 17l-22.6 22.6c-4.7 4.7-12.3 4.7-17 0L256 295.6l-62.2 62.2c-4.7 4.7-12.3 4.7-17 0l-22.6-22.6c-4.7-4.7-4.7-12.3 0-17l62.2-62.2-62.2-62.2c-4.7-4.7-4.7-12.3 0-17l22.6-22.6c4.7-4.7 12.3-4.7 17 0l62.2 62.2 62.2-62.2c4.7-4.7 12.3-4.7 17 0l22.6 22.6c4.7 4.7 4.7 12.3 0 17z"/>
-                                    </svg>
-                                    </svg>
+                                <button type="submit" class="swal-disable btn btn-icon btn-bg-light btn-active-color-danger btn-md me-1">
+                                    <!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen040.svg-->
+                                    <span class="svg-icon svg-icon-muted svg-icon-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black"/>
+                                    <rect x="7" y="15.3137" width="12" height="2" rx="1" transform="rotate(-45 7 15.3137)" fill="black"/>
+                                    <rect x="8.41422" y="7" width="12" height="2" rx="1" transform="rotate(45 8.41422 7)" fill="black"/>
+                                    </svg></span>
+                                    <!--end::Svg Icon-->
                                 </button>
                             </form>
                             ';
                         } else {
                             $btn = '
-                            <form action="suppliers/'.$row->id.'" method="POST">
+                            <form action="main/'.$row->id.'" method="POST" class="text-center">
     
-                                <a class="btn btn-info" href="suppliers/'.$row->id.'" >
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
-                                        <style>svg{fill:#ffffff}</style>
-                                        <path d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z"/>
-                                    </svg>
-                                </svg>
+                                <a class="btn btn-icon btn-bg-light btn-active-color-primary btn-md me-1" href="main/'.$row->id.'" >
+                                    <!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen004.svg-->
+                                    <span class="svg-icon svg-icon-muted svg-icon-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M21.7 18.9L18.6 15.8C17.9 16.9 16.9 17.9 15.8 18.6L18.9 21.7C19.3 22.1 19.9 22.1 20.3 21.7L21.7 20.3C22.1 19.9 22.1 19.3 21.7 18.9Z" fill="black"/>
+                                    <path opacity="0.3" d="M11 20C6 20 2 16 2 11C2 6 6 2 11 2C16 2 20 6 20 11C20 16 16 20 11 20ZM11 4C7.1 4 4 7.1 4 11C4 14.9 7.1 18 11 18C14.9 18 18 14.9 18 11C18 7.1 14.9 4 11 4ZM8 11C8 9.3 9.3 8 11 8C11.6 8 12 7.6 12 7C12 6.4 11.6 6 11 6C8.2 6 6 8.2 6 11C6 11.6 6.4 12 7 12C7.6 12 8 11.6 8 11Z" fill="black"/>
+                                    </svg></span>
+                                    <!--end::Svg Icon-->
                                 </a>
     
-                                <a class="btn btn-primary" href="suppliers/'.$row->id.'/edit" >
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                                </svg>
+                                <a class="btn btn-icon btn-bg-light btn-active-color-warning btn-md me-1" href="main/'.$row->id.'/edit" >
+                                    <!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen055.svg-->
+                                    <span class="svg-icon svg-icon-muted svg-icon-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z" fill="black"/>
+                                    <path d="M10.9256 11.1882C10.5351 10.7977 10.5351 10.1645 10.9256 9.77397L18.0669 2.6327C18.8479 1.85165 20.1143 1.85165 20.8953 2.6327L21.3665 3.10391C22.1476 3.88496 22.1476 5.15129 21.3665 5.93234L14.2252 13.0736C13.8347 13.4641 13.2016 13.4641 12.811 13.0736L10.9256 11.1882Z" fill="black"/>
+                                    <path d="M8.82343 12.0064L8.08852 14.3348C7.8655 15.0414 8.46151 15.7366 9.19388 15.6242L11.8974 15.2092C12.4642 15.1222 12.6916 14.4278 12.2861 14.0223L9.98595 11.7221C9.61452 11.3507 8.98154 11.5055 8.82343 12.0064Z" fill="black"/>
+                                    </svg></span>
+                                    <!--end::Svg Icon-->
                                 </a>
     
                                 '.csrf_field().'
                                 '.method_field("DELETE").'
+                                <input type="hidden" id="swal_name_val" value="'.$row->job_name.'">
     
-                                <button type="submit" class="btn btn-success">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
-                                    <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"/>
-                                </svg>
+                                <button type="submit" class="swal-enable btn btn-icon btn-bg-light btn-active-color-success btn-md me-1">
+                                    <!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen043.svg-->
+                                    <span class="svg-icon svg-icon-muted svg-icon-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black"/>
+                                    <path d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z" fill="black"/>
+                                    </svg></span>
+                                    <!--end::Svg Icon-->
                                 </button>
                             </form>
                             ';
@@ -98,7 +115,7 @@ class SupplierController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('scaffolds.master.suppliers.index');
+        return view('scaffolds.master.suppliers.index', compact('branches', 'supplierSubTypes', 'positions', 'provinsis'));
     }
 
     /**
@@ -106,12 +123,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        $branchs = Branch::select('branch_code', 'branch_name')->get();
-        $supplierSubTypes = SupplierSubType::select('sub_code', 'sub_name')->get();
-        $poss = Position::select('poss_code', 'poss_name')->get();
-        $zips = Zip::select('zip_code', 'zip_desc')->get();
-        $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.master.suppliers.create', compact('branchs', 'supplierSubTypes', 'poss', 'zips', 'coys'));
+        //
     }
 
     /**
@@ -120,7 +132,6 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'coy_id' => 'required|integer',
             'supl_code' => 'required|string',
             'branch_code' => 'required|string',
             'is_active' => 'required|string',
@@ -150,23 +161,23 @@ class SupplierController extends Controller
         ]);
 
         if ($validator->fails()) {
-            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            Alert::toast('Ups, Terjadi Sesuatu yang Salah!', 'error');
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
-            $request->file('supl_pic_name')->move(storage_path('supl/files/supl-img'), 'supl_pic_name-' . Carbon::now()->format('yyyy_dd_mm'));
-            $request->file('file_name_mou')->move(storage_path('supl/files/mous'), 'file_name_mou-' . Carbon::now()->format('yyyy_dd_mm'));
-            $request->file('file_name_ktp')->move(storage_path('supl/files/ktps'), 'file_name_ktp-' . Carbon::now()->format('yyyy_dd_mm'));
-            $request->file('file_name_npwp')->move(storage_path('supl/files/npwps'), 'file_name_npwp-' . Carbon::now()->format('yyyy_dd_mm'));
+            $request->file('supl_pic_name')->move(storage_path('app/supl/supl-img'), 'supl_pic_name-' . Carbon::now()->format('Y-m-d') . '.jpg');
+            $request->file('file_name_mou')->move(storage_path('app/supl/mous'), 'file_name_mou-' . Carbon::now()->format('Y-m-d') . '.jpg');
+            $request->file('file_name_ktp')->move(storage_path('app/supl/ktps'), 'file_name_ktp-' . Carbon::now()->format('Y-m-d') . '.jpg');
+            $request->file('file_name_npwp')->move(storage_path('app/supl/npwps'), 'file_name_npwp-' . Carbon::now()->format('Y-m-d') . '.jpg');
             Supplier::create([
-                'coy_id' => $request->coy_id,
+                'coy_id' => Auth::user()->coy_id,
                 'supl_code' => $request->supl_code,
                 'branch_code' => $request->branch_code,
                 'is_active' => $request->is_active,
-                'supl_status' => 'NW',
+                'supl_status' => $request->submit == 'submit' ? 'NW' : 'NA',
                 'supl_name' => $request->supl_name,
                 'supl_type' => $request->supl_type,
                 'supl_sub_type' => $request->supl_sub_type,
-                'supl_pic_name' => 'supl_pic_name-' . Carbon::now()->format('yyyy_dd_mm'),
+                'supl_pic_name' => 'supl_pic_name-' . Carbon::now()->format('Y-m-d') . '.jpg',
                 'poss_code' => $request->poss_code,
                 'supl_id_no' => $request->supl_id_no,
                 'supl_addr' => $request->supl_addr,
@@ -182,14 +193,14 @@ class SupplierController extends Controller
                 'supl_npwp_no' => $request->supl_npwp_no,
                 'supl_npwp_name' => $request->supl_npwp_name,
                 'supl_npwp_addr' => $request->supl_npwp_addr,
-                'file_name_mou' => 'file_name_mou-' . Carbon::now()->format('yyyy_dd_mm'),
-                'file_name_ktp' => 'file_name_ktp-' . Carbon::now()->format('yyyy_dd_mm'),
-                'file_name_npwp' => 'file_name_npwp-' . Carbon::now()->format('yyyy_dd_mm'),
+                'file_name_mou' => 'file_name_mou-' . Carbon::now()->format('Y-m-d') . '.jpg',
+                'file_name_ktp' => 'file_name_ktp-' . Carbon::now()->format('Y-m-d') . '.jpg',
+                'file_name_npwp' => 'file_name_npwp-' . Carbon::now()->format('Y-m-d') . '.jpg',
                 'supl_desc' => $request->supl_desc,
                 'created_by' => Auth::user()->name,
                 'updated_by' => Auth::user()->name,
             ]);
-            Alert::toast('Data Created Successfully!', 'success');
+            Alert::toast('Data Berhasil Dibuat!', 'success');
             return redirect()->route('suppliers.index');
         }
     }
@@ -199,12 +210,16 @@ class SupplierController extends Controller
      */
     public function show($supplier)
     {
-        $data = Supplier::where('id', $supplier)->first();
-        $branchs = Branch::select('branch_code', 'branch_name')->get();
-        $supplierSubTypes = SupplierSubType::select('sub_code', 'sub_name')->get();
-        $poss = Position::select('poss_code', 'poss_name')->get();
-        $zips = Zip::select('zip_code', 'zip_desc')->get();
-        return view('scaffolds.master.suppliers.view', compact('data', 'branchs', 'supplierSubTypes', 'poss', 'zips'));
+        $data = Supplier::where([
+            ['id', '=', $supplier],
+            ['coy_id', '=', Auth::user()->coy_id]
+        ])->first();
+
+        if (!$data) {
+            Alert::toast('Anda Tidak Memiliki Akses Untuk Melihat Data Ini!', 'error');
+            return redirect()->back();
+        }
+        return view('scaffolds.master.suppliers.view', compact('data'));
     }
 
     /**
@@ -212,30 +227,34 @@ class SupplierController extends Controller
      */
     public function edit($supplier)
     {
-        $data = Supplier::where('id', $supplier)->first();
-        $branchs = Branch::select('branch_code', 'branch_name')->get();
+        $data = Supplier::where([
+            ['id', '=', $supplier],
+            ['coy_id', '=', Auth::user()->coy_id]
+        ])->first();
+        $branches = Branch::where('coy_id', Auth::user()->coy_id)->select('branch_code', 'branch_name')->get();
         $supplierSubTypes = SupplierSubType::select('sub_code', 'sub_name')->get();
-        $poss = Position::select('poss_code', 'poss_name')->get();
-        $zips = Zip::select('zip_code', 'zip_desc')->get();
-        $coys = Coy::select('coy_id', 'coy_name')->get();
-        return view('scaffolds.master.suppliers.edit', compact('data', 'branchs', 'supplierSubTypes', 'poss', 'zips', 'coys'));
+        $positions = Position::where('coy_id', Auth::user()->coy_id)->select('poss_code', 'poss_name')->get();
+        $provinsis = Provinsi::select('prov_code', 'provinsi')->get();
+
+        if (!$data) {
+            Alert::toast('Anda Tidak Memiliki Akses Untuk Mengedit Data Ini!', 'error');
+            return redirect()->back();
+        }
+        return view('scaffolds.master.suppliers.edit', compact('data', 'branches', 'supplierSubTypes', 'positions', 'provinsis'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Supplier $supplier)
+    public function update(Request $request, $supplier)
     {
         $validator = Validator::make($request->all(), [
-            'coy_id' => 'required|integer',
             'supl_code' => 'required|string',
             'branch_code' => 'required|string',
             'is_active' => 'required|string',
-            'supl_status' => 'required|string',
             'supl_name' => 'required|string',
             'supl_type' => 'required|string',
             'supl_sub_type' => 'required|string',
-            'supl_pic_name' => 'image|file',
             'poss_code' => 'required|string',
             'supl_id_no' => 'required|string',
             'supl_addr' => 'required|string',
@@ -252,45 +271,49 @@ class SupplierController extends Controller
             'supl_npwp_name' => 'required|string',
             'supl_npwp_addr' => 'required|string',
             'supl_desc' => 'required|string',
-            'file_name_mou' => 'image|file',
-            'file_name_ktp' => 'image|file',
-            'file_name_npwp' => 'image|file',
         ]);
 
         if ($validator->fails()) {
-            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            Alert::toast('Ups, Terjadi Sesuatu yang Salah!', 'error');
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             if ($request->file('supl_pic_name')) {
-                unlink(storage_path('supl/supl-img/' . $request->old_supl_pic_name));
-                $request->file('supl_pic_name')->move(storage_path('supl/supl-img'), 'supl_pic_name-' . Carbon::now()->format('yyyy_dd_mm'));
-                $supplier->update(['supl_pic_name' => 'supl_pic_name-' . Carbon::now()->format('yyyy_dd_mm')]);
+                unlink(storage_path('app/supl/supl-img/' . $request->old_supl_pic_name));
+                $request->file('supl_pic_name')->move(storage_path('app/supl/supl-img'), 'supl_pic_name-' . Carbon::now()->format('Y-m-d'));
+                $supplier->update(['supl_pic_name' => 'supl_pic_name-' . Carbon::now()->format('Y-m-d')]);
             }
             
             if ($request->file('file_name_mou')) {
-                unlink(storage_path('supl/files/mous/' . $request->old_file_name_mou));
-                $request->file('file_name_mou')->move(storage_path('supl/files/mous'), 'file_name_mou-' . Carbon::now()->format('yyyy_dd_mm'));
-                $supplier->update(['file_name_mou' => 'file_name_mou-' . Carbon::now()->format('yyyy_dd_mm')]);
+                unlink(storage_path('app/supl/mous/' . $request->old_file_name_mou));
+                $request->file('file_name_mou')->move(storage_path('app/supl/mous'), 'file_name_mou-' . Carbon::now()->format('Y-m-d'));
+                $supplier->update(['file_name_mou' => 'file_name_mou-' . Carbon::now()->format('Y-m-d')]);
             }
             
             if ($request->file('file_name_ktp')) {
-                unlink(storage_path('supl/files/ktps/' . $request->old_file_name_ktp));
-                $request->file('file_name_ktp')->move(storage_path('supl/files/ktps'), 'file_name_ktp-' . Carbon::now()->format('yyyy_dd_mm'));
-                $supplier->update(['file_name_ktp' => 'file_name_ktp-' . Carbon::now()->format('yyyy_dd_mm')]);
+                unlink(storage_path('app/supl/ktps/' . $request->old_file_name_ktp));
+                $request->file('file_name_ktp')->move(storage_path('app/supl/ktps'), 'file_name_ktp-' . Carbon::now()->format('Y-m-d'));
+                $supplier->update(['file_name_ktp' => 'file_name_ktp-' . Carbon::now()->format('Y-m-d')]);
             }
             
             if ($request->file('file_name_npwp')) {
-                unlink(storage_path('supl/files/npwps/' . $request->old_file_name_npwp));
-                $request->file('file_name_npwp')->move(storage_path('supl/files/npwps'), 'file_name_npwp-' . Carbon::now()->format('yyyy_dd_mm'));
-                $supplier->update(['file_name_npwp' => 'file_name_npwp-' . Carbon::now()->format('yyyy_dd_mm')]);
+                unlink(storage_path('app/supl/npwps/' . $request->old_file_name_npwp));
+                $request->file('file_name_npwp')->move(storage_path('app/supl/npwps'), 'file_name_npwp-' . Carbon::now()->format('Y-m-d'));
+                $supplier->update(['file_name_npwp' => 'file_name_npwp-' . Carbon::now()->format('Y-m-d')]);
             }
 
-            $supplier->update([
-                'coy_id' => $request->coy_id,
+            
+            if ($request->submit == 'approval') {
+                $supl_status = 'NA';
+            } else {
+                $supl_status = $request->supl_status;
+            }
+
+            Supplier::where('id', $supplier)->update([
+                'coy_id' => Auth::user()->coy_id,
                 'supl_code' => $request->supl_code,
                 'branch_code' => $request->branch_code,
                 'is_active' => $request->is_active,
-                'supl_status' => $request->supl_status,
+                'supl_status' => $supl_status,
                 'supl_name' => $request->supl_name,
                 'supl_type' => $request->supl_type,
                 'supl_sub_type' => $request->supl_sub_type,
@@ -312,7 +335,12 @@ class SupplierController extends Controller
                 'supl_desc' => $request->supl_desc,
                 'updated_by' => Auth::user()->name,
             ]);
-            Alert::toast('Data Created Successfully!', 'success');
+
+            SupplierAcc::where('id', $supplier)->update([
+                'acc_status' => $supl_status
+            ]);
+
+            Alert::toast('Data Berhasil Diperbarui!', 'success');
             return redirect()->route('suppliers.index');
         }
     }
@@ -322,16 +350,17 @@ class SupplierController extends Controller
      */
     public function destroy(Supplier $supplier)
     {
-        if ($supplier->is_active == 1) {
+        if ($supplier->is_active == 'Y') {
             $supplier->update([
-                'is_active' => 0
+                'is_active' => 'N'
             ]);
         } else {
             $supplier->update([
-                'is_active' => 1
+                'is_active' => 'Y'
             ]);
         }
 
+        Alert::toast('Status Data Berhasil Diperbarui!', 'success');
         return redirect()->route('suppliers.index');
     }
 }

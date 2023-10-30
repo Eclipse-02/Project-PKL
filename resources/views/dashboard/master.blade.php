@@ -73,7 +73,7 @@
 							</div>
 							<!--end::Mobile logo-->
 							<!--begin::Wrapper-->
-							<div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
+							<div class="d-flex align-items-stretch justify-content-end flex-lg-grow-1">
 								@include('dashboard.navbar')
 							</div>
 							<!--end::Wrapper-->

@@ -106,7 +106,7 @@ class Supplier extends Model
         return $this->belongsTo(Position::class, 'poss_code', 'poss_code');
     }
 
-    function coy() {
-        return $this->belongsTo(Coy::class, 'coy_id', 'coy_id');
+    function sub() {
+        return $this->belongsTo(SupplierSubType::class, 'supl_sub_type', 'sub_code');
     }
 }
