@@ -53,20 +53,8 @@
 
                         <!--begin::Body-->
                         <div id="kt_accordion_2_item_1" class="fs-6 collapse show ps-10" data-bs-parent="#kt_accordion_2">
-                            <!--begin::Row-->
-                            <div class="row my-7">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 fw-bold text-muted">UID</label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8">
-                                    <span class="fw-bolder fs-6 text-gray-800">{{ $data->id }}</span>
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Row-->
                             <!--begin::Input group-->
-                            <div class="row mb-7">
+                            <div class="row my-7">
                                 <!--begin::Label-->
                                 <label class="col-lg-4 fw-bold text-muted">Kode Bank</label>
                                 <!--end::Label-->

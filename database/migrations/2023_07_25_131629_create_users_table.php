@@ -14,15 +14,17 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->string("coy_id", 5);
             $table->uuid("id");
-            $table->string("empl_id", 15)->nullable()->primary(); // fs_mst_employees
+            $table->string("empl_id", 16)->nullable()->primary(); // fs_mst_employees
             $table->string("empl_branch", 5)->nullable(); // fs_mst_branch
             $table->timestamp("access_last")->nullable();
             $table->integer("max_session")->nullable();
             $table->timestamp("expired_pwd")->nullable();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('username');
             $table->string('password');
+            $table->timestamp('password_change_at')->nullable();
+            $table->string('copy_ktp_name')->nullable();
+            $table->string('copy_npwp_name')->nullable();
             $table->rememberToken();
             $table->string("created_by");
             $table->string("updated_by");

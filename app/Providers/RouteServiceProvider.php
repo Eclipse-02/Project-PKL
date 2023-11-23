@@ -29,7 +29,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         $this->routes(function () {
-            Route::middleware('api')
+            Route::middleware(['api', 'web'])
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
@@ -37,10 +37,6 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
 
             Route::middleware('web')
-                ->group(base_path('routes/landing.php'));
-
-            Route::middleware('web')
-                ->domain('travel.test')
                 ->group(base_path('routes/landing.php'));
         });
     }

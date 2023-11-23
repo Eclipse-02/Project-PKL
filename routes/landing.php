@@ -28,19 +28,3 @@ Route::group(['prefix' => 'package'], function () {
     Route::get('/{package}', [MainController::class, 'show'])->name('landing.main.welcome.show');
 
 });
-
-Route::domain('travel' . '.test')->group(function () {
-
-    Route::get('/', [TestController::class, 'index'])->name('landing.test.welcome');
-    
-    Route::group(['prefix' => 'package'], function () {
-
-        Route::get('/', [TestController::class, 'package'])->name('landing.test.welcome.packages');
-        Route::post('/', [TestController::class, 'store'])->name('landing.test.welcome.store');
-        Route::get('/register', [TestController::class, 'create'])->name('landing.test.welcome.register');
-        Route::get('/register/{package}/success', [TestController::class, 'success'])->name('landing.test.welcome.success');
-        Route::get('/{package}', [TestController::class, 'show'])->name('landing.test.welcome.show');
-
-    });
-
-});

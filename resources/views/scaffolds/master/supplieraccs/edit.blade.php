@@ -11,8 +11,8 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title m-0 flex-column">
-                    <h3 class="fw-bolder m-0">Edit Data</h3>
-                    <div class="text-muted fs-7 fw-bold">Edit Data</div>
+                    <h3 class="fw-bolder m-0">Edit Confirmation Data</h3>
+                    <div class="text-muted fs-7 fw-bold">Edit Data Konfirmasi</div>
                 </div>
                 <!--end::Card title-->
                 <!--start::Button-->
@@ -93,7 +93,7 @@
                         </label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input class="form-control form-control-lg form-control-solid @error('acc_no')is-invalid @enderror" type="text" id="acc_no" name="acc_no" value="{{ old('acc_no') ? old('acc_no') : $data->acc_no }}" />
+                        <input class="form-control form-control-lg form-control-solid @error('acc_no')is-invalid @enderror" type="text" id="acc_no" name="acc_no" value="{{ old('acc_no') ? old('acc_no') : $data->acc_no }}" disabled="disabled" />
                         <!--end::Input-->
                         <!--begin::Error-->
                         @error('acc_no')

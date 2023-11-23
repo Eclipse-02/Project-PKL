@@ -40,7 +40,7 @@ class RegisterPackageSeeder extends Seeder
             "appl_fth_name" => "Budi",
             "rel_code" => "1",
             "appl_mahram" => "asd",
-            "appl_pass_no" => "24236334",
+            "appl_pass_no" => "B 24236334",
             "appl_pass_name" => "asnjkfsad",
             "appl_pass_iss_date" => "2023-09-12",
             "appl_pass_exp_date" => "2023-09-12",

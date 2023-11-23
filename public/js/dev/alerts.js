@@ -84,3 +84,50 @@ $(document).on('click', '.swal-delete', function(event) {
         }
     });
 });
+
+// dtl delete
+$(document).on('click', '.swal-dtl-delete', function(event) {
+    var id = $(this).val();
+    var token =  $("meta[name='csrf-token']").attr("content");
+    var name = $(this).closest('form').find("input[name='dtl_desc[]']").val();
+
+    event.preventDefault();
+
+    styleSwal.fire({
+        title: "Hapus",
+        html: "Apakah kamu yakin ingin menghapus <span class='text-danger'><b>"+name+"</b></span>? Aksi ini permanen.",
+        icon: "warning",
+        showCloseButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Ya',
+        cancelButtonText: 'Tidak',
+    })
+    .then((res) => {
+        if (res.isConfirmed) {
+            //fetch to delete data
+            $.ajax({
+
+                url: `http://127.0.0.1:8000/packages/packagedetails/${id}`,
+                type: "DELETE",
+                cache: false,
+                data: {
+                    "_token": token
+                },
+                success:function(){ 
+
+                    //show success message
+                    Swal.fire({
+                        type: 'success',
+                        icon: 'success',
+                        title: `Data Berhasil di Hapus!`,
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+
+                    //remove post on table
+                    $(`#dtl_${id}`).remove();
+                }
+            });
+        }
+    });
+});

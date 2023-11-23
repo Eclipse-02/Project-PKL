@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Master\Edu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\Validator;
 
 class EduController extends Controller
 {
@@ -121,8 +121,8 @@ class EduController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'edu_code' => 'required|string|unique:edus,edu_code',
             'edu_name' => 'required|string',
-            'edu_code' => 'required|string',
             'is_active' => 'required|string'
         ]);
 
@@ -139,7 +139,7 @@ class EduController extends Controller
                 'updated_by' => Auth::user()->name,
             ]);
             Alert::toast('Data Berhasil Dibuat!', 'success');
-            return redirect()->route('edus.index');
+            return redirect()->route('educations.index');
         }
     }
 
@@ -184,7 +184,6 @@ class EduController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'edu_name' => 'required|string',
-            'edu_code' => 'required|string',
             'is_active' => 'required|string'
         ]);
 
@@ -193,13 +192,11 @@ class EduController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $edu->update([
-                'coy_id' => Auth::user()->coy_id,
                 'edu_name' => $request->edu_name,
-                'edu_code' => $request->edu_code,
                 'updated_by' => Auth::user()->name,
             ]);    
             Alert::toast('Data Berhasil Diperbarui!', 'success');
-            return redirect()->route('edus.index');
+            return redirect()->route('educations.index');
         }
     }
 
@@ -219,6 +216,6 @@ class EduController extends Controller
         }
 
         Alert::toast('Status Data Berhasil Diperbarui!', 'success');
-        return redirect()->route('edus.index');
+        return redirect()->route('educations.index');
     }
 }

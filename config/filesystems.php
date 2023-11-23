@@ -77,7 +77,7 @@ return [
         public_path('storage/supl/ktps') => storage_path('app/public/supl/ktps'),
         public_path('storage/supl/mous') => storage_path('app/public/supl/mous'),
         public_path('storage/supl/npwps') => storage_path('app/public/supl/npwps'),
-        public_path('storage/pkg/pkg-imgs') => storage_path('app/public/pkg/pkg-img'),
+        public_path('storage/pkg/pkg-imgs') => storage_path('app/public/pkg/pkg-imgs'),
         public_path('storage/reg/full-name') => storage_path('app/public/reg/full-name'),
         public_path('storage/reg/half-name') => storage_path('app/public/reg/half-name'),
         public_path('storage/reg/pass-name') => storage_path('app/public/reg/pass-name'),
@@ -87,5 +87,7 @@ return [
         public_path('storage/reg/kk-name') => storage_path('app/public/reg/kk-name'),
         public_path('storage/reg/akta-n-name') => storage_path('app/public/reg/akta-n-name'),
         public_path('storage/reg/akta-l-name') => storage_path('app/public/reg/akta-l-name'),
+        public_path('storage/user/ktp') => storage_path('app/public/user/ktp'),
+        public_path('storage/user/npwp') => storage_path('app/public/user/npwp'),
     ],
 ];

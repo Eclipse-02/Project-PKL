@@ -71,7 +71,7 @@ class Employee extends Model
     ];
 
     function up() {
-        return $this->hasOne(Employee::class, 'empl_up_level', 'empl_id');
+        return $this->hasOne(Employee::class, 'empl_id', 'empl_up_level');
     }
 
     function branch() {

@@ -2,18 +2,16 @@
 <html lang="en">
 	<!--begin::Head-->
 	<head>
-		<title>Metronic - @yield('title')</title>
+		<title>Adam Indonesia - @yield('title')</title>
 		<meta name="csrf-token" content="{{ csrf_token() }}">
-		<meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
-		<meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+		<meta name="description" content="Melayani Anda Adalah Kebanggaan Kami" />
+		<meta name="keywords" content="Travel, Umroh, Haji" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta charset="utf-8" />
-		<meta property="og:locale" content="en_US" />
-		<meta property="og:type" content="article" />
-		<meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
-		<meta property="og:url" content="https://keenthemes.com/metronic" />
-		<meta property="og:site_name" content="Keenthemes | Metronic" />
-		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+		<meta property="og:locale" content="id_ID" />
+		<meta property="og:type" content="travel" />
+		<meta property="og:title" content="Adam Indonesia" />
+		<meta property="og:url" content="http://127.0.0.1" />
 		<link rel="shortcut icon" href="{{ asset('master/html/theme/dist/assets/media/logos/favicon.ico') }}" />
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
@@ -70,10 +68,20 @@
 								<a href="{{ route('dashboard') }}" class="d-lg-none">
 									<img alt="Logo" src="{{ asset('master/html/theme/dist/assets/media/logos/logo-2.svg') }}" class="h-30px" />
 								</a>
+								<!--begin::Title-->
+								<h1 class="d-flex align-items-center text-dark fw-bolder fs-4 ms-3 my-1 d-lg-none">@yield('title')
+									<!--begin::Separator-->
+									<span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
+									<!--end::Separator-->
+									<!--begin::Description-->
+									<small class="text-muted fs-8 fw-bold my-1 ms-1">{{ auth()->user()->coy->coy_name }}</small>
+									<!--end::Description-->
+								</h1>
+								<!--end::Title-->
 							</div>
 							<!--end::Mobile logo-->
 							<!--begin::Wrapper-->
-							<div class="d-flex align-items-stretch justify-content-end flex-lg-grow-1">
+							<div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
 								@include('dashboard.navbar')
 							</div>
 							<!--end::Wrapper-->
@@ -136,11 +144,6 @@
 		<!--end::Page Custom Javascript-->
         <!--begin::Page Custom Javascript(used by scaffolds)-->
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<script src="{{ asset('js/dev/alerts.js') }}"></script>
-		<script src="{{ asset('js/dev/formats.js') }}"></script>
-		<script src="{{ asset('js/dev/locations.js') }}"></script>
-		<script src="{{ asset('master/html/theme/dist/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-		@include('sweetalert::alert')
 		<script type="text/javascript">
 			// csrf token
 			$.ajaxSetup({
@@ -148,6 +151,8 @@
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 				}
 			});
+
+			const baseUrl = "{{ request()->root() }}";
 
 			$(document).ready(function() {
 
@@ -177,9 +182,17 @@
 				@if($errors->any())
 				// PopUp modal if there is any errors
 				$('#create_modal').modal('show');
+				callLocations({{ old('prov_code') ? old('prov_code') : '0' }}, {{ old('kota_code') ? old('kota_code') : '0' }}, {{ old('kec_code') ? old('kec_code') : '0' }}, {{ old('kel_code') ? old('kel_code') : '0' }}, {{ old('zip_code') ? old('zip_code') : '0' }});
 				@endif
+
 			});
 		</script>
+		<script src="{{ asset('js/dev/alerts.js') }}"></script>
+		<script src="{{ asset('js/dev/formats.js') }}"></script>
+		<script src="{{ asset('js/dev/locations.js') }}"></script>
+		<script src="{{ asset('js/dev/select2.js') }}"></script>
+		<script src="{{ asset('master/html/theme/dist/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+		@include('sweetalert::alert')
         @yield('scripts')
         <!--end::Page Custom Javascript-->
 		<!--end::Javascript-->

@@ -11,8 +11,8 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title m-0 flex-column">
-                    <h3 class="fw-bolder m-0">Edit Data</h3>
-                    <div class="text-muted fs-7 fw-bold">Edit Data</div>
+                    <h3 class="fw-bolder m-0">Edit Employee Data</h3>
+                    <div class="text-muted fs-7 fw-bold">Edit Data Karyawan</div>
                 </div>
                 <!--end::Card title-->
                 <!--start::Button-->
@@ -134,7 +134,7 @@
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <input class="form-control form-control form-control-solid @error('empl_id')is-invalid @enderror" type="text" name="empl_id" value="{{ old('empl_id') ? old('empl_id') : $data->empl_id }}" />
+                                        <input class="form-control form-control form-control-solid @error('empl_id')is-invalid @enderror" type="text" name="empl_id" value="{{ old('empl_id') ? old('empl_id') : $data->empl_id }}" disabled="disabled" />
                                         <!--end::Input-->
 
                                         <!--begin::Error-->
@@ -197,8 +197,8 @@
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid @error('empl_branch')is-invalid @enderror" name="empl_branch" id="empl_branch" data-control="select2" data-placeholder="Pilih Cabang">
-                                            <option></option>
+                                        <select class="form-select form-select-solid @error('empl_branch')is-invalid @enderror" name="empl_branch" id="empl_branch">
+                                            <option>Pilih Cabang</option>
                                             @foreach ($branches as $i)
                                                 <option value="{{ $i->branch_code }}" {{ old('empl_branch') ? (old('empl_branch') == $i->branch_code ? 'selected' : '') : ($data->empl_branch == $i->branch_code ? 'selected' : '') }}>{{ $i->branch_name }}</option>
                                             @endforeach
@@ -222,8 +222,8 @@
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid @error('position_code')is-invalid @enderror" name="position_code" id="position_code" data-control="select2" data-placeholder="Pilih Posisi">
-                                            <option></option>
+                                        <select class="form-select form-select-solid @error('position_code')is-invalid @enderror" name="position_code" id="position_code">
+                                            <option>Pilih Posisi</option>
                                             @foreach ($positions as $i)
                                                 <option value="{{ $i->poss_code }}" {{ old('position_code') ? (old('position_code') == $i->poss_code ? 'selected' : '') : ($data->position_code == $i->poss_code ? 'selected' : '') }}>{{ $i->poss_name }}</option>
                                             @endforeach
@@ -247,8 +247,8 @@
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid @error('empl_up_level')is-invalid @enderror" name="empl_up_level" id="empl_up_level" data-control="select2" data-placeholder="Pilih Karyawan">
-                                            <option></option>
+                                        <select class="form-select form-select-solid @error('empl_up_level')is-invalid @enderror" name="empl_up_level" id="empl_up_level">
+                                            <option>Pilih Karyawan</option>
                                             @foreach ($employees as $i)
                                                 <option value="{{ $i->empl_id }}" {{ old('empl_up_level') ? (old('empl_up_level') == $i->empl_id ? 'selected' : '') : ($data->empl_up_level == $i->empl_id ? 'selected' : '') }}>{{ $i->empl_name }}</option>
                                             @endforeach
@@ -404,8 +404,8 @@
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid @error('prov_code')is-invalid @enderror" name="prov_code" id="prov_code" data-control="select2" data-placeholder="Pilih Provinsi">
-                                            <option></option>
+                                        <select class="form-select form-select-solid @error('prov_code')is-invalid @enderror" name="prov_code" id="prov_code">
+                                            <option>Pilih Provinsi</option>
                                             @foreach ($provinsis as $i)
                                                 <option value="{{ $i->prov_code }}" {{ old('prov_code') ? (old('prov_code') == $i->prov_code ? 'selected' : '') : ($data->prov_code == $i->prov_code ? 'selected' : '') }}>{{ $i->provinsi }}</option>
                                             @endforeach
@@ -523,8 +523,8 @@
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid @error('empl_status')is-invalid @enderror" name="empl_status" id="empl_status" data-control="select2" data-placeholder="Pilih Status">
-                                            <option></option>
+                                        <select class="form-select form-select-solid @error('empl_status')is-invalid @enderror" name="empl_status" id="empl_status">
+                                            <option>Pilih Status</option>
                                             <option value="PB" {{ old('empl_status') ? (old('empl_status') == "PB" ? 'selected' : '') : ($data->empl_status == "PB" ? 'selected' : '') }}>Probation</option>
                                             <option value="PM" {{ old('empl_status') ? (old('empl_status') == "PM" ? 'selected' : '') : ($data->empl_status == "PM" ? 'selected' : '') }}>Permanent</option>
                                             <option value="KT" {{ old('empl_status') ? (old('empl_status') == "KT" ? 'selected' : '') : ($data->empl_status == "KT" ? 'selected' : '') }}>Kontrak</option>
@@ -609,6 +609,7 @@
 
 @section('scripts')
 <script type="text/javascript">
+$(function () {
 
     callLocations({{ $data->prov_code }}, {{ $data->kota_code }}, {{ $data->kec_code }}, {{ $data->kel_code }}, {{ $data->zip_code }});
 
@@ -679,5 +680,8 @@
         "placeholder": "9999999999999999",
     }).mask("[name='empl_nik']");
 
+    select2Edit(['empl_branch', 'position_code', 'empl_up_level', 'prov_code', 'empl_status'])
+
+});
 </script>
 @endsection

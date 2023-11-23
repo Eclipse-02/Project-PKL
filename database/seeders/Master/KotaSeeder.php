@@ -13,7 +13,6 @@ class KotaSeeder extends Seeder
     public function run(): void
     {
         $aceh = [
-            "",
             "Kab. Aceh Barat",
             "Kab. Aceh Barat Daya",
             "Kab. Aceh Besar",
@@ -640,9 +639,9 @@ class KotaSeeder extends Seeder
         // ];
 
         // Aceh
-        for ($i=1; $i < count($aceh); $i++) {
+        for ($i = 0; $i < count($aceh); $i++) {
             MasterKota::create([
-                'kota_code' => $i,
+                'kota_code' => $i + 1,
                 'kota' => $aceh[$i],
                 'prov_code' => 1,
                 'is_active' => 'Y',

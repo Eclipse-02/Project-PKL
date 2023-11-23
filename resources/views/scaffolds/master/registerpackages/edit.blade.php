@@ -11,8 +11,8 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title m-0 flex-column">
-                    <h3 class="fw-bolder m-0">Edit Data</h3>
-                    <div class="text-muted fs-7 fw-bold">Edit Data</div>
+                    <h3 class="fw-bolder m-0">Edit Registration Data</h3>
+                    <div class="text-muted fs-7 fw-bold">Edit Data Registrasi</div>
                 </div>
                 <!--end::Card title-->
                 <!--start::Button-->
@@ -197,7 +197,7 @@
                                             <!--end::Label-->
 
                                             <!--begin::Input-->
-                                            <select class="form-select form-select-solid @error('pkg_code')is-invalid @enderror" name="pkg_code" id="pkg_code" data-control="select2" data-placeholder="Pilih Paket">
+                                            <select class="form-select form-select-solid @error('pkg_code')is-invalid @enderror" name="pkg_code" id="pkg_code" data-control="select2" data-placeholder="Pilih Paket" disabled="disabled">
                                                 <option></option>
                                                 @foreach ($packages as $i)
                                                     <option value="{{ $i->pkg_code }}" {{ old('pkg_code') ? (old('pkg_code') == $i->pkg_code ? 'selected' : '') : ($data->pkg_code == $i->pkg_code ? 'selected' : '') }}>{{ $i->pkg_name }}</option>
@@ -265,9 +265,9 @@
                                         <!--begin::Textarea-->
                                         <select class="form-select form-select-solid @error('appl_title')is-invalid @enderror" name="appl_title" id="appl_title" data-control="select2" data-placeholder="Pilih Title">
                                             <option></option>
-                                            <option value="Mr" {{ old('appl_title') ? (old('appl_title') == 'MR' ? 'selected' : '') : ($data->appl_title == 'MR' ? 'selected' : '') }}>Mr</option>
-                                            <option value="Mrs" {{ old('appl_title') ? (old('appl_title') == 'MRS' ? 'selected' : '') : ($data->appl_title == 'MRS' ? 'selected' : '') }}>Mrs</option>
-                                            <option value="Ms" {{ old('appl_title') ? (old('appl_title') == 'MS' ? 'selected' : '') : ($data->appl_title == 'MS' ? 'selected' : '') }}>Ms</option>
+                                            <option value="MR" {{ old('appl_title') ? (old('appl_title') == 'MR' ? 'selected' : '') : ($data->appl_title == 'MR' ? 'selected' : '') }}>Mr</option>
+                                            <option value="MRS" {{ old('appl_title') ? (old('appl_title') == 'MRS' ? 'selected' : '') : ($data->appl_title == 'MRS' ? 'selected' : '') }}>Mrs</option>
+                                            <option value="MS" {{ old('appl_title') ? (old('appl_title') == 'MS' ? 'selected' : '') : ($data->appl_title == 'MS' ? 'selected' : '') }}>Ms</option>
                                         </select>
                                         <!--end::Textarea-->
 
@@ -1591,9 +1591,17 @@
 
                             <!--begin::Wrapper-->
                             <div>
-                                <button type="submit" class="btn btn-primary" data-kt-stepper-action="submit">
+                                <button type="submit" class="btn btn-primary" data-kt-stepper-action="submit" name="submit" value="submit">
                                     <span class="indicator-label">
                                         Simpan
+                                    </span>
+                                    <span class="indicator-progress">
+                                        Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                </button>
+                                <button type="submit" class="btn btn-warning" data-kt-stepper-action="submit" name="submit" value="post">
+                                    <span class="indicator-label">
+                                        Posting
                                     </span>
                                     <span class="indicator-progress">
                                         Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
@@ -1622,6 +1630,43 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
+        // Stepper element
+        var element = document.querySelector("#kt_stepper_example_vertical");
+
+        // Initialize Stepper
+        var stepper = new KTStepper(element);
+
+        // Handle next step
+        stepper.on("kt.stepper.next", function (stepper) {
+            stepper.goNext(); // go next step
+        });
+
+        // Handle previous step
+        stepper.on("kt.stepper.previous", function (stepper) {
+            stepper.goPrevious(); // go previous step
+        });
+
+        // Handle navigation click
+        stepper.on("kt.stepper.click", function (stepper) {
+            stepper.goTo(stepper.getClickedStepIndex()); // go to clicked step
+        });
+
+        // Handle submit button
+        stepper.on("kt.stepper.changed", function(stepper) {
+            if (stepper.getCurrentStepIndex() === 5) {
+                document.querySelectorAll('[data-kt-stepper-action="submit"]')[0].classList.remove("d-none")
+                document.querySelectorAll('[data-kt-stepper-action="submit"]')[0].classList.add("d-inline-block")
+                document.querySelectorAll('[data-kt-stepper-action="submit"]')[1].classList.remove("d-none")
+                document.querySelectorAll('[data-kt-stepper-action="submit"]')[1].classList.add("d-inline-block")
+                document.querySelector('[data-kt-stepper-action="next"]').classList.add("d-none")
+            } else {
+                document.querySelectorAll('[data-kt-stepper-action="submit"]')[0].classList.add("d-none")
+                document.querySelectorAll('[data-kt-stepper-action="submit"]')[0].classList.remove("d-inline-block")
+                document.querySelectorAll('[data-kt-stepper-action="submit"]')[1].classList.add("d-none")
+                document.querySelectorAll('[data-kt-stepper-action="submit"]')[1].classList.remove("d-inline-block")
+                document.querySelector('[data-kt-stepper-action="next"]').classList.remove("d-none")
+            }
+        });
         if ($('[name="appl_id_type"]').val() == "") {
             $('[name="appl_id_no"]').attr('disabled', true);
         }
@@ -1814,6 +1859,8 @@
             }
         }
     }).mask("[name='appl_email']");
+
+    callLocations({{ $data->prov_code }}, {{ $data->kota_code }}, {{ $data->kec_code }}, {{ $data->kel_code }});
 
 </script>
 @endsection

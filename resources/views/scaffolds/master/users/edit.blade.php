@@ -11,8 +11,8 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title m-0 flex-column">
-                    <h3 class="fw-bolder m-0">Edit Data</h3>
-                    <div class="text-muted fs-7 fw-bold">Edit Data</div>
+                    <h3 class="fw-bolder m-0">Edit User Data</h3>
+                    <div class="text-muted fs-7 fw-bold">Edit Data User</div>
                 </div>
                 <!--end::Card title-->
                 <!--start::Button-->
@@ -88,6 +88,7 @@
                         <div class="mb-5">
                             <!--begin::Step 1-->
                             <div class="current" data-kt-stepper-element="content">
+                                @if (($data->role_id == 2))
                                 <div class="w-100">
                                     <!--begin::Input group-->
                                     <div class="fv-row mb-10">
@@ -99,7 +100,7 @@
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid @error('empl_id')is-invalid @enderror" name="empl_id" id="empl_id" data-control="select2" data-placeholder="Pilih Karyawan">
+                                        <select class="form-select form-select-solid @error('empl_id')is-invalid @enderror" name="empl_id" id="empl_id" data-control="select2" data-placeholder="Pilih Karyawan" disabled="disabled">
                                             <option></option>
                                             @foreach ($employees as $i)
                                                 <option value="{{ $i->empl_id }}" {{ old('empl_id') ? (old('empl_id') == $i->empl_id ? 'selected' : '') : ($data->empl_id == $i->empl_id ? 'selected' : '') }}>{{ $i->empl_name }}</option>
@@ -162,18 +163,99 @@
                                     </div>
                                     <!--end::Input group-->
 
+                                    <!--begin::Main wrapper-->
+                                    <div class="fv-row mb-10" data-kt-password-meter="true">
+                                        <!--begin::Wrapper-->
+                                        <div class="mb-1">
+                                            <!--begin::Label-->
+                                            <label class="d-flex align-items-center fs-5 mb-2">
+                                                <span>Password</span>
+                                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Kosongkan jika tidak ingin diubah"></i>
+                                            </label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Input wrapper-->
+                                            <div class="position-relative mb-3">
+                                                <input class="form-control form-control-lg form-control-solid"
+                                                    type="password" placeholder="" name="password" autocomplete="off" />
+                                                <!--begin::Visibility toggle-->
+                                                <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2"
+                                                    data-kt-password-meter-control="visibility">
+                                                    <i class="bi bi-eye-slash fs-2"></i>
+                                                    <i class="bi bi-eye fs-2 d-none"></i>
+                                                </span>
+                                                <!--begin::Error-->
+                                                @error('password')
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                <!--end::Error-->
+                                                <!--end::Visibility toggle-->
+                                            </div>
+                                            <!--end::Input wrapper-->
+                                        </div>
+                                        <!--end::Wrapper-->
+                                    </div>
+                                    <!--end::Main wrapper-->
+                                </div>
+                                @else
+                                <div class="w-100">
                                     <!--begin::Input group-->
                                     <div class="fv-row mb-10">
                                         <!--begin::Label-->
-                                        <label class="form-label required">Email</label>
+                                        <label class="d-flex align-items-center fs-5 mb-2">
+                                            <span class="required">No KTP</span>
+                                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Hanya Karyawan yang tidak memiliki akun muncul di sini"></i>
+                                        </label>
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <input class="form-control form-control form-control-solid @error('email')is-invalid @enderror" type="email" name="email" value="{{ old('email') ? old('email') : $data->email }}" />
+                                        <input class="form-control form-control form-control-solid @error('empl_id')is-invalid @enderror" type="text" user="empl_id" value="{{ old('empl_id') ? old('empl_id') : $data->empl_id }}" />
+                                        <!--end::Input-->
+
+                                        <!--start::Error-->
+                                        @error('empl_id')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Nama di KTP</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('name')is-invalid @enderror" type="text" name="name" value="{{ old('name') ? old('name') : $data->name }}" />
                                         <!--end::Input-->
 
                                         <!--begin::Error-->
-                                        @error('email')
+                                        @error('name')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                        <!--end::Error-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Label-->
+                                        <label class="form-label required">Nama User</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control form-control-solid @error('username')is-invalid @enderror" type="text" user="username" value="{{ old('username') ? old('username') : $data->username }}" />
+                                        <!--end::Input-->
+
+                                        <!--begin::Error-->
+                                        @error('username')
                                             <span class="invalid-feedback d-block" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -213,11 +295,52 @@
                                                 <!--end::Visibility toggle-->
                                             </div>
                                             <!--end::Input wrapper-->
+
+                                            <!--begin::Input group-->
+                                            <div class="fv-row mb-10 agen d-none">
+                                                <!--begin::Label-->
+                                                <label class="form-label">Copy KTP</label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Input-->
+                                                <input class="form-control form-control form-control-solid @error('copy_ktp_name')is-invalid @enderror" type="file" name="copy_ktp_name" />
+                                                <!--end::Input-->
+
+                                                <!--begin::Error-->
+                                                @error('copy_ktp_name')
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                <!--end::Error-->
+                                            </div>
+                                            <!--end::Input group-->
+
+                                            <!--begin::Input group-->
+                                            <div class="fv-row mb-10 agen d-none">
+                                                <!--begin::Label-->
+                                                <label class="form-label">Copy NPWP</label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Input-->
+                                                <input class="form-control form-control form-control-solid @error('copy_npwp_name')is-invalid @enderror" type="file" name="copy_npwp_name" />
+                                                <!--end::Input-->
+
+                                                <!--begin::Error-->
+                                                @error('copy_npwp_name')
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                <!--end::Error-->
+                                            </div>
+                                            <!--end::Input group-->
                                         </div>
                                         <!--end::Wrapper-->
                                     </div>
                                     <!--end::Main wrapper-->
                                 </div>
+                                @endif
                             </div>
                             <!--begin::Step 1-->
 
@@ -377,6 +500,13 @@
                 format: 'YYYY-MM-DD'
             }
         });
+
+        @if ($data->role_id == 3) 
+        Inputmask("9999-9999-9999-9999", {
+            "numericInput": true,
+            "reverse": false
+        }).mask("[name='empl_id']");
+        @endif
 
     </script>
 @endsection

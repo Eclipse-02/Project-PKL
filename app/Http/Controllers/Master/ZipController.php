@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Master;
 
 use App\Models\Master\Zip;
-use Illuminate\Http\Request;
 use App\Models\Master\Provinsi;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\Validator;
 
 class ZipController extends Controller
 {
@@ -20,7 +20,7 @@ class ZipController extends Controller
     {
         $provinsis = Provinsi::select('prov_code', 'provinsi')->where('is_active', 'Y')->get();
         if ($request->ajax()) {
-            $data = Zip::all();
+            $data = Zip::with(['provinsi', 'kota', 'kecamatan', 'kelurahan'])->get();
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -124,13 +124,13 @@ class ZipController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'zip_code' => 'required|integer',
-            'sub_zip_code' => 'required|integer',
+            'zip_code' => 'required|string|unique:zips,zip_code',
+            'sub_zip_code' => 'required|string',
             'zip_desc' => 'required|string',
-            'prov_code' => 'required|integer',
-            'kota_code' => 'required|integer',
-            'kec_code' => 'required|integer',
-            'kel_code' => 'required|integer',
+            'prov_code' => 'required|string',
+            'kota_code' => 'required|string',
+            'kec_code' => 'required|string',
+            'kel_code' => 'required|string',
             'is_active' => 'required|string'
         ]);
 
@@ -180,13 +180,12 @@ class ZipController extends Controller
     public function update(Request $request, Zip $zip)
     {
         $validator = Validator::make($request->all(), [
-            'zip_code' => 'required|integer',
-            'sub_zip_code' => 'required|integer',
+            'sub_zip_code' => 'required|string',
             'zip_desc' => 'required|string',
-            'prov_code' => 'required|integer',
-            'kota_code' => 'required|integer',
-            'kec_code' => 'required|integer',
-            'kel_code' => 'required|integer',
+            'prov_code' => 'required|string',
+            'kota_code' => 'required|string',
+            'kec_code' => 'required|string',
+            'kel_code' => 'required|string',
             'is_active' => 'required|string'
         ]);
 
@@ -195,7 +194,6 @@ class ZipController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $zip->update([
-                'zip_code' => $request->zip_code,
                 'sub_zip_code' => $request->sub_zip_code,
                 'zip_desc' => $request->zip_desc,
                 'prov_code' => $request->prov_code,
@@ -231,7 +229,10 @@ class ZipController extends Controller
 
     public function api(Request $request)
     {
-        $data = Zip::select('zip_code', 'zip_desc', 'kec_code')->where('kec_code', $request->code)->get();
+        $data = Zip::select('zip_code', 'zip_desc', 'kec_code')->where([
+            ['kec_code', '=', $request->code],
+            ['is_active', '=', 'Y'],
+        ])->get();
 
         return response()->json($data);
     }

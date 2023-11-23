@@ -1,6 +1,6 @@
 @extends('dashboard.master')
 
-@section('title', 'Pemasok')
+@section('title', 'Agen')
 
 @section('content')
     <!--start::Col-->
@@ -11,8 +11,8 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title m-0 flex-column">
-                    <h3 class="fw-bolder m-0">Edit Data</h3>
-                    <div class="text-muted fs-7 fw-bold">Edit Data</div>
+                    <h3 class="fw-bolder m-0">Edit Supplier Data</h3>
+                    <div class="text-muted fs-7 fw-bold">Edit Data Agen</div>
                 </div>
                 <!--end::Card title-->
                 <!--start::Button-->
@@ -69,7 +69,7 @@
                             <!--begin::Label-->
                             <div class="stepper-label">
                                 <h3 class="stepper-title">Contacts</h3>
-                                <div class="stepper-desc">Informasi Kontak Pemasok</div>
+                                <div class="stepper-desc">Informasi Kontak Agen</div>
                             </div>
                             <!--begin::Label-->
                         </div>
@@ -107,7 +107,7 @@
                             <!--begin::Label-->
                             <div class="stepper-label">
                                 <h3 class="stepper-title">NPWP</h3>
-                                <div class="stepper-desc">Data NPWP Pemasok</div>
+                                <div class="stepper-desc">Data NPWP Agen</div>
                             </div>
                             <!--end::Label-->
                         </div>
@@ -144,8 +144,8 @@
                             <!--begin::Label-->
                             <div class="stepper-label">
                                 <h3 class="stepper-title">Status</h3>
+                                <div class="stepper-desc">Status Agen</div>
                             </div>
-                                <div class="stepper-desc">Status Pemasok</div>
                             <!--end::Label-->
                         </div>
                         <!--end::Step 6-->
@@ -171,7 +171,7 @@
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <input class="form-control form-control form-control-solid @error('supl_code')is-invalid @enderror" type="text" name="supl_code" value="{{ old('supl_code') ? old('supl_code') : $data->supl_code }}" />
+                                        <input class="form-control form-control form-control-solid @error('supl_code')is-invalid @enderror" type="text" name="supl_code" value="{{ old('supl_code') ? old('supl_code') : $data->supl_code }}" disabled="disabled" />
                                         <!--end::Input-->
 
                                         <!--begin::Error-->
@@ -287,7 +287,7 @@
                                     <!--begin::Input group-->
                                     <div class="fv-row mb-10">
                                         <!--begin::Label-->
-                                        <label class="form-label">Foto Pemasok</label>
+                                        <label class="form-label">Foto Agen</label>
                                         <!--end::Label-->
 
                                         <!--begin::Input-->

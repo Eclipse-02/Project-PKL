@@ -14,7 +14,6 @@ class KecamatanSeeder extends Seeder
     {
         // Aceh
         $aceh_barat = [
-            "",
             "Arongan Lambalek",
             "Bubon",
             "Johan Pahlawan",
@@ -192,9 +191,9 @@ class KecamatanSeeder extends Seeder
         // ];
 
         // Aceh
-        for ($i=1; $i < count($aceh_barat); $i++) {
+        for ($i = 0; $i < count($aceh_barat); $i++) {
             MasterKecamatan::create([
-                'kec_code' => $i,
+                'kec_code' => $i + 1,
                 'kecamatan' => $aceh_barat[$i],
                 'kota_code' => 1,
                 'is_active' => 'Y',

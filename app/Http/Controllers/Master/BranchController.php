@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class BranchController extends Controller
 {
@@ -22,7 +23,7 @@ class BranchController extends Controller
         $provinsis = Provinsi::select('prov_code', 'provinsi')->where('is_active', 'Y')->get();
         $areas = Area::select('area_code', 'area_name')->where('is_active', 'Y')->get();
         if ($request->ajax()) {
-            $data = Branch::where('coy_id', Auth::user()->coy_id)->get();
+            $data = Branch::with(['provinsi', 'kota', 'kecamatan', 'kelurahan', 'zip', 'area'])->where('coy_id', Auth::user()->coy_id)->get();
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -126,20 +127,23 @@ class BranchController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'branch_code' => 'required|string',
+            'branch_code' => ['required',
+                                'string',
+                                Rule::unique('branches', 'branch_code')->where('coy_id', Auth::user()->coy_id)
+                            ],
             'branch_name' => 'required|string',
             'branch_addr' => 'required|string',
             'branch_tlp_area' => 'required|string',
-            'branch_tlp' => 'required|integer',
-            'branch_hp01' => 'required|integer',
-            'branch_hp02' => 'required|integer',
-            'prov_code' => 'required|integer',
-            'kota_code' => 'required|integer',
-            'kec_code' => 'required|integer',
-            'kel_code' => 'required|integer',
-            'zip_code' => 'required|integer',
+            'branch_tlp' => 'required|string',
+            'branch_hp01' => 'required|string',
+            'branch_hp02' => 'required|string',
+            'prov_code' => 'required|string',
+            'kota_code' => 'required|string',
+            'kec_code' => 'required|string',
+            'kel_code' => 'required|string',
+            'zip_code' => 'required|string',
             'branch_type' => 'required|string',
-            'area_code' => 'required|integer',
+            'area_code' => 'required|string',
             'is_active' => 'required|string',
         ]);
 
@@ -168,7 +172,7 @@ class BranchController extends Controller
                 'updated_by' => Auth::user()->name,
             ]); 
             Alert::toast('Data Berhasil Dibuat!', 'success');
-            return redirect()->route('branchs.index');
+            return redirect()->route('branches.index');
         }
     }
 
@@ -214,20 +218,19 @@ class BranchController extends Controller
     public function update(Request $request, Branch $branch)
     {
         $validator = Validator::make($request->all(), [
-            'branch_code' => 'required|string',
             'branch_name' => 'required|string',
             'branch_addr' => 'required|string',
             'branch_tlp_area' => 'required|string',
-            'branch_tlp' => 'required|integer',
-            'branch_hp01' => 'required|integer',
-            'branch_hp02' => 'required|integer',
-            'prov_code' => 'required|integer',
-            'kota_code' => 'required|integer',
-            'kec_code' => 'required|integer',
-            'kel_code' => 'required|integer',
-            'zip_code' => 'required|integer',
+            'branch_tlp' => 'required|string',
+            'branch_hp01' => 'required|string',
+            'branch_hp02' => 'required|string',
+            'prov_code' => 'required|string',
+            'kota_code' => 'required|string',
+            'kec_code' => 'required|string',
+            'kel_code' => 'required|string',
+            'zip_code' => 'required|string',
             'branch_type' => 'required|string',
-            'area_code' => 'required|integer',
+            'area_code' => 'required|string',
             'is_active' => 'required|string',
         ]);
 
@@ -236,8 +239,6 @@ class BranchController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $branch->update([
-                'coy_id' => Auth::user()->coy_id,
-                'branch_code' => $request->branch_code,
                 'branch_name' => $request->branch_name,
                 'branch_addr' => $request->branch_addr,
                 'branch_tlp_area' => $request->branch_tlp_area,
@@ -255,7 +256,7 @@ class BranchController extends Controller
                 'updated_by' => Auth::user()->name,
             ]);
             Alert::toast('Data Berhasil Diperbarui!', 'success');
-            return redirect()->route('branchs.index');
+            return redirect()->route('branches.index');
         }
     }
 
@@ -275,6 +276,6 @@ class BranchController extends Controller
         }
 
         Alert::toast('Status Data Berhasil Diperbarui!', 'success');
-        return redirect()->route('branchs.index');
+        return redirect()->route('branches.index');
     }
 }

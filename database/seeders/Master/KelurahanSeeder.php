@@ -14,7 +14,6 @@ class KelurahanSeeder extends Seeder
     {
         // Aceh
         $aceh_barat_arongan_malabek = [
-            "",
             "Arongan",
             "Cot Buloh",
             "Cot Kumbang",
@@ -2942,9 +2941,9 @@ class KelurahanSeeder extends Seeder
         // ];
 
         // Aceh
-        for ($i=1; $i < count($aceh_barat_arongan_malabek); $i++) {
+        for ($i = 0; $i < count($aceh_barat_arongan_malabek); $i++) {
             MasterKelurahan::create([
-                'kel_code' => $i,
+                'kel_code' => $i + 1,
                 'kelurahan' => $aceh_barat_arongan_malabek[$i],
                 'kec_code' => 1,
                 'is_active' => 'Y',

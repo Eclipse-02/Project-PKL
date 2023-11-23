@@ -16,7 +16,7 @@ class UtiltySeeder extends Seeder
             'coy_id' => 1,
             'seqn_code' => 'test',
             'branch_code' => 1,
-            'start_value' => 1,
+            'start_value' => 2,
             'last_value' => 1,
             'max_value' => 100,
             'increment_by' => 1,

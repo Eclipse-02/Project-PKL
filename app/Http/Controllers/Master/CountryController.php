@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Master\Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\Validator;
 
 class CountryController extends Controller
 {
@@ -122,7 +122,7 @@ class CountryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'con_code' => 'required|integer',
+            'con_code' => 'required|string|unique:countries,con_code',
             'con_name' => 'required|string',
             'is_active' => 'required|string'
         ]);
@@ -169,7 +169,6 @@ class CountryController extends Controller
     public function update(Request $request, Country $country)
     {
         $validator = Validator::make($request->all(), [
-            'con_code' => 'required|integer',
             'con_name' => 'required|string',
             'is_active' => 'required|string'
         ]);
@@ -179,7 +178,6 @@ class CountryController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $country->update([
-                'con_code' => $request->con_code,
                 'con_name' => $request->con_name,
                 'is_active' => $request->is_active,
                 'updated_by' => Auth::user()->name,

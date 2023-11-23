@@ -11,8 +11,8 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title m-0 flex-column">
-                    <h3 class="fw-bolder m-0">Edit Data</h3>
-                    <div class="text-muted fs-7 fw-bold">Edit Data</div>
+                    <h3 class="fw-bolder m-0">Edit City Data</h3>
+                    <div class="text-muted fs-7 fw-bold">Edit Data Kota</div>
                 </div>
                 <!--end::Card title-->
                 <!--start::Button-->
@@ -45,7 +45,7 @@
                         </label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input class="form-control form-control-lg form-control-solid @error('kota_code')is-invalid @enderror" type="text" id="kota_code" name="kota_code" value="{{ old('kota_code') ? old('kota_code') : $data->kota_code }}" />
+                        <input class="form-control form-control-lg form-control-solid @error('kota_code')is-invalid @enderror" type="text" name="kota_code" value="{{ old('kota_code') ? old('kota_code') : $data->kota_code }}" disabled="disabled" />
                         <!--end::Input-->
                         <!--begin::Error-->
                         @error('kota_code')

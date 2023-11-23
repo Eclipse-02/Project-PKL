@@ -50,7 +50,6 @@ return new class extends Migration
             $table->foreign("kel_code")->references('kel_code')->on('kelurahans')->onDelete('cascade');
             $table->foreign("zip_code")->references('kel_code')->on('kelurahans')->onDelete('cascade');
             $table->foreign("poss_code")->references('poss_code')->on('positions')->onDelete('cascade');
-            $table->foreign("branch_code")->references('branch_code')->on('branches')->onDelete('cascade');
             $table->foreign("coy_id")->references('coy_id')->on('coys')->onDelete('cascade');
         });
     }

@@ -54,7 +54,7 @@ class Provinsi extends Model
         'updated_by',
     ];
 
-    function kotas(): HasMany {
-        return $this->hasMany(Kota::class, 'prov_code', 'kota_code');
+    function kota(): HasMany {
+        return $this->hasMany(Kota::class, 'kota_code', 'prov_code');
     }
 }

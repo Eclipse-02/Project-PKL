@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Master\Area;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\Validator;
 
 class AreaController extends Controller
 {
@@ -122,7 +122,7 @@ class AreaController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'area_code' => 'required|integer',
+            'area_code' => 'required|string|unique:areas,area_code',
             'area_name' => 'required|string',
             'is_active' => 'required|string',
         ]);
@@ -184,7 +184,6 @@ class AreaController extends Controller
     public function update(Request $request, Area $area)
     {
         $validator = Validator::make($request->all(), [
-            'area_code' => 'required|integer',
             'area_name' => 'required|string',
             'is_active' => 'required|string',
         ]);
@@ -194,8 +193,6 @@ class AreaController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $area->update([
-                'coy_id' => Auth::user()->coy_id,
-                'area_code' => $request->area_code,
                 'area_name' => $request->area_name,
                 'is_active' => $request->is_active,
                 'updated_by' => Auth::user()->name,

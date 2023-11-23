@@ -11,8 +11,8 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title m-0 flex-column">
-                    <h3 class="fw-bolder m-0">Edit Data</h3>
-                    <div class="text-muted fs-7 fw-bold">Edit Data</div>
+                    <h3 class="fw-bolder m-0">Edit Bank Data</h3>
+                    <div class="text-muted fs-7 fw-bold">Edit Data Bank</div>
                 </div>
                 <!--end::Card title-->
                 <!--start::Button-->
@@ -99,8 +99,9 @@
                 <!--begin::Content-->
                 <div class="flex-row-fluid py-lg-5 px-lg-15">
                     <!--begin::Form-->
-                    <form class="form w-lg-500px mx-auto" action="{{ route('banks.store') }}" method="POST">
+                    <form class="form w-lg-500px mx-auto" action="{{ route('banks.update', $data->id) }}" method="POST">
                         @csrf
+                        @method('PUT')
 
                         <!--begin::Group-->
                         <div class="mb-5">
@@ -114,7 +115,7 @@
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <input class="form-control form-control form-control-solid @error('bank_code')is-invalid @enderror" type="text" name="bank_code" value="{{ old('bank_code') ? old('bank_code') : $data->bank_code }}" />
+                                        <input class="form-control form-control form-control-solid @error('bank_code')is-invalid @enderror" type="text" name="bank_code" value="{{ old('bank_code') ? old('bank_code') : $data->bank_code }}" disabled="disabled" />
                                         <!--end::Input-->
 
                                         <!--begin::Error-->

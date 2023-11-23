@@ -11,8 +11,8 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title m-0 flex-column">
-                    <h3 class="fw-bolder m-0">Edit Data</h3>
-                    <div class="text-muted fs-7 fw-bold">Edit Data</div>
+                    <h3 class="fw-bolder m-0">Edit Province Data</h3>
+                    <div class="text-muted fs-7 fw-bold">Edit Data Provinsi</div>
                 </div>
                 <!--end::Card title-->
                 <!--start::Button-->
@@ -46,7 +46,7 @@
                         </label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input class="form-control form-control form-control-solid @error('prov_code')is-invalid @enderror" type="text" id="prov_code" name="prov_code" value="{{ old('prov_code') ? old('prov_code') : $data->prov_code }}" />
+                        <input class="form-control form-control form-control-solid @error('prov_code')is-invalid @enderror" type="text" name="prov_code" value="{{ old('prov_code') ? old('prov_code') : $data->prov_code }}" disabled="disabled" />
                         <!--end::Input-->
                         <!--begin::Error-->
                         @error('prov_code')

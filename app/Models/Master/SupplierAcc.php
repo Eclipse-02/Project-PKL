@@ -65,8 +65,4 @@ class SupplierAcc extends Model
     function bank() {
         return $this->hasOne(Bank::class, 'bank_code', 'bank_code');
     }
-
-    function coy() {
-        return $this->belongsTo(Coy::class, 'coy_id', 'coy_id');
-    }
 }

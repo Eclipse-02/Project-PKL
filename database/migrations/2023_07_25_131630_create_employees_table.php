@@ -36,7 +36,6 @@ return new class extends Migration
             $table->string("created_by");
             $table->string("updated_by");
             $table->timestamps();
-            $table->foreign("empl_branch")->references('branch_code')->on('branches')->onDelete('cascade');
             $table->foreign("position_code")->references('poss_code')->on('positions')->onDelete('cascade');
             $table->foreign("prov_code")->references('prov_code')->on('provinsis')->onDelete('cascade');
             $table->foreign("kota_code")->references('kota_code')->on('kotas')->onDelete('cascade');

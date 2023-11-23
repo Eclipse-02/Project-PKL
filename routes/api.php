@@ -38,4 +38,6 @@ Route::group(['prefix' => 'v1'], function() {
     Route::get('zips', [ZipController::class, 'api'])->name('zips.api');
     Route::get('register', [RegisterPackageController::class, 'api'])->name('register.api');
     Route::get('accounts', [AccountController::class, 'api'])->name('accounts.api');
+    Route::get('registerpackage/{id}', [RegisterPackageController::class, 'api'])->name('registerpackage.api');
+    Route::get('utilty/{coy_id}/{empl_branch}', [RegisterPackageController::class, 'utilApi'])->name('util.api');
 });

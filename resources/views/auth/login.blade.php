@@ -43,14 +43,10 @@
 							@csrf
 
 							<!--begin::Heading-->
-							<div class="text-center mb-10">
+							{{-- <div class="text-center mb-10">
 								<!--begin::Title-->
 								<h1 class="text-dark mb-3">Sign In to Metronic</h1>
 								<!--end::Title-->
-								<!--begin::Link-->
-								<div class="text-gray-400 fw-bold fs-4 mb-5">New Here?
-								<a href="{{ route('register') }}" class="link-primary fw-bolder">Create an Account</a></div>
-								<!--end::Link-->
 								<!--start::User Account-->
 								<div class="card card-flush shadow-sm mb-5">
 									<div class="card-header">
@@ -71,18 +67,18 @@
 									</div>
 								</div>
 								<!--end::User Account-->
-							</div>
-							<!--begin::Heading-->
+							</div> --}}
+							<!--end::Heading-->
 							<!--begin::Input group-->
 							<div class="fv-row mb-10">
 								<!--begin::Label-->
-								<label class="form-label fs-6 fw-bolder text-dark">Email</label>
+								<label class="form-label fs-6 fw-bolder text-dark">Username</label>
 								<!--end::Label-->
 								<!--begin::Input-->
-								<input class="form-control form-control-lg form-control-solid @error('email')is-invalid @enderror" type="text" name="email" autocomplete="off" value="{{ old('email') }}" />
+								<input class="form-control form-control-lg form-control-solid @error('username')is-invalid @enderror" type="text" name="username" autocomplete="off" value="{{ old('username') }}" />
 								<!--end::Input-->
 								<!--begin::Error-->
-								@error('email')
+								@error('username')
 									<span class="invalid-feedback" role="alert">
 										<strong>{{ $message }}</strong>
 									</span>

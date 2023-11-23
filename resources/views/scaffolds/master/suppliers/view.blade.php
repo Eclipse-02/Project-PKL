@@ -1,6 +1,6 @@
 @extends('dashboard.master')
 
-@section('title', 'Pemasok')
+@section('title', 'Agen')
 
 @section('content')
     <!--begin::details View-->
@@ -10,7 +10,7 @@
             <!--begin::Card title-->
             <div class="card-title m-0 flex-column">
                 <h3 class="fw-bolder m-0">Supplier Details</h3>
-                <div class="text-muted fs-7 fw-bold">Detail Pemasok</div>
+                <div class="text-muted fs-7 fw-bold">Detail Agen</div>
             </div>
             <!--end::Card title-->
             <!--start::Button-->
@@ -54,19 +54,7 @@
                         <!--begin::Body-->
                         <div id="kt_accordion_2_item_1" class="fs-6 collapse show ps-10" data-bs-parent="#kt_accordion_2">
                             <!--begin::Input group-->
-                            <div class="row mb-7 mt-7">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 fw-bold text-muted">UID</label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8">
-                                    <span class="fw-bolder fs-6 text-gray-800">{{ $data->id }}</span>
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-7">
+                            <div class="row my-7">
                                 <!--begin::Label-->
                                 <label class="col-lg-4 fw-bold text-muted">Kode</label>
                                 <!--end::Label-->
@@ -153,7 +141,7 @@
                             <!--begin::Input group-->
                             <div class="row mb-7">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 fw-bold text-muted">Foto Pemasok</label>
+                                <label class="col-lg-4 fw-bold text-muted">Foto Agen</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">

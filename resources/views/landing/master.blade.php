@@ -2,17 +2,15 @@
 <html lang="en">
 	<!--begin::Head-->
 	<head><base href="">
-		<title>Metronic</title>
-		<meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
-		<meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+		<title>Adam Indonesia</title>
+		<meta name="description" content="Melayani Anda Adalah Kebanggaan Kami" />
+		<meta name="keywords" content="Travel, Umroh, Haji" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta charset="utf-8" />
-		<meta property="og:locale" content="en_US" />
-		<meta property="og:type" content="article" />
-		<meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
-		<meta property="og:url" content="https://keenthemes.com/metronic" />
-		<meta property="og:site_name" content="Keenthemes | Metronic" />
-		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+		<meta property="og:locale" content="id_ID" />
+		<meta property="og:type" content="travel" />
+		<meta property="og:title" content="Adam Indonesia" />
+		<meta property="og:url" content="http://127.0.0.1" />
 		<link rel="shortcut icon" href="{{ asset('master/html/theme/dist/assets/media/logos/favicon.ico') }}" />
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
@@ -22,19 +20,6 @@
 		<link href="{{ asset('master/html/theme/dist/assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 		<!--end::Global Stylesheets Bundle-->
-        @if (request()->url() == 'http://127.0.0.1:8000/package/create')
-            @php
-                $packages = App\Models\Master\Package::select('pkg_code', 'pkg_name')->get();
-                $utilities = App\Models\Master\Utility::where([['coy_id', 1],['branch_code', 1]])->first();
-                $edus = App\Models\Master\Edu::where('coy_id', 1)->select('edu_code', 'edu_name')->get();
-                $jobs = App\Models\Master\Job::where('coy_id', 1)->select('job_code', 'job_name')->get();
-                $suppliers = App\Models\Master\Supplier::where('coy_id', 1)->select('supl_code', 'supl_name')->get();
-                $data = App\Models\Master\Package::join('appl_trn_pkg_dtls', 'appl_trn_pkg.pkg_code', '=', 'appl_trn_pkg_dtls.pkg_code')
-                        ->where('appl_trn_pkg.coy_id', '=', 1)
-                        ->select('appl_trn_pkg.coy_id', 'appl_trn_pkg.id', 'appl_trn_pkg.pkg_code', 'appl_trn_pkg.pkg_name', 'appl_trn_pkg.pkg_desc', 'appl_trn_pkg.pkg_price', 'appl_trn_pkg.pkg_price_limit', 'appl_trn_pkg.pkg_price_agent', 'appl_trn_pkg.pkg_start', 'appl_trn_pkg.pkg_closed', 'appl_trn_pkg.pkg_image', 'appl_trn_pkg.pkg_is_display', 'appl_trn_pkg_dtls.dtl_sq_no', 'appl_trn_pkg_dtls.dtl_desc', 'appl_trn_pkg_dtls.dtl_price', 'appl_trn_pkg_dtls.pkg_status', 'appl_trn_pkg.created_by', 'appl_trn_pkg.updated_by', 'appl_trn_pkg.created_at', 'appl_trn_pkg.updated_at')
-                        ->get();
-            @endphp
-        @endif
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -44,9 +29,9 @@
 			<!--begin::Header Section-->
 			<div class="mb-0" id="home">
 				<!--begin::Wrapper-->
-				<div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-dark-bg" style="background-image: url({{ asset('master/html/theme/dist/assets/media/svg/illustrations/landing.svg') }})">
+				<div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-red-bg">
 					<!--begin::Header-->
-					<div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
+					<div class="landing-header h-100px" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
 						<!--begin::Container-->
 						<div class="container">
 							<!--begin::Wrapper-->
@@ -66,9 +51,9 @@
 									</button>
 									<!--end::Mobile menu toggle-->
 									<!--begin::Logo image-->
-									<a href="../../demo1/dist/landing.html">
-										<img alt="Logo" src="{{ asset('master/html/theme/dist/assets/media/logos/logo-landing.svg') }}" class="logo-default h-25px h-lg-30px" />
-										<img alt="Logo" src="{{ asset('master/html/theme/dist/assets/media/logos/logo-landing-dark.svg') }}" class="logo-sticky h-20px h-lg-25px" />
+									<a href="{{ request()->root() }}">
+										<img alt="Logo" src="{{ asset('master/html/theme/dist/assets/media/logos/adam-indonesia.png') }}" class="logo-default w-90px w-lg-95px" />
+										<img alt="Logo" src="{{ asset('master/html/theme/dist/assets/media/logos/adam-indonesia.png') }}" class="logo-sticky w-85px w-lg-90px" />
 									</a>
 									<!--end::Logo image-->
 								</div>
@@ -81,21 +66,21 @@
 											<!--begin::Menu item-->
 											<div class="menu-item">
 												<!--begin::Menu link-->
-												<a class="menu-link nav-link{{ request()->root() == 'http://travel' ? (request()->url() == 'http://travel' ? ' active' : '') : (request()->url() == 'http://travel.test' ? ' active' : '') }} py-3 px-4 px-xxl-6" href="{{ request()->root() == 'http://travel' ? route('landing.main.welcome') : route('landing.test.welcome') }}" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Landing Page</a>
+												<a class="menu-link nav-link{{ request()->url() == 'http://127.0.0.1:8000' ? ' active' : '' }} py-3 px-4 px-xxl-6" href="{{ route('landing.main.welcome') }}" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Halaman Utama</a>
 												<!--end::Menu link-->
 											</div>
 											<!--end::Menu item-->
 											<!--begin::Menu item-->
 											<div class="menu-item">
 												<!--begin::Menu link-->
-												<a class="menu-link nav-link{{ request()->root() == 'http://travel' ? (request()->url() == 'http://travel/package' ? ' active' : '') : (request()->url() == 'http://travel.test/package' ? ' active' : '') }} py-3 px-4 px-xxl-6" href="{{ request()->root() == 'http://travel' ? route('landing.main.welcome.packages') : route('landing.test.welcome.packages') }}" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Packages</a>
+												<a class="menu-link nav-link{{ request()->url() == 'http://127.0.0.1:8000/package' ? ' active' : '' }} py-3 px-4 px-xxl-6" href="{{ route('landing.main.welcome.packages') }}" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Paket</a>
 												<!--end::Menu link-->
 											</div>
 											<!--end::Menu item-->
 											<!--begin::Menu item-->
 											<div class="menu-item">
 												<!--begin::Menu link-->
-												<a class="menu-link nav-link{{ request()->root() == 'http://travel' ? (request()->url() == 'http://travel/package/register' ? ' active' : '') : (request()->url() == 'http://travel.test/package/register' ? ' active' : '') }} py-3 px-4 px-xxl-6" href="{{ request()->root() == 'http://travel' ? route('landing.main.welcome.register') : route('landing.test.welcome.register') }}" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Register</a>
+												<a class="menu-link nav-link py-3 px-4 px-xxl-6" href="https://api.whatsapp.com/send?phone=6285335410141&text=undefined&type=phone_number&app_absent=0" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Hubungi Kami</a>
 												<!--end::Menu link-->
 											</div>
 											<!--end::Menu item-->
@@ -106,7 +91,11 @@
 								<!--end::Menu wrapper-->
 								<!--begin::Toolbar-->
 								<div class="flex-equal text-end ms-1">
+								@if (auth()->guest())
 									<a href="{{ route('login') }}" class="btn btn-success">Sign In</a>
+								@else
+									<a href="{{ route('dashboard') }}" class="btn btn-primary">Masuk</a>
+								@endif
 								</div>
 								<!--end::Toolbar-->
 							</div>
@@ -115,25 +104,28 @@
 						<!--end::Container-->
 					</div>
 					<!--end::Header-->
-					<!--start::Curve Top-->
+					<!--begin::Curve top-->
 					<div class="landing-curve">
 						<svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path fill="#ffffff" d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
 						</svg>
 					</div>
-					<!--bottom::Curve Top-->
-					<!--begin::Landing hero-->
-					<div class="d-flex flex-column flex-center w-100 min-h-350px min-h-lg-500px" style="background-color: white">
-						@yield('content')
+					<!--end::Curve top-->
+					<!--begin::Wrapper-->
+					<div class="pb-15 pt-18 landing-light-bg">
+						<!--begin::Container-->
+						<div class="container-fluid">
+							@yield('content')
+						</div>
+						<!--end::Container-->
 					</div>
-					<!--end::Landing hero-->
-					<!--start::Curve Bottom-->
+					<!--end::Wrapper-->
+					<!--begin::Curve bottom-->
 					<div class="landing-curve">
 						<svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path fill="#ffffff" d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
 						</svg>
 					</div>
-					<!--end::Curve Bottom-->
 				</div>
 				<!--end::Wrapper-->
 			</div>
@@ -141,7 +133,7 @@
 			<!--begin::Footer Section-->
 			<div class="mb-0">
 				<!--begin::Wrapper-->
-				<div class="landing-dark-bg pt-20">
+				<div class="landing-red-bg pt-20">
 					<!--begin::Container-->
 					<div class="container">
 						<!--begin::Row-->
@@ -149,24 +141,25 @@
 							<!--begin::Col-->
 							<div class="col-lg-6 pe-lg-16 mb-10 mb-lg-0">
 								<!--begin::Block-->
-								<div class="rounded landing-dark-border p-9 mb-10">
+								<div class="rounded landing-red-border p-9 mb-10">
 									<!--begin::Title-->
-									<h2 class="text-white">Would you need a Custom License?</h2>
+									<h2 class="text-white">Apa motto kami?</h2>
 									<!--end::Title-->
 									<!--begin::Text-->
-									<span class="fw-normal fs-4 text-gray-700">Email us to
-									<a href="https://keenthemes.com/support" class="text-white opacity-50 text-hover-primary">support@keenthemes.com</a></span>
+									<span class="fw-normal fs-4 text-gray-400">
+										Melayani para jama’ah dengan sepenuh hati, sehingga tercipta hubungan yang harmonis, sesuai amanah yang telah Allah berikan
+									</span>
 									<!--end::Text-->
 								</div>
 								<!--end::Block-->
 								<!--begin::Block-->
-								<div class="rounded landing-dark-border p-9">
+								<div class="rounded landing-red-border p-9">
 									<!--begin::Title-->
-									<h2 class="text-white">How About a Custom Project?</h2>
+									<h2 class="text-white">Anda ingin bertanya mengenai paket kami?</h2>
 									<!--end::Title-->
 									<!--begin::Text-->
-									<span class="fw-normal fs-4 text-gray-700">Use Our Custom Development Service.
-									<a href="../../demo1/dist/pages/profile/overview.html" class="text-white opacity-50 text-hover-primary">Click to Get a Quote</a></span>
+									<span class="fw-normal fs-4 text-gray-400">Silahkan menghubungi kami melalui
+									<a href="https://api.whatsapp.com/send?phone=6285335410141&text=undefined&type=phone_number&app_absent=0" class="text-white opacity-50 text-hover-success">WhatsApp</a></span>
 									<!--end::Text-->
 								</div>
 								<!--end::Block-->
@@ -179,59 +172,38 @@
 									<!--begin::Links-->
 									<div class="d-flex fw-bold flex-column me-20">
 										<!--begin::Subtitle-->
-										<h4 class="fw-bolder text-gray-400 mb-6">More for Metronic</h4>
+										<h4 class="fw-bolder text-gray-400 mb-6">Paket Kami</h4>
 										<!--end::Subtitle-->
 										<!--begin::Link-->
-										<a href="#" class="text-white opacity-50 text-hover-primary fs-5 mb-6">FAQ</a>
+										<a href="#" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Umroh Regular</a>
 										<!--end::Link-->
 										<!--begin::Link-->
-										<a href="#" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Documentaions</a>
+										<a href="#" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Umroh Plus Thaif</a>
 										<!--end::Link-->
 										<!--begin::Link-->
-										<a href="#" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Video Tuts</a>
+										<a href="#" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Umroh Plus Turki</a>
 										<!--end::Link-->
 										<!--begin::Link-->
-										<a href="#" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Changelog</a>
+										<a href="#" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Umroh Plus Dubai</a>
 										<!--end::Link-->
 										<!--begin::Link-->
-										<a href="#" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Github</a>
-										<!--end::Link-->
-										<!--begin::Link-->
-										<a href="#" class="text-white opacity-50 text-hover-primary fs-5">Tutorials</a>
+										<a href="#" class="text-white opacity-50 text-hover-primary fs-5 mb-6">Umroh Plus Aqsho</a>
 										<!--end::Link-->
 									</div>
 									<!--end::Links-->
 									<!--begin::Links-->
 									<div class="d-flex fw-bold flex-column ms-lg-20">
 										<!--begin::Subtitle-->
-										<h4 class="fw-bolder text-gray-400 mb-6">Stay Connected</h4>
+										<h4 class="fw-bolder text-gray-400 mb-6">Media Sosial</h4>
 										<!--end::Subtitle-->
 										<!--begin::Link-->
-										<a href="#" class="mb-6">
+										<a href="https://www.facebook.com/profile.php?id=61550213074048" class="mb-6">
 											<img src="{{ asset('master/html/theme/dist/assets/media/svg/brand-logos/facebook-4.svg') }}" class="h-20px me-2" alt="" />
 											<span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Facebook</span>
 										</a>
 										<!--end::Link-->
 										<!--begin::Link-->
-										<a href="#" class="mb-6">
-											<img src="{{ asset('master/html/theme/dist/assets/media/svg/brand-logos/github.svg') }}" class="h-20px me-2" alt="" />
-											<span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Github</span>
-										</a>
-										<!--end::Link-->
-										<!--begin::Link-->
-										<a href="#" class="mb-6">
-											<img src="{{ asset('master/html/theme/dist/assets/media/svg/brand-logos/twitter.svg') }}" class="h-20px me-2" alt="" />
-											<span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Twitter</span>
-										</a>
-										<!--end::Link-->
-										<!--begin::Link-->
-										<a href="#" class="mb-6">
-											<img src="{{ asset('master/html/theme/dist/assets/media/svg/brand-logos/dribbble-icon-1.svg') }}" class="h-20px me-2" alt="" />
-											<span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Dribbble</span>
-										</a>
-										<!--end::Link-->
-										<!--begin::Link-->
-										<a href="#" class="mb-6">
+										<a href="https://www.instagram.com/adam_indonesia_official" class="mb-6">
 											<img src="{{ asset('master/html/theme/dist/assets/media/svg/brand-logos/instagram-2-1.svg') }}" class="h-20px me-2" alt="" />
 											<span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Instagram</span>
 										</a>
@@ -247,7 +219,7 @@
 					</div>
 					<!--end::Container-->
 					<!--begin::Separator-->
-					<div class="landing-dark-separator"></div>
+					<div class="landing-red-separator"></div>
 					<!--end::Separator-->
 					<!--begin::Container-->
 					<div class="container">
@@ -256,28 +228,15 @@
 							<!--begin::Copyright-->
 							<div class="d-flex align-items-center order-2 order-md-1">
 								<!--begin::Logo-->
-								<a href="../../demo1/dist/landing.html">
-									<img alt="Logo" src="{{ asset('master/html/theme/dist/assets/media/logos/logo-landing.svg') }}" class="h-15px h-md-20px" />
+								<a href="{{ request()->root() }}">
+									<img alt="Logo" src="{{ asset('master/html/theme/dist/assets/media/logos/adam-indonesia.png') }}" class="h-45px h-md-50px" />
 								</a>
-								<!--end::Logo image-->
+								<!--end::Logo-->
 								<!--begin::Logo image-->
-								<span class="mx-5 fs-6 fw-bold text-gray-600 pt-1" href="https://keenthemes.com">© 2023 Eclipse</span>
+								<span class="mx-5 fs-6 fw-bold text-gray-600 pt-1" href="https://keenthemes.com">© 2023 Adam Indonesia</span>
 								<!--end::Logo image-->
 							</div>
 							<!--end::Copyright-->
-							<!--begin::Menu-->
-							<ul class="menu menu-gray-600 menu-hover-primary fw-bold fs-6 fs-md-5 order-1 mb-5 mb-md-0">
-								<li class="menu-item">
-									<a href="https://keenthemes.com" target="_blank" class="menu-link px-2">About</a>
-								</li>
-								<li class="menu-item mx-5">
-									<a href="https://keenthemes.com/support" target="_blank" class="menu-link px-2">Support</a>
-								</li>
-								<li class="menu-item">
-									<a href="" target="_blank" class="menu-link px-2">Purchase</a>
-								</li>
-							</ul>
-							<!--end::Menu-->
 						</div>
 						<!--end::Wrapper-->
 					</div>
@@ -300,7 +259,18 @@
 			<!--end::Scrolltop-->
 		</div>
 		<!--end::Main-->
-		<script>var hostUrl = "master/html/theme/dist/assets/";</script>
+		<!--begin::Sign Out Form-->
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+        <!--end::Sign Out Form-->
+		<script>
+			var hostUrl = "master/html/theme/dist/assets/";
+			const baseUrl = "{{ request()->root() }}";
+			@if($errors->any())
+				callLocations({{ old('prov_code') ? old('prov_code') : '0' }}, {{ old('kota_code') ? old('kota_code') : '0' }}, {{ old('kec_code') ? old('kec_code') : '0' }}, {{ old('kel_code') ? old('kel_code') : '0' }}, {{ old('zip_code') ? old('zip_code') : '0' }});
+			@endif
+		</script>
 		<!--begin::Javascript-->
 		<!--begin::Global Javascript Bundle(used by all pages)-->
 		<script src="{{ asset('master/html/theme/dist/assets/plugins/global/plugins.bundle.js') }}"></script>

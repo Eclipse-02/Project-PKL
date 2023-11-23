@@ -50,7 +50,7 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <div>
-                                                <select data-column="4" class="filter-select form-select form-select-solid">
+                                                <select data-column="4" class="filter-select form-select form-select-solid" data-control="select2">
                                                     <option value="">Semua</option>
                                                     <option value="Y">Ya</option>
                                                     <option value="N">Tidak</option>
@@ -82,7 +82,7 @@
                             <th class="min-w-50px">No</th>
                             <th class="min-w-100px">Kode Kelurahan</th>
                             <th class="min-w-100px">Nama Kelurahan</th>
-                            <th class="min-w-100px">Kode Kecamatan</th>
+                            <th class="min-w-100px">Nama Kecamatan</th>
                             <th class="min-w-100px">Aktif</th>
                             <th class="min-w-150px text-center">AKSI</th>
                         </tr>
@@ -110,7 +110,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header">
                     <!--begin::Modal title-->
-                    <h2>Create New Data <div class="text-muted fs-3 fw-bold d-inline"><span class="fw-bolder">/</span> Membuat Data Baru</div></h2>
+                    <h2>Create New Urban Village Data <div class="text-muted fs-3 fw-bold d-inline"><span class="fw-bolder">/</span> Membuat Data Kecamatan Baru</div></h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -185,7 +185,7 @@
                                     <select class="form-select form-select-solid @error('kec_code')is-invalid @enderror" name="kec_code" data-control="select2" data-placeholder="Pilih Kecamatan" data-dropdown-parent="#create_modal">
                                         <option></option>
                                         @foreach ($kecamatans as $i)
-                                            <option value="{{ $i->kec_code }}">{{ $i->kecamatan }}</option>
+                                            <option value="{{ $i->kec_code }}" {{ old('kec_code') == $i->kec_code ? 'selected' : '' }}{{ $i->kecamatan }}</option>
                                         @endforeach
                                     </select>
                                     <!--end::Input-->
@@ -287,8 +287,8 @@
                     name: "kelurahan"
                 },
                 {
-                    data: "kec_code",
-                    name: "kec_code"
+                    data: "kecamatan.kecamatan",
+                    name: "kecamatan"
                 },
                 {
                     data: "is_active",

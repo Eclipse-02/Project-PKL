@@ -26,13 +26,7 @@ class MainController extends Controller
      */
     public function index()
     {
-        $data = Package::join('appl_trn_pkg_dtls', 'appl_trn_pkg.pkg_code', '=', 'appl_trn_pkg_dtls.pkg_code')
-                ->where([
-                    ['appl_trn_pkg.coy_id', '=', 1],
-                    ['appl_trn_pkg.pkg_is_display', '=', 'Y'],
-                ])
-                ->select('appl_trn_pkg.coy_id', 'appl_trn_pkg.id', 'appl_trn_pkg.pkg_code', 'appl_trn_pkg.pkg_name', 'appl_trn_pkg.pkg_desc', 'appl_trn_pkg.pkg_price', 'appl_trn_pkg.pkg_price_limit', 'appl_trn_pkg.pkg_price_agent', 'appl_trn_pkg.pkg_start', 'appl_trn_pkg.pkg_closed', 'appl_trn_pkg.pkg_image', 'appl_trn_pkg.pkg_is_display', 'appl_trn_pkg_dtls.dtl_sq_no', 'appl_trn_pkg_dtls.dtl_desc', 'appl_trn_pkg_dtls.dtl_price', 'appl_trn_pkg_dtls.pkg_status', 'appl_trn_pkg.created_by', 'appl_trn_pkg.updated_by', 'appl_trn_pkg.created_at', 'appl_trn_pkg.updated_at')
-                ->get();
+        $data = Package::with('details')->where('coy_id', '=', 1)->get();
 
         return view('landing.welcome', compact('data'));
     }
@@ -59,10 +53,10 @@ class MainController extends Controller
             ['coy_id', '=', 1],
             ['is_active', '=', 'Y'],
         ])->select('supl_code', 'supl_name')->get();
-        $provinsis = Provinsi::select('prov_code', 'provinsi')->get();
-        $countries = Country::select('con_code', 'con_name')->get();
-        $relations = Relation::select('rel_code', 'rel_name')->get();
-        $vaccines = Vaccine::select('vc_code', 'vc_name')->get();
+        $provinsis = Provinsi::where('is_active', 'Y')->select('prov_code', 'provinsi')->get();
+        $countries = Country::where('is_active', 'Y')->select('con_code', 'con_name')->get();
+        $relations = Relation::where('is_active', 'Y')->select('rel_code', 'rel_name')->get();
+        $vaccines = Vaccine::where('is_active', 'Y')->select('vc_code', 'vc_name')->get();
 
         return view('landing.create', compact('packages', 'utilities', 'edus', 'jobs', 'suppliers', 'provinsis', 'countries', 'relations', 'vaccines'));
     }
@@ -86,7 +80,6 @@ class MainController extends Controller
             'kota_code' => 'required',
             'kec_code' => 'required',
             'kel_code' => 'required',
-            'zip_code' => 'required',
             'appl_status' => 'required',
             'con_code' => 'required',
             'edu_code' => 'required',
@@ -121,6 +114,8 @@ class MainController extends Controller
             'appl_is_copy_akta_l' => 'required',
         ]);
 
+        // dd($validator->errors());
+
         $appl_id_no = str_replace('-', '', $request->appl_id_no);
 
         if ($validator->fails()) {
@@ -131,9 +126,9 @@ class MainController extends Controller
             event(new Utils(1, 1));
             $seqn = sprintf("%08d", $db->last_value);
 
-            if ($db->first()->is_cycle == 'Y') {
+            if ($db->is_cycle == 'Y') {
                 $appl_no = 1 . 'ORD' . Carbon::now()->format('y') . $seqn;
-            } else if($db->first()->is_cycle == 'M') {
+            } else if($db->is_cycle == 'M') {
                 $appl_no = 1 . 'ORD' . Carbon::now()->format('ym') . $seqn;
             } else {
                 $appl_no = 1 . 'ORD' . Carbon::now()->format('ymd') . $seqn;

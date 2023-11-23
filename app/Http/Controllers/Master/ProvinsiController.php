@@ -122,7 +122,7 @@ class ProvinsiController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'prov_code' => 'required|integer',
+            'prov_code' => 'required|string|unique:provinsis,prov_code',
             'provinsi' => 'required|string',
             'is_active' => 'required|string'
         ]);
@@ -169,7 +169,6 @@ class ProvinsiController extends Controller
     public function update(Request $request, Provinsi $provinsi)
     {
         $validator = Validator::make($request->all(), [
-            'prov_code' => 'required|integer',
             'provinsi' => 'required|string',
             'is_active' => 'required|string'
         ]);
@@ -179,7 +178,6 @@ class ProvinsiController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $provinsi->update([
-                'prov_code' => $request->prov_code,
                 'provinsi' => $request->provinsi,
                 'is_active' => $request->is_active,
                 'updated_by' => Auth::user()->name,
@@ -192,14 +190,27 @@ class ProvinsiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Provinsi $provinsi)
+    public function destroy($provinsi)
     {
-        if ($provinsi->is_active == 'Y') {
-            $provinsi->update([
+        $isKotaActive = Provinsi::join('kotas', 'provinsis.prov_code', '=', 'kotas.prov_code')
+                ->where([
+                    ['provinsis.id', '=', $provinsi],
+                    ['kotas.is_active', '=', 'Y']
+                ])->exists();
+
+        $data = Provinsi::where('id', $provinsi)->first();
+
+        if ($isKotaActive) {
+            Alert::toast('Bawahan dari Data ini Masih Aktif!', 'error');
+            return redirect()->route('provinsis.index');
+        }
+
+        if ($data->is_active == 'Y') {
+            $data->update([
                 'is_active' => 'N'
             ]);
         } else {
-            $provinsi->update([
+            $data->update([
                 'is_active' => 'Y'
             ]);
         }
@@ -210,7 +221,7 @@ class ProvinsiController extends Controller
 
     public function api()
     {
-        $data = Provinsi::select('prov_code', 'provinsi')->get();
+        $data = Provinsi::select('prov_code', 'provinsi')->where('is_active', 'Y')->get();
 
         return response()->json($data);
     }

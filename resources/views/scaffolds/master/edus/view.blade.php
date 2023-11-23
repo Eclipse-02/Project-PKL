@@ -30,20 +30,8 @@
         <!--begin::Card header-->
         <!--begin::Card body-->
         <div class="card-body p-9">
-            <!--begin::Row-->
-            <div class="row mb-7">
-                <!--begin::Label-->
-                <label class="col-lg-4 fw-bold text-muted">UID</label>
-                <!--end::Label-->
-                <!--begin::Col-->
-                <div class="col-lg-8">
-                    <span class="fw-bolder fs-6 text-gray-800">{{ $data->id }}</span>
-                </div>
-                <!--end::Col-->
-            </div>
-            <!--end::Row-->
             <!--begin::Input group-->
-            <div class="row mb-7">
+            <div class="row my-7">
                 <!--begin::Label-->
                 <label class="col-lg-4 fw-bold text-muted">Kode</label>
                 <!--end::Label-->

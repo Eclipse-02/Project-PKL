@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 {
     protected $table = 'gl_mst_account';
+
     /**
      * The "booting" function of model
      *
@@ -58,4 +59,8 @@ class Account extends Model
         'created_by',
         'updated_by',
     ];
+
+    public function childs() {
+        return $this->hasMany(Account::class, 'glacct_acct_parent', 'glacct_code');
+    }
 }

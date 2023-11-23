@@ -11,8 +11,8 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title m-0 flex-column">
-                    <h3 class="fw-bolder m-0">Edit Data</h3>
-                    <div class="text-muted fs-7 fw-bold">Edit Data</div>
+                    <h3 class="fw-bolder m-0">Edit Company Data</h3>
+                    <div class="text-muted fs-7 fw-bold">Edit Data Perusahaan</div>
                 </div>
                 <!--end::Card title-->
                 <!--start::Button-->
@@ -99,8 +99,9 @@
                 <!--begin::Content-->
                 <div class="flex-row-fluid py-lg-5 px-lg-15">
                     <!--begin::Form-->
-                    <form class="form w-lg-500px mx-auto" action="{{ route('companies.store') }}" method="POST">
+                    <form class="form w-lg-500px mx-auto" action="{{ route('companies.update', $data->id) }}" method="POST">
                         @csrf
+                        @method('PUT')
 
                         <!--begin::Group-->
                         <div class="mb-5">
@@ -291,7 +292,7 @@
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid @error('kota_code')is-invalid @enderror" name="kota_code" id="kota_code" disabled="disabled">
+                                        <select class="form-select form-select-solid @error('kota_code')is-invalid @enderror" name="kota_code" id="kota_code">
                                             <option></option>
                                         </select>
                                         <!--end::Input-->
@@ -313,7 +314,7 @@
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid @error('kec_code')is-invalid @enderror" name="kec_code" id="kec_code" disabled="disabled">
+                                        <select class="form-select form-select-solid @error('kec_code')is-invalid @enderror" name="kec_code" id="kec_code">
                                             <option></option>
                                         </select>
                                         <!--end::Input-->
@@ -335,7 +336,7 @@
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid @error('kel_code')is-invalid @enderror" name="kel_code" id="kel_code" disabled="disabled">
+                                        <select class="form-select form-select-solid @error('kel_code')is-invalid @enderror" name="kel_code" id="kel_code">
                                             <option></option>
                                         </select>
                                         <!--end::Input-->
@@ -357,7 +358,7 @@
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid @error('zip_code')is-invalid @enderror" name="zip_code" id="zip_code" disabled="disabled">
+                                        <select class="form-select form-select-solid @error('zip_code')is-invalid @enderror" name="zip_code" id="zip_code">
                                             <option></option>
                                         </select>
                                         <!--end::Input-->

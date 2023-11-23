@@ -11,8 +11,8 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title m-0 flex-column">
-                    <h3 class="fw-bolder m-0">Edit Data</h3>
-                    <div class="text-muted fs-7 fw-bold">Edit Data</div>
+                    <h3 class="fw-bolder m-0">Edit Branch Data</h3>
+                    <div class="text-muted fs-7 fw-bold">Edit Data Cabang</div>
                 </div>
                 <!--end::Card title-->
                 <!--start::Button-->
@@ -134,7 +134,7 @@
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <input class="form-control form-control form-control-solid @error('branch_code')is-invalid @enderror" type="text" name="branch_code" value="{{ old('branch_code') ? old('branch_code') : $data->branch_code }}" />
+                                        <input class="form-control form-control form-control-solid @error('branch_code')is-invalid @enderror" type="text" name="branch_code" value="{{ old('branch_code') ? old('branch_code') : $data->branch_code }}" disabled="disabled" />
                                         <!--end::Input-->
 
                                         <!--begin::Error-->
@@ -320,8 +320,8 @@
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid @error('prov_code')is-invalid @enderror" name="prov_code" id="prov_code" data-control="select2" data-placeholder="Pilih Provinsi">
-                                            <option></option>
+                                        <select class="form-select form-select-solid @error('prov_code')is-invalid @enderror" name="prov_code" id="prov_code">
+                                            <option>Pilih Provinsi</option>
                                             @foreach ($provinsis as $i)
                                                 <option value="{{ $i->prov_code }}" {{ old('prov_code') ? (old('prov_code') == $i->prov_code ? 'selected' : '') : ($data->prov_code == $i->prov_code ? 'selected' : '') }}>{{ $i->provinsi }}</option>
                                             @endforeach
@@ -433,8 +433,8 @@
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid @error('area_code')is-invalid @enderror" name="area_code" id="area_code" data-control="select2" data-placeholder="Pilih Area">
-                                            <option></option>
+                                        <select class="form-select form-select-solid @error('area_code')is-invalid @enderror" name="area_code" id="area_code">
+                                            <option>Pilih Area</option>
                                             @foreach ($areas as $i)
                                                 <option value="{{ $i->area_code }}" {{ old('area_code') ? (old('area_code') == $i->area_code ? 'selected' : '') : ($data->area_code == $i->area_code ? 'selected' : '') }}>{{ $i->area_name }}</option>
                                             @endforeach
@@ -919,6 +919,8 @@
             document.querySelector('[data-kt-stepper-action="next"]').classList.remove("d-none")
         }
     });
+
+    select2Edit(['prov_code', 'area_code']);
 
 </script>
 @endsection

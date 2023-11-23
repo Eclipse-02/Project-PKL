@@ -7,9 +7,9 @@ use App\Models\Master\Kecamatan;
 use App\Models\Master\Kelurahan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\Validator;
 
 class KelurahanController extends Controller
 {
@@ -20,7 +20,7 @@ class KelurahanController extends Controller
     {
         $kecamatans = Kecamatan::select('kec_code', 'kecamatan')->where('is_active', 'Y')->get();
         if ($request->ajax()) {
-            $data = Kelurahan::all();
+            $data = Kelurahan::with('kecamatan')->get();
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -124,9 +124,9 @@ class KelurahanController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'kel_code' => 'required|integer',
+            'kel_code' => 'required|string|unique:kelurahans,kel_code',
             'kelurahan' => 'required|string',
-            'kec_code' => 'required|integer',
+            'kec_code' => 'required|string',
             'is_active' => 'required|string'
         ]);
 
@@ -172,9 +172,8 @@ class KelurahanController extends Controller
     public function update(Request $request, Kelurahan $kelurahan)
     {
         $validator = Validator::make($request->all(), [
-            'kel_code' => 'required|integer',
             'kelurahan' => 'required|string',
-            'kec_code' => 'required|integer',
+            'kec_code' => 'required|string',
             'is_active' => 'required|string'
         ]);
 
@@ -183,7 +182,6 @@ class KelurahanController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $kelurahan->update([
-                'kel_code' => $request->kel_code,
                 'kelurahan' => $request->kelurahan,
                 'kec_code' => $request->kec_code,
                 'is_active' => $request->is_active,
@@ -215,7 +213,10 @@ class KelurahanController extends Controller
 
     public function api(Request $request)
     {
-        $data = Kelurahan::select('kel_code', 'kelurahan')->where('kec_code', $request->code)->get();
+        $data = Kelurahan::select('kel_code', 'kelurahan')->where([
+            ['kec_code', '=', $request->code],
+            ['is_active', '=', 'Y']
+        ])->get();
 
         return response()->json($data);
     }

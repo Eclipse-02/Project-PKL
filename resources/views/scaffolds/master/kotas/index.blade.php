@@ -50,7 +50,7 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <div>
-                                                <select data-column="4" class="filter-select form-select form-select-solid">
+                                                <select data-column="4" class="filter-select form-select form-select-solid" data-control="select2">
                                                     <option value="">Semua</option>
                                                     <option value="Y">Ya</option>
                                                     <option value="N">Tidak</option>
@@ -82,7 +82,7 @@
                             <th class="min-w-50px">No</th>
                             <th class="min-w-100px">Kode Kota</th>
                             <th class="min-w-100px">Nama Kota</th>
-                            <th class="min-w-100px">Kode Provinsi</th>
+                            <th class="min-w-100px">Nama Provinsi</th>
                             <th class="min-w-100px">Aktif</th>
                             <th class="min-w-150px text-center">AKSI</th>
                         </tr>
@@ -102,7 +102,7 @@
     <!--end::Col-->
 
     <!--begin::Modal - Create-->
-    <div class="modal fade" id="create_modal" tabindex="-2" aria-hidden="true">
+    <div class="modal fade" id="create_modal" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->
         <div class="modal-dialog modal-dialog-centered mw-900px">
             <!--begin::Modal content-->
@@ -110,7 +110,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header">
                     <!--begin::Modal title-->
-                    <h2>Create New Data <div class="text-muted fs-3 fw-bold d-inline"><span class="fw-bolder">/</span> Membuat Data Baru</div></h2>
+                    <h2>Create New City Data <div class="text-muted fs-3 fw-bold d-inline"><span class="fw-bolder">/</span> Membuat Data Kota Baru</div></h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -185,7 +185,7 @@
                                     <select class="form-select form-select-solid @error('prov_code')is-invalid @enderror" name="prov_code" data-control="select2" data-placeholder="Pilih Provinsi" data-dropdown-parent="#create_modal">
                                         <option></option>
                                         @foreach ($provinsis as $i)
-                                            <option value="{{ $i->prov_code }}">{{ $i->provinsi }}</option>
+                                            <option value="{{ $i->prov_code }}" {{ old('prov_code') == $i->prov_code ? 'selected' : '' }}>{{ $i->provinsi }}</option>
                                         @endforeach
                                     </select>
                                     <!--end::Input-->
@@ -287,8 +287,8 @@
                     name: "kota"
                 },
                 {
-                    data: "prov_code",
-                    name: "prov_code"
+                    data: "provinsi.provinsi",
+                    name: "provinsi"
                 },
                 {
                     data: "is_active",

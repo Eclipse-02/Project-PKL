@@ -50,7 +50,7 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <div>
-                                                <select data-column="4" class="filter-select form-select form-select-solid">
+                                                <select data-column="4" class="filter-select form-select form-select-solid" data-control="select2">
                                                     <option value="">Semua</option>
                                                     <option value="Y">Ya</option>
                                                     <option value="N">Tidak</option>
@@ -82,7 +82,7 @@
                             <th class="min-w-50px">No</th>
                             <th class="min-w-100px">Kode Kecamatan</th>
                             <th class="min-w-100px">Nama Kecamatan</th>
-                            <th class="min-w-100px">Kode Kota</th>
+                            <th class="min-w-100px">Nama Kota</th>
                             <th class="min-w-100px">Aktif</th>
                             <th class="min-w-150px text-center">AKSI</th>
                         </tr>
@@ -110,7 +110,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header">
                     <!--begin::Modal title-->
-                    <h2>Create New Data <div class="text-muted fs-3 fw-bold d-inline"><span class="fw-bolder">/</span> Membuat Data Baru</div></h2>
+                    <h2>Create New Subdistrict Data <div class="text-muted fs-3 fw-bold d-inline"><span class="fw-bolder">/</span> Membuat Data Kecamatan Baru</div></h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -185,7 +185,7 @@
                                     <select class="form-select form-select-solid @error('kota_code')is-invalid @enderror" name="kota_code" data-control="select2" data-placeholder="Pilih Kota" data-dropdown-parent="#create_modal">
                                         <option></option>
                                         @foreach ($kotas as $i)
-                                            <option value="{{ $i->kota_code }}">{{ $i->kota }}</option>
+                                            <option value="{{ $i->kota_code }}" {{ old('kota_code') == $i->kota_code ? 'selected' : '' }}>{{ $i->kota }}</option>
                                         @endforeach
                                     </select>
                                     <!--end::Input-->
@@ -287,8 +287,8 @@
                     name: "kecamatan"
                 },
                 {
-                    data: "kota_code",
-                    name: "kota_code"
+                    data: "kota.kota",
+                    name: "kota"
                 },
                 {
                     data: "is_active",

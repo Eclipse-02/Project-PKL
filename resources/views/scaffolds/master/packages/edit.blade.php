@@ -11,8 +11,8 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title m-0 flex-column">
-                    <h3 class="fw-bolder m-0">Edit Data</h3>
-                    <div class="text-muted fs-7 fw-bold">Edit Data</div>
+                    <h3 class="fw-bolder m-0">Edit Package Data</h3>
+                    <div class="text-muted fs-7 fw-bold">Edit Data Paket</div>
                 </div>
                 <!--end::Card title-->
                 <!--start::Button-->
@@ -87,31 +87,12 @@
                             <!--end::Icon-->
                             <!--begin::Label-->
                             <div class="stepper-label">
-                                <h3 class="stepper-title">Detail</h3>
-                                <div class="stepper-desc">Detail Paket</div>
-                            </div>
-                            <!--end::Label-->
-                        </div>
-                        <!--end::Step 3-->
-                        <!--begin::Step 4-->
-                        <div class="stepper-item" data-kt-stepper-element="nav" data-kt-stepper-action="step">
-                            <!--begin::Line-->
-                            <div class="stepper-line w-40px"></div>
-                            <!--end::Line-->
-                            <!--begin::Icon-->
-                            <div class="stepper-icon w-40px h-40px">
-                                <i class="stepper-check fas fa-check"></i>
-                                <span class="stepper-number">4</span>
-                            </div>
-                            <!--end::Icon-->
-                            <!--begin::Label-->
-                            <div class="stepper-label">
                                 <h3 class="stepper-title">Status</h3>
                                 <div class="stepper-desc">Status Paket</div>
                             </div>
                             <!--end::Label-->
                         </div>
-                        <!--end::Step 4-->
+                        <!--end::Step 3-->
                     </div>
                     <!--end::Nav-->
                 </div>
@@ -135,7 +116,7 @@
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <input class="form-control form-control form-control-solid @error('pkg_code')is-invalid @enderror" type="text" name="pkg_code" value="{{ old('pkg_code') ? old('pkg_code') : $data->pkg_code }}" />
+                                        <input class="form-control form-control form-control-solid @error('pkg_code')is-invalid @enderror" type="text" name="pkg_code" value="{{ old('pkg_code') ? old('pkg_code') : $data->pkg_code }}" disabled="disabled" />
                                         <!--end::Input-->
 
                                         <!--begin::Error-->
@@ -217,27 +198,7 @@
                                     <!--begin::Input group-->
                                     <div class="fv-row mb-10">
                                         <!--begin::Label-->
-                                        <label class="form-label required">Batas Harga</label>
-                                        <!--end::Label-->
-
-                                        <!--begin::Input-->
-                                        <input class="form-control form-control form-control-solid @error('pkg_price_limit')is-invalid @enderror" type="text" name="pkg_price_limit" value="{{ old('pkg_price_limit') ? old('pkg_price_limit') : $data->pkg_price_limit }}" />
-                                        <!--end::Input-->
-
-                                        <!--begin::Error-->
-                                        @error('pkg_price_limit')
-                                            <span class="invalid-feedback d-block" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                        <!--end::Error-->
-                                    </div>
-                                    <!--end::Input group-->
-
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-10">
-                                        <!--begin::Label-->
-                                        <label class="form-label required">Harga Agen</label>
+                                        <label class="form-label required">Insentif Agen</label>
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
@@ -324,58 +285,12 @@
                                     <!--begin::Input group-->
                                     <div class="fv-row mb-10">
                                         <!--begin::Label-->
-                                        <label class="form-label required">Deskripsi</label>
-                                        <!--end::Label-->
-
-                                        <!--begin::Textarea-->
-                                        <textarea class="form-control form-control form-control-solid @error('dtl_desc')is-invalid @enderror" name="dtl_desc" data-kt-autosize="true">{{ old('dtl_desc') ? old('dtl_desc') : $data->dtl_desc }}</textarea>
-                                        <!--end::Textarea-->
-
-                                        <!--begin::Error-->
-                                        @error('dtl_desc')
-                                            <span class="invalid-feedback d-block" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                        <!--end::Error-->
-                                    </div>
-                                    <!--end::Input group-->
-
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-10">
-                                        <!--begin::Label-->
-                                        <label class="form-label required">Detail Harga</label>
-                                        <!--end::Label-->
-
-                                        <!--begin::Input-->
-                                        <input class="form-control form-control form-control-solid @error('dtl_price')is-invalid @enderror" type="text" name="dtl_price" value="{{ old('dtl_price') ? old('dtl_price') : $data->dtl_price }}" />
-                                        <!--end::Input-->
-
-                                        <!--begin::Error-->
-                                        @error('dtl_price')
-                                            <span class="invalid-feedback d-block" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                        <!--end::Error-->
-                                    </div>
-                                    <!--end::Input group-->
-                                </div>
-                            </div>
-                            <!--begin::Step 3-->
-
-                            <!--begin::Step 4-->
-                            <div data-kt-stepper-element="content">
-                                <div class="w-100">
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-10">
-                                        <!--begin::Label-->
                                         <label class="form-label required">Status</label>
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <select class="form-select form-select-solid @error('pkg_status')is-invalid @enderror" name="pkg_status" id="pkg_status">
-                                            <option value="" class="text-center">Pilih Status</option>
+                                        <select class="form-select form-select-solid @error('pkg_status')is-invalid @enderror" name="pkg_status" id="pkg_status" data-control="select2" data-placeholder="Pilih Status">
+                                            <option></option>
                                             <option value="NW" {{ old('pkg_status') ? (old('pkg_status') == 'NW' ? 'selected' : '') : ($data->pkg_status == 'NW' ? 'selected' : '') }}>New</option>
                                             <option value="AC" {{ old('pkg_status') ? (old('pkg_status') == 'AC' ? 'selected' : '') : ($data->pkg_status == 'AC' ? 'selected' : '') }}>Aktif</option>
                                             <option value="CN" {{ old('pkg_status') ? (old('pkg_status') == 'CN' ? 'selected' : '') : ($data->pkg_status == 'CN' ? 'selected' : '') }}>Cancel</option>
@@ -428,7 +343,7 @@
                                     <!--end::Input group-->
                                 </div>
                             </div>
-                            <!--begin::Step 4-->
+                            <!--begin::Step 3-->
                         </div>
                         <!--end::Group-->
 
@@ -496,7 +411,7 @@
 
     // Handle submit button
     stepper.on("kt.stepper.changed", function(stepper) {
-        if (stepper.getCurrentStepIndex() === 4) {
+        if (stepper.getCurrentStepIndex() === 3) {
             document.querySelector('[data-kt-stepper-action="submit"]').classList.remove("d-none")
             document.querySelector('[data-kt-stepper-action="submit"]').classList.add("d-inline-block")
             document.querySelector('[data-kt-stepper-action="next"]').classList.add("d-none")

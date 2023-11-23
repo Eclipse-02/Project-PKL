@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Master;
 
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use App\Models\Master\Branch;
 use App\Models\Master\Employee;
 use App\Models\Master\Position;
 use App\Models\Master\Provinsi;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\Validator;
 
 class EmployeeController extends Controller
 {
@@ -26,7 +26,7 @@ class EmployeeController extends Controller
         $employees = Employee::select('empl_id', 'empl_name')->where('coy_id', Auth::user()->coy_id)->get();
         $provinsis = Provinsi::select('prov_code', 'provinsi')->get();
         if ($request->ajax()) {
-            $data = Employee::where('coy_id', Auth::user()->coy_id)->get();
+            $data = Employee::with(['branch', 'up', 'position', 'provinsi', 'kota', 'kecamatan', 'kelurahan', 'zip'])->where('coy_id', Auth::user()->coy_id)->get();
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -91,7 +91,7 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'empl_id' => 'required|string',
+            'empl_id' => 'required|string|unique:employees,empl_id',
             'empl_branch' => 'required|string',
             'empl_nik' => 'required|string',
             'empl_name' => 'required|string',
@@ -212,7 +212,6 @@ class EmployeeController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $employee->update([
-                'coy_id' => Auth::user()->coy_id,
                 'empl_branch' => $request->empl_branch,
                 'empl_nik' => $request->empl_nik,
                 'empl_name' => $request->empl_name,

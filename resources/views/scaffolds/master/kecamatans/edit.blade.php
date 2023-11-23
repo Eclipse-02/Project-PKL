@@ -11,8 +11,8 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title m-0 flex-column">
-                    <h3 class="fw-bolder m-0">Edit Data</h3>
-                    <div class="text-muted fs-7 fw-bold">Edit Data</div>
+                    <h3 class="fw-bolder m-0">Edit Subdistrict Data</h3>
+                    <div class="text-muted fs-7 fw-bold">Edit Data Kecamatan</div>
                 </div>
                 <!--end::Card title-->
                 <!--start::Button-->
@@ -45,7 +45,7 @@
                         </label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input class="form-control form-control-lg form-control-solid @error('kec_code')is-invalid @enderror" type="text" id="kec_code" name="kec_code" value="{{ old('kec_code') ? old('kec_code') : $data->kec_code }}" />
+                        <input class="form-control form-control-lg form-control-solid @error('kec_code')is-invalid @enderror" type="text" name="kec_code" value="{{ old('kec_code') ? old('kec_code') : $data->kec_code }}" disabled="disabled" />
                         <!--end::Input-->
                         <!--begin::Error-->
                         @error('kec_code')

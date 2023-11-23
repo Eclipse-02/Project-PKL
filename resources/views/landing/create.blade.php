@@ -10,7 +10,7 @@
             <!--begin::Heading-->
             <div class="text-center mb-15 mt-10">
                 <!--begin::Title-->
-                <h3 class="fs-2hx text-dark mb-5" id="how-it-works" data-kt-scroll-offset="{default: 100, lg: 150}">Registration</h3>
+                <h3 class="fs-2hx text-dark mb-5" id="how-it-works" data-kt-scroll-offset="{default: 100, lg: 150}">Registrasi</h3>
                 <!--end::Title-->
                 <!--begin::Text-->
                 <div class="fs-5 text-muted fw-bold">Silahkan lengkapi kolom di bawah ini
@@ -124,7 +124,7 @@
                 <!--begin::Content-->
                 <div class="flex-row-fluid py-lg-5 px-lg-10">
                     <!--begin::Form-->
-                    <form class="form w-lg-500px mx-auto" action="@if(request()->url() == 'http://travel/package/create'){{ route('landing.main.welcome.store') }} @else{{ route('landing.test.welcome.store') }} @endif" method="POST" enctype="multipart/form-data">
+                    <form class="form w-lg-500px mx-auto" action="{{ route('landing.main.welcome.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <!--begin::Group-->
@@ -132,49 +132,6 @@
                             <!--begin::Step 1-->
                             <div class="current" data-kt-stepper-element="content">
                                 <div class="w-100">
-                                    <!--begin::Input group-->
-                                    <div class="row mb-10">
-                                        <!--begin::Col-->
-                                        <div class="col-6 fv-row">
-                                            <!--begin::Label-->
-                                            <label class="form-label required">No Aplikasi</label>
-                                            <!--end::Label-->
-
-                                            <!--begin::Input-->
-                                            <input class="form-control form-control form-control-solid @error('appl_no')is-invalid @enderror" type="text" name="appl_no" value="{{ $utilities->last_value }}" readonly="readonly" />
-                                            <!--end::Input-->
-
-                                            <!--begin::Error-->
-                                            @error('appl_no')
-                                                <span class="invalid-feedback d-block" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                            <!--end::Error-->
-                                        </div>
-                                        <!--end::Col-->
-                                        <!--begin::Col-->
-                                        <div class="col-6 fv-row">
-                                            <!--begin::Label-->
-                                            <label class="form-label required">Aplikasi Status</label>
-                                            <!--end::Label-->
-
-                                            <!--begin::Input-->
-                                            <input class="form-control form-control form-control-solid @error('appl_st')is-invalid @enderror" type="text" name="appl_st" value="New" readonly="readonly" />
-                                            <!--end::Input-->
-
-                                            <!--begin::Error-->
-                                            @error('appl_st')
-                                                <span class="invalid-feedback d-block" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                            <!--end::Error-->
-                                        </div>
-                                        <!--end::Col-->
-                                    </div>
-                                    <!--end::Input group-->
-
                                     <!--begin::Input group-->
                                     <div class="row mb-10">
                                         <!--begin::Col-->
@@ -204,7 +161,7 @@
                                         <!--begin::Col-->
                                         <div class="col-6 fv-row">
                                             <!--begin::Label-->
-                                            <label class="form-label required">Tanggal Aplikasi</label>
+                                            <label class="form-label required">Tanggal Registrasi</label>
                                             <!--end::Label-->
 
                                             <!--begin::Input-->
@@ -252,9 +209,9 @@
                                         <!--begin::Textarea-->
                                         <select class="form-select form-select-solid @error('appl_title')is-invalid @enderror" name="appl_title" id="appl_title" data-control="select2" data-placeholder="Pilih Title">
                                             <option></option>
-                                            <option value="Mr" {{ old('appl_title') == 'Mr' ? 'selected' : '' }}>Mr</option>
-                                            <option value="Mrs" {{ old('appl_title') == 'Mrs' ? 'selected' : '' }}>Mrs</option>
-                                            <option value="Ms" {{ old('appl_title') == 'Ms' ? 'selected' : '' }}>Ms</option>
+                                            <option value="MR" {{ old('appl_title') == 'MR' ? 'selected' : '' }}>Mr</option>
+                                            <option value="MRS" {{ old('appl_title') == 'MRS' ? 'selected' : '' }}>Mrs</option>
+                                            <option value="MS" {{ old('appl_title') == 'MS' ? 'selected' : '' }}>Ms</option>
                                         </select>
                                         <!--end::Textarea-->
 
@@ -1580,7 +1537,7 @@
                             <div>
                                 <button type="submit" class="btn btn-primary" data-kt-stepper-action="submit">
                                     <span class="indicator-label">
-                                        Simpan
+                                        Registrasi
                                     </span>
                                     <span class="indicator-progress">
                                         Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
@@ -1632,16 +1589,12 @@
     // Handle submit button
     stepper.on("kt.stepper.changed", function(stepper) {
         if (stepper.getCurrentStepIndex() === 5) {
-            document.querySelectorAll('[data-kt-stepper-action="submit"]')[0].classList.remove("d-none")
-            document.querySelectorAll('[data-kt-stepper-action="submit"]')[0].classList.add("d-inline-block")
-            document.querySelectorAll('[data-kt-stepper-action="submit"]')[1].classList.remove("d-none")
-            document.querySelectorAll('[data-kt-stepper-action="submit"]')[1].classList.add("d-inline-block")
+            document.querySelector('[data-kt-stepper-action="submit"]').classList.remove("d-none")
+            document.querySelector('[data-kt-stepper-action="submit"]').classList.add("d-inline-block")
             document.querySelector('[data-kt-stepper-action="next"]').classList.add("d-none")
         } else {
-            document.querySelectorAll('[data-kt-stepper-action="submit"]')[0].classList.add("d-none")
-            document.querySelectorAll('[data-kt-stepper-action="submit"]')[0].classList.remove("d-inline-block")
-            document.querySelectorAll('[data-kt-stepper-action="submit"]')[1].classList.add("d-none")
-            document.querySelectorAll('[data-kt-stepper-action="submit"]')[1].classList.remove("d-inline-block")
+            document.querySelector('[data-kt-stepper-action="submit"]').classList.add("d-none")
+            document.querySelector('[data-kt-stepper-action="submit"]').classList.remove("d-inline-block")
             document.querySelector('[data-kt-stepper-action="next"]').classList.remove("d-none")
         }
     });
@@ -1649,6 +1602,7 @@
     $(document).ready(function() {
         if ($('[name="appl_id_type"]').val() == "") {
             $('[name="appl_id_no"]').attr('disabled', true);
+            $('[name="appl_id_no"]').attr('placeholder', 'Pilih Tipe ID Terlebih Dahulu');
         }
         if (!$('[name="appl_is_img_full"]:checked').val()) {
             $('[name="appl_is_img_full_name"]').attr('disabled', true);
@@ -1682,8 +1636,10 @@
     $('form').on('change', '[name="appl_id_type"]', function() {
         if ($('[name="appl_id_no"]').val() != "") {
             $('[name="appl_id_no"]').attr('disabled', true);
+            $('[name="appl_id_no"]').attr('placeholder', '');
         } else {
             $('[name="appl_id_no"]').attr('disabled', false);
+            $('[name="appl_id_no"]').attr('placeholder', 'Pilih Tipe ID Terlebih Dahulu');
         }
     });
 

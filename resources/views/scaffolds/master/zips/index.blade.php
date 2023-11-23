@@ -50,7 +50,7 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <div>
-                                                <select data-column="8" class="filter-select form-select form-select-solid">
+                                                <select data-column="8" class="filter-select form-select form-select-solid" data-control="select2">
                                                     <option value="">Semua</option>
                                                     <option value="Y">Ya</option>
                                                     <option value="N">Tidak</option>
@@ -75,7 +75,7 @@
                 </div>
                 <!--end::Stats-->
                 <!--start::Table-->
-                <table class="table table-striped gy-7 gs-7">
+                <table class="table table-striped gy-7 gs-7 d-none">
                     <!--start::Thead-->
                     <thead>
                         <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200">
@@ -83,10 +83,10 @@
                             <th class="min-w-100px">Kode Pos</th>
                             <th class="min-w-100px">Sub Kode Pos</th>
                             <th class="min-w-100px">Deskripsi</th>
-                            <th class="min-w-100px">Kode Provinsi</th>
-                            <th class="min-w-100px">Kode Kota</th>
-                            <th class="min-w-100px">Kode Kecamatan</th>
-                            <th class="min-w-100px">Kode Kelurahan</th>
+                            <th class="min-w-100px">Nama Provinsi</th>
+                            <th class="min-w-100px">Nama Kota</th>
+                            <th class="min-w-100px">Nama Kecamatan</th>
+                            <th class="min-w-100px">Nama Kelurahan</th>
                             <th class="min-w-100px">Aktif</th>
                             <th class="min-w-150px text-center">AKSI</th>
                         </tr>
@@ -114,7 +114,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header">
                     <!--begin::Modal title-->
-                    <h2>Create New Data <div class="text-muted fs-3 fw-bold d-inline"><span class="fw-bolder">/</span> Membuat Data Baru</div></h2>
+                    <h2>Create New Zip Code Data <div class="text-muted fs-3 fw-bold d-inline"><span class="fw-bolder">/</span> Membuat Data Kode Pos Baru</div></h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -283,7 +283,7 @@
                                                 <!--end::Label-->
 
                                                 <!--begin::Input-->
-                                                <select class="form-select form-select-solid @error('prov_code')is-invalid @enderror" name="prov_code" id="prov_code" data-control="select2" data-placeholder="Pilih Provinsi" data-dropdown-parent="#create_modal">
+                                                <select class="form-select form-select-solid @error('prov_code')is-invalid @enderror" name="prov_code" id="prov_code" data-placeholder="Pilih Provinsi">
                                                     <option></option>
                                                     @foreach ($provinsis as $i)
                                                         <option value="{{ $i->prov_code }}" {{ old('prov_code') == $i->prov_code ? 'selected' : '' }}>{{ $i->provinsi }}</option>
@@ -460,6 +460,8 @@
 <script type="text/javascript">
     $(function() {
 
+        $('.table').removeClass('d-none');
+
         var table = $('.table').DataTable({
             processing: true,
             scrollX: true,
@@ -486,20 +488,20 @@
                     name: "zip_desc"
                 },
                 {
-                    data: "prov_code",
-                    name: "prov_code"
+                    data: "provinsi.provinsi",
+                    name: "provinsi"
                 },
                 {
-                    data: "kota_code",
-                    name: "kota_code"
+                    data: "kota.kota",
+                    name: "kota"
                 },
                 {
-                    data: "kec_code",
-                    name: "kec_code"
+                    data: "kecamatan.kecamatan",
+                    name: "kecamatan"
                 },
                 {
-                    data: "kel_code",
-                    name: "kel_code"
+                    data: "kelurahan.kelurahan",
+                    name: "kelurahan"
                 },
                 {
                     data: "is_active",
@@ -559,6 +561,8 @@
                 .search( $(this).val() )
                 .draw();
         });
+
+        select2Create(['prov_code']);
 
     });
 </script>

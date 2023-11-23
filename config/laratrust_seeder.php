@@ -47,6 +47,9 @@ return [
         'agen' => [
             'register-package' => 'c,r,u,d',
         ],
+        'representative' => [
+            'register-package' => 'c,r,u,d',
+        ],
     ],
 
     'permissions_map' => [

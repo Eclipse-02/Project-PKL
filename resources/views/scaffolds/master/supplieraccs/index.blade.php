@@ -50,7 +50,7 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <div>
-                                                <select data-column="7" class="filter-select form-select form-select-solid">
+                                                <select data-column="7" class="filter-select form-select form-select-solid" data-control="select2">
                                                     <option value="">Semua</option>
                                                     <option value="NW">Baru Disimpan</option>
                                                     <option value="NA">Need Approval</option>
@@ -83,8 +83,8 @@
                     <thead>
                         <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200">
                             <th class="min-w-50px">No</th>
-                            <th class="min-w-100px">Kode Pemasok</th>
-                            <th class="min-w-100px">Kode Bank</th>
+                            <th class="min-w-100px">Nama Pemasok</th>
+                            <th class="min-w-100px">Nama Bank</th>
                             <th class="min-w-100px">No Konfirmasi</th>
                             <th class="min-w-100px">Nama Konfirmasi</th>
                             <th class="min-w-100px">Deskripsi Konfirmasi</th>
@@ -116,7 +116,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header">
                     <!--begin::Modal title-->
-                    <h2>Create New Data <div class="text-muted fs-3 fw-bold d-inline"><span class="fw-bolder">/</span> Membuat Data Baru</div></h2>
+                    <h2>Create New Confirmation Data <div class="text-muted fs-3 fw-bold d-inline"><span class="fw-bolder">/</span> Membuat Data Konfirmasi Baru</div></h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -152,7 +152,7 @@
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <select class="form-select form-select-solid @error('supl_code')is-invalid @enderror" name="supl_code" id="supl_code" data-control="select2" data-placeholder="Pilih Pemasok">
+                                    <select class="form-select form-select-solid @error('supl_code')is-invalid @enderror" name="supl_code" id="supl_code" data-placeholder="Pilih Pemasok">
                                         <option></option>
                                         @foreach ($suppliers as $i)
                                             <option value="{{ $i->supl_code }}" {{ old('supl_code') == $i->supl_code ? 'selected' : '' }}>{{ $i->supl_name }}</option>
@@ -177,7 +177,7 @@
                                     </label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <select class="form-select form-select-solid @error('bank_code')is-invalid @enderror" name="bank_code" id="bank_code" data-control="select2" data-placeholder="Pilih Bank">
+                                    <select class="form-select form-select-solid @error('bank_code')is-invalid @enderror" name="bank_code" id="bank_code" data-placeholder="Pilih Bank">
                                         <option></option>
                                         @foreach ($banks as $i)
                                             <option value="{{ $i->bank_code }}" {{ old('bank_code') == $i->bank_code ? 'selected' : '' }}>{{ $i->bank_name }}</option>
@@ -258,7 +258,7 @@
                                     <!--end::Label-->
 
                                     <!--begin::Input-->
-                                    <select class="form-select form-select-solid @error('acc_curr')is-invalid @enderror" name="acc_curr" id="acc_curr" data-control="select2" data-placeholder="Pilih Mata Uang">
+                                    <select class="form-select form-select-solid @error('acc_curr')is-invalid @enderror" name="acc_curr" id="acc_curr" data-placeholder="Pilih Mata Uang">
                                         <option></option>
                                         <option value="IDR" {{ old('acc_curr') == 'IDR' ? 'selected' : '' }}>IDR</option>
                                         <option value="USD" {{ old('acc_curr') == 'USD' ? 'selected' : '' }}>USD</option>
@@ -321,12 +321,12 @@
                     searchable: false
                 },
                 {
-                    data: "supl_code",
-                    name: "supl_code"
+                    data: "supplier.supl_name",
+                    name: "supplier"
                 },
                 {
-                    data: "bank_code",
-                    name: "bank_code"
+                    data: "bank.bank_name",
+                    name: "bank"
                 },
                 {
                     data: "acc_no",
@@ -374,6 +374,8 @@
                 .search( $(this).val() )
                 .draw();
         });
+
+        select2Create(['supl_code', 'bank_code', 'acc_curr']);
 
     });
 </script>

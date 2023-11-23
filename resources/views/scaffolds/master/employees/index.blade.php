@@ -50,7 +50,7 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <div>
-                                                <select data-column="7" class="filter-select form-select form-select-solid">
+                                                <select data-column="7" class="filter-select form-select form-select-solid"" data-control="select2">
                                                     <option value="">Semua</option>
                                                     <option value="PB">Probation</option>
                                                     <option value="PM">Permanent</option>
@@ -78,7 +78,7 @@
                 </div>
                 <!--end::Stats-->
                 <!--start::Table-->
-                <table class="table table-striped gy-7 gs-7">
+                <table class="table table-striped gy-7 gs-7 d-none">
                     <!--start::Thead-->
                     <thead>
                         <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200">
@@ -87,7 +87,7 @@
                             <th class="min-w-100px">Cabang Karyawan</th>
                             <th class="min-w-100px">NIK Karyawan</th>
                             <th class="min-w-100px">Nama Karyawan</th>
-                            <th class="min-w-100px">Kode Posisi</th>
+                            <th class="min-w-100px">Nama Posisi</th>
                             <th class="min-w-100px">Bawahan Dari</th>
                             <th class="min-w-100px">Status Karyawan</th>
                             <th class="min-w-100px">Tanggak Berlaku Karywan</th>
@@ -97,11 +97,11 @@
                             <th class="min-w-100px">No Telp Karyawan</th>
                             <th class="min-w-100px">No HP 1</th>
                             <th class="min-w-100px">No HP 2</th>
-                            <th class="min-w-100px">Kode Provinsi</th>
-                            <th class="min-w-100px">Kode Kota</th>
-                            <th class="min-w-100px">Kode Kecamatan</th>
-                            <th class="min-w-100px">Kode Kelurahan</th>
-                            <th class="min-w-100px">Kode Pos</th>
+                            <th class="min-w-100px">Nama Provinsi</th>
+                            <th class="min-w-100px">Nama Kota</th>
+                            <th class="min-w-100px">Nama Kecamatan</th>
+                            <th class="min-w-100px">Nama Kelurahan</th>
+                            <th class="min-w-100px">Nama Pos</th>
                             <th class="min-w-150px text-center">AKSI</th>
                         </tr>
                     </thead>
@@ -128,7 +128,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header">
                     <!--begin::Modal title-->
-                    <h2>Create New Data <div class="text-muted fs-3 fw-bold d-inline"><span class="fw-bolder">/</span> Membuat Data Baru</div></h2>
+                    <h2>Create New Employee Data <div class="text-muted fs-3 fw-bold d-inline"><span class="fw-bolder">/</span> Membuat Data Karywan Baru</div></h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -312,7 +312,7 @@
                                                 <!--end::Label-->
 
                                                 <!--begin::Input-->
-                                                <select class="form-select form-select-solid @error('empl_branch')is-invalid @enderror" name="empl_branch" id="empl_branch" data-control="select2" data-placeholder="Pilih Cabang" data-dropdown-parent="#create_modal">
+                                                <select class="form-select form-select-solid @error('empl_branch')is-invalid @enderror" name="empl_branch" id="empl_branch" data-placeholder="Pilih Cabang">
                                                     <option></option>
                                                     @foreach ($branches as $i)
                                                         <option value="{{ $i->branch_code }}" {{ old('empl_branch') == $i->branch_code ? 'selected' : '' }}>{{ $i->branch_name }}</option>
@@ -337,7 +337,7 @@
                                                 <!--end::Label-->
 
                                                 <!--begin::Input-->
-                                                <select class="form-select form-select-solid @error('position_code')is-invalid @enderror" name="position_code" id="position_code" data-control="select2" data-placeholder="Pilih Posisi" data-dropdown-parent="#create_modal">
+                                                <select class="form-select form-select-solid @error('position_code')is-invalid @enderror" name="position_code" id="position_code" data-placeholder="Pilih Posisi">
                                                     <option></option>
                                                     @foreach ($positions as $i)
                                                         <option value="{{ $i->poss_code }}" {{ old('position_code') == $i->poss_code ? 'selected' : '' }}>{{ $i->poss_name }}</option>
@@ -362,7 +362,7 @@
                                                 <!--end::Label-->
 
                                                 <!--begin::Input-->
-                                                <select class="form-select form-select-solid @error('empl_up_level')is-invalid @enderror" name="empl_up_level" id="empl_up_level" data-control="select2" data-placeholder="Pilih Karyawan" data-dropdown-parent="#create_modal">
+                                                <select class="form-select form-select-solid @error('empl_up_level')is-invalid @enderror" name="empl_up_level" id="empl_up_level" data-placeholder="Pilih Karyawan">
                                                     <option></option>
                                                     @foreach ($employees as $i)
                                                         <option value="{{ $i->empl_id }}" {{ old('empl_up_level') == $i->empl_id ? 'selected' : '' }}>{{ $i->empl_name }}</option>
@@ -519,7 +519,7 @@
                                                 <!--end::Label-->
 
                                                 <!--begin::Input-->
-                                                <select class="form-select form-select-solid @error('prov_code')is-invalid @enderror" name="prov_code" id="prov_code" data-control="select2" data-placeholder="Pilih Provinsi" data-dropdown-parent="#create_modal">
+                                                <select class="form-select form-select-solid @error('prov_code')is-invalid @enderror" name="prov_code" id="prov_code" data-placeholder="Pilih Provinsi">
                                                     <option></option>
                                                     @foreach ($provinsis as $i)
                                                         <option value="{{ $i->prov_code }}" {{ old('prov_code') == $i->prov_code ? 'selected' : '' }}>{{ $i->provinsi }}</option>
@@ -544,7 +544,7 @@
                                                 <!--end::Label-->
 
                                                 <!--begin::Input-->
-                                                <select class="form-select form-select-solid @error('kota_code')is-invalid @enderror" name="kota_code" id="kota_code">
+                                                <select class="form-select form-select-solid @error('kota_code')is-invalid @enderror" name="kota_code" id="kota_code" disabled="disabled">
                                                     <option></option>
                                                 </select>
                                                 <!--end::Input-->
@@ -566,7 +566,7 @@
                                                 <!--end::Label-->
 
                                                 <!--begin::Input-->
-                                                <select class="form-select form-select-solid @error('kec_code')is-invalid @enderror" name="kec_code" id="kec_code">
+                                                <select class="form-select form-select-solid @error('kec_code')is-invalid @enderror" name="kec_code" id="kec_code" disabled="disabled">
                                                     <option></option>
                                                 </select>
                                                 <!--end::Input-->
@@ -588,7 +588,7 @@
                                                 <!--end::Label-->
 
                                                 <!--begin::Input-->
-                                                <select class="form-select form-select-solid @error('kel_code')is-invalid @enderror" name="kel_code" id="kel_code">
+                                                <select class="form-select form-select-solid @error('kel_code')is-invalid @enderror" name="kel_code" id="kel_code" disabled="disabled">
                                                     <option></option>
                                                 </select>
                                                 <!--end::Input-->
@@ -610,7 +610,7 @@
                                                 <!--end::Label-->
 
                                                 <!--begin::Input-->
-                                                <select class="form-select form-select-solid @error('zip_code')is-invalid @enderror" name="zip_code" id="zip_code">
+                                                <select class="form-select form-select-solid @error('zip_code')is-invalid @enderror" name="zip_code" id="zip_code" disabled="disabled">
                                                     <option></option>
                                                 </select>
                                                 <!--end::Input-->
@@ -638,8 +638,8 @@
                                                 <!--end::Label-->
 
                                                 <!--begin::Input-->
-                                                <select class="form-select form-select-solid @error('empl_status')is-invalid @enderror" name="empl_status" id="empl_status" data-control="select2" data-placeholder="Pilih Status" data-dropdown-parent="#create_modal">
-                                                    <option></option>
+                                                <select class="form-select form-select-solid @error('empl_status')is-invalid @enderror" name="empl_status" id="empl_status">
+                                                    <option>Pilih Status</option>
                                                     <option value="PB" {{ old('empl_status') == 'PB' ? 'selected' : '' }}>Probation</option>
                                                     <option value="PM" {{ old('empl_status') == 'PM' ? 'selected' : '' }}>Permanent</option>
                                                     <option value="KT" {{ old('empl_status') == 'KT' ? 'selected' : '' }}>Kontrak</option>
@@ -730,6 +730,8 @@
 <script type="text/javascript">
     $(function() {
 
+        $('.table').removeClass('d-none');
+
         var table = $('.table').DataTable({
             processing: true,
             serverSide: true,
@@ -749,8 +751,8 @@
                     name: "empl_id"
                 },
                 {
-                    data: "empl_branch",
-                    name: "empl_branch"
+                    data: "branch.branch_name",
+                    name: "branch"
                 },
                 {
                     data: "empl_nik",
@@ -761,12 +763,12 @@
                     name: "empl_name"
                 },
                 {
-                    data: "position_code",
-                    name: "position_code"
+                    data: "position.poss_name",
+                    name: "position"
                 },
                 {
-                    data: "empl_up_level",
-                    name: "empl_up_level"
+                    data: "up.empl_name",
+                    name: "up"
                 },
                 {
                     data: "empl_status",
@@ -813,24 +815,24 @@
                     name: "empl_hp02"
                 },
                 {
-                    data: "prov_code",
-                    name: "prov_code"
+                    data: "provinsi.provinsi",
+                    name: "provinsi"
                 },
                 {
-                    data: "kota_code",
-                    name: "kota_code"
+                    data: "kota.kota",
+                    name: "kota"
                 },
                 {
-                    data: "kec_code",
-                    name: "kec_code"
+                    data: "kecamatan.kecamatan",
+                    name: "kecamatan"
                 },
                 {
-                    data: "kel_code",
-                    name: "kel_code"
+                    data: "kelurahan.kelurahan",
+                    name: "kelurahan"
                 },
                 {
-                    data: "zip_code",
-                    name: "zip_code"
+                    data: "zip.zip_desc",
+                    name: "zip"
                 },
                 {
                     data: "action",
@@ -913,6 +915,8 @@
                 .search( $(this).val() )
                 .draw();
         });
+
+        select2Create(['empl_branch', 'position_code', 'empl_up_level', 'prov_code', 'empl_status'])
 
     });
 </script>

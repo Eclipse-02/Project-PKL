@@ -1,6 +1,6 @@
 @extends('dashboard.master')
 
-@section('title', 'Sub Jenis Pemasok')
+@section('title', 'Sub Jenis Agen')
 
 @section('content')
     <!--begin::Col-->
@@ -11,8 +11,8 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title m-0 flex-column">
-                    <h3 class="fw-bolder m-0">Edit Data</h3>
-                    <div class="text-muted fs-7 fw-bold">Edit Data</div>
+                    <h3 class="fw-bolder m-0">Edit Sub Type Data</h3>
+                    <div class="text-muted fs-7 fw-bold">Edit Sub Tipe Data</div>
                 </div>
                 <!--end::Card title-->
                 <!--start::Button-->
@@ -45,7 +45,7 @@
                         </label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input class="form-control form-control form-control-solid @error('sub_code')is-invalid @enderror" type="text" id="sub_code" name="sub_code" value="{{ old('sub_code') ? old('sub_code') : $data->sub_code }}" />
+                        <input class="form-control form-control form-control-solid @error('sub_code')is-invalid @enderror" type="text" id="sub_code" name="sub_code" value="{{ old('sub_code') ? old('sub_code') : $data->sub_code }}" disabled="disable" />
                         <!--end::Input-->
                         <!--begin::Error-->
                         @error('sub_code')

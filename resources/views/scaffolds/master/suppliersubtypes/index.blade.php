@@ -1,6 +1,6 @@
 @extends('dashboard.master')
 
-@section('title', 'Sub Jenis Pemasok')
+@section('title', 'Sub Jenis Agen')
 
 @section('content')
     <!--begin::Col-->
@@ -50,7 +50,7 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <div>
-                                                <select data-column="3" class="filter-select form-select form-select-solid">
+                                                <select data-column="3" class="filter-select form-select form-select-solid" data-control="select2">
                                                     <option value="">Semua</option>
                                                     <option value="Y">Ya</option>
                                                     <option value="N">Tidak</option>
@@ -80,10 +80,10 @@
                     <thead>
                         <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200">
                             <th class="min-w-50px">No</th>
-                            <th class="min-w-100px">Kode Pemasok</th>
-                            <th class="min-w-100px">Nama Pemasok</th>
+                            <th class="min-w-100px">Kode Agen</th>
+                            <th class="min-w-100px">Nama Agen</th>
                             <th class="min-w-100px">Aktif</th>
-                            <th class="min-w-100px text-center">AKSI</th>
+                            <th class="min-w-150px text-center">AKSI</th>
                         </tr>
                     </thead>
                     <!--end::Thead-->
@@ -109,7 +109,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header">
                     <!--begin::Modal title-->
-                    <h2>Create New Data <div class="text-muted fs-3 fw-bold d-inline"><span class="fw-bolder">/</span> Membuat Data Baru</div></h2>
+                    <h2>Create New Sub Type Data <div class="text-muted fs-3 fw-bold d-inline"><span class="fw-bolder">/</span> Membuat Data Sub Tipe Baru</div></h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">

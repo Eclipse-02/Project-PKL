@@ -392,13 +392,13 @@ class RegisterPackageExport implements FromQuery, WithCustomStartCell, WithColum
         }
 
         // convert all dates
-        $birth_date =  Carbon::createFromFormat('Y-m-d', $row->appl_birth_date)->format('j F Y'); // appl_birth_date
-        $pass_iss_date =  Carbon::createFromFormat('Y-m-d', $row->appl_pass_iss_date)->format('j F Y'); // appl_pass_iss_date
-        $pass_exp_date =  Carbon::createFromFormat('Y-m-d', $row->appl_pass_exp_date)->format('j F Y'); // appl_pass_exp_date
-        $vac_id_date_01 =  Carbon::createFromFormat('Y-m-d', $row->appl_vac_id_date_01)->format('j F Y'); // appl_vac_id_date_01
-        $vac_id_date_02 =  Carbon::createFromFormat('Y-m-d', $row->appl_vac_id_date_02)->format('j F Y'); // appl_vac_id_date_02
-        $vac_id_date_03 =  Carbon::createFromFormat('Y-m-d', $row->appl_vac_id_date_03)->format('j F Y'); // appl_vac_id_date_03
-        $vac_id_date_04 =  Carbon::createFromFormat('Y-m-d', $row->appl_vac_id_date_04)->format('j F Y'); // appl_vac_id_date_04
+        $birth_date =  Carbon::createFromFormat('Y-m-d', $row->appl_birth_date)->isoFormat('D MMMM Y'); // appl_birth_date
+        $pass_iss_date =  Carbon::createFromFormat('Y-m-d', $row->appl_pass_iss_date)->isoFormat('D MMMM Y'); // appl_pass_iss_date
+        $pass_exp_date =  Carbon::createFromFormat('Y-m-d', $row->appl_pass_exp_date)->isoFormat('D MMMM Y'); // appl_pass_exp_date
+        $vac_id_date_01 =  Carbon::createFromFormat('Y-m-d', $row->appl_vac_id_date_01)->isoFormat('D MMMM Y'); // appl_vac_id_date_01
+        $vac_id_date_02 =  Carbon::createFromFormat('Y-m-d', $row->appl_vac_id_date_02)->isoFormat('D MMMM Y'); // appl_vac_id_date_02
+        $vac_id_date_03 =  Carbon::createFromFormat('Y-m-d', $row->appl_vac_id_date_03)->isoFormat('D MMMM Y'); // appl_vac_id_date_03
+        $vac_id_date_04 =  Carbon::createFromFormat('Y-m-d', $row->appl_vac_id_date_04)->isoFormat('D MMMM Y'); // appl_vac_id_date_04
 
         return [
             $this->i++,

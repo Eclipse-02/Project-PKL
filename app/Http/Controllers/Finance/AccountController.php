@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Finance;
 
-use App\Http\Controllers\Controller;
-use App\Models\Finance\Account;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Models\Finance\Account;
+use App\Http\Controllers\Controller;
+use App\Models\Master\Branch;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 
 class AccountController extends Controller
 {
@@ -13,9 +18,14 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $data = Account::all();
+        $accounts = Account::where([
+                ['glacct_acct_parent', '=', null],
+                ['coy_id', '=', Auth::user()->coy_id]
+            ])->get();
+        $allAccounts = Account::where('coy_id', Auth::user()->coy_id)->pluck('glacct_description', 'glacct_code')->all();
+        $branches = Branch::where('coy_id', Auth::user()->coy_id)->select('branch_code', 'branch_name')->get();
 
-        return view('');
+        return view('scaffolds.finance.accounts.index', compact('accounts', 'allAccounts', 'branches'));
     }
 
     /**
@@ -31,7 +41,41 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'glacct_code' => 'required|integer',
+            'glacct_description' => 'required|string',
+            'glacct_acct_type' => 'required|string',
+            'glacct_acct_summ' => 'required|string',
+            'glacct_acct_enable' => 'required|string',
+            'glacct_acct_flag' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            Alert::toast('Oops, Something Wrong Happened!', 'error');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            Account::updateOrCreate(
+                [
+                    'glacct_code' => $request->glacct_code,
+                ],
+                [
+                'coy_id' => Auth::user()->coy_id,
+                'glacct_description' => $request->glacct_description,
+                'glacct_acct_type' => $request->glacct_acct_type,
+                'glacct_acct_summ' => $request->glacct_acct_summ,
+                'glacct_acct_enable' => $request->glacct_acct_enable,
+                'glacct_acct_flag' => $request->glacct_acct_flag,
+                'glacct_acct_default' => $request->glacct_acct_default,
+                'glacct_acct_parent' => $request->glacct_acct_parent,
+                'glacct_rpt_flag' => $request->glacct_rpt_flag,
+                'glacct_segment1_allow' => $request->glacct_segment1_allow,
+                'created_by' => Auth::user()->name,
+                'updated_by' => Auth::user()->name,
+                ]
+            );   
+            Alert::toast('Data Created Successfully!', 'success');
+            return redirect()->route('accounts.index');
+        }
     }
 
     /**
@@ -64,5 +108,26 @@ class AccountController extends Controller
     public function destroy(Account $account)
     {
         //
+    }
+
+    public function api(Request $request) {
+        $validator = Validator::make(request()->all(), [
+            'glacct_code' => 'required',
+            // ... Rules 
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors(),
+                'status' => Response::HTTP_BAD_REQUEST,
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        $data = Account::where('glacct_code', $request->glacct_code)->first();
+
+        return response()->json([
+            'data' => $data,
+            'status' => Response::HTTP_CREATED
+        ], Response::HTTP_CREATED);
     }
 }

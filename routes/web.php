@@ -1,10 +1,13 @@
 <?php
 
 // Default route files
+
+use App\Http\Controllers\AccountController as DashboardAccountController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 // Master controller
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Master\CoyController;
 use App\Http\Controllers\Master\EduController;
 use App\Http\Controllers\Master\JobController;
@@ -14,9 +17,12 @@ use App\Http\Controllers\Master\BankController;
 use App\Http\Controllers\Master\KotaController;
 use App\Http\Controllers\Master\UserController;
 use App\Http\Controllers\Master\BranchController;
+use App\Http\Controllers\Finance\PeriodController;
 use App\Http\Controllers\Master\CountryController;
 use App\Http\Controllers\Master\PackageController;
 use App\Http\Controllers\Master\VaccineController;
+use App\Http\Controllers\Finance\AccountController;
+use App\Http\Controllers\Finance\InvoiceController;
 use App\Http\Controllers\Master\EmployeeController;
 use App\Http\Controllers\Master\PositionController;
 use App\Http\Controllers\Master\ProvinsiController;
@@ -24,17 +30,15 @@ use App\Http\Controllers\Master\RelationController;
 use App\Http\Controllers\Master\SupplierController;
 use App\Http\Controllers\Master\KecamatanController;
 use App\Http\Controllers\Master\KelurahanController;
-use App\Http\Controllers\Master\SupplierAccController;
-use App\Http\Controllers\Master\RegisterPackageController;
-use App\Http\Controllers\Master\SupplierSubTypeController;
 
 // Finance controller
-use App\Http\Controllers\Finance\AccountController;
-use App\Http\Controllers\Finance\PeriodController;
-use App\Http\Controllers\Finance\TransactionHeaderController;
+use App\Http\Controllers\Master\SupplierAccController;
 use App\Http\Controllers\Finance\TransactionController;
+use App\Http\Controllers\Master\PackageDetailController;
+use App\Http\Controllers\Master\RegisterPackageController;
+use App\Http\Controllers\Master\SupplierSubTypeController;
 use App\Http\Controllers\Finance\TransactionDetailController;
-use App\Http\Controllers\Finance\InvoiceController;
+use App\Http\Controllers\Finance\TransactionHeaderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,10 +57,27 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     // check if password_expired
     Route::middleware('password_expired')->group(function () {
 
+        Route::group(['prefix' => 'account'], function () {
+            Route::get('overview', [DashboardAccountController::class, 'overview'])->name('dashboard.account.overview');
+            Route::get('setting', [DashboardAccountController::class, 'setting'])->name('dashboard.account.setting');
+            Route::match(['put', 'patch'],'/{id}', [DashboardAccountController::class, 'updatePassword'])->name('dashboard.account.updatepassword');
+        });
+
         // user with 'office' role can access
         Route::middleware('role:office')->group(function () {
 
-            Route::group(['prefix' => 'others'], function () {
+            Route::group(['prefix' => 'setup'], function () {
+
+                // coy scaffold
+                Route::group(['prefix' => 'companies'], function () {
+                    Route::get('/', [CoyController::class, 'index'])->name('companies.index')->middleware('permission:company-read');
+                    Route::post('/', [CoyController::class, 'store'])->name('companies.store');
+                    Route::get('/create', [CoyController::class, 'create'])->name('companies.create')->middleware('permission:company-create');
+                    Route::get('/{coy}', [CoyController::class, 'show'])->name('companies.show')->middleware('permission:company-read');
+                    Route::match(['put', 'patch'],'/{coy}', [CoyController::class, 'update'])->name('companies.update');
+                    Route::delete('/{coy}', [CoyController::class, 'destroy'])->name('companies.destroy')->middleware('permission:company-delete');
+                    Route::get('/{coy}/edit', [CoyController::class, 'edit'])->name('companies.edit')->middleware('permission:company-update');
+                });
 
                 Route::group(['prefix' => 'locations'], function () {
 
@@ -117,21 +138,32 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
                 });
 
-                // branch scaffold
-                Route::group(['prefix' => 'branches'], function () {
-                    Route::get('/', [BranchController::class, 'index'])->name('branches.index')->middleware('permission:branch-read');
-                    Route::post('/', [BranchController::class, 'store'])->name('branches.store');
-                    Route::get('/create', [BranchController::class, 'create'])->name('branches.create')->middleware('permission:branch-create');
-                    Route::get('/{branch}', [BranchController::class, 'show'])->name('branches.show')->middleware('permission:branch-read');
-                    Route::match(['put', 'patch'],'/{branch}', [BranchController::class, 'update'])->name('branches.update');
-                    Route::delete('/{branch}', [BranchController::class, 'destroy'])->name('branches.destroy')->middleware('permission:branch-delete');
-                    Route::get('/{branch}/edit', [BranchController::class, 'edit'])->name('branches.edit')->middleware('permission:branch-update');
-                });
+                Route::group(['prefix' => 'users'], function () {
 
-                Route::group(['prefix' => 'accounts'], function () {
+                    // position scaffold
+                    Route::group(['prefix' => 'positions'], function () {
+                        Route::get('/', [PositionController::class, 'index'])->name('positions.index')->middleware('permission:position-read');
+                        Route::post('/', [PositionController::class, 'store'])->name('positions.store');
+                        Route::get('/create', [PositionController::class, 'create'])->name('positions.create')->middleware('permission:position-create');
+                        Route::get('/{position}', [PositionController::class, 'show'])->name('positions.show')->middleware('permission:position-read');
+                        Route::match(['put', 'patch'],'/{position}', [PositionController::class, 'update'])->name('positions.update');
+                        Route::delete('/{position}', [PositionController::class, 'destroy'])->name('positions.destroy')->middleware('permission:position-delete');
+                        Route::get('/{position}/edit', [PositionController::class, 'edit'])->name('positions.edit')->middleware('permission:position-update');
+                    });
+
+                    // employee scaffold
+                    Route::group(['prefix' => 'employees'], function () {
+                        Route::get('/', [EmployeeController::class, 'index'])->name('employees.index')->middleware('permission:employee-read');
+                        Route::post('/', [EmployeeController::class, 'store'])->name('employees.store');
+                        Route::get('/create', [EmployeeController::class, 'create'])->name('employees.create')->middleware('permission:employee-create');
+                        Route::get('/{employee}', [EmployeeController::class, 'show'])->name('employees.show')->middleware('permission:employee-read');
+                        Route::match(['put', 'patch'],'/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
+                        Route::delete('/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy')->middleware('permission:employee-delete');
+                        Route::get('/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit')->middleware('permission:employee-update');
+                    });
 
                     // user scaffold
-                    Route::group(['prefix' => 'users'], function () {
+                    Route::group(['prefix' => 'user'], function () {
                         Route::get('/', [UserController::class, 'index'])->name('users.index')->middleware('permission:user-read');
                         Route::post('/', [UserController::class, 'store'])->name('users.store');
                         Route::get('/create', [UserController::class, 'create'])->name('users.create')->middleware('permission:user-create');
@@ -141,28 +173,6 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
                         Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit')->middleware('permission:user-update');
                     });
 
-                });
-
-                // employee scaffold
-                Route::group(['prefix' => 'employees'], function () {
-                    Route::get('/', [EmployeeController::class, 'index'])->name('employees.index')->middleware('permission:employee-read');
-                    Route::post('/', [EmployeeController::class, 'store'])->name('employees.store');
-                    Route::get('/create', [EmployeeController::class, 'create'])->name('employees.create')->middleware('permission:employee-create');
-                    Route::get('/{employee}', [EmployeeController::class, 'show'])->name('employees.show')->middleware('permission:employee-read');
-                    Route::match(['put', 'patch'],'/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
-                    Route::delete('/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy')->middleware('permission:employee-delete');
-                    Route::get('/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit')->middleware('permission:employee-update');
-                });
-
-                // position scaffold
-                Route::group(['prefix' => 'positions'], function () {
-                    Route::get('/', [PositionController::class, 'index'])->name('positions.index')->middleware('permission:position-read');
-                    Route::post('/', [PositionController::class, 'store'])->name('positions.store');
-                    Route::get('/create', [PositionController::class, 'create'])->name('positions.create')->middleware('permission:position-create');
-                    Route::get('/{position}', [PositionController::class, 'show'])->name('positions.show')->middleware('permission:position-read');
-                    Route::match(['put', 'patch'],'/{position}', [PositionController::class, 'update'])->name('positions.update');
-                    Route::delete('/{position}', [PositionController::class, 'destroy'])->name('positions.destroy')->middleware('permission:position-delete');
-                    Route::get('/{position}/edit', [PositionController::class, 'edit'])->name('positions.edit')->middleware('permission:position-update');
                 });
 
                 // area scaffold
@@ -176,100 +186,112 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
                     Route::get('/{area}/edit', [AreaController::class, 'edit'])->name('areas.edit')->middleware('permission:area-update');
                 });
 
-                // coy scaffold
-                Route::group(['prefix' => 'companies'], function () {
-                    Route::get('/', [CoyController::class, 'index'])->name('companies.index')->middleware('permission:company-read');
-                    Route::post('/', [CoyController::class, 'store'])->name('companies.store');
-                    Route::get('/create', [CoyController::class, 'create'])->name('companies.create')->middleware('permission:company-create');
-                    Route::get('/{coy}', [CoyController::class, 'show'])->name('companies.show')->middleware('permission:company-read');
-                    Route::match(['put', 'patch'],'/{coy}', [CoyController::class, 'update'])->name('companies.update');
-                    Route::delete('/{coy}', [CoyController::class, 'destroy'])->name('companies.destroy')->middleware('permission:company-delete');
-                    Route::get('/{coy}/edit', [CoyController::class, 'edit'])->name('companies.edit')->middleware('permission:company-update');
+                // branch scaffold
+                Route::group(['prefix' => 'branches'], function () {
+                    Route::get('/', [BranchController::class, 'index'])->name('branches.index')->middleware('permission:branch-read');
+                    Route::post('/', [BranchController::class, 'store'])->name('branches.store');
+                    Route::get('/create', [BranchController::class, 'create'])->name('branches.create')->middleware('permission:branch-create');
+                    Route::get('/{branch}', [BranchController::class, 'show'])->name('branches.show')->middleware('permission:branch-read');
+                    Route::match(['put', 'patch'],'/{branch}', [BranchController::class, 'update'])->name('branches.update');
+                    Route::delete('/{branch}', [BranchController::class, 'destroy'])->name('branches.destroy')->middleware('permission:branch-delete');
+                    Route::get('/{branch}/edit', [BranchController::class, 'edit'])->name('branches.edit')->middleware('permission:branch-update');
                 });
 
-                // vaccine scaffold
-                Route::group(['prefix' => 'vaccines'], function () {
-                    Route::get('/', [VaccineController::class, 'index'])->name('vaccines.index')->middleware('permission:vaccine-read');
-                    Route::post('/', [VaccineController::class, 'store'])->name('vaccines.store');
-                    Route::get('/create', [VaccineController::class, 'create'])->name('vaccines.create')->middleware('permission:vaccine-create');
-                    Route::get('/{vaccine}', [VaccineController::class, 'show'])->name('vaccines.show')->middleware('permission:vaccine-read');
-                    Route::match(['put', 'patch'],'/{vaccine}', [VaccineController::class, 'update'])->name('vaccines.update');
-                    Route::delete('/{vaccine}', [VaccineController::class, 'destroy'])->name('vaccines.destroy')->middleware('permission:vaccine-delete');
-                    Route::get('/{vaccine}/edit', [VaccineController::class, 'edit'])->name('vaccines.edit')->middleware('permission:vaccine-update');
+                Route::group(['prefix' => 'registrations'], function () {
+
+                    // vaccine scaffold
+                    Route::group(['prefix' => 'vaccines'], function () {
+                        Route::get('/', [VaccineController::class, 'index'])->name('vaccines.index')->middleware('permission:vaccine-read');
+                        Route::post('/', [VaccineController::class, 'store'])->name('vaccines.store');
+                        Route::get('/create', [VaccineController::class, 'create'])->name('vaccines.create')->middleware('permission:vaccine-create');
+                        Route::get('/{vaccine}', [VaccineController::class, 'show'])->name('vaccines.show')->middleware('permission:vaccine-read');
+                        Route::match(['put', 'patch'],'/{vaccine}', [VaccineController::class, 'update'])->name('vaccines.update');
+                        Route::delete('/{vaccine}', [VaccineController::class, 'destroy'])->name('vaccines.destroy')->middleware('permission:vaccine-delete');
+                        Route::get('/{vaccine}/edit', [VaccineController::class, 'edit'])->name('vaccines.edit')->middleware('permission:vaccine-update');
+                    });
+
+                    // job scaffold
+                    Route::group(['prefix' => 'jobs'], function () {
+                        Route::get('/', [JobController::class, 'index'])->name('jobs.index')->middleware('permission:job-read');
+                        Route::post('/', [JobController::class, 'store'])->name('jobs.store');
+                        Route::get('/create', [JobController::class, 'create'])->name('jobs.create')->middleware('permission:job-create');
+                        Route::get('/{job}', [JobController::class, 'show'])->name('jobs.show')->middleware('permission:job-read');
+                        Route::match(['put', 'patch'],'/{job}', [JobController::class, 'update'])->name('jobs.update');
+                        Route::delete('/{job}', [JobController::class, 'destroy'])->name('jobs.destroy')->middleware('permission:job-delete');
+                        Route::get('/{job}/edit', [JobController::class, 'edit'])->name('jobs.edit')->middleware('permission:job-update');
+                    });
+
+                    // edu scaffold
+                    Route::group(['prefix' => 'educations'], function () {
+                        Route::get('/', [EduController::class, 'index'])->name('educations.index')->middleware('permission:education-read');
+                        Route::post('/', [EduController::class, 'store'])->name('educations.store');
+                        Route::get('/create', [EduController::class, 'create'])->name('educations.create')->middleware('permission:education-create');
+                        Route::get('/{edu}', [EduController::class, 'show'])->name('educations.show')->middleware('permission:education-read');
+                        Route::match(['put', 'patch'],'/{edu}', [EduController::class, 'update'])->name('educations.update');
+                        Route::delete('/{edu}', [EduController::class, 'destroy'])->name('educations.destroy')->middleware('permission:education-delete');
+                        Route::get('/{edu}/edit', [EduController::class, 'edit'])->name('educations.edit')->middleware('permission:education-update');
+                    });
+
+                    // country scaffold
+                    Route::group(['prefix' => 'countries'], function () {
+                        Route::get('/', [CountryController::class, 'index'])->name('countries.index')->middleware('permission:country-read');
+                        Route::post('/', [CountryController::class, 'store'])->name('countries.store');
+                        Route::get('/create', [CountryController::class, 'create'])->name('countries.create')->middleware('permission:country-create');
+                        Route::get('/{country}', [CountryController::class, 'show'])->name('countries.show')->middleware('permission:country-read');
+                        Route::match(['put', 'patch'],'/{country}', [CountryController::class, 'update'])->name('countries.update');
+                        Route::delete('/{country}', [CountryController::class, 'destroy'])->name('countries.destroy')->middleware('permission:country-delete');
+                        Route::get('/{country}/edit', [CountryController::class, 'edit'])->name('countries.edit')->middleware('permission:country-update');
+                    });
+
+                    // relation scaffold
+                    Route::group(['prefix' => 'relations'], function () {
+                        Route::get('/', [RelationController::class, 'index'])->name('relations.index')->middleware('permission:relation-read');
+                        Route::post('/', [RelationController::class, 'store'])->name('relations.store');
+                        Route::get('/create', [RelationController::class, 'create'])->name('relations.create')->middleware('permission:relation-create');
+                        Route::get('/{relation}', [RelationController::class, 'show'])->name('relations.show')->middleware('permission:relation-read');
+                        Route::match(['put', 'patch'],'/{relation}', [RelationController::class, 'update'])->name('relations.update');
+                        Route::delete('/{relation}', [RelationController::class, 'destroy'])->name('relations.destroy')->middleware('permission:relation-delete');
+                        Route::get('/{relation}/edit', [RelationController::class, 'edit'])->name('relations.edit')->middleware('permission:relation-update');
+                    });
+
                 });
 
-                // job scaffold
-                Route::group(['prefix' => 'jobs'], function () {
-                    Route::get('/', [JobController::class, 'index'])->name('jobs.index')->middleware('permission:job-read');
-                    Route::post('/', [JobController::class, 'store'])->name('jobs.store');
-                    Route::get('/create', [JobController::class, 'create'])->name('jobs.create')->middleware('permission:job-create');
-                    Route::get('/{job}', [JobController::class, 'show'])->name('jobs.show')->middleware('permission:job-read');
-                    Route::match(['put', 'patch'],'/{job}', [JobController::class, 'update'])->name('jobs.update');
-                    Route::delete('/{job}', [JobController::class, 'destroy'])->name('jobs.destroy')->middleware('permission:job-delete');
-                    Route::get('/{job}/edit', [JobController::class, 'edit'])->name('jobs.edit')->middleware('permission:job-update');
-                });
-
-                // edu scaffold
-                Route::group(['prefix' => 'educations'], function () {
-                    Route::get('/', [EduController::class, 'index'])->name('educations.index')->middleware('permission:education-read');
-                    Route::post('/', [EduController::class, 'store'])->name('educations.store');
-                    Route::get('/create', [EduController::class, 'create'])->name('educations.create')->middleware('permission:education-create');
-                    Route::get('/{edu}', [EduController::class, 'show'])->name('educations.show')->middleware('permission:education-read');
-                    Route::match(['put', 'patch'],'/{edu}', [EduController::class, 'update'])->name('educations.update');
-                    Route::delete('/{edu}', [EduController::class, 'destroy'])->name('educations.destroy')->middleware('permission:education-delete');
-                    Route::get('/{edu}/edit', [EduController::class, 'edit'])->name('educations.edit')->middleware('permission:education-update');
-                });
-
-                // country scaffold
-                Route::group(['prefix' => 'countries'], function () {
-                    Route::get('/', [CountryController::class, 'index'])->name('countries.index')->middleware('permission:country-read');
-                    Route::post('/', [CountryController::class, 'store'])->name('countries.store');
-                    Route::get('/create', [CountryController::class, 'create'])->name('countries.create')->middleware('permission:country-create');
-                    Route::get('/{country}', [CountryController::class, 'show'])->name('countries.show')->middleware('permission:country-read');
-                    Route::match(['put', 'patch'],'/{country}', [CountryController::class, 'update'])->name('countries.update');
-                    Route::delete('/{country}', [CountryController::class, 'destroy'])->name('countries.destroy')->middleware('permission:country-delete');
-                    Route::get('/{country}/edit', [CountryController::class, 'edit'])->name('countries.edit')->middleware('permission:country-update');
-                });
-
-                // relation scaffold
-                Route::group(['prefix' => 'relations'], function () {
-                    Route::get('/', [RelationController::class, 'index'])->name('relations.index')->middleware('permission:relation-read');
-                    Route::post('/', [RelationController::class, 'store'])->name('relations.store');
-                    Route::get('/create', [RelationController::class, 'create'])->name('relations.create')->middleware('permission:relation-create');
-                    Route::get('/{relation}', [RelationController::class, 'show'])->name('relations.show')->middleware('permission:relation-read');
-                    Route::match(['put', 'patch'],'/{relation}', [RelationController::class, 'update'])->name('relations.update');
-                    Route::delete('/{relation}', [RelationController::class, 'destroy'])->name('relations.destroy')->middleware('permission:relation-delete');
-                    Route::get('/{relation}/edit', [RelationController::class, 'edit'])->name('relations.edit')->middleware('permission:relation-update');
-                });
-
-                // bank scaffold
                 Route::group(['prefix' => 'banks'], function () {
-                    Route::get('/', [BankController::class, 'index'])->name('banks.index')->middleware('permission:bank-read');
-                    Route::post('/', [BankController::class, 'store'])->name('banks.store');
-                    Route::get('/create', [BankController::class, 'create'])->name('banks.create')->middleware('permission:bank-create');
-                    Route::get('/{bank}', [BankController::class, 'show'])->name('banks.show')->middleware('permission:bank-read');
-                    Route::match(['put', 'patch'],'/{bank}', [BankController::class, 'update'])->name('banks.update');
-                    Route::delete('/{bank}', [BankController::class, 'destroy'])->name('banks.destroy')->middleware('permission:bank-delete');
-                    Route::get('/{bank}/edit', [BankController::class, 'edit'])->name('banks.edit')->middleware('permission:bank-update');
+
+                    // bank scaffold
+                    Route::group(['prefix' => 'bank'], function () {
+                        Route::get('/', [BankController::class, 'index'])->name('banks.index')->middleware('permission:bank-read');
+                        Route::post('/', [BankController::class, 'store'])->name('banks.store');
+                        Route::get('/create', [BankController::class, 'create'])->name('banks.create')->middleware('permission:bank-create');
+                        Route::get('/{bank}', [BankController::class, 'show'])->name('banks.show')->middleware('permission:bank-read');
+                        Route::match(['put', 'patch'],'/{bank}', [BankController::class, 'update'])->name('banks.update');
+                        Route::delete('/{bank}', [BankController::class, 'destroy'])->name('banks.destroy')->middleware('permission:bank-delete');
+                        Route::get('/{bank}/edit', [BankController::class, 'edit'])->name('banks.edit')->middleware('permission:bank-update');
+                    });
+
+                });
+
+                Route::group(['prefix' => 'suppliers'], function () {
+
+                    // suppliersubtype scaffold
+                    Route::group(['prefix' => 'subtypes'], function () {
+                        Route::get('/', [SupplierSubTypeController::class, 'index'])->name('suppliersubtypes.index')->middleware('permission:supplier-sub-type-read');
+                        Route::post('/', [SupplierSubTypeController::class, 'store'])->name('suppliersubtypes.store');
+                        Route::get('/create', [SupplierSubTypeController::class, 'create'])->name('suppliersubtypes.create')->middleware('permission:supplier-sub-type-create');
+                        Route::get('/{suppliersubtype}', [SupplierSubTypeController::class, 'show'])->name('suppliersubtypes.show')->middleware('permission:supplier-sub-type-read');
+                        Route::match(['put', 'patch'],'/{suppliersubtype}', [SupplierSubTypeController::class, 'update'])->name('suppliersubtypes.update');
+                        Route::delete('/{suppliersubtype}', [SupplierSubTypeController::class, 'destroy'])->name('suppliersubtypes.destroy')->middleware('permission:supplier-sub-type-delete');
+                        Route::get('/{suppliersubtype}/edit', [SupplierSubTypeController::class, 'edit'])->name('suppliersubtypes.edit')->middleware('permission:supplier-sub-type-update');
+                    });
+
                 });
 
             });
 
             Route::group(['prefix' => 'suppliers'], function () {
 
-                // suppliersubtype scaffold
-                Route::group(['prefix' => 'suppliersubtypes'], function () {
-                    Route::get('/', [SupplierSubTypeController::class, 'index'])->name('suppliersubtypes.index')->middleware('permission:supplier-sub-type-read');
-                    Route::post('/', [SupplierSubTypeController::class, 'store'])->name('suppliersubtypes.store');
-                    Route::get('/create', [SupplierSubTypeController::class, 'create'])->name('suppliersubtypes.create')->middleware('permission:supplier-sub-type-create');
-                    Route::get('/{suppliersubtype}', [SupplierSubTypeController::class, 'show'])->name('suppliersubtypes.show')->middleware('permission:supplier-sub-type-read');
-                    Route::match(['put', 'patch'],'/{suppliersubtype}', [SupplierSubTypeController::class, 'update'])->name('suppliersubtypes.update');
-                    Route::delete('/{suppliersubtype}', [SupplierSubTypeController::class, 'destroy'])->name('suppliersubtypes.destroy')->middleware('permission:supplier-sub-type-delete');
-                    Route::get('/{suppliersubtype}/edit', [SupplierSubTypeController::class, 'edit'])->name('suppliersubtypes.edit')->middleware('permission:supplier-sub-type-update');
-                });
-
                 // supplier scaffold
-                Route::group(['prefix' => 'main'], function () {
+                Route::group(['prefix' => 'supplier'], function () {
                     Route::get('/', [SupplierController::class, 'index'])->name('suppliers.index')->middleware('permission:supplier-read');
                     Route::post('/', [SupplierController::class, 'store'])->name('suppliers.store');
                     Route::get('/create', [SupplierController::class, 'create'])->name('suppliers.create')->middleware('permission:supplier-create');
@@ -280,7 +302,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
                 });
 
                 // supplieracc scaffold
-                Route::group(['prefix' => 'supplieraccs'], function () {
+                Route::group(['prefix' => 'accs'], function () {
                     Route::get('/', [SupplierAccController::class, 'index'])->name('supplieraccs.index')->middleware('permission:supplier-acc-read');
                     Route::post('/', [SupplierAccController::class, 'store'])->name('supplieraccs.store');
                     Route::get('/create', [SupplierAccController::class, 'create'])->name('supplieraccs.create')->middleware('permission:supplier-acc-create');
@@ -303,6 +325,15 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
                     Route::match(['put', 'patch'],'/{package}', [PackageController::class, 'update'])->name('packages.update');
                     Route::delete('/{package}', [PackageController::class, 'destroy'])->name('packages.destroy')->middleware('permission:package-delete');
                     Route::get('/{package}/edit', [PackageController::class, 'edit'])->name('packages.edit')->middleware('permission:package-update');
+                });
+
+                // packagedetail scaffold
+                Route::group(['prefix' => 'packagedetails'], function () {
+                    Route::post('/', [PackageDetailController::class, 'store'])->name('packagedetails.store');
+                    Route::get('/create/{packageDetail}', [PackageDetailController::class, 'create'])->name('packagedetails.create')->middleware('permission:package-create');
+                    Route::get('/{packageDetail}', [PackageDetailController::class, 'show'])->name('packagedetails.show')->middleware('permission:package-read');
+                    Route::match(['put', 'patch'],'/{packageDetail}', [PackageDetailController::class, 'update'])->name('packagedetails.update');
+                    Route::delete('/{packageDetail}', [PackageDetailController::class, 'destroy'])->name('packagedetails.destroy')->middleware('permission:package-delete');
                 });
 
                 // registerpackage scaffold

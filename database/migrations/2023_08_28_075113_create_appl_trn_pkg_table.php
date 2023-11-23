@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('pkg_name', 60);
             $table->string('pkg_desc', 200);
             $table->integer('pkg_price');
-            $table->integer('pkg_price_limit');
+            // $table->integer('pkg_price_limit');
             $table->integer('pkg_price_agent');
             $table->date('pkg_start');
             $table->date('pkg_closed');

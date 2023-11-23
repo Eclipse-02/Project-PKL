@@ -7,9 +7,9 @@ use App\Models\Master\Kota;
 use App\Models\Master\Provinsi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\Validator;
 
 class KotaController extends Controller
 {
@@ -20,7 +20,7 @@ class KotaController extends Controller
     {
         $provinsis = Provinsi::select('prov_code', 'provinsi')->where('is_active', 'Y')->get();
         if ($request->ajax()) {
-            $data = Kota::all();
+            $data = Kota::with('provinsi')->get();
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -124,9 +124,9 @@ class KotaController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'kota_code' => 'required|integer',
+            'kota_code' => 'required|string|unique:kotas,kota_code',
             'kota' => 'required|string',
-            'prov_code' => 'required|integer',
+            'prov_code' => 'required|string',
             'is_active' => 'required|string'
         ]);
 
@@ -174,9 +174,8 @@ class KotaController extends Controller
     public function update(Request $request, Kota $kota)
     {
         $validator = Validator::make($request->all(), [
-            'kota_code' => 'required|integer',
             'kota' => 'required|string',
-            'prov_code' => 'required|integer',
+            'prov_code' => 'required|string',
             'is_active' => 'required|string'
         ]);
 
@@ -185,7 +184,6 @@ class KotaController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $kota->update([
-                'kota_code' => $request->kota_code,
                 'kota' => $request->kota,
                 'prov_code' => $request->prov_code,
                 'is_active' => $request->is_active,
@@ -199,14 +197,27 @@ class KotaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kota $kota)
+    public function destroy($kota)
     {
-        if ($kota->is_active == 'Y') {
-            $kota->update([
+        $isKecActive = Kota::join('kecamatans', 'kotas.kota_code', '=', 'kecamatans.kota_code')
+                ->where([
+                    ['kotas.id', '=', $kota],
+                    ['kecamatans.is_active', '=', 'Y']
+                ])->exists();
+
+        $data = Kota::where('id', $kota)->first();
+
+        if ($isKecActive) {
+            Alert::toast('Bawahan dari Data ini Masih Aktif!', 'error');
+            return redirect()->route('kotas.index');
+        }
+
+        if ($data->is_active == 'Y') {
+            $data->update([
                 'is_active' => 'N'
             ]);
         } else {
-            $kota->update([
+            $data->update([
                 'is_active' => 'Y'
             ]);
         }
@@ -217,7 +228,10 @@ class KotaController extends Controller
 
     public function api(Request $request)
     {
-        $data = Kota::select('kota_code', 'kota')->where('prov_code', $request->code)->get();
+        $data = Kota::select('kota_code', 'kota')->where([
+            ['prov_code', '=', $request->code],
+            ['is_active', '=', 'Y']
+        ])->get();
 
         return response()->json($data);
     }

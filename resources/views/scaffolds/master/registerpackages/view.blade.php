@@ -15,7 +15,7 @@
             <!--end::Card title-->
             <!--start::Button-->
             <!--start::Action-->
-            <a href="@role('office'){{ route('registerpackages.index') }}@endrole @role('agen'){{ route('agen.registerpackages.index') }}@endrole" class="btn btn-flex btn-light btn-light btn-active-primary fw-bolder align-self-center">
+            <a href="{{ route('registerpackages.index') }}" class="btn btn-flex btn-light btn-light btn-active-primary fw-bolder align-self-center">
                 <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr002.svg-->
                 <span class="svg-icon svg-icon-muted svg-icon-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -54,19 +54,7 @@
                         <!--begin::Body-->
                         <div id="kt_accordion_2_item_1" class="fs-6 collapse show ps-10" data-bs-parent="#kt_accordion_2">
                             <!--begin::Input group-->
-                            <div class="row mb-7 mt-7">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 fw-bold text-muted">UID</label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8">
-                                    <span class="fw-bolder fs-6 text-gray-800">{{ $data->id }}</span>
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-7">
+                            <div class="row my-7">
                                 <!--begin::Label-->
                                 <label class="col-lg-4 fw-bold text-muted">No Aplikasi</label>
                                 <!--end::Label-->
@@ -666,7 +654,7 @@
                         <!--begin::Body-->
                         <div id="kt_accordion_2_item_5" class="collapse fs-6 ps-10" data-bs-parent="#kt_accordion_2">
                             <!--begin::Input group-->
-                            <div class="row mb-7">
+                            <div class="row my-7">
                                 <!--begin::Label-->
                                 <label class="col-lg-4 fw-bold text-muted">Jemaah Dari</label>
                                 <!--end::Label-->
@@ -759,10 +747,10 @@
                                     <div class="card  overlay overflow-hidden">
                                         <div class="card-body p-0">
                                             <div class="overlay-wrapper">
-                                                <img src="{{ url('storage/reg/full-name/' . $data->appl_is_img_half_name) }}" alt="img_full" class="w-100 rounded"/>
+                                                <img src="{{ url('storage/reg/half-name/' . $data->appl_is_img_half_name) }}" alt="img_half" class="w-100 rounded"/>
                                             </div>
                                             <div class="overlay-layer bg-dark bg-opacity-25">
-                                                <a href="{{ url('storage/reg/full-name/' . $data->appl_is_img_half_name) }}" download="{{ $data->appl_is_img_full_name }}" class="btn btn-light-primary btn-shadow ms-2">Download</a>
+                                                <a href="{{ url('storage/reg/half-name/' . $data->appl_is_img_half_name) }}" download="{{ $data->appl_is_img_full_name }}" class="btn btn-light-primary btn-shadow ms-2">Download</a>
                                             </div>
                                         </div>
                                     </div>
@@ -794,10 +782,10 @@
                                     <div class="card  overlay overflow-hidden">
                                         <div class="card-body p-0">
                                             <div class="overlay-wrapper">
-                                                <img src="{{ url('storage/reg/full-name/' . $data->appl_is_pass_name) }}" alt="img_full" class="w-100 rounded"/>
+                                                <img src="{{ url('storage/reg/pass-name/' . $data->appl_is_pass_name) }}" alt="img_pass" class="w-100 rounded"/>
                                             </div>
                                             <div class="overlay-layer bg-dark bg-opacity-25">
-                                                <a href="{{ url('storage/reg/full-name/' . $data->appl_is_pass_name) }}" download="{{ $data->appl_is_img_full_name }}" class="btn btn-light-primary btn-shadow ms-2">Download</a>
+                                                <a href="{{ url('storage/reg/pass-name/' . $data->appl_is_pass_name) }}" download="{{ $data->appl_is_img_full_name }}" class="btn btn-light-primary btn-shadow ms-2">Download</a>
                                             </div>
                                         </div>
                                     </div>
@@ -829,10 +817,10 @@
                                     <div class="card  overlay overflow-hidden">
                                         <div class="card-body p-0">
                                             <div class="overlay-wrapper">
-                                                <img src="{{ url('storage/reg/full-name/' . $data->appl_is_yb_name) }}" alt="img_full" class="w-100 rounded"/>
+                                                <img src="{{ url('storage/reg/yb-name/' . $data->appl_is_yb_name) }}" alt="img_yb" class="w-100 rounded"/>
                                             </div>
                                             <div class="overlay-layer bg-dark bg-opacity-25">
-                                                <a href="{{ url('storage/reg/full-name/' . $data->appl_is_yb_name) }}" download="{{ $data->appl_is_img_full_name }}" class="btn btn-light-primary btn-shadow ms-2">Download</a>
+                                                <a href="{{ url('storage/reg/yb-name/' . $data->appl_is_yb_name) }}" download="{{ $data->appl_is_img_full_name }}" class="btn btn-light-primary btn-shadow ms-2">Download</a>
                                             </div>
                                         </div>
                                     </div>
@@ -864,10 +852,10 @@
                                     <div class="card  overlay overflow-hidden">
                                         <div class="card-body p-0">
                                             <div class="overlay-wrapper">
-                                                <img src="{{ url('storage/reg/full-name/' . $data->appl_is_id_name) }}" alt="img_full" class="w-100 rounded"/>
+                                                <img src="{{ url('storage/reg/id-name/' . $data->appl_is_id_name) }}" alt="img_id" class="w-100 rounded"/>
                                             </div>
                                             <div class="overlay-layer bg-dark bg-opacity-25">
-                                                <a href="{{ url('storage/reg/full-name/' . $data->appl_is_id_name) }}" download="{{ $data->appl_is_img_full_name }}" class="btn btn-light-primary btn-shadow ms-2">Download</a>
+                                                <a href="{{ url('storage/reg/id-name/' . $data->appl_is_id_name) }}" download="{{ $data->appl_is_img_full_name }}" class="btn btn-light-primary btn-shadow ms-2">Download</a>
                                             </div>
                                         </div>
                                     </div>
@@ -899,10 +887,10 @@
                                     <div class="card  overlay overflow-hidden">
                                         <div class="card-body p-0">
                                             <div class="overlay-wrapper">
-                                                <img src="{{ url('storage/reg/full-name/' . $data->appl_is_kk_name) }}" alt="img_full" class="w-100 rounded"/>
+                                                <img src="{{ url('storage/reg/kk-name/' . $data->appl_is_kk_name) }}" alt="img_kk" class="w-100 rounded"/>
                                             </div>
                                             <div class="overlay-layer bg-dark bg-opacity-25">
-                                                <a href="{{ url('storage/reg/full-name/' . $data->appl_is_kk_name) }}" download="{{ $data->appl_is_img_full_name }}" class="btn btn-light-primary btn-shadow ms-2">Download</a>
+                                                <a href="{{ url('storage/reg/kk-name/' . $data->appl_is_kk_name) }}" download="{{ $data->appl_is_img_full_name }}" class="btn btn-light-primary btn-shadow ms-2">Download</a>
                                             </div>
                                         </div>
                                     </div>
@@ -934,10 +922,10 @@
                                     <div class="card  overlay overflow-hidden">
                                         <div class="card-body p-0">
                                             <div class="overlay-wrapper">
-                                                <img src="{{ url('storage/reg/full-name/' . $data->appl_is_copy_pass_name) }}" alt="img_full" class="w-100 rounded"/>
+                                                <img src="{{ url('storage/reg/copy-pass-name/' . $data->appl_is_copy_pass_name) }}" alt="img_copy_pass" class="w-100 rounded"/>
                                             </div>
                                             <div class="overlay-layer bg-dark bg-opacity-25">
-                                                <a href="{{ url('storage/reg/full-name/' . $data->appl_is_copy_pass_name) }}" download="{{ $data->appl_is_img_full_name }}" class="btn btn-light-primary btn-shadow ms-2">Download</a>
+                                                <a href="{{ url('storage/reg/copy-pass-name/' . $data->appl_is_copy_pass_name) }}" download="{{ $data->appl_is_img_full_name }}" class="btn btn-light-primary btn-shadow ms-2">Download</a>
                                             </div>
                                         </div>
                                     </div>
@@ -969,10 +957,10 @@
                                     <div class="card  overlay overflow-hidden">
                                         <div class="card-body p-0">
                                             <div class="overlay-wrapper">
-                                                <img src="{{ url('storage/reg/full-name/' . $data->appl_is_akta_n_name) }}" alt="img_full" class="w-100 rounded"/>
+                                                <img src="{{ url('storage/reg/akta-n-name/' . $data->appl_is_akta_n_name) }}" alt="img_akta_n" class="w-100 rounded"/>
                                             </div>
                                             <div class="overlay-layer bg-dark bg-opacity-25">
-                                                <a href="{{ url('storage/reg/full-name/' . $data->appl_is_akta_n_name) }}" download="{{ $data->appl_is_img_full_name }}" class="btn btn-light-primary btn-shadow ms-2">Download</a>
+                                                <a href="{{ url('storage/reg/akta-n-name/' . $data->appl_is_akta_n_name) }}" download="{{ $data->appl_is_img_full_name }}" class="btn btn-light-primary btn-shadow ms-2">Download</a>
                                             </div>
                                         </div>
                                     </div>
@@ -1004,10 +992,10 @@
                                     <div class="card  overlay overflow-hidden">
                                         <div class="card-body p-0">
                                             <div class="overlay-wrapper">
-                                                <img src="{{ url('storage/reg/full-name/' . $data->appl_is_akta_l_name) }}" alt="img_full" class="w-100 rounded"/>
+                                                <img src="{{ url('storage/reg/akta-l-name/' . $data->appl_is_akta_l_name) }}" alt="img_akta_l" class="w-100 rounded"/>
                                             </div>
                                             <div class="overlay-layer bg-dark bg-opacity-25">
-                                                <a href="{{ url('storage/reg/full-name/' . $data->appl_is_akta_l_name) }}" download="{{ $data->appl_is_img_full_name }}" class="btn btn-light-primary btn-shadow ms-2">Download</a>
+                                                <a href="{{ url('storage/reg/akta-l-name/' . $data->appl_is_akta_l_name) }}" download="{{ $data->appl_is_img_full_name }}" class="btn btn-light-primary btn-shadow ms-2">Download</a>
                                             </div>
                                         </div>
                                     </div>

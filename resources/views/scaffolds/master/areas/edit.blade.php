@@ -11,8 +11,8 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title m-0 flex-column">
-                    <h3 class="fw-bolder m-0">Edit Data</h3>
-                    <div class="text-muted fs-7 fw-bold">Edit Data</div>
+                    <h3 class="fw-bolder m-0">Edit Area Data</h3>
+                    <div class="text-muted fs-7 fw-bold">Edit Data Area</div>
                 </div>
                 <!--end::Card title-->
                 <!--start::Button-->
@@ -45,7 +45,7 @@
                         </label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input class="form-control form-control-lg form-control-solid @error('area_code')is-invalid @enderror" type="text" id="area_code" name="area_code" value="{{ old('area_code') ? old('area_code') : $data->area_code }}" />
+                        <input class="form-control form-control-lg form-control-solid @error('area_code')is-invalid @enderror" type="text" id="area_code" name="area_code" value="{{ old('area_code') ? old('area_code') : $data->area_code }}" disabled="disabled" />
                         <!--end::Input-->
                         <!--begin::Error-->
                         @error('area_code')

@@ -14,38 +14,38 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
+        User::create([
             'coy_id' => 1,
             'empl_id' => 1,
             'empl_branch' => 1,
             'id' => Str::uuid(),
             'name' => 'Konsumen',
-            'email' => 'konsumen@gmail.com',
-            'password' => Hash::make('konsumen'),
+            'username' => 'konsumen',
+            'password' => Hash::make('konsumen1'),
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ])->addRole('konsumen');
 
-        User::factory()->create([
+        User::create([
             'coy_id' => 1,
             'empl_id' => 2,
             'empl_branch' => 1,
             'id' => Str::uuid(),
             'name' => 'Office',
-            'email' => 'office@gmail.com',
-            'password' => Hash::make('office'),
+            'username' => 'office',
+            'password' => Hash::make('office1'),
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ])->addRole('office');
 
-        User::factory()->create([
+        User::create([
             'coy_id' => 1,
             'empl_id' => 3,
             'empl_branch' => 1,
             'id' => Str::uuid(),
             'name' => 'Agen',
-            'email' => 'agen@gmail.com',
-            'password' => Hash::make('agen'),
+            'username' => 'agen',
+            'password' => Hash::make('agen1'),
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ])->addRole('agen');

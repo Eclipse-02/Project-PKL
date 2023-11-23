@@ -46,16 +46,24 @@
                         <span class="menu-section text-muted text-uppercase fs-8 ls-1">Office</span>
                     </div>
                 </div>
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion{{ request()->is('others/*') ? ' hover show' : '' }}">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion{{ request()->is('setup/*') ? ' hover show' : '' }}">
                     <span class="menu-link">
                         <span class="menu-icon">
-                            <i class="bi bi-back fs-3"></i>
+                            <i class="bi bi-gear fs-3"></i>
                         </span>
-                        <span class="menu-title">Others</span>
+                        <span class="menu-title">Setup</span>
                         <span class="menu-arrow"></span>
                     </span>
-                    <div class="menu-sub menu-sub-accordion menu-active-bg{{ request()->is('others/locations/*') ? ' show' : '' }}">
-                        <div data-kt-menu-trigger="click" class="menu-item{{ request()->is('others/locations/*') ? ' here show' : '' }} menu-accordion">
+                    <div class="menu-sub menu-sub-accordion menu-active-bg{{ request()->is('setup/locations/*') ? ' show' : '' }}">
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('setup/companies*') ? ' active' : '' }}" href="{{ route('companies.index') }}">
+                                <span class="menu-icon">
+                                    <i class="bi bi-buildings fs-3"></i>
+                                </span>
+                                <span class="menu-title">Perusahaan</span>
+                            </a>
+                        </div>
+                        <div data-kt-menu-trigger="click" class="menu-item{{ request()->is('setup/locations/*') ? ' here show' : '' }} menu-accordion">
                             <span class="menu-link">
                                 <span class="menu-icon">
                                     <i class="bi bi-map fs-3"></i>
@@ -65,7 +73,7 @@
                             </span>
                             <div class="menu-sub menu-sub-accordion menu-active-bg">
                                 <div class="menu-item">
-                                    <a class="menu-link{{ request()->is('others/locations/provinsis*') ? ' active' : '' }}" href="{{ route('provinsis.index') }}">
+                                    <a class="menu-link{{ request()->is('setup/locations/provinsis*') ? ' active' : '' }}" href="{{ route('provinsis.index') }}">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
@@ -73,7 +81,7 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link{{ request()->is('others/locations/kotas*') ? ' active' : '' }}" href="{{ route('kotas.index') }}">
+                                    <a class="menu-link{{ request()->is('setup/locations/kotas*') ? ' active' : '' }}" href="{{ route('kotas.index') }}">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
@@ -81,7 +89,7 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link{{ request()->is('others/locations/kecamatans*') ? ' active' : '' }}" href="{{ route('kecamatans.index') }}">
+                                    <a class="menu-link{{ request()->is('setup/locations/kecamatans*') ? ' active' : '' }}" href="{{ route('kecamatans.index') }}">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
@@ -89,7 +97,7 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link{{ request()->is('others/locations/kelurahans*') ? ' active' : '' }}" href="{{ route('kelurahans.index') }}">
+                                    <a class="menu-link{{ request()->is('setup/locations/kelurahans*') ? ' active' : '' }}" href="{{ route('kelurahans.index') }}">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
@@ -97,7 +105,7 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link{{ request()->is('others/locations/zips*') ? ' active' : '' }}" href="{{ route('zips.index') }}">
+                                    <a class="menu-link{{ request()->is('setup/locations/zips*') ? ' active' : '' }}" href="{{ route('zips.index') }}">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
@@ -106,66 +114,41 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="menu-item">
-                            <a class="menu-link{{ request()->is('others/branches*') ? ' active' : '' }}" href="{{ route('branches.index') }}">
-                                <span class="menu-icon">
-                                    <i class="bi bi-bezier fs-3"></i>
-                                </span>
-                                <span class="menu-title">Cabang</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link{{ request()->is('others/areas*') ? ' active' : '' }}" href="{{ route('areas.index') }}">
-                                <span class="menu-icon">
-                                    <i class="bi bi-crosshair fs-3"></i>
-                                </span>
-                                <span class="menu-title">Area</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link{{ request()->is('others/positions*') ? ' active' : '' }}" href="{{ route('positions.index') }}">
-                                <span class="menu-icon">
-                                    <i class="bi bi-person-badge fs-3"></i>
-                                </span>
-                                <span class="menu-title">Jabatan</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link{{ request()->is('others/employees*') ? ' active' : '' }}" href="{{ route('employees.index') }}">
-                                <span class="menu-icon">
-                                    <i class="bi bi-people fs-3"></i>
-                                </span>
-                                <span class="menu-title">Karyawan</span>
-                            </a>
-                        </div>
-                        <div data-kt-menu-trigger="click" class="menu-item{{ request()->is('others/accounts/*') ? ' here show' : '' }} menu-accordion">
+                        <div data-kt-menu-trigger="click" class="menu-item{{ request()->is('setup/users/*') ? ' here show' : '' }} menu-accordion">
                             <span class="menu-link">
                                 <span class="menu-icon">
                                     <i class="bi bi-person-circle fs-3"></i>
                                 </span>
-                                <span class="menu-title">Akun</span>
+                                <span class="menu-title">User</span>
                                 <span class="menu-arrow"></span>
                             </span>
                             <div class="menu-sub menu-sub-accordion menu-active-bg">
                                 <div class="menu-item">
-                                    <a class="menu-link{{ request()->is('others/accounts/users*') ? ' active' : '' }}" href="{{ route('users.index') }}">
+                                    <a class="menu-link{{ request()->is('setup/users/positions*') ? ' active' : '' }}" href="{{ route('positions.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Jabatan</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('setup/users/employees*') ? ' active' : '' }}" href="{{ route('employees.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Karyawan</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('setup/users/user*') ? ' active' : '' }}" href="{{ route('users.index') }}">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
                                         <span class="menu-title">User</span>
                                     </a>
                                 </div>
-                                {{-- <div class="menu-item">
-                                    <a class="menu-link{{ request()->is('others/accounts/permissions*') ? ' active' : '' }}" href="{{ route('laratrust.permissions.index') }}">
-                                        <span class="menu-bullet">
-                                            <span class="bullet bullet-dot"></span>
-                                        </span>
-                                        <span class="menu-title">Permissions</span>
-                                    </a>
-                                </div> --}}
-                                {{-- <div csup --}}
                                 <div class="menu-item">
-                                    <a class="menu-link{{ request()->is('others/accounts/roles-assignment*') ? ' active' : '' }}" href="{{ route('laratrust.roles-assignment.index') }}">
+                                    <a class="menu-link{{ request()->is('setup/users/roles-assignment*') ? ' active' : '' }}" href="{{ route('laratrust.roles-assignment.index') }}">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
@@ -175,82 +158,123 @@
                             </div>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link{{ request()->is('others/companies*') ? ' active' : '' }}" href="{{ route('companies.index') }}">
+                            <a class="menu-link{{ request()->is('setup/areas*') ? ' active' : '' }}" href="{{ route('areas.index') }}">
                                 <span class="menu-icon">
-                                    <i class="bi bi-buildings fs-3"></i>
+                                    <i class="bi bi-crosshair fs-3"></i>
                                 </span>
-                                <span class="menu-title">Perusahaan</span>
+                                <span class="menu-title">Area</span>
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link{{ request()->is('others/vaccines*') ? ' active' : '' }}" href="{{ route('vaccines.index') }}">
+                            <a class="menu-link{{ request()->is('setup/branches*') ? ' active' : '' }}" href="{{ route('branches.index') }}">
                                 <span class="menu-icon">
-                                    <i class="bi bi-capsule fs-3"></i>
+                                    <i class="bi bi-bezier fs-3"></i>
                                 </span>
-                                <span class="menu-title">Vaksin</span>
+                                <span class="menu-title">Cabang</span>
                             </a>
                         </div>
-                        <div class="menu-item">
-                            <a class="menu-link{{ request()->is('others/jobs*') ? ' active' : '' }}" href="{{ route('jobs.index') }}">
+                        <div data-kt-menu-trigger="click" class="menu-item{{ request()->is('setup/registrations/*') ? ' here show' : '' }} menu-accordion">
+                            <span class="menu-link">
                                 <span class="menu-icon">
-                                    <i class="bi bi-briefcase fs-3"></i>
+                                    <i class="bi bi-journal-text fs-3"></i>
                                 </span>
-                                <span class="menu-title">Pekerjaan</span>
-                            </a>
+                                <span class="menu-title">Registrasi</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('setup/registrations/vaccines*') ? ' active' : '' }}" href="{{ route('vaccines.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Vaksin</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('setup/registrations/jobs*') ? ' active' : '' }}" href="{{ route('jobs.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Pekerjaan</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('setup/registrations/educations*') ? ' active' : '' }}" href="{{ route('educations.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Edukasi</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('setup/registrations/countries*') ? ' active' : '' }}" href="{{ route('countries.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Negara</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('setup/registrations/relations*') ? ' active' : '' }}" href="{{ route('relations.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Relasi</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="menu-item">
-                            <a class="menu-link{{ request()->is('others/educations*') ? ' active' : '' }}" href="{{ route('educations.index') }}">
-                                <span class="menu-icon">
-                                    <i class="bi bi-mortarboard fs-3"></i>
-                                </span>
-                                <span class="menu-title">Edukasi</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link{{ request()->is('others/countries*') ? ' active' : '' }}" href="{{ route('countries.index') }}">
-                                <span class="menu-icon">
-                                    <i class="bi bi-globe fs-3"></i>
-                                </span>
-                                <span class="menu-title">Negara</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link{{ request()->is('others/relations*') ? ' active' : '' }}" href="{{ route('relations.index') }}">
-                                <span class="menu-icon">
-                                    <i class="bi bi-link fs-3"></i>
-                                </span>
-                                <span class="menu-title">Relasi</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link{{ request()->is('others/banks*') ? ' active' : '' }}" href="{{ route('banks.index') }}">
+                        <div data-kt-menu-trigger="click" class="menu-item{{ request()->is('setup/banks/*') ? ' here show' : '' }} menu-accordion">
+                            <span class="menu-link">
                                 <span class="menu-icon">
                                     <i class="bi bi-bank fs-3"></i>
                                 </span>
-                                <span class="menu-title">Bank</span>
-                            </a>
+                                <span class="menu-title">Data Bank</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('setup/banks/bank*') ? ' active' : '' }}" href="{{ route('banks.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Bank</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-kt-menu-trigger="click" class="menu-item{{ request()->is('setup/suppliers/*') ? ' here show' : '' }} menu-accordion">
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <i class="bi bi-shop fs-3"></i>
+                                </span>
+                                <span class="menu-title">Agen</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('setup/suppliers/subtypes*') ? ' active' : '' }}" href="{{ route('suppliersubtypes.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Sub Tipe</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion{{ request()->is('suppliers/*') ? ' hover show' : '' }}">
                     <span class="menu-link">
                         <span class="menu-icon">
-                            <i class="bi bi-truck fs-3"></i>
+                            <i class="bi bi-shop fs-3"></i>
                         </span>
-                        <span class="menu-title">Pemasok</span>
+                        <span class="menu-title">Agen</span>
                         <span class="menu-arrow"></span>
                     </span>
                     <div class="menu-sub menu-sub-accordion menu-active-bg{{ request()->is('suppliers/*') ? ' show' : '' }}">
                         <div class="menu-item">
-                            <a class="menu-link{{ request()->is('suppliers/suppliersubtypes*') ? ' active' : '' }}" href="{{ route('suppliersubtypes.index') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Sub Tipe</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link{{ request()->is('suppliers/main*') ? ' active' : '' }}" href="{{ route('suppliers.index') }}">
+                            <a class="menu-link{{ request()->is('suppliers/supplier*') ? ' active' : '' }}" href="{{ route('suppliers.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -258,7 +282,7 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link{{ request()->is('suppliers/supplieraccs*') ? ' active' : '' }}" href="{{ route('supplieraccs.index') }}">
+                            <a class="menu-link{{ request()->is('suppliers/accs*') ? ' active' : '' }}" href="{{ route('supplieraccs.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -281,15 +305,26 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Membuat Paket</span>
+                                <span class="menu-title">Data Paket</span>
                             </a>
                         </div>
+                    </div>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion{{ request()->is('packages/*') ? ' hover show' : '' }}">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                            <i class="bi bi-journal-text fs-3"></i>
+                        </span>
+                        <span class="menu-title">Registrasi</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion menu-active-bg{{ request()->is('packages/*') ? ' show' : '' }}">
                         <div class="menu-item">
                             <a class="menu-link{{ request()->is('packages/registerpackages*') ? ' active' : '' }}" href="{{ route('registerpackages.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Registrasi Paket</span>
+                                <span class="menu-title">Registrasi Jamaah</span>
                             </a>
                         </div>
                     </div>
@@ -304,9 +339,9 @@
                 <div class="menu-item">
                     <a class="menu-link{{ request()->is('registerpackages') ? ' active' : '' }}" href="{{ route('agen.registerpackages.index') }}">
                         <span class="menu-icon">
-                            <i class="bi bi-box-seam fs-3"></i>
+                            <i class="bi bi-journal-text fs-3"></i>
                         </span>
-                        <span class="menu-title">Registrasi Paket</span>
+                        <span class="menu-title">Registrasi Jamaah</span>
                     </a>
                 </div>
                 @endrole

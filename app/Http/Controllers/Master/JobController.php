@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
-use App\Models\Master\Coy;
 use App\Models\Master\Job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\Validator;
 
 class JobController extends Controller
 {
@@ -123,8 +122,8 @@ class JobController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'job_code' => 'required|string|unique:jobs,job_code',
             'job_name' => 'required|string',
-            'job_code' => 'required|string',
             'is_active' => 'required|string'
         ]);
 
@@ -186,7 +185,6 @@ class JobController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'job_name' => 'required|string',
-            'job_code' => 'required|string',
             'is_active' => 'required|string'
         ]);
 
@@ -195,9 +193,7 @@ class JobController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $job->update([
-                'coy_id' => Auth::user()->coy_id,
                 'job_name' => $request->job_name,
-                'job_code' => $request->job_code,
                 'updated_by' => Auth::user()->name,
             ]);    
             Alert::toast('Data Berhasil Diperbarui!', 'success');

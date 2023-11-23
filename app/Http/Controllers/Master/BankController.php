@@ -7,9 +7,9 @@ use App\Models\Master\Bank;
 use App\Models\Master\Provinsi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\Validator;
 
 class BankController extends Controller
 {
@@ -20,7 +20,7 @@ class BankController extends Controller
     {
         $provinsis = Provinsi::select('prov_code', 'provinsi')->where('is_active', 'Y')->get();
         if ($request->ajax()) {
-            $data = Bank::all();
+            $data = Bank::with(['provinsi', 'kota', 'kecamatan', 'kelurahan'])->get();
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -124,15 +124,15 @@ class BankController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'bank_code' => 'required|string',
+            'bank_code' => 'required|string|unique:banks,bank_code',
             'bank_name' => 'required|string',
             'bank_branch' => 'required|string',
-            'is_active' => 'required|integer',
-            'prov_code' => 'required|integer',
-            'kota_code' => 'required|integer',
-            'kec_code' => 'required|integer',
-            'kel_code' => 'required|integer',
-            'zip_code' => 'required|integer'
+            'is_active' => 'required|string',
+            'prov_code' => 'required|string',
+            'kota_code' => 'required|string',
+            'kec_code' => 'required|string',
+            'kel_code' => 'required|string',
+            'zip_code' => 'required|string'
         ]);
 
         if ($validator->fails()) {
@@ -199,15 +199,14 @@ class BankController extends Controller
     public function update(Request $request, Bank $bank)
     {
         $validator = Validator::make($request->all(), [
-            'bank_code' => 'required|string',
             'bank_name' => 'required|string',
             'bank_branch' => 'required|string',
             'is_active' => 'required|string',
-            'prov_code' => 'required|integer',
-            'kota_code' => 'required|integer',
-            'kec_code' => 'required|integer',
-            'kel_code' => 'required|integer',
-            'zip_code' => 'required|integer'
+            'prov_code' => 'required|string',
+            'kota_code' => 'required|string',
+            'kec_code' => 'required|string',
+            'kel_code' => 'required|string',
+            'zip_code' => 'required|string'
         ]);
 
         if ($validator->fails()) {
@@ -215,8 +214,6 @@ class BankController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $bank->update([
-                'coy_id' => Auth::user()->coy_id,
-                'bank_code' => $request->bank_code,
                 'bank_name' => $request->bank_name,
                 'bank_branch' => $request->bank_branch,
                 'is_active' => $request->is_active,

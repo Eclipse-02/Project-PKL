@@ -11,8 +11,8 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title m-0 flex-column">
-                    <h3 class="fw-bolder m-0">Edit Data</h3>
-                    <div class="text-muted fs-7 fw-bold">Edit Data</div>
+                    <h3 class="fw-bolder m-0">Edit Zip Code Data</h3>
+                    <div class="text-muted fs-7 fw-bold">Edit Data Kode Pos</div>
                 </div>
                 <!--end::Card title-->
                 <!--start::Button-->
@@ -116,7 +116,7 @@
                                         <!--end::Label-->
 
                                         <!--begin::Input-->
-                                        <input class="form-control form-control form-control-solid @error('zip_code')is-invalid @enderror" type="text" name="zip_code" value="{{ old('zip_code') ? old('zip_code') : $data->zip_code }}" />
+                                        <input class="form-control form-control form-control-solid @error('zip_code')is-invalid @enderror" type="text" name="zip_code" value="{{ old('zip_code') ? old('zip_code') : $data->zip_code }}" disabled="disabled" />
                                         <!--end::Input-->
 
                                         <!--begin::Error-->

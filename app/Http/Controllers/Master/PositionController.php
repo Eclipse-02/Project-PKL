@@ -122,7 +122,7 @@ class PositionController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'poss_code' => 'required|string',
+            'poss_code' => 'required|string|unique:positions,poss_code',
             'poss_name' => 'required|string',
             'is_active' => 'required|string'
         ]);
@@ -184,7 +184,6 @@ class PositionController extends Controller
     public function update(Request $request, Position $position)
     {
         $validator = Validator::make($request->all(), [
-            'poss_code' => 'required|string',
             'poss_name' => 'required|string',
             'is_active' => 'required|string'
         ]);
@@ -194,8 +193,6 @@ class PositionController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $position->update([
-                'coy_id' => Auth::user()->coy_id,
-                'poss_code' => $request->poss_code,
                 'poss_name' => $request->poss_name,
                 'is_active' => $request->is_active,
                 'updated_by' => Auth::user()->name,

@@ -7,9 +7,9 @@ use App\Models\Master\Kota;
 use App\Models\Master\Kecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\Validator;
 
 class KecamatanController extends Controller
 {
@@ -20,7 +20,7 @@ class KecamatanController extends Controller
     {
         $kotas = Kota::select('kota_code', 'kota')->where('is_active', 'Y')->get();
         if ($request->ajax()) {
-            $data = Kecamatan::all();
+            $data = Kecamatan::with('kota')->get();
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -124,9 +124,9 @@ class KecamatanController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'kec_code' => 'required|integer',
+            'kec_code' => 'required|string|unique:kecamatans,kec_code',
             'kecamatan' => 'required|string',
-            'kota_code' => 'required|integer',
+            'kota_code' => 'required|string',
             'is_active' => 'required|string'
         ]);
 
@@ -172,9 +172,8 @@ class KecamatanController extends Controller
     public function update(Request $request, Kecamatan $kecamatan)
     {
         $validator = Validator::make($request->all(), [
-            'kec_code' => 'required|integer',
             'kecamatan' => 'required|string',
-            'kota_code' => 'required|integer',
+            'kota_code' => 'required|string',
             'is_active' => 'required|string'
         ]);
 
@@ -183,7 +182,6 @@ class KecamatanController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $kecamatan->update([
-                'kec_code' => $request->kec_code,
                 'kecamatan' => $request->kecamatan,
                 'kota_code' => $request->kota_code,
                 'is_active' => $request->is_active,
@@ -197,14 +195,33 @@ class KecamatanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kecamatan $kecamatan)
+    public function destroy($kecamatan)
     {
-        if ($kecamatan->is_active == 'Y') {
-            $kecamatan->update([
+        $isKelActive = Kecamatan::join('kelurahans', 'kecamatans.kec_code', '=', 'kelurahans.kec_code')
+                ->where([
+                    ['kecamatans.id', '=', $kecamatan],
+                    ['kelurahans.is_active', '=', 'Y']
+                ])->exists();
+
+        $isZipActive = Kecamatan::join('zips', 'kecamatans.kec_code', '=', 'zips.kec_code')
+                ->where([
+                    ['kecamatans.id', '=', $kecamatan],
+                    ['zips.is_active', '=', 'Y']
+                ])->exists();
+
+        $data = Kecamatan::where('id', $kecamatan)->first();
+
+        if ($isKelActive && $isZipActive) {
+            Alert::toast('Bawahan dari Data ini Masih Aktif!', 'error');
+            return redirect()->route('kecamatans.index');
+        }
+
+        if ($data->is_active == 'Y') {
+            $data->update([
                 'is_active' => 'N'
             ]);
         } else {
-            $kecamatan->update([
+            $data->update([
                 'is_active' => 'Y'
             ]);
         }
@@ -215,7 +232,10 @@ class KecamatanController extends Controller
 
     public function api(Request $request)
     {
-        $data = Kecamatan::select('kec_code', 'kecamatan')->where('kota_code', $request->code)->get();
+        $data = Kecamatan::select('kec_code', 'kecamatan')->where([
+            ['kota_code', '=', $request->code],
+            ['is_active', '=', 'Y']
+        ])->get();
 
         return response()->json($data);
     }

@@ -64,7 +64,7 @@ class Package extends Model
         'updated_by',
     ];
 
-    function detail() {
-        return $this->belongsTo(PackageDetail::class, 'pkg_code', 'pkg_code');
+    function details() {
+        return $this->hasMany(PackageDetail::class, 'pkg_code', 'pkg_code');
     }
 }

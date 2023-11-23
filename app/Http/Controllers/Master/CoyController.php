@@ -7,9 +7,9 @@ use App\Models\Master\Coy;
 use App\Models\Master\Provinsi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\Validator;
 
 class CoyController extends Controller
 {
@@ -20,7 +20,7 @@ class CoyController extends Controller
     {
         $provinsis = Provinsi::select('prov_code', 'provinsi')->get();
         if ($request->ajax()) {
-            $data = Coy::all();
+            $data = Coy::with(['provinsi', 'kota', 'kecamatan', 'kelurahan', 'zip'])->get();
             return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -85,18 +85,18 @@ class CoyController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'coy_id' => 'required|string',
+            'coy_id' => 'required|string|unique:coys,coy_id',
             'coy_name' => 'required|string',
             'coy_addr' => 'required|string',
             'empl_tlp_area' => 'required|string',
-            'empl_tlp' => 'required|integer',
-            'empl_hp01' => 'required|integer',
-            'empl_hp02' => 'required|integer',
-            'prov_code' => 'required|integer',
-            'kota_code' => 'required|integer',
-            'kec_code' => 'required|integer',
-            'kel_code' => 'required|integer',
-            'zip_code' => 'required|integer',
+            'empl_tlp' => 'required|string',
+            'empl_hp01' => 'required|string',
+            'empl_hp02' => 'required|string',
+            'prov_code' => 'required|string',
+            'kota_code' => 'required|string',
+            'kec_code' => 'required|string',
+            'kel_code' => 'required|string',
+            'zip_code' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -120,7 +120,7 @@ class CoyController extends Controller
                 'updated_by' => Auth::user()->name,
             ]);
             Alert::toast('Data Berhasil Dibuat!', 'success');
-            return redirect()->route('coys.index');
+            return redirect()->route('companies.index');
         }
     }
 
@@ -151,18 +151,17 @@ class CoyController extends Controller
     public function update(Request $request, Coy $coy)
     {
         $validator = Validator::make($request->all(), [
-            'coy_id' => 'required|string',
             'coy_name' => 'required|string',
             'coy_addr' => 'required|string',
             'empl_tlp_area' => 'required|string',
-            'empl_tlp' => 'required|integer',
-            'empl_hp01' => 'required|integer',
-            'empl_hp02' => 'required|integer',
-            'prov_code' => 'required|integer',
-            'kota_code' => 'required|integer',
-            'kec_code' => 'required|integer',
-            'kel_code' => 'required|integer',
-            'zip_code' => 'required|integer',
+            'empl_tlp' => 'required|string',
+            'empl_hp01' => 'required|string',
+            'empl_hp02' => 'required|string',
+            'prov_code' => 'required|string',
+            'kota_code' => 'required|string',
+            'kec_code' => 'required|string',
+            'kel_code' => 'required|string',
+            'zip_code' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -170,7 +169,6 @@ class CoyController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $coy->update([
-                'coy_id' => Auth::user()->coy_id,
                 'coy_name' => $request->coy_name,
                 'coy_addr' => $request->coy_addr,
                 'empl_tlp_area' => $request->empl_tlp_area,
@@ -185,7 +183,7 @@ class CoyController extends Controller
                 'updated_by' => Auth::user()->name,
             ]);
             Alert::toast('Data Berhasil Diperbarui!', 'success');
-            return redirect()->route('coys.index');
+            return redirect()->route('companies.index');
         }
     }
 
@@ -197,6 +195,6 @@ class CoyController extends Controller
         $coy->delete();
 
         Alert::toast('Status Data Berhasil Dihapus!', 'success');
-        return redirect()->route('coys.index');
+        return redirect()->route('companies.index');
     }
 }

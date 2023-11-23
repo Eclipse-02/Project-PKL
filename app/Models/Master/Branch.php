@@ -86,7 +86,7 @@ class Branch extends Model
         return $this->hasOne(Zip::class, 'zip_code', 'zip_code');
     }
 
-    function coy() {
-        return $this->belongsTo(Coy::class, 'coy_id', 'coy_id');
+    function area() {
+        return $this->hasOne(Area::class, 'area_code', 'area_code');
     }
 }

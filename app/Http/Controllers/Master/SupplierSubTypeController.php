@@ -122,7 +122,7 @@ class SupplierSubTypeController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'sub_code' => 'required|string',
+            'sub_code' => 'required|string|unique:supplier_sub_types,sub_code',
             'sub_name' => 'required|string',
             'is_active' => 'required|string'
         ]);
@@ -169,7 +169,6 @@ class SupplierSubTypeController extends Controller
     public function update(Request $request, SupplierSubType $suppliersubtype)
     {
         $validator = Validator::make($request->all(), [
-            'sub_code' => 'required|string',
             'sub_name' => 'required|string',
             'is_active' => 'required|string'
         ]);
@@ -179,7 +178,6 @@ class SupplierSubTypeController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $suppliersubtype->update([
-                'sub_code' => $request->sub_code,
                 'sub_name' => $request->sub_name,
                 'is_active' => $request->is_active,
                 'updated_by' => Auth::user()->name,

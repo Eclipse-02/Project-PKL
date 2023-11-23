@@ -304,7 +304,7 @@ return [
         | will be accessible from.
         |
         */
-        'path' => 'others/accounts',
+        'path' => 'setup/users',
 
         /*
         |--------------------------------------------------------------------------

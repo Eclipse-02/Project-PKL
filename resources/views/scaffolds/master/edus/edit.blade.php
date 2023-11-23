@@ -11,8 +11,8 @@
             <div class="card-header">
                 <!--begin::Card title-->
                 <div class="card-title m-0 flex-column">
-                    <h3 class="fw-bolder m-0">Edit Data</h3>
-                    <div class="text-muted fs-7 fw-bold">Edit Data</div>
+                    <h3 class="fw-bolder m-0">Edit Education Data</h3>
+                    <div class="text-muted fs-7 fw-bold">Edit Data Edukasi</div>
                 </div>
                 <!--end::Card title-->
                 <!--start::Button-->
@@ -45,7 +45,7 @@
                         </label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input class="form-control form-control form-control-solid @error('edu_code')is-invalid @enderror" type="text" id="edu_code" name="edu_code" value="{{ old('edu_code') ? old('edu_code') : $data->edu_code }}" />
+                        <input class="form-control form-control form-control-solid @error('edu_code')is-invalid @enderror" type="text" id="edu_code" name="edu_code" value="{{ old('edu_code') ? old('edu_code') : $data->edu_code }}" disabled="disabled" />
                         <!--end::Input-->
                         <!--begin::Error-->
                         @error('edu_code')

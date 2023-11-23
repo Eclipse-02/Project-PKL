@@ -1,6 +1,6 @@
 @extends('dashboard.master')
 
-@section('title', 'Pemasok')
+@section('title', 'Agen')
 
 @section('content')
     <!--begin::Col-->
@@ -50,7 +50,7 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <div>
-                                                <select data-column="3" class="filter-select form-select form-select-solid">
+                                                <select data-column="3" class="filter-select form-select form-select-solid" data-control="select2">
                                                     <option value="">Semua</option>
                                                     <option value="Y">Ya</option>
                                                     <option value="N">Tidak</option>
@@ -66,7 +66,7 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <div>
-                                                <select data-column="4" class="filter-select form-select form-select-solid">
+                                                <select data-column="4" class="filter-select form-select form-select-solid" data-control="select2">
                                                     <option value="">Semua</option>
                                                     <option value="NW">Baru Disimpan</option>
                                                     <option value="NA">Need Approval</option>
@@ -85,7 +85,7 @@
                                             <!--end::Label-->
                                             <!--begin::Input-->
                                             <div>
-                                                <select data-column="6" class="filter-select form-select form-select-solid">
+                                                <select data-column="6" class="filter-select form-select form-select-solid" data-control="select2">
                                                     <option value="">Semua</option>
                                                     <option value="0">Individu</option>
                                                     <option value="1">Company</option>
@@ -110,35 +110,35 @@
                 </div>
                 <!--end::Stats-->
                 <!--start::Table-->
-                <table class="table table-striped gy-7 gs-7">
+                <table class="table table-striped gy-7 gs-7 d-none">
                     <!--start::Thead-->
                     <thead>
                         <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200">
                             <th class="min-w-50px">No</th>
-                            <th class="min-w-100px">Kode Pemasok</th>
-                            <th class="min-w-100px">Kode Cabang</th>
+                            <th class="min-w-100px">Kode Agen</th>
+                            <th class="min-w-100px">Nama Cabang</th>
                             <th class="min-w-100px">Aktif</th>
-                            <th class="min-w-100px">Status Pemasok</th>
-                            <th class="min-w-100px">Nama Pemasok</th>
-                            <th class="min-w-100px">Tipe Pemasok</th>
-                            <th class="min-w-100px">Sub Tipe Pemasok</th>
-                            <th class="min-w-100px">Nama Foto Pemasok</th>
-                            <th class="min-w-100px">Kode Posisi</th>
-                            <th class="min-w-100px">No ID Pemasok</th>
-                            <th class="min-w-100px">Alamat Pemasok</th>
-                            <th class="min-w-100px">No Area Pemasok</th>
-                            <th class="min-w-100px">No Pemasok</th>
-                            <th class="min-w-100px">No HP 1 Pemasok</th>
-                            <th class="min-w-100px">No HP 2 Pemasok</th>
-                            <th class="min-w-100px">Kode Provinsi</th>
-                            <th class="min-w-100px">Kode Kota</th>
-                            <th class="min-w-100px">Kode kecamatan</th>
-                            <th class="min-w-100px">Kode kelurahan</th>
-                            <th class="min-w-100px">Kode Pos</th>
-                            <th class="min-w-100px">No NPWP Pemasok</th>
-                            <th class="min-w-100px">Nama NPWP Pemasok</th>
-                            <th class="min-w-100px">Alamat NPWP Pemasok</th>
-                            <th class="min-w-100px">Deskripsi Pemasok</th>
+                            <th class="min-w-100px">Status Agen</th>
+                            <th class="min-w-100px">Nama Agen</th>
+                            <th class="min-w-100px">Tipe Agen</th>
+                            <th class="min-w-100px">Sub Tipe Agen</th>
+                            <th class="min-w-100px">Nama Foto Agen</th>
+                            <th class="min-w-100px">Nama Posisi</th>
+                            <th class="min-w-100px">No ID Agen</th>
+                            <th class="min-w-100px">Alamat Agen</th>
+                            <th class="min-w-100px">No Area Agen</th>
+                            <th class="min-w-100px">No Agen</th>
+                            <th class="min-w-100px">No HP 1 Agen</th>
+                            <th class="min-w-100px">No HP 2 Agen</th>
+                            <th class="min-w-100px">Nama Provinsi</th>
+                            <th class="min-w-100px">Nama Kota</th>
+                            <th class="min-w-100px">Nama kecamatan</th>
+                            <th class="min-w-100px">Nama kelurahan</th>
+                            <th class="min-w-100px">Nama Pos</th>
+                            <th class="min-w-100px">No NPWP Agen</th>
+                            <th class="min-w-100px">Nama NPWP Agen</th>
+                            <th class="min-w-100px">Alamat NPWP Agen</th>
+                            <th class="min-w-100px">Deskripsi Agen</th>
                             <th class="min-w-100px">Nama File MOU</th>
                             <th class="min-w-100px">Nama File KTP</th>
                             <th class="min-w-100px">Nama File NPWP</th>
@@ -168,7 +168,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header">
                     <!--begin::Modal title-->
-                    <h2>Create New Data <div class="text-muted fs-3 fw-bold d-inline"><span class="fw-bolder">/</span> Membuat Data Baru</div></h2>
+                    <h2>Create New Supplier Data <div class="text-muted fs-3 fw-bold d-inline"><span class="fw-bolder">/</span> Membuat Data Agen Baru</div></h2>
                     <!--end::Modal title-->
                     <!--begin::Close-->
                     <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -225,7 +225,7 @@
                                     <!--begin::Label-->
                                     <div class="stepper-label">
                                         <h3 class="stepper-title">Contacts</h3>
-                                        <div class="stepper-desc">Informasi Kontak Pemasok</div>
+                                        <div class="stepper-desc">Informasi Kontak Agen</div>
                                     </div>
                                     <!--begin::Label-->
                                 </div>
@@ -263,7 +263,7 @@
                                     <!--begin::Label-->
                                     <div class="stepper-label">
                                         <h3 class="stepper-title">NPWP</h3>
-                                        <div class="stepper-desc">Data NPWP Pemasok</div>
+                                        <div class="stepper-desc">Data NPWP Agen</div>
                                     </div>
                                     <!--end::Label-->
                                 </div>
@@ -300,7 +300,7 @@
                                     <!--begin::Label-->
                                     <div class="stepper-label">
                                         <h3 class="stepper-title">Status</h3>
-                                        <div class="stepper-desc">Status Pemasok</div>
+                                        <div class="stepper-desc">Status Agen</div>
                                     </div>
                                     <!--end::Label-->
                                 </div>
@@ -346,7 +346,7 @@
                                                 <!--end::Label-->
 
                                                 <!--begin::Input-->
-                                                <select class="form-select form-select-solid @error('branch_code')is-invalid @enderror" name="branch_code" id="branch_code" data-control="select2" data-placeholder="Pilih Cabang" data-dropdown-parent="#create_modal">
+                                                <select class="form-select form-select-solid @error('branch_code')is-invalid @enderror" name="branch_code" id="branch_code" data-placeholder="Pilih Cabang">
                                                     <option></option>
                                                     @foreach ($branches as $i)
                                                         <option value="{{ $i->branch_code }}" {{ old('branch_code') == $i->branch_code ? 'selected' : '' }}>{{ $i->branch_name }}</option>
@@ -391,7 +391,7 @@
                                                 <!--end::Label-->
 
                                                 <!--begin::Input-->
-                                                <select class="form-select form-select-solid @error('supl_type')is-invalid @enderror" name="supl_type" id="supl_type" data-control="select2" data-placeholder="Pilih Tipe" data-dropdown-parent="#create_modal">
+                                                <select class="form-select form-select-solid @error('supl_type')is-invalid @enderror" name="supl_type" id="supl_type" data-placeholder="Pilih Tipe">
                                                     <option></option>
                                                     <option value="0" {{ old('supl_type') == '0' ? 'selected' : '' }}>Individu</option>
                                                     <option value="1" {{ old('supl_type') == '1' ? 'selected' : '' }}>Company</option>
@@ -421,7 +421,7 @@
                                                 <!--end::Label-->
 
                                                 <!--begin::Input-->
-                                                <select class="form-select form-select-solid @error('supl_sub_type')is-invalid @enderror" name="supl_sub_type" data-control="select2" data-placeholder="Pilih Sub Tipe" data-dropdown-parent="#create_modal">
+                                                <select class="form-select form-select-solid @error('supl_sub_type')is-invalid @enderror" name="supl_sub_type" id="supl_sub_type" data-placeholder="Pilih Sub Tipe">
                                                     <option></option>
                                                     @foreach ($supplierSubTypes as $i)
                                                         <option value="{{ $i->sub_code }}" {{ old('supl_sub_type') == $i->sub_code ? 'selected' : '' }}>{{ $i->sub_name }}</option>
@@ -442,7 +442,7 @@
                                             <!--begin::Input group-->
                                             <div class="fv-row mb-10">
                                                 <!--begin::Label-->
-                                                <label class="form-label required">Foto Pemasok</label>
+                                                <label class="form-label required">Foto Agen</label>
                                                 <!--end::Label-->
 
                                                 <!--begin::Input-->
@@ -466,7 +466,7 @@
                                                 <!--end::Label-->
 
                                                 <!--begin::Input-->
-                                                <select class="form-select form-select-solid @error('poss_code')is-invalid @enderror" name="poss_code" data-control="select2" data-placeholder="Pilih Jabatan" data-dropdown-parent="#create_modal">
+                                                <select class="form-select form-select-solid @error('poss_code')is-invalid @enderror" name="poss_code" id="poss_code" data-placeholder="Pilih Jabatan">
                                                     <option></option>
                                                     @foreach ($positions as $i)
                                                         <option value="{{ $i->poss_code }}" {{ old('poss_code') == $i->poss_code ? 'selected' : '' }}>{{ $i->poss_name }}</option>
@@ -617,7 +617,7 @@
                                                 <!--end::Label-->
 
                                                 <!--begin::Input-->
-                                                <select class="form-select form-select-solid @error('prov_code')is-invalid @enderror" name="prov_code" id="prov_code" data-control="select2" data-placeholder="Pilih Provinsi" data-dropdown-parent="#create_modal">
+                                                <select class="form-select form-select-solid @error('prov_code')is-invalid @enderror" name="prov_code" id="prov_code" data-placeholder="Pilih Provinsi">
                                                     <option></option>
                                                     @foreach ($provinsis as $i)
                                                         <option value="{{ $i->prov_code }}" {{ old('prov_code') == $i->prov_code ? 'selected' : '' }}>{{ $i->provinsi }}</option>
@@ -976,6 +976,8 @@
 <script type="text/javascript">
     $(function() {
 
+        $('.table').removeClass('d-none');
+
         var table = $('.table').DataTable({
             processing: true,
             serverSide: true,
@@ -995,8 +997,8 @@
                     name: "supl_code"
                 },
                 {
-                    data: "branch_code",
-                    name: "branch_code"
+                    data: "branch.branch_name",
+                    name: "branch"
                 },
                 {
                     data: "is_active",
@@ -1039,16 +1041,16 @@
                     }
                 },
                 {
-                    data: "supl_sub_type",
-                    name: "supl_sub_type"
+                    data: "sub.sub_name",
+                    name: "sub"
                 },
                 {
                     data: "supl_pic_name",
                     name: "supl_pic_name"
                 },
                 {
-                    data: "poss_code",
-                    name: "poss_code"
+                    data: "position.poss_name",
+                    name: "position"
                 },
                 {
                     data: "supl_id_no",
@@ -1075,24 +1077,24 @@
                     name: "supl_hp02"
                 },
                 {
-                    data: "prov_code",
-                    name: "prov_code"
+                    data: "provinsi.provinsi",
+                    name: "provinsi"
                 },
                 {
-                    data: "kota_code",
-                    name: "kota_code"
+                    data: "kota.kota",
+                    name: "kota"
                 },
                 {
-                    data: "kec_code",
-                    name: "kec_code"
+                    data: "kecamatan.kecamatan",
+                    name: "kecamatan"
                 },
                 {
-                    data: "kel_code",
-                    name: "kel_code"
+                    data: "kelurahan.kelurahan",
+                    name: "kelurahan"
                 },
                 {
-                    data: "zip_code",
-                    name: "zip_code"
+                    data: "zip.zip_desc",
+                    name: "zip"
                 },
                 {
                     data: "supl_npwp_no",
@@ -1174,6 +1176,8 @@
                 .search( $(this).val() )
                 .draw();
         });
+
+        select2Create(['branch_code', 'supl_type', 'supl_sub_type', 'poss_code', 'prov_code'])
 
     });
 </script>

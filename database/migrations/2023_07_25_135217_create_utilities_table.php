@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string("updated_by");
             $table->timestamps();
             $table->foreign("coy_id")->references('coy_id')->on('coys')->onDelete('cascade');
-            $table->foreign("branch_code")->references('branch_code')->on('branches')->onDelete('cascade');
         });
     }
 
