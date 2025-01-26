@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('provinsis', function (Blueprint $table) {
-            $table->string('prov_code', 5)->unique()->primary();
+            $table->string('prov_code', 3)->unique()->primary();
             $table->uuid('id');
             $table->string("provinsi", 100);
             $table->string("is_active", 1)->nullable();
@@ -22,10 +22,10 @@ return new class extends Migration
         });
 
         Schema::create('kotas', function (Blueprint $table) {
-            $table->string("kota_code", 5)->unique()->primary();
+            $table->string("kota_code", 4)->unique()->primary();
             $table->uuid("id");
             $table->string("kota", 100);
-            $table->string('prov_code', 5);
+            $table->string('prov_code', 3);
             $table->string("is_active", 1)->nullable();
             $table->string("created_by");
             $table->string("updated_by");
@@ -34,10 +34,10 @@ return new class extends Migration
         });
 
         Schema::create('kecamatans', function (Blueprint $table) {
-            $table->string("kec_code", 5)->unique()->primary();
+            $table->string("kec_code", 7)->unique()->primary();
             $table->uuid("id");
             $table->string("kecamatan", 100);
-            $table->string('kota_code', 5);
+            $table->string('kota_code', 4);
             $table->string("is_active", 1)->nullable();
             $table->string("created_by");
             $table->string("updated_by");
@@ -46,10 +46,10 @@ return new class extends Migration
         });
 
         Schema::create('kelurahans', function (Blueprint $table) {
-            $table->string("kel_code", 5)->unique()->primary();
+            $table->string("kel_code", 10)->unique()->primary();
             $table->uuid("id");
             $table->string("kelurahan", 100);
-            $table->string('kec_code', 5);
+            $table->string('kec_code', 7);
             $table->string("is_active", 1)->nullable();
             $table->string("created_by");
             $table->string("updated_by");

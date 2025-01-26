@@ -59,6 +59,7 @@
                                                 <thead>
                                                     <tr class="border-bottom fs-7 fw-bolder text-gray-700 text-uppercase">
                                                         <th class="min-w-300px w-475px">Details</th>
+                                                        <th class="min-w-300px w-475px">Price Unit</th>
                                                         <th class="min-w-75px w-75px text-end">Action</th>
                                                     </tr>
                                                 </thead>
@@ -68,7 +69,10 @@
                                                     @foreach ($details as $i)
                                                     <tr data-kt-element="item" id="dtl_{{ $i->id }}">
                                                         <td class="pe-7">
-                                                            <input type="text" class="form-control form-control-solid" name="dtl_desc[]" value="{{ $i->dtl_desc }}" placeholder="Description" />
+                                                            <input type="text" class="form-control form-control-solid" name="dtl_desc[]" value="{{ $i->dtl_desc }}" placeholder="Detail" />
+                                                        </td>
+                                                        <td class="pe-7">
+                                                            <input type="text" class="form-control form-control-solid" name="dtl_price[]" value="{{ $i->dtl_price }}" placeholder="Price" />
                                                         </td>
                                                         <td class="pt-5 text-end">
                                                             <button type="button" class="btn btn-sm btn-icon btn-active-color-primary swal-dtl-delete" value="{{ $i->id }}">
@@ -90,6 +94,9 @@
                                                     <tr class="border-bottom border-bottom-dashed" data-kt-element="item">
                                                         <td class="pe-7">
                                                             <input type="text" class="form-control form-control-solid" name="dtl_desc[]" placeholder="Detail" />
+                                                        </td>
+                                                        <td class="pe-7">
+                                                            <input type="text" class="form-control form-control-solid" name="dtl_price[]" placeholder="Price" />
                                                         </td>
                                                         <td class="pt-5 text-end">
                                                             <button type="button" class="btn btn-sm btn-icon btn-active-color-primary" data-kt-element="remove-item">
@@ -145,6 +152,9 @@
                                             <tr class="border-bottom border-bottom-dashed" data-kt-element="item">
                                                 <td class="pe-7">
                                                     <input type="text" class="form-control form-control-solid" name="dtl_desc[]" placeholder="Detail" />
+                                                </td>
+                                                <td class="pe-7">
+                                                    <input type="text" class="form-control form-control-solid" name="dtl_price[]" placeholder="Price" />
                                                 </td>
                                                 <td class="pt-5 text-end">
                                                     <button type="button" class="btn btn-sm btn-icon btn-active-color-primary" data-kt-element="remove-item">

@@ -15,9 +15,9 @@ return new class extends Migration
             $table->string('coy_id', 5);
             $table->string('trx_code', 10)->primary();
             $table->uuid('id');
-            $table->string('trx_desc', 60);
-            $table->string('trx_type', 5);
-            $table->string('trx_status', 5);
+            $table->string('trx_desc', 60)->nullable();
+            $table->string('trx_type', 5)->nullable();
+            $table->string('trx_status', 5)->nullable();
             $table->string("created_by", 12);
             $table->string("updated_by", 15);
             $table->timestamps();

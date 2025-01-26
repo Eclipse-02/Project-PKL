@@ -64,6 +64,10 @@ class User extends Authenticatable implements LaratrustUser
         'expired_pwd',
         'name',
         'email',
+        'copy_ktp_name',
+        'copy_npwp_name',
+        'created_by',
+        'updated_by',
     ];
 
     /**

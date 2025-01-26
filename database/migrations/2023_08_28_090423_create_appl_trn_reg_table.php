@@ -26,10 +26,10 @@ return new class extends Migration
             $table->string('appl_birth_place', 60)->nullable();
             $table->date('appl_birth_date')->nullable();
             $table->string("appl_addr", 200)->nullable();
-            $table->string("prov_code", 5)->nullable();
-            $table->string("kota_code", 5)->nullable();
-            $table->string("kec_code", 5)->nullable();
-            $table->string("kel_code", 5)->nullable();
+            $table->string("prov_code", 3)->nullable();
+            $table->string("kota_code", 4)->nullable();
+            $table->string("kec_code", 7)->nullable();
+            $table->string("kel_code", 10)->nullable();
             $table->string('appl_status', 1)->nullable();
             $table->string("con_code", 5)->nullable();
             $table->string("edu_code", 5)->nullable();
@@ -77,6 +77,7 @@ return new class extends Migration
             $table->string("updated_by", 15);
             $table->timestamps();
             $table->foreign("coy_id")->references('coy_id')->on('coys')->onDelete('cascade');
+            $table->foreign("pkg_code")->references('pkg_code')->on('appl_trn_pkg')->onDelete('cascade');
             $table->foreign("prov_code")->references('prov_code')->on('provinsis')->onDelete('cascade');
             $table->foreign("kota_code")->references('kota_code')->on('kotas')->onDelete('cascade');
             $table->foreign("kec_code")->references('kec_code')->on('kecamatans')->onDelete('cascade');

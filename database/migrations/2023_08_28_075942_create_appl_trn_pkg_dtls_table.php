@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('pkg_code', 30);
             $table->integer('dtl_sq_no');
             $table->string('dtl_desc', 200);
+            $table->bigInteger('dtl_price');
             $table->string('pkg_status', 2)->default('NW');
             $table->string("created_by", 12);
             $table->string("updated_by", 15);

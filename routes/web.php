@@ -22,7 +22,6 @@ use App\Http\Controllers\Master\CountryController;
 use App\Http\Controllers\Master\PackageController;
 use App\Http\Controllers\Master\VaccineController;
 use App\Http\Controllers\Finance\AccountController;
-use App\Http\Controllers\Finance\InvoiceController;
 use App\Http\Controllers\Master\EmployeeController;
 use App\Http\Controllers\Master\PositionController;
 use App\Http\Controllers\Master\ProvinsiController;
@@ -33,12 +32,17 @@ use App\Http\Controllers\Master\KelurahanController;
 
 // Finance controller
 use App\Http\Controllers\Master\SupplierAccController;
-use App\Http\Controllers\Finance\TransactionController;
 use App\Http\Controllers\Master\PackageDetailController;
 use App\Http\Controllers\Master\RegisterPackageController;
 use App\Http\Controllers\Master\SupplierSubTypeController;
-use App\Http\Controllers\Finance\TransactionDetailController;
-use App\Http\Controllers\Finance\TransactionHeaderController;
+use App\Http\Controllers\Finance\Transaction\InvoiceController;
+use App\Http\Controllers\Finance\Transaction\CorrectController;
+use App\Http\Controllers\Finance\Transaction\PCashController;
+use App\Http\Controllers\Finance\Transaction\ReceiveController;
+use App\Http\Controllers\Finance\Transaction\TransactionDetailController;
+use App\Http\Controllers\Finance\Transaction\Parameter\TransactionHeaderController;
+use App\Http\Controllers\Finance\Transaction\Parameter\TransactionController;
+use App\Http\Controllers\RegisterEventPackageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +59,7 @@ use App\Http\Controllers\Finance\TransactionHeaderController;
 Route::middleware(['auth', 'auth.session'])->group(function () {
 
     // check if password_expired
-    Route::middleware('password_expired')->group(function () {
+    // Route::middleware('password_expired')->group(function () {
 
         Route::group(['prefix' => 'account'], function () {
             Route::get('overview', [DashboardAccountController::class, 'overview'])->name('dashboard.account.overview');
@@ -336,6 +340,10 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
                     Route::delete('/{packageDetail}', [PackageDetailController::class, 'destroy'])->name('packagedetails.destroy')->middleware('permission:package-delete');
                 });
 
+            });
+
+            Route::group(['prefix' => 'registers'], function () {
+
                 // registerpackage scaffold
                 Route::group(['prefix' => 'registerpackages'], function () {
                     Route::get('/', [RegisterPackageController::class, 'index'])->name('registerpackages.index')->middleware('permission:register-package-read');
@@ -348,82 +356,217 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
                     Route::post('/export', [RegisterPackageController::class, 'export'])->name('registerpackages.export')->middleware('permission:register-package-update');
                 });
 
+                // event scaffold
+                Route::group(['prefix' => 'events'], function () {
+                    Route::get('/', [RegisterEventPackageController::class, 'index'])->name('events.index');
+                    Route::post('/', [RegisterEventPackageController::class, 'store'])->name('events.store');
+                    Route::get('/create', [RegisterEventPackageController::class, 'create'])->name('events.create');
+                    Route::get('/{event}', [RegisterEventPackageController::class, 'show'])->name('events.show');
+                    Route::match(['put', 'patch'],'/{event}', [RegisterEventPackageController::class, 'update'])->name('events.update');
+                    Route::delete('/{event}', [RegisterEventPackageController::class, 'destroy'])->name('events.destroy');
+                    Route::get('/{event}/edit', [RegisterEventPackageController::class, 'edit'])->name('events.edit');
+                    Route::post('/export', [RegisterEventPackageController::class, 'export'])->name('events.export');
+                });
+
             });
 
-            /* Master scaffolds */
+            /* Finance scaffolds */
+
+            Route::group(['prefix' => 'finances'], function() {
+
+                // accounts scaffold
+                Route::group(['prefix' => 'accounts'], function () {
+                    Route::get('/', [AccountController::class, 'index'])->name('finances.accounts.index');
+                    Route::post('/', [AccountController::class, 'store'])->name('finances.accounts.store');
+                    Route::get('/create', [AccountController::class, 'create'])->name('finances.accounts.create');
+                    Route::get('/{account}', [AccountController::class, 'show'])->name('finances.accounts.show');
+                    Route::match(['put', 'patch'],'/{account}', [AccountController::class, 'update'])->name('finances.accounts.update');
+                    Route::delete('/{account}', [AccountController::class, 'destroy'])->name('finances.accounts.destroy');
+                    Route::get('/{account}/edit', [AccountController::class, 'edit'])->name('finances.accounts.edit');
+                    // Route::post('/export', [AccountController::class, 'export'])->name('finances.accounts.export');
+                });
+
+                // periods scaffold
+                Route::group(['prefix' => 'periods'], function () {
+                    Route::get('/', [PeriodController::class, 'index'])->name('finances.periods.index');
+                    Route::post('/', [PeriodController::class, 'store'])->name('finances.periods.store');
+                    Route::get('/create', [PeriodController::class, 'create'])->name('finances.periods.create');
+                    Route::get('/{period}', [PeriodController::class, 'show'])->name('finances.periods.show');
+                    Route::match(['put', 'patch'],'/{period}', [PeriodController::class, 'update'])->name('finances.periods.update');
+                    Route::delete('/{period}', [PeriodController::class, 'destroy'])->name('finances.periods.destroy');
+                    Route::get('/{period}/edit', [PeriodController::class, 'edit'])->name('finances.periods.edit');
+                    // Route::post('/export', [PeriodController::class, 'export'])->name('finances.periods.export');
+                });
+
+                // transactions master
+                Route::group(['prefix' => 'transactions'], function() {
+
+                    // parameters
+                    Route::group(['prefix' => 'parameters'], function () {
+
+                        // headers scaffold
+                        Route::group(['prefix' => 'headers'], function () {
+                            Route::get('/', [TransactionHeaderController::class, 'index'])->name('finances.transactions.parameters.headers.index');
+                            Route::post('/', [TransactionHeaderController::class, 'store'])->name('finances.transactions.parameters.headers.store');
+                            Route::get('/create', [TransactionHeaderController::class, 'create'])->name('finances.transactions.parameters.headers.create');
+                            Route::get('/{headers}', [TransactionHeaderController::class, 'show'])->name('finances.transactions.parameters.headers.show');
+                            Route::match(['put', 'patch'],'/{headers}', [TransactionHeaderController::class, 'update'])->name('finances.transactions.parameters.headers.update');
+                            Route::delete('/{headers}', [TransactionHeaderController::class, 'destroy'])->name('finances.transactions.parameters.headers.destroy');
+                            Route::get('/{headers}/edit', [TransactionHeaderController::class, 'edit'])->name('finances.transactions.parameters.headers.edit');
+                            // Route::post('/export', [TransactionHeaderController::class, 'export'])->name('finances.transactions.parameters.headers.export');
+                        });
+
+                        // transactions scaffold
+                        Route::group(['prefix' => 'transaction'], function () {
+                            Route::get('/', [TransactionController::class, 'index'])->name('finances.transactions.parameters.transaction.index');
+                            Route::post('/', [TransactionController::class, 'store'])->name('finances.transactions.parameters.transaction.store');
+                            Route::get('/create', [TransactionController::class, 'create'])->name('finances.transactions.parameters.transaction.create');
+                            Route::get('/{transaction}', [TransactionController::class, 'show'])->name('finances.transactions.parameters.transaction.show');
+                            Route::match(['put', 'patch'],'/{transaction}', [TransactionController::class, 'update'])->name('finances.transactions.parameters.transaction.update');
+                            Route::delete('/{transaction}', [TransactionController::class, 'destroy'])->name('finances.transactions.parameters.transaction.destroy');
+                            Route::get('/{transaction}/edit', [TransactionController::class, 'edit'])->name('finances.transactions.parameters.transaction.edit');
+                            // Route::post('/export', [TransactionController::class, 'export'])->name('finances.transactions.parameters.transaction.export');
+                        });
+
+                    });
+
+                    // transactions scaffold
+                    Route::group(['prefix' => 'details'], function () {
+                        Route::get('/', [TransactionDetailController::class, 'index'])->name('finances.transactions.details.index');
+                        Route::post('/', [TransactionDetailController::class, 'store'])->name('finances.transactions.details.store');
+                        Route::get('/create', [TransactionDetailController::class, 'create'])->name('finances.transactions.details.create');
+                        Route::match(['put', 'patch'],'/{transactiondetail}', [TransactionDetailController::class, 'update'])->name('finances.transactions.details.update');
+                        Route::delete('/{transactiondetail}', [TransactionDetailController::class, 'destroy'])->name('finances.transactions.details.destroy');
+                        Route::get('/{transactiondetail}/edit', [TransactionDetailController::class, 'edit'])->name('finances.transactions.details.edit');
+                        // Route::post('/export', [TransactionDetailController::class, 'export'])->name('finances.transactions.details.export');
+                    });
+
+                    // receives scaffold
+                    Route::group(['prefix' => 'receives'], function () {
+                        Route::get('/', [ReceiveController::class, 'index'])->name('finances.transactions.receives.index');
+                        Route::post('/', [ReceiveController::class, 'store'])->name('finances.transactions.receives.store');
+                        Route::post('/link', [ReceiveController::class, 'link'])->name('finances.transactions.receives.link');
+                        Route::get('/create', [ReceiveController::class, 'create'])->name('finances.transactions.receives.create');
+                        Route::get('/request', [ReceiveController::class, 'show'])->name('finances.transactions.receives.show');
+                        Route::match(['put', 'patch'],'/update', [ReceiveController::class, 'update'])->name('finances.transactions.receives.update');
+                        Route::delete('/{receive}', [ReceiveController::class, 'destroy'])->name('finances.transactions.receives.destroy');
+                        Route::get('/{receive}/edit', [ReceiveController::class, 'edit'])->name('finances.transactions.receives.edit');
+                        // Route::post('/export', [ReceiveController::class, 'export'])->name('finances.transactions.receives.export');
+                    });
+
+                    // invoices scaffold
+                    Route::group(['prefix' => 'invoices'], function () {
+                        Route::get('/', [InvoiceController::class, 'index'])->name('finances.transactions.invoices.index');
+                        Route::post('/', [InvoiceController::class, 'store'])->name('finances.transactions.invoices.store');
+                        Route::post('/link', [InvoiceController::class, 'link'])->name('finances.transactions.invoices.link');
+                        Route::get('/create', [InvoiceController::class, 'create'])->name('finances.transactions.invoices.create');
+                        Route::get('/request', [InvoiceController::class, 'show'])->name('finances.transactions.invoices.show');
+                        Route::match(['put', 'patch'],'/update', [InvoiceController::class, 'update'])->name('finances.transactions.invoices.update');
+                        Route::delete('/{invoice}', [InvoiceController::class, 'destroy'])->name('finances.transactions.invoices.destroy');
+                        Route::get('/{invoice}/edit', [InvoiceController::class, 'edit'])->name('finances.transactions.invoices.edit');
+                        // Route::post('/export', [InvoiceController::class, 'export'])->name('finances.transactions.invoices.export');
+                    });
+
+                    // corrects scaffold
+                    Route::group(['prefix' => 'corrects'], function () {
+                        Route::get('/', [CorrectController::class, 'index'])->name('finances.transactions.corrects.index');
+                        Route::post('/', [CorrectController::class, 'store'])->name('finances.transactions.corrects.store');
+                        Route::get('/create', [CorrectController::class, 'create'])->name('finances.transactions.corrects.create');
+                        Route::get('/{correct}', [CorrectController::class, 'show'])->name('finances.transactions.corrects.show');
+                        Route::match(['put', 'patch'],'/{correct}', [CorrectController::class, 'update'])->name('finances.transactions.corrects.update');
+                        Route::delete('/{correct}', [CorrectController::class, 'destroy'])->name('finances.transactions.corrects.destroy');
+                        Route::get('/{correct}/edit', [CorrectController::class, 'edit'])->name('finances.transactions.corrects.edit');
+                        // Route::post('/export', [CorrectController::class, 'export'])->name('finances.transactions.corrects.export');
+                    });
+
+                    // pcashes scaffold
+                    Route::group(['prefix' => 'pcashes'], function () {
+                        Route::get('/', [PCashController::class, 'index'])->name('finances.transactions.pcashes.index');
+                        Route::post('/', [PCashController::class, 'store'])->name('finances.transactions.pcashes.store');
+                        Route::get('/create', [PCashController::class, 'create'])->name('finances.transactions.pcashes.create');
+                        Route::get('/{pcash}', [PCashController::class, 'show'])->name('finances.transactions.pcashes.show');
+                        Route::match(['put', 'patch'],'/{pcash}', [PCashController::class, 'update'])->name('finances.transactions.pcashes.update');
+                        Route::delete('/{pcash}', [PCashController::class, 'destroy'])->name('finances.transactions.pcashes.destroy');
+                        Route::get('/{pcash}/edit', [PCashController::class, 'edit'])->name('finances.transactions.pcashes.edit');
+                        // Route::post('/export', [CorrectController::class, 'export'])->name('finances.transactions.pcashes.export');
+                    });
+
+                });
+
+            });
             // account scaffold
-            Route::group(['prefix' => 'accounts'], function () {
-                Route::get('/', [AccountController::class, 'index'])->name('accounts.index')->middleware('permission:account-read');
-                Route::post('/', [AccountController::class, 'store'])->name('accounts.store');
-                Route::get('/create', [AccountController::class, 'create'])->name('accounts.create')->middleware('permission:account-create');
-                Route::get('/{account}', [AccountController::class, 'show'])->name('accounts.show')->middleware('permission:account-read');
-                Route::match(['put', 'patch'],'/{account}', [AccountController::class, 'update'])->name('accounts.update');
-                Route::delete('/{account}', [AccountController::class, 'destroy'])->name('accounts.destroy')->middleware('permission:account-delete');
-                Route::get('/{account}/edit', [AccountController::class, 'edit'])->name('accounts.edit')->middleware('permission:account-update');
-            });
+            // Route::group(['prefix' => 'accounts'], function () {
+            //     Route::get('/', [AccountController::class, 'index'])->name('accounts.index')->middleware('permission:account-read');
+            //     Route::post('/', [AccountController::class, 'store'])->name('accounts.store');
+            //     Route::get('/create', [AccountController::class, 'create'])->name('accounts.create')->middleware('permission:account-create');
+            //     Route::get('/{account}', [AccountController::class, 'show'])->name('accounts.show')->middleware('permission:account-read');
+            //     Route::match(['put', 'patch'],'/{account}', [AccountController::class, 'update'])->name('accounts.update');
+            //     Route::delete('/{account}', [AccountController::class, 'destroy'])->name('accounts.destroy')->middleware('permission:account-delete');
+            //     Route::get('/{account}/edit', [AccountController::class, 'edit'])->name('accounts.edit')->middleware('permission:account-update');
+            // });
             // period scaffold
-            Route::group(['prefix' => 'periods'], function () {
-                Route::get('/', [PeriodController::class, 'index'])->name('periods.index')->middleware('permission:period-read');
-                Route::post('/', [PeriodController::class, 'store'])->name('periods.store');
-                Route::get('/create', [PeriodController::class, 'create'])->name('periods.create')->middleware('permission:period-create');
-                Route::get('/{period}', [PeriodController::class, 'show'])->name('periods.show')->middleware('permission:period-read');
-                Route::match(['put', 'patch'],'/{period}', [PeriodController::class, 'update'])->name('periods.update');
-                Route::delete('/{period}', [PeriodController::class, 'destroy'])->name('periods.destroy')->middleware('permission:period-delete');
-                Route::get('/{period}/edit', [PeriodController::class, 'edit'])->name('periods.edit')->middleware('permission:period-update');
-            });
+            // Route::group(['prefix' => 'periods'], function () {
+            //     Route::get('/', [PeriodController::class, 'index'])->name('periods.index')->middleware('permission:period-read');
+            //     Route::post('/', [PeriodController::class, 'store'])->name('periods.store');
+            //     Route::get('/create', [PeriodController::class, 'create'])->name('periods.create')->middleware('permission:period-create');
+            //     Route::get('/{period}', [PeriodController::class, 'show'])->name('periods.show')->middleware('permission:period-read');
+            //     Route::match(['put', 'patch'],'/{period}', [PeriodController::class, 'update'])->name('periods.update');
+            //     Route::delete('/{period}', [PeriodController::class, 'destroy'])->name('periods.destroy')->middleware('permission:period-delete');
+            //     Route::get('/{period}/edit', [PeriodController::class, 'edit'])->name('periods.edit')->middleware('permission:period-update');
+            // });
             // transactionheader scaffold
-            Route::group(['prefix' => 'transactionheaders'], function () {
-                Route::get('/', [TransactionHeaderController::class, 'index'])->name('transactionheaders.index')->middleware('permission:period-read');
-                Route::post('/', [TransactionHeaderController::class, 'store'])->name('transactionheaders.store');
-                Route::get('/create', [TransactionHeaderController::class, 'create'])->name('transactionheaders.create')->middleware('permission:period-create');
-                Route::get('/{transactionheader}', [TransactionHeaderController::class, 'show'])->name('transactionheaders.show')->middleware('permission:period-read');
-                Route::match(['put', 'patch'],'/{transactionheader}', [TransactionHeaderController::class, 'update'])->name('transactionheaders.update');
-                Route::delete('/{transactionheader}', [TransactionHeaderController::class, 'destroy'])->name('transactionheaders.destroy')->middleware('permission:period-delete');
-                Route::get('/{transactionheader}/edit', [TransactionHeaderController::class, 'edit'])->name('transactionheaders.edit')->middleware('permission:period-update');
-            });
+            // Route::group(['prefix' => 'transactionheaders'], function () {
+            //     Route::get('/', [TransactionHeaderController::class, 'index'])->name('transactionheaders.index')->middleware('permission:period-read');
+            //     Route::post('/', [TransactionHeaderController::class, 'store'])->name('transactionheaders.store');
+            //     Route::get('/create', [TransactionHeaderController::class, 'create'])->name('transactionheaders.create')->middleware('permission:period-create');
+            //     Route::get('/{transactionheader}', [TransactionHeaderController::class, 'show'])->name('transactionheaders.show')->middleware('permission:period-read');
+            //     Route::match(['put', 'patch'],'/{transactionheader}', [TransactionHeaderController::class, 'update'])->name('transactionheaders.update');
+            //     Route::delete('/{transactionheader}', [TransactionHeaderController::class, 'destroy'])->name('transactionheaders.destroy')->middleware('permission:period-delete');
+            //     Route::get('/{transactionheader}/edit', [TransactionHeaderController::class, 'edit'])->name('transactionheaders.edit')->middleware('permission:period-update');
+            // });
             // transaction scaffold
-            Route::group(['prefix' => 'transactions'], function () {
-                Route::get('/', [TransactionController::class, 'index'])->name('transactions.index')->middleware('permission:period-read');
-                Route::post('/', [TransactionController::class, 'store'])->name('transactions.store');
-                Route::get('/create', [TransactionController::class, 'create'])->name('transactions.create')->middleware('permission:period-create');
-                Route::get('/{transaction}', [TransactionController::class, 'show'])->name('transactions.show')->middleware('permission:period-read');
-                Route::match(['put', 'patch'],'/{transaction}', [TransactionController::class, 'update'])->name('transactions.update');
-                Route::delete('/{transaction}', [TransactionController::class, 'destroy'])->name('transactions.destroy')->middleware('permission:period-delete');
-                Route::get('/{transaction}/edit', [TransactionController::class, 'edit'])->name('transactions.edit')->middleware('permission:period-update');
-            });
+            // Route::group(['prefix' => 'transactions'], function () {
+            //     Route::get('/', [TransactionController::class, 'index'])->name('transactions.index')->middleware('permission:period-read');
+            //     Route::post('/', [TransactionController::class, 'store'])->name('transactions.store');
+            //     Route::get('/create', [TransactionController::class, 'create'])->name('transactions.create')->middleware('permission:period-create');
+            //     Route::get('/{transaction}', [TransactionController::class, 'show'])->name('transactions.show')->middleware('permission:period-read');
+            //     Route::match(['put', 'patch'],'/{transaction}', [TransactionController::class, 'update'])->name('transactions.update');
+            //     Route::delete('/{transaction}', [TransactionController::class, 'destroy'])->name('transactions.destroy')->middleware('permission:period-delete');
+            //     Route::get('/{transaction}/edit', [TransactionController::class, 'edit'])->name('transactions.edit')->middleware('permission:period-update');
+            // });
             // mastertransaction group
-            Route::group(['prefix' => 'mastertransactions'], function () {
-                // transactiondetails scaffold
-                Route::group(['prefix' => 'transactiondetails'], function () {
-                    Route::get('/', [TransactionDetailController::class, 'index'])->name('transactiondetails.index')->middleware('permission:period-read');
-                    Route::post('/', [TransactionDetailController::class, 'store'])->name('transactiondetails.store');
-                    Route::get('/create', [TransactionDetailController::class, 'create'])->name('transactiondetails.create')->middleware('permission:period-create');
-                    Route::get('/{transactiondetail}', [TransactionDetailController::class, 'show'])->name('transactiondetails.show')->middleware('permission:period-read');
-                    Route::match(['put', 'patch'],'/{transactiondetail}', [TransactionDetailController::class, 'update'])->name('transactiondetails.update');
-                    Route::delete('/{transactiondetail}', [TransactionDetailController::class, 'destroy'])->name('transactiondetails.destroy')->middleware('permission:period-delete');
-                    Route::get('/{transactiondetail}/edit', [TransactionDetailController::class, 'edit'])->name('transactiondetails.edit')->middleware('permission:period-update');
-                });
-                // // transactiondetails scaffold
-                // Route::group(['prefix' => 'transactiondetails'], function () {
-                //     Route::get('/', [TransactionDetailController::class, 'index'])->name('transactiondetails.index')->middleware('permission:period-read');
-                //     Route::post('/', [TransactionDetailController::class, 'store'])->name('transactiondetails.store');
-                //     Route::get('/create', [TransactionDetailController::class, 'create'])->name('transactiondetails.create')->middleware('permission:period-create');
-                //     Route::get('/{transactiondetail}', [TransactionDetailController::class, 'show'])->name('transactiondetails.show')->middleware('permission:period-read');
-                //     Route::match(['put', 'patch'],'/{transactiondetail}', [TransactionDetailController::class, 'update'])->name('transactiondetails.update');
-                //     Route::delete('/{transactiondetail}', [TransactionDetailController::class, 'destroy'])->name('transactiondetails.destroy')->middleware('permission:period-delete');
-                //     Route::get('/{transactiondetail}/edit', [TransactionDetailController::class, 'edit'])->name('transactiondetails.edit')->middleware('permission:period-update');
-                // });
-                // invoices scaffold
-                Route::group(['prefix' => 'invoices'], function () {
-                    Route::get('/', [InvoiceController::class, 'index'])->name('invoices.index')->middleware('permission:period-read');
-                    Route::post('/', [InvoiceController::class, 'store'])->name('invoices.store');
-                    Route::get('/create', [InvoiceController::class, 'create'])->name('invoices.create')->middleware('permission:period-create');
-                    Route::get('/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show')->middleware('permission:period-read');
-                    Route::match(['put', 'patch'],'/{invoice}', [InvoiceController::class, 'update'])->name('invoices.update');
-                    Route::delete('/{invoice}', [InvoiceController::class, 'destroy'])->name('invoices.destroy')->middleware('permission:period-delete');
-                    Route::get('/{invoice}/edit', [InvoiceController::class, 'edit'])->name('invoices.edit')->middleware('permission:period-update');
-                });
-            });
+            // Route::group(['prefix' => 'mastertransactions'], function () {
+            //     // transactiondetails scaffold
+            //     // Route::group(['prefix' => 'transactiondetails'], function () {
+            //     //     Route::get('/', [TransactionDetailController::class, 'index'])->name('transactiondetails.index')->middleware('permission:period-read');
+            //     //     Route::post('/', [TransactionDetailController::class, 'store'])->name('transactiondetails.store');
+            //     //     Route::get('/create', [TransactionDetailController::class, 'create'])->name('transactiondetails.create')->middleware('permission:period-create');
+            //     //     Route::get('/{transactiondetail}', [TransactionDetailController::class, 'show'])->name('transactiondetails.show')->middleware('permission:period-read');
+            //     //     Route::match(['put', 'patch'],'/{transactiondetail}', [TransactionDetailController::class, 'update'])->name('transactiondetails.update');
+            //     //     Route::delete('/{transactiondetail}', [TransactionDetailController::class, 'destroy'])->name('transactiondetails.destroy')->middleware('permission:period-delete');
+            //     //     Route::get('/{transactiondetail}/edit', [TransactionDetailController::class, 'edit'])->name('transactiondetails.edit')->middleware('permission:period-update');
+            //     // });
+            //     // transactiondetails scaffold
+            //     // Route::group(['prefix' => 'transactiondetails'], function () {
+            //     //     Route::get('/', [TransactionDetailController::class, 'index'])->name('transactiondetails.index')->middleware('permission:period-read');
+            //     //     Route::post('/', [TransactionDetailController::class, 'store'])->name('transactiondetails.store');
+            //     //     Route::get('/create', [TransactionDetailController::class, 'create'])->name('transactiondetails.create')->middleware('permission:period-create');
+            //     //     Route::get('/{transactiondetail}', [TransactionDetailController::class, 'show'])->name('transactiondetails.show')->middleware('permission:period-read');
+            //     //     Route::match(['put', 'patch'],'/{transactiondetail}', [TransactionDetailController::class, 'update'])->name('transactiondetails.update');
+            //     //     Route::delete('/{transactiondetail}', [TransactionDetailController::class, 'destroy'])->name('transactiondetails.destroy')->middleware('permission:period-delete');
+            //     //     Route::get('/{transactiondetail}/edit', [TransactionDetailController::class, 'edit'])->name('transactiondetails.edit')->middleware('permission:period-update');
+            //     // });
+            //     // invoices scaffold
+            //     // Route::group(['prefix' => 'invoices'], function () {
+            //     //     Route::get('/', [InvoiceController::class, 'index'])->name('invoices.index')->middleware('permission:period-read');
+            //     //     Route::post('/', [InvoiceController::class, 'store'])->name('invoices.store');
+            //     //     Route::get('/create', [InvoiceController::class, 'create'])->name('invoices.create')->middleware('permission:period-create');
+            //     //     Route::get('/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show')->middleware('permission:period-read');
+            //     //     Route::match(['put', 'patch'],'/{invoice}', [InvoiceController::class, 'update'])->name('invoices.update');
+            //     //     Route::delete('/{invoice}', [InvoiceController::class, 'destroy'])->name('invoices.destroy')->middleware('permission:period-delete');
+            //     //     Route::get('/{invoice}/edit', [InvoiceController::class, 'edit'])->name('invoices.edit')->middleware('permission:period-update');
+            //     // });
+            // });
         });
 
         Route::middleware('role:agen')->group(function () {
@@ -442,13 +585,100 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
         });
 
-    });
+    // });
 
     Route::get('password/expired', [UserController::class, 'expired'])->name('password.expired');
     Route::post('password/post_expired', [UserController::class, 'postExpired'])->name('password.post_expired');
 });
 
-Auth::routes(['verify' => true]);
+// Route::group(['prefix' => 'test'], function () {
 
+//     // accounts scaffold
+//     Route::group(['prefix' => 'accounts'], function () {
+//         Route::get('/', [AccountController::class, 'index'])->name('test.accounts.index');
+//         Route::post('/', [AccountController::class, 'store'])->name('test.accounts.store');
+//         Route::get('/create', [AccountController::class, 'create'])->name('test.accounts.create');
+//         Route::get('/{account}', [AccountController::class, 'show'])->name('test.accounts.show');
+//         Route::match(['put', 'patch'],'/{account}', [AccountController::class, 'update'])->name('test.accounts.update');
+//         Route::delete('/{account}', [AccountController::class, 'destroy'])->name('test.accounts.destroy');
+//         Route::get('/{account}/edit', [AccountController::class, 'edit'])->name('test.accounts.edit');
+//         // Route::post('/export', [AccountController::class, 'export'])->name('test.accounts.export');
+//     });
+
+//     // periods scaffold
+//     Route::group(['prefix' => 'periods'], function () {
+//         Route::get('/', [PeriodController::class, 'index'])->name('test.periods.index');
+//         Route::post('/', [PeriodController::class, 'store'])->name('test.periods.store');
+//         Route::get('/create', [PeriodController::class, 'create'])->name('test.periods.create');
+//         Route::get('/{period}', [PeriodController::class, 'show'])->name('test.periods.show');
+//         Route::match(['put', 'patch'],'/{period}', [PeriodController::class, 'update'])->name('test.periods.update');
+//         Route::delete('/{period}', [PeriodController::class, 'destroy'])->name('test.periods.destroy');
+//         Route::get('/{period}/edit', [PeriodController::class, 'edit'])->name('test.periods.edit');
+//         // Route::post('/export', [PeriodController::class, 'export'])->name('test.periods.export');
+//     });
+
+//     // transactions scaffold
+//     Route::group(['prefix' => 'transactions'], function () {
+//         Route::get('/', [TransactionDetailController::class, 'index'])->name('test.transactions.index');
+//         Route::post('/', [TransactionDetailController::class, 'store'])->name('test.transactions.store');
+//         Route::get('/create', [TransactionDetailController::class, 'create'])->name('test.transactions.create');
+//         Route::get('/{transaction}', [TransactionDetailController::class, 'show'])->name('test.transactions.show');
+//         Route::match(['put', 'patch'],'/{transaction}', [TransactionDetailController::class, 'update'])->name('test.transactions.update');
+//         Route::delete('/{transaction}', [TransactionDetailController::class, 'destroy'])->name('test.transactions.destroy');
+//         Route::get('/{transaction}/edit', [TransactionDetailController::class, 'edit'])->name('test.transactions.edit');
+//         // Route::post('/export', [TransactionDetailController::class, 'export'])->name('test.transactions.export');
+//     });
+
+//     // transactionheaders scaffold
+//     Route::group(['prefix' => 'transactionheaders'], function () {
+//         Route::get('/', [TransactionHeaderController::class, 'index'])->name('test.transactionheaders.index');
+//         Route::post('/', [TransactionHeaderController::class, 'store'])->name('test.transactionheaders.store');
+//         Route::get('/create', [TransactionHeaderController::class, 'create'])->name('test.transactionheaders.create');
+//         Route::get('/{transactionheader}', [TransactionHeaderController::class, 'show'])->name('test.transactionheaders.show');
+//         Route::match(['put', 'patch'],'/{transactionheader}', [TransactionHeaderController::class, 'update'])->name('test.transactionheaders.update');
+//         Route::delete('/{transactionheader}', [TransactionHeaderController::class, 'destroy'])->name('test.transactionheaders.destroy');
+//         Route::get('/{transactionheader}/edit', [TransactionHeaderController::class, 'edit'])->name('test.transactionheaders.edit');
+//         // Route::post('/export', [TransactionHeaderController::class, 'export'])->name('test.transactionheaders.export');
+//     });
+
+//     // invoices scaffold
+//     Route::group(['prefix' => 'invoices'], function () {
+//         Route::get('/', [InvoiceController::class, 'index'])->name('test.invoices.index');
+//         Route::post('/', [InvoiceController::class, 'store'])->name('test.invoices.store');
+//         Route::get('/create', [InvoiceController::class, 'create'])->name('test.invoices.create');
+//         Route::get('/{invoice}', [InvoiceController::class, 'show'])->name('test.invoices.show');
+//         Route::match(['put', 'patch'],'/{invoice}', [InvoiceController::class, 'update'])->name('test.invoices.update');
+//         Route::delete('/{invoice}', [InvoiceController::class, 'destroy'])->name('test.invoices.destroy');
+//         Route::get('/{invoice}/edit', [InvoiceController::class, 'edit'])->name('test.invoices.edit');
+//         // Route::post('/export', [InvoiceController::class, 'export'])->name('test.invoices.export');
+//     });
+
+//     // corrects scaffold
+//     Route::group(['prefix' => 'corrects'], function () {
+//         Route::get('/', [CorrectController::class, 'index'])->name('test.corrects.index');
+//         Route::post('/', [CorrectController::class, 'store'])->name('test.corrects.store');
+//         Route::get('/create', [CorrectController::class, 'create'])->name('test.corrects.create');
+//         Route::get('/{correct}', [CorrectController::class, 'show'])->name('test.corrects.show');
+//         Route::match(['put', 'patch'],'/{correct}', [CorrectController::class, 'update'])->name('test.corrects.update');
+//         Route::delete('/{correct}', [CorrectController::class, 'destroy'])->name('test.corrects.destroy');
+//         Route::get('/{correct}/edit', [CorrectController::class, 'edit'])->name('test.corrects.edit');
+//         // Route::post('/export', [CorrectController::class, 'export'])->name('test.corrects.export');
+//     });
+
+//     // pcashes scaffold
+//     Route::group(['prefix' => 'pcashes'], function () {
+//         Route::get('/', [PCashController::class, 'index'])->name('test.pcashes.index');
+//         Route::post('/', [PCashController::class, 'store'])->name('test.pcashes.store');
+//         Route::get('/create', [PCashController::class, 'create'])->name('test.pcashes.create');
+//         Route::get('/{pcash}', [PCashController::class, 'show'])->name('test.pcashes.show');
+//         Route::match(['put', 'patch'],'/{pcash}', [PCashController::class, 'update'])->name('test.pcashes.update');
+//         Route::delete('/{pcash}', [PCashController::class, 'destroy'])->name('test.pcashes.destroy');
+//         Route::get('/{pcash}/edit', [PCashController::class, 'edit'])->name('test.pcashes.edit');
+//         // Route::post('/export', [CorrectController::class, 'export'])->name('test.pcashes.export');
+//     });
+
+// });
+
+Auth::routes(['verify' => true]);
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');

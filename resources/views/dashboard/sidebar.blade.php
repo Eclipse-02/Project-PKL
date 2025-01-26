@@ -310,7 +310,7 @@
                         </div>
                     </div>
                 </div>
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion{{ request()->is('packages/*') ? ' hover show' : '' }}">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion{{ request()->is('registers/*') ? ' hover show' : '' }}">
                     <span class="menu-link">
                         <span class="menu-icon">
                             <i class="bi bi-journal-text fs-3"></i>
@@ -318,13 +318,120 @@
                         <span class="menu-title">Registrasi</span>
                         <span class="menu-arrow"></span>
                     </span>
-                    <div class="menu-sub menu-sub-accordion menu-active-bg{{ request()->is('packages/*') ? ' show' : '' }}">
+                    <div class="menu-sub menu-sub-accordion menu-active-bg{{ request()->is('registers/*') ? ' show' : '' }}">
                         <div class="menu-item">
-                            <a class="menu-link{{ request()->is('packages/registerpackages*') ? ' active' : '' }}" href="{{ route('registerpackages.index') }}">
+                            <a class="menu-link{{ request()->is('registers/registerpackages*') ? ' active' : '' }}" href="{{ route('registerpackages.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title">Registrasi Jamaah</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('registers/events*') ? ' active' : '' }}" href="{{ route('events.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Registrasi Acara</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-content pb-2">
+                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">Finance</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link{{ request()->is('finances/accounts') ? ' active' : '' }}" href="{{ route('finances.accounts.index') }}">
+                        <span class="menu-icon">
+                            <i class="bi bi-person-lines-fill fs-3"></i>
+                        </span>
+                        <span class="menu-title">GL Account</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link{{ request()->is('finances/periods') ? ' active' : '' }}" href="{{ route('finances.periods.index') }}">
+                        <span class="menu-icon">
+                            <i class="bi bi-calendar2-range fs-3"></i>
+                        </span>
+                        <span class="menu-title">GL Period</span>
+                    </a>
+                </div>
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion{{ request()->is('finances/transactions/*') ? ' hover show' : '' }}">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                            <i class="bi bi-journal-text fs-3"></i>
+                        </span>
+                        <span class="menu-title">Master Transaksi</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion menu-active-bg{{ request()->is('finances/transactions/*') ? ' show' : '' }}">
+                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion{{ request()->is('finances/transactions/parameters*') ? ' hover show' : '' }}">
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <i class="bi bi-journal-text fs-3"></i>
+                                </span>
+                                <span class="menu-title">Parameters</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <div class="menu-sub menu-sub-accordion menu-active-bg{{ request()->is('finances/transactions/parameters*') ? ' show' : '' }}">
+                                <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('finances/transactions/parameters/headers*') ? ' active' : '' }}" href="{{ route('finances.transactions.parameters.headers.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Transaction Header</span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link{{ request()->is('finances/transactions/parameters/transaction*') ? ' active' : '' }}" href="{{ route('finances.transactions.parameters.transaction.index') }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Transaction</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('finances/transactions/details*') ? ' active' : '' }}" href="{{ route('finances.transactions.details.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Transaction Detail</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('finances/transactions/receives*') ? ' active' : '' }}" href="{{ route('finances.transactions.receives.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Receive</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('finances/transactions/invoices*') ? ' active' : '' }}" href="{{ route('finances.transactions.invoices.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Invoice</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('finances/transactions/corrects*') ? ' active' : '' }}" href="{{ route('finances.transactions.corrects.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Correct</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link{{ request()->is('finances/transactions/pcashes*') ? ' active' : '' }}" href="{{ route('finances.transactions.pcashes.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">PCash</span>
                             </a>
                         </div>
                     </div>

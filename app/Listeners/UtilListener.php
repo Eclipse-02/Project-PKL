@@ -8,15 +8,10 @@ use App\Models\Master\Utility;
 class UtilListener
 {
     /**
-     * Create the event listener.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
+     * 
+     * @param  \Illuminate\Auth\Events\Utils  $event
+     * @return void
      */
     public function handle(Utils $event): void
     {

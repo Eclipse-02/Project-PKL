@@ -135,7 +135,6 @@ class PackageController extends Controller
             'pkg_desc' => 'required|string',
             'pkg_price' => 'required|string',
             // 'pkg_price_limit' => 'required|string',
-            'pkg_price_agent' => 'required|string',
             'pkg_start' => 'required|date|before:pkg_closed',
             'pkg_closed' => 'required|date|after:pkg_start',
             'pkg_image' => 'required|image|file',
@@ -146,17 +145,14 @@ class PackageController extends Controller
         $pkg_price = str_replace('.', '', $request->pkg_price);
         $pkg_price_limit = str_replace('.', '', $request->pkg_price_limit);
         $pkg_price_agent = str_replace('.', '', $request->pkg_price_agent);
-        $dtl_price = str_replace('.', '', $request->dtl_price);
 
         $pkg_price = str_replace('_', '', $pkg_price);
         $pkg_price_limit = str_replace('_', '', $pkg_price_limit);
         $pkg_price_agent = str_replace('_', '', $pkg_price_agent);
-        $dtl_price = str_replace('_', '', $dtl_price);
 
         $pkg_price = str_replace('Rp ', '', $pkg_price);
         $pkg_price_limit = str_replace('Rp ', '', $pkg_price_limit);
         $pkg_price_agent = str_replace('Rp ', '', $pkg_price_agent);
-        $dtl_price = str_replace('Rp ', '', $dtl_price);
 
         if ($validator->fails()) {
             Alert::toast('Ups, Terjadi Sesuatu yang Salah!', 'error');
@@ -165,12 +161,12 @@ class PackageController extends Controller
             $request->file('pkg_image')->move(storage_path('app/public/pkg/pkg-img'), 'pkg_image-' . Carbon::now()->format('Y-m-d') . '.jpg');
             Package::create([
                 'coy_id' => Auth::user()->coy_id,
+                'pkg_type' => $request->pkg_type,
                 'pkg_code' => $request->pkg_code,
                 'pkg_name' => $request->pkg_name,
                 'pkg_desc' => $request->pkg_desc,
                 'pkg_price' => $pkg_price,
                 // 'pkg_price_limit' => $pkg_price_limit,
-                'pkg_price_agent' => $pkg_price_agent,
                 'pkg_start' => Carbon::parse($request->pkg_start)->format('Y-m-d'),
                 'pkg_closed' => Carbon::parse($request->pkg_closed)->format('Y-m-d'),
                 'pkg_image' => 'pkg_image-' . Carbon::now()->format('Y-m-d') . '.jpg',
@@ -268,7 +264,6 @@ class PackageController extends Controller
                 'pkg_desc' => $request->pkg_desc,
                 'pkg_price' => $pkg_price,
                 // 'pkg_price_limit' => $pkg_price_limit,
-                'pkg_price_agent' => $pkg_price_agent,
                 'pkg_start' => $request->pkg_start,
                 'pkg_closed' => $request->pkg_closed,
                 'pkg_status' => $request->pkg_status,

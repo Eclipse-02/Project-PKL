@@ -15,11 +15,11 @@ return new class extends Migration
             $table->string('coy_id', 5);
             $table->uuid('id');
             $table->string('pkg_code', 30)->primary();
+            $table->string('pkg_type', 1);
             $table->string('pkg_name', 60);
             $table->string('pkg_desc', 200);
             $table->integer('pkg_price');
             // $table->integer('pkg_price_limit');
-            $table->integer('pkg_price_agent');
             $table->date('pkg_start');
             $table->date('pkg_closed');
             $table->string('pkg_image', 100);

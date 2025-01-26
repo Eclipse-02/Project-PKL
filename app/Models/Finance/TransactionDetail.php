@@ -2,12 +2,15 @@
 
 namespace App\Models\Finance;
 
+use App\Models\Finance\Transaction\Invoice\InvoiceDetail;
+use App\Models\Finance\Transaction\Receive\ReceiveDetail;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class TransactionDetail extends Model
 {
     protected $table = 'fin_mst_trxdtl';
+    protected $primaryKey = 'trxdtl_code';
 
     /**
      * The "booting" function of model
@@ -18,9 +21,7 @@ class TransactionDetail extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            if ( ! $model->getKey()) {
-                $model->id = (string) Str::uuid();
-            }
+            $model->id = (string) Str::uuid();
         });
     }
 
@@ -66,4 +67,14 @@ class TransactionDetail extends Model
         'created_by',
         'updated_by',
     ];
+
+    public function rvdtl()
+    {
+        return $this->hasOne(ReceiveDetail::class, 'trxdtl_code');
+    }
+
+    public function invdtl()
+    {
+        return $this->hasOne(InvoiceDetail::class, 'trxdtl_code');
+    }
 }

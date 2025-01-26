@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -53,6 +54,7 @@ class AccountController extends Controller
         }else {
             $user = User::where('empl_id', $id)->first();
             $user->password = Hash::make($request->password);
+            $user->password_change_at = Carbon::now();
             $user->save();
 
             Auth::login($user);

@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('fin_mst_rvdtl', function (Blueprint $table) {
             $table->string('coy_id', 5);
             $table->uuid('id');
-            $table->string('rmst_code', 30)->unique()->primary();
-            $table->string('trxdtl_code', 30)->unique();
-            $table->string('status', 2);
+            $table->string('rvmst_code', 30);
+            $table->string('trxdtl_code', 30)->primary();
+            $table->string('status', 2)->nullable();
             $table->string("created_by", 12);
             $table->string("updated_by", 15);
             $table->timestamps();
+            $table->foreign("rvmst_code")->references('rvmst_code')->on('fin_mst_rvhdr')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign("trxdtl_code")->references('trxdtl_code')->on('fin_mst_trxdtl')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

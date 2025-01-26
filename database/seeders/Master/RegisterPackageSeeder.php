@@ -29,10 +29,10 @@ class RegisterPackageSeeder extends Seeder
             "appl_birth_place" => "Jakarta",
             "appl_birth_date" => "2001-07-22",
             "appl_addr" => "liuk",
-            "prov_code" => "1",
-            "kota_code" => "1",
-            "kec_code" => "1",
-            "kel_code" => "1",
+            'prov_code' => '11',
+            'kota_code' => '1101',
+            'kec_code' => '1101010',
+            'kel_code' => '1101010001',
             "appl_status" => "1",
             "con_code" => "1",
             "edu_code" => "1",
@@ -75,7 +75,7 @@ class RegisterPackageSeeder extends Seeder
             "appl_is_kk_name" => "default.jpg",
             "appl_is_akta_n_name" => "default.jpg",
             "appl_is_akta_l_name" => "default.jpg",
-            "appl_posting_date" => "",
+            "appl_posting_date" => null,
             "created_by" => "Seeder",
             "updated_by" => "Seeder"
         ]);

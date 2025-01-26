@@ -15,10 +15,11 @@ return new class extends Migration
             $table->string('coy_id', 5);
             $table->string('trxdtl_code', 30)->primary();
             $table->uuid('id');
-            $table->string('status', 2);
+            $table->string('status', 2)->default('N')->nullable();
             $table->string("created_by", 12);
             $table->string("updated_by", 15);
             $table->timestamps();
+            $table->foreign("trxdtl_code")->references('trxdtl_code')->on('fin_mst_trxdtl')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

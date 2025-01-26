@@ -27,13 +27,13 @@ class UtiltySeeder extends Seeder
         ]);
         MasterUtility::create([
             'coy_id' => 2,
-            'seqn_code' => 'another',
+            'seqn_code' => 'nthr',
             'branch_code' => 1,
             'start_value' => 1,
             'last_value' => 1,
             'max_value' => 100,
             'increment_by' => 1,
-            'description' => 'another',
+            'description' => 'nthr',
             'is_cycle' => 'Y',
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',

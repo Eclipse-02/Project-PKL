@@ -53,42 +53,47 @@
 
                         <!--begin::Body-->
                         <div id="kt_accordion_2_item_1" class="fs-6 collapse show ps-10" data-bs-parent="#kt_accordion_2">
-                            <!--begin::Input group-->
-                            <div class="row my-7">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 fw-bold text-muted">Karyawan</label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <span class="fw-bold text-gray-800 fs-6">{{ $data->employee->empl_name }}</span>
+                            @if ($data->employee != null)
+                                <!--begin::Input group-->
+                                <div class="row my-7">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 fw-bold text-muted">ID Karyawan</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <span class="fw-bold text-gray-800 fs-6">{{ $data->employee->empl_name }}</span>
+                                    </div>
+                                    <!--end::Col-->
                                 </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-7">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 fw-bold text-muted">Cabang</label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <span class="fw-bold text-gray-800 fs-6">{{ $data->branch->branch_name }}</span>
+                                <!--end::Input group-->
+                            @else
+                                <!--begin::Input group-->
+                                <div class="row my-7">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 fw-bold text-muted">No KTP</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <span class="fw-bold text-gray-800 fs-6">{{ $data->empl_id }}</span>
+                                    </div>
+                                    <!--end::Col-->
                                 </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-7">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 fw-bold text-muted">Nama</label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <span class="fw-bold text-gray-800 fs-6">{{ $data->name }}</span>
+                                <!--end::Input group-->
+                            @endif
+                            @if ($data->branch != null)
+                                <!--begin::Input group-->
+                                <div class="row mb-7">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 fw-bold text-muted">Cabang</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <span class="fw-bold text-gray-800 fs-6">{{ $data->branch->branch_name }}</span>
+                                    </div>
+                                    <!--end::Col-->
                                 </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
+                                <!--end::Input group-->
+                            @endif
                             <!--begin::Input group-->
                             <div class="row mb-7">
                                 <!--begin::Label-->

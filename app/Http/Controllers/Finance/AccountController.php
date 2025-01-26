@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Finance\Account;
 use App\Http\Controllers\Controller;
+use App\Models\Finance\Correct;
+use App\Models\Finance\PCash;
+use App\Models\Finance\Transaction\Receive\ReceiveHeader;
+use App\Models\Finance\TransactionDetail;
 use App\Models\Master\Branch;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -54,27 +58,58 @@ class AccountController extends Controller
             Alert::toast('Oops, Something Wrong Happened!', 'error');
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
-            Account::updateOrCreate(
+            // GL Account
+            $test = Account::updateOrCreate(
                 [
                     'glacct_code' => $request->glacct_code,
                 ],
                 [
+                    'coy_id' => Auth::user()->coy_id,
+                    'glacct_description' => $request->glacct_description,
+                    'glacct_acct_type' => $request->glacct_acct_type,
+                    'glacct_acct_summ' => $request->glacct_acct_summ,
+                    'glacct_acct_enable' => $request->glacct_acct_enable,
+                    'glacct_acct_flag' => $request->glacct_acct_flag,
+                    'glacct_acct_default' => $request->glacct_acct_default,
+                    'glacct_acct_parent' => $request->glacct_acct_parent,
+                    'glacct_rpt_flag' => $request->glacct_rpt_flag,
+                    'glacct_segment1_allow' => $request->glacct_segment1_allow,
+                    'created_by' => Auth::user()->name,
+                    'updated_by' => Auth::user()->name,
+                ]
+            );
+
+            // dd($test);
+
+            // Trxdtl
+            TransactionDetail::create([
                 'coy_id' => Auth::user()->coy_id,
-                'glacct_description' => $request->glacct_description,
-                'glacct_acct_type' => $request->glacct_acct_type,
-                'glacct_acct_summ' => $request->glacct_acct_summ,
-                'glacct_acct_enable' => $request->glacct_acct_enable,
-                'glacct_acct_flag' => $request->glacct_acct_flag,
-                'glacct_acct_default' => $request->glacct_acct_default,
-                'glacct_acct_parent' => $request->glacct_acct_parent,
-                'glacct_rpt_flag' => $request->glacct_rpt_flag,
-                'glacct_segment1_allow' => $request->glacct_segment1_allow,
+                'trxdtl_code' => $request->glacct_code,
+                'trxdtl_desc' => $request->glacct_description,
+                'trxdtl_flag' => $request->glacct_acct_flag,
+                'trxdtl_segment2' => $request->glacct_code,
                 'created_by' => Auth::user()->name,
                 'updated_by' => Auth::user()->name,
-                ]
-            );   
+            ]);
+
+            // Pcash
+            PCash::create([
+                'coy_id' => Auth::user()->coy_id,
+                'trxdtl_code' => $request->glacct_code,
+                'created_by' => Auth::user()->name,
+                'updated_by' => Auth::user()->name,
+            ]);
+
+            // Correct
+            Correct::create([
+                'coy_id' => Auth::user()->coy_id,
+                'trxdtl_code' => $request->glacct_code,
+                'created_by' => Auth::user()->name,
+                'updated_by' => Auth::user()->name,
+            ]);
+
             Alert::toast('Data Created Successfully!', 'success');
-            return redirect()->route('accounts.index');
+            return redirect()->route('finances.accounts.index');
         }
     }
 

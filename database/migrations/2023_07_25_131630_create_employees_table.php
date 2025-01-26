@@ -28,10 +28,10 @@ return new class extends Migration
             $table->string("empl_tlp", 6)->nullable();
             $table->string("empl_hp01", 10)->nullable();
             $table->string("empl_hp02", 10)->nullable();
-            $table->string("prov_code", 5)->nullable(); // fs_mst_provinsi
-            $table->string("kota_code", 5)->nullable(); // fs_mst_kota
-            $table->string("kec_code", 5)->nullable(); // fs_mst_kecamatan
-            $table->string("kel_code", 5)->nullable(); // fs_mst_kelurahan
+            $table->string("prov_code", 3)->nullable(); // fs_mst_provinsi
+            $table->string("kota_code", 4)->nullable(); // fs_mst_kota
+            $table->string("kec_code", 7)->nullable(); // fs_mst_kecamatan
+            $table->string("kel_code", 10)->nullable(); // fs_mst_kelurahan
             $table->string("zip_code", 5)->nullable(); // fs_mst_zip
             $table->string("created_by");
             $table->string("updated_by");
@@ -41,7 +41,7 @@ return new class extends Migration
             $table->foreign("kota_code")->references('kota_code')->on('kotas')->onDelete('cascade');
             $table->foreign("kec_code")->references('kec_code')->on('kecamatans')->onDelete('cascade');
             $table->foreign("kel_code")->references('kel_code')->on('kelurahans')->onDelete('cascade');
-            $table->foreign("zip_code")->references('zip_code')->on('zips')->onDelete('cascade');
+            // $table->foreign("zip_code")->references('zip_code')->on('zips')->onDelete('cascade');
             $table->foreign("coy_id")->references('coy_id')->on('coys')->onDelete('cascade');
         });
     }

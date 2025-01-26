@@ -71,6 +71,44 @@
 							<!--end::Heading-->
 							<!--begin::Input group-->
 							<div class="fv-row mb-10">
+								<!--begin::Account Description-->
+								<div class="row my-6">
+									<h2 class="card-title text-bolder text-center w-100 mb-4">Trial Accounts</h2>
+									<div class="col-12 mb-2">
+										<div class="card card-dashed">
+											<div class="card-header">
+												<h3 class="card-title w-100 justify-content-center">Konsumen Account</h3>
+											</div>
+											<div class="card-body">
+												<b>Username:</b> konsumen<br/>
+												<b>Password:</b> konsumen1<br/>
+											</div>
+										</div>
+									</div>
+									<div class="col-12 mb-2">
+										<div class="card card-dashed">
+											<div class="card-header">
+												<h3 class="card-title w-100 justify-content-center">Office Account</h3>
+											</div>
+											<div class="card-body">
+												<b>Username:</b> office<br/>
+												<b>Password:</b> office2<br/>
+											</div>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="card card-dashed">
+											<div class="card-header">
+												<h3 class="card-title w-100 justify-content-center">Agen Account</h3>
+											</div>
+											<div class="card-body">
+												<b>Username:</b> agen<br/>
+												<b>Password:</b> agen3<br/>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--end::Account Description-->
 								<!--begin::Label-->
 								<label class="form-label fs-6 fw-bolder text-dark">Username</label>
 								<!--end::Label-->

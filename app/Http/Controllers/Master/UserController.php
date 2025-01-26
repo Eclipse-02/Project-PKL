@@ -107,8 +107,8 @@ class UserController extends Controller
             Alert::toast('Ups, Terjadi Sesuatu yang Salah!', 'error');
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
-            $password = $request->role . $request->empl_id;
             $empl_id = str_replace('-', '', $request->empl_id);
+            $password = $request->username . $empl_id;
 
             $new_data = User::create([
                 'coy_id' => Auth::user()->coy_id,
@@ -133,7 +133,7 @@ class UserController extends Controller
             }
 
             Alert::toast('Data Berhasil Dibuat!', 'success');
-            $this->sendMail($request->email, $request->username, $password);
+            return $this->sendMail($request->email, $request->username, $password);
         }
     }
 

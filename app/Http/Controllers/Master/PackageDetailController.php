@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Master;
 
-use App\Models\PackageDetail;
+use App\Models\Master\PackageDetail;
 use App\Models\Master\Package;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ class PackageDetailController extends Controller
      */
     public function index()
     {
-        //
+        return view('scaffolds.master.packagedetails.index');
     }
 
     /**
@@ -69,7 +69,6 @@ class PackageDetailController extends Controller
             Alert::toast('Data Berhasil Dibuat!', 'success');
             return redirect()->route('packages.index');
         }
-
     }
 
     /**
@@ -106,5 +105,12 @@ class PackageDetailController extends Controller
         return response()->json([
             'message' => 'success'
         ]);
+    }
+
+    public function api(Request $request)
+    {
+        $data = PackageDetail::where('pkg_code', $request->code)->get();
+
+        return response()->json($data);
     }
 }

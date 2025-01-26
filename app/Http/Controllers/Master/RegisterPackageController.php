@@ -35,6 +35,7 @@ class RegisterPackageController extends Controller
             $packages = Package::where([
                 ['coy_id', '=', Auth::user()->coy_id],
                 ['pkg_is_display', '=', 'Y'],
+                ['pkg_type', '=', 'U'],
             ])->select('pkg_code', 'pkg_name')->get();
             $countries = Country::where('is_active', 'Y')->select('con_code', 'con_name')->get();
             $edus = Edu::where([

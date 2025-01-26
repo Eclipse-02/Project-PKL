@@ -14,6 +14,7 @@ use App\Http\Controllers\Master\ZipController;
 
 // Finance controllers
 use App\Http\Controllers\Finance\AccountController;
+use App\Http\Controllers\Master\PackageDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,4 +41,5 @@ Route::group(['prefix' => 'v1'], function() {
     Route::get('accounts', [AccountController::class, 'api'])->name('accounts.api');
     Route::get('registerpackage/{id}', [RegisterPackageController::class, 'api'])->name('registerpackage.api');
     Route::get('utilty/{coy_id}/{empl_branch}', [RegisterPackageController::class, 'utilApi'])->name('util.api');
+    Route::get('details', [PackageDetailController::class, 'api'])->name('packagedetails.api');
 });

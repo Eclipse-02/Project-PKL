@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
             'id' => Str::uuid(),
             'name' => 'Office',
             'username' => 'office',
-            'password' => Hash::make('office1'),
+            'password' => Hash::make('office2'),
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ])->addRole('office');
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
             'id' => Str::uuid(),
             'name' => 'Agen',
             'username' => 'agen',
-            'password' => Hash::make('agen1'),
+            'password' => Hash::make('agen3'),
             'created_by' => 'Seeder',
             'updated_by' => 'Seeder',
         ])->addRole('agen');

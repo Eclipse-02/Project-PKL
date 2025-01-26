@@ -50,6 +50,7 @@ class Package extends Model
     protected $fillable = [
         'coy_id',
         'pkg_code',
+        'pkg_type',
         'pkg_name',
         'pkg_desc',
         'pkg_price',

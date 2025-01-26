@@ -64,7 +64,7 @@
                 <!--end::Col-->
                 @endforeach
                 <!--begin::Add new card-->
-                <div class="ol-md-4">
+                <div class="col-md-4">
                     <!--begin::Card-->
                     <div class="card h-md-100">
                         <!--begin::Card body-->
@@ -137,8 +137,8 @@
                                     <!--end::Icon-->
                                     <!--begin::Label-->
                                     <div class="stepper-label">
-                                        <h3 class="stepper-title">Basic Info</h3>
-                                        <div class="stepper-desc">Informasi Dasar</div>
+                                        <h3 class="stepper-title">Package Type</h3>
+                                        <div class="stepper-desc">Tipe Paket</div>
                                     </div>
                                     <!--end::Label-->
                                 </div>
@@ -153,13 +153,13 @@
                                         <i class="stepper-check fas fa-check"></i>
                                         <span class="stepper-number">2</span>
                                     </div>
-                                    <!--begin::Icon-->
+                                    <!--end::Icon-->
                                     <!--begin::Label-->
                                     <div class="stepper-label">
-                                        <h3 class="stepper-title">Information</h3>
-                                        <div class="stepper-desc">Informasi Paket</div>
+                                        <h3 class="stepper-title">Basic Info</h3>
+                                        <div class="stepper-desc">Informasi Dasar</div>
                                     </div>
-                                    <!--begin::Label-->
+                                    <!--end::Label-->
                                 </div>
                                 <!--end::Step 2-->
                                 <!--begin::Step 3-->
@@ -172,6 +172,25 @@
                                         <i class="stepper-check fas fa-check"></i>
                                         <span class="stepper-number">3</span>
                                     </div>
+                                    <!--begin::Icon-->
+                                    <!--begin::Label-->
+                                    <div class="stepper-label">
+                                        <h3 class="stepper-title">Information</h3>
+                                        <div class="stepper-desc">Informasi Paket</div>
+                                    </div>
+                                    <!--begin::Label-->
+                                </div>
+                                <!--end::Step 3-->
+                                <!--begin::Step 4-->
+                                <div class="stepper-item" data-kt-stepper-element="nav" data-kt-stepper-action="step">
+                                    <!--begin::Line-->
+                                    <div class="stepper-line w-40px"></div>
+                                    <!--end::Line-->
+                                    <!--begin::Icon-->
+                                    <div class="stepper-icon w-40px h-40px">
+                                        <i class="stepper-check fas fa-check"></i>
+                                        <span class="stepper-number">4</span>
+                                    </div>
                                     <!--end::Icon-->
                                     <!--begin::Label-->
                                     <div class="stepper-label">
@@ -180,7 +199,7 @@
                                     </div>
                                     <!--end::Label-->
                                 </div>
-                                <!--end::Step 3-->
+                                <!--end::Step 4-->
                             </div>
                             <!--end::Nav-->
                         </div>
@@ -194,6 +213,49 @@
                                 <div class="mb-5">
                                     <!--begin::Step 1-->
                                     <div class="current" data-kt-stepper-element="content">
+                                        <div class="w-100">
+                                            <!--begin::Input group-->
+                                            <div class="fv-row mb-10">
+                                                <!--begin::Option-->
+                                                <input type="radio" class="btn-check" name="pkg_type" id="umroh" value="U" checked="checked">
+                                                <label class="btn btn-outline btn-outline-dashed btn-outline-default p-7 d-flex align-items-center" for="umroh">
+                                                    <!--begin::Icon-->
+                                                    <i class="fas fa-kaaba fs-2hx me-5"></i>
+                                                    <!--end::Icon-->
+                                                    <!--begin::Info-->
+                                                    <span class="d-block fw-bold text-start">
+                                                        <span class="text-dark fw-bolder d-block fs-4 mb-2">Umroh Package</span>
+                                                        <span class="text-muted fw-bold fs-6">This package include Passport, Vaccine, and ID to fill</span>
+                                                    </span>
+                                                    <!--end::Info-->
+                                                </label>
+                                                <!--end::Option-->
+                                            </div>
+                                            <!--end::Input group-->
+                                            <!--begin::Input group-->
+                                            <div class="fv-row mb-10">
+                                                <!--begin::Option-->
+                                                <input type="radio" class="btn-check" name="pkg_type" id="event" value="E">
+                                                <label class="btn btn-outline btn-outline-dashed btn-outline-default p-7 d-flex align-items-center" for="event">
+                                                    <!--begin::Icon-->
+                                                    <i class="fas fa-calendar-day fs-2hx me-5"></i>
+                                                    <!--end::Icon-->
+                                                    <!--begin::Info-->
+                                                    <span class="d-block fw-bold text-start">
+                                                        <span class="text-dark fw-bolder d-block fs-4 mb-2">Event Package</span>
+                                                        <span class="text-muted fw-bold fs-6">Simillar as Umroh Package but with Invoice included</span>
+                                                    </span>
+                                                    <!--end::Info-->
+                                                </label>
+                                                <!--end::Option-->
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                    </div>
+                                    <!--begin::Step 1-->
+
+                                    <!--begin::Step 2-->
+                                    <div data-kt-stepper-element="content">
                                         <div class="w-100">
                                             <!--begin::Input group-->
                                             <div class="fv-row mb-10">
@@ -238,6 +300,26 @@
                                             <!--begin::Input group-->
                                             <div class="fv-row mb-10">
                                                 <!--begin::Label-->
+                                                <label class="form-label required">Lokasi</label>
+                                                <!--end::Label-->
+
+                                                <!--begin::Textarea-->
+                                                <textarea class="form-control form-control form-control-solid @error('pkg_location')is-invalid @enderror" name="pkg_location" data-kt-autosize="true">{{ old('pkg_location') }}</textarea>
+                                                <!--end::Textarea-->
+
+                                                <!--begin::Error-->
+                                                @error('pkg_location')
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                <!--end::Error-->
+                                            </div>
+                                            <!--end::Input group-->
+
+                                            <!--begin::Input group-->
+                                            <div class="fv-row mb-10">
+                                                <!--begin::Label-->
                                                 <label class="form-label required">Deskripsi</label>
                                                 <!--end::Label-->
 
@@ -256,9 +338,9 @@
                                             <!--end::Input group-->
                                         </div>
                                     </div>
-                                    <!--begin::Step 1-->
-
                                     <!--begin::Step 2-->
+
+                                    <!--begin::Step 3-->
                                     <div data-kt-stepper-element="content">
                                         <div class="w-100">
                                             <!--begin::Input group-->
@@ -273,26 +355,6 @@
 
                                                 <!--begin::Error-->
                                                 @error('pkg_price')
-                                                    <span class="invalid-feedback d-block" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                                <!--end::Error-->
-                                            </div>
-                                            <!--end::Input group-->
-
-                                            <!--begin::Input group-->
-                                            <div class="fv-row mb-10">
-                                                <!--begin::Label-->
-                                                <label class="form-label required">Insentif Agen</label>
-                                                <!--end::Label-->
-
-                                                <!--begin::Input-->
-                                                <input class="form-control form-control form-control-solid @error('pkg_price_agent')is-invalid @enderror" type="text" name="pkg_price_agent" value="{{ old('pkg_price_agent') }}" />
-                                                <!--end::Input-->
-
-                                                <!--begin::Error-->
-                                                @error('pkg_price_agent')
                                                     <span class="invalid-feedback d-block" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -362,9 +424,9 @@
                                             <!--end::Input group-->
                                         </div>
                                     </div>
-                                    <!--begin::Step 2-->
-
                                     <!--begin::Step 3-->
+
+                                    <!--begin::Step 4-->
                                     <div data-kt-stepper-element="content">
                                         <div class="w-100">
                                             <!--begin::Input group-->
@@ -428,7 +490,7 @@
                                             <!--end::Input group-->
                                         </div>
                                     </div>
-                                    <!--end::Step 3-->
+                                    <!--end::Step 4-->
                                 </div>
                                 <!--end::Group-->
 
@@ -596,7 +658,7 @@
         
         // Handle submit button
         stepper.on("kt.stepper.changed", function(stepper) {
-            if (stepper.getCurrentStepIndex() === 3) {
+            if (stepper.getCurrentStepIndex() === 4) {
                 document.querySelector('[data-kt-stepper-action="submit"]').classList.remove("d-none")
                 document.querySelector('[data-kt-stepper-action="submit"]').classList.add("d-inline-block")
                 document.querySelector('[data-kt-stepper-action="next"]').classList.add("d-none")
@@ -606,6 +668,14 @@
                 document.querySelector('[data-kt-stepper-action="next"]').classList.remove("d-none")
             }
         });
+
+        $(document).on('click', '[name="pkg_type"]:checked', function() {
+            if ($('[name="pkg_type"]:checked').val() == 'U') {
+                $('.umroh').removeClass('d-none');
+            } else {
+                $('.umroh').addClass('d-none');
+            }
+        })
 
         $('.filter-select').change(function() {
             table.column( $(this).data('column') )
@@ -639,19 +709,6 @@
             androidHack: "rtfm",
             //clearIncomplete: !0,
         }).mask("[name='pkg_price_limit']");
-
-        Inputmask("decimal", {
-            numericInput: true,
-            groupSeparator: '.',
-            radixPoint: ",",
-            digits: 2,
-            autoGroup: true,
-            autoUnmask: true,
-            prefix: 'Rp. ',
-            placeholder: '0,00',
-            androidHack: "rtfm",
-            //clearIncomplete: !0,
-        }).mask("[name='pkg_price_agent']");
 
         Inputmask("decimal", {
             numericInput: true,
