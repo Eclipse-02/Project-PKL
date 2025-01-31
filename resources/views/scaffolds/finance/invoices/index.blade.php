@@ -147,7 +147,7 @@
             });
         });
         // Update trxdtl_code
-        $('#trxdtl_code').on('keyup', function() {
+        $('input[name="trxdtl_code"]').on('keyup', function() {
             clearTimeout(keyupTimer);
             let code = $(this).val();
             keyupTimer = setTimeout(() => {
