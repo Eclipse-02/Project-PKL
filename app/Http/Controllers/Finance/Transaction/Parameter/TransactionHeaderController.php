@@ -16,9 +16,18 @@ class TransactionHeaderController extends Controller
      */
     public function index(Request $request)
     {
-        $data = TransactionHeader::where('coy_id', Auth::user()->coy_id)->orderBy('created_at', 'asc')->get();
+        if ($request->ajax()) {
+            $data = TransactionHeader::where([
+                ['coy_id', '=', Auth::user()->coy_id],
+                ['param_code', 'like', '%'.$request->s_param_code.'%']
+            ])->orderBy('created_at', 'asc')->get();
+    
+            return response()->json($data);
+        } else {
+            $data = TransactionHeader::where('coy_id', Auth::user()->coy_id)->orderBy('created_at', 'asc')->get();
 
-        return view('scaffolds.finance.transactionheaders.index', compact('data'));
+            return view('scaffolds.finance.transactionheaders.index', compact('data'));
+        }
     }
 
     /**
@@ -41,19 +50,46 @@ class TransactionHeaderController extends Controller
         ]);
 
         if ($validator->fails()) {
-            Alert::toast('Oops, Something Wrong Happened!', 'error');
-            return redirect()->back()->withErrors($validator)->withInput();
+            return response()->json([
+                "request" => $request->all(),
+                "message" => "Failed",
+                "validator" => $validator->errors(),
+            ], 422);
         } else {
-            TransactionHeader::create([
-                'coy_id' => Auth::user()->coy_id,
-                'param_code' => $request->param_code,
-                'param_desc' => $request->param_desc,
-                'param_status' => $request->param_status,
-                'created_by' => Auth::user()->name,
-                'updated_by' => Auth::user()->name,
+            if ($request->action == 'create') {
+                try {
+                    TransactionHeader::create([
+                            'param_code' => $request->param_code,
+                            'coy_id' => Auth::user()->coy_id,
+                            'param_desc' => $request->param_desc,
+                            'param_status' => $request->param_status,
+                            'created_by' => Auth::user()->name,
+                            'updated_by' => Auth::user()->name,
+                        ]
+                    );
+                    $status = true;
+                } catch (\Throwable $th) {
+                    return response()->json([
+                        "id" => true
+                    ], 422);
+                }
+            } else {
+                TransactionHeader::where('param_code', $request->old_param_code)->update([
+                    'param_code' => $request->param_code,
+                    'coy_id' => Auth::user()->coy_id,
+                    'param_desc' => $request->param_desc,
+                    'param_status' => $request->param_status,
+                    'created_by' => Auth::user()->name,
+                    'updated_by' => Auth::user()->name,
+                ]);
+                $status = false; 
+            }
+            return response()->json([
+                "request" => $request->all(),
+                "created" => $status
             ]);
-            Alert::toast('Data Created Successfully!', 'success');
-            return redirect()->route('finances.transactions.parameters.headers.index');
+            // Alert::toast('Data Created Successfully!', 'success');
+            // return redirect()->route('finances.transactions.parameters.headers.index');
         }
     }
 
@@ -92,11 +128,6 @@ class TransactionHeaderController extends Controller
         } else {
             $data = TransactionHeader::where('param_code', $transactionheader);
             $default = $data->first();
-            // dd($data->first()->param_code);
-            // $data->param_code = $request->param_code;
-            // $data->param_desc = $request->param_desc;
-            // $data->param_status = $request->param_status;
-            // $data->save();
             $update = $data->update([
                 'coy_id' => Auth::user()->coy_id,
                 'param_code' => $request->param_code ?? $default->param_code,
@@ -104,9 +135,6 @@ class TransactionHeaderController extends Controller
                 'param_status' => $request->param_status ?? $default->param_status,
                 'updated_by' => Auth::user()->name,
             ]);
-            // Alert::toast('Data Updated Successfully!', 'success');
-            // return redirect()->route('transactionheaders.index');
-            // dd($transactionheader);
             return response()->json([
                 "data" => $update,
                 "request" => $request->all()

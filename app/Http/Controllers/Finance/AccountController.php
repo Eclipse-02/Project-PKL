@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Finance;
 
 use Illuminate\Http\Request;
+use App\Models\Finance\PCash;
+use App\Models\Master\Branch;
 use Illuminate\Http\Response;
 use App\Models\Finance\Account;
-use App\Http\Controllers\Controller;
 use App\Models\Finance\Correct;
-use App\Models\Finance\PCash;
-use App\Models\Finance\Transaction\Receive\ReceiveHeader;
-use App\Models\Finance\TransactionDetail;
-use App\Models\Master\Branch;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\Finance\TransactionDetail;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Finance\Transaction\Receive\ReceiveHeader;
 
 class AccountController extends Controller
 {
@@ -22,12 +23,12 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $accounts = Account::where([
-                ['glacct_acct_parent', '=', null],
+        $accounts = Account::with('children')->select('glacct_code AS id', DB::raw("CONCAT(gl_mst_account.glacct_code,' - ',gl_mst_account.glacct_description) as text"), 'glacct_code', 'glacct_acct_parent')->where([
                 ['coy_id', '=', Auth::user()->coy_id]
-            ])->get();
+            ])->orderBy('glacct_code', 'asc')->get();
         $allAccounts = Account::where('coy_id', Auth::user()->coy_id)->pluck('glacct_description', 'glacct_code')->all();
         $branches = Branch::where('coy_id', Auth::user()->coy_id)->select('branch_code', 'branch_name')->get();
+        // dd(response()->json($accounts, 200, [], JSON_PRETTY_PRINT));
 
         return view('scaffolds.finance.accounts.index', compact('accounts', 'allAccounts', 'branches'));
     }
@@ -55,8 +56,13 @@ class AccountController extends Controller
         ]);
 
         if ($validator->fails()) {
-            Alert::toast('Oops, Something Wrong Happened!', 'error');
-            return redirect()->back()->withErrors($validator)->withInput();
+            // Alert::toast('Oops, Something Wrong Happened!', 'error');
+            // return redirect()->back()->withErrors($validator)->withInput();
+            return response()->json([
+                "request" => $request->all(),
+                "message" => "Failed",
+                "validator" => $validator->errors(),
+            ], 422);
         } else {
             // GL Account
             $test = Account::updateOrCreate(
@@ -79,37 +85,49 @@ class AccountController extends Controller
                 ]
             );
 
-            // dd($test);
-
-            // Trxdtl
-            TransactionDetail::create([
-                'coy_id' => Auth::user()->coy_id,
-                'trxdtl_code' => $request->glacct_code,
-                'trxdtl_desc' => $request->glacct_description,
-                'trxdtl_flag' => $request->glacct_acct_flag,
-                'trxdtl_segment2' => $request->glacct_code,
-                'created_by' => Auth::user()->name,
-                'updated_by' => Auth::user()->name,
-            ]);
+            TransactionDetail::updateOrCreate(
+                [
+                    'trxdtl_code' => $request->glacct_code,
+                ],
+                [
+                    'coy_id' => Auth::user()->coy_id,
+                    'trxdtl_desc' => $request->glacct_description,
+                    'trxdtl_flag' => $request->glacct_acct_flag,
+                    'trxdtl_segment2' => $request->glacct_code,
+                    'created_by' => Auth::user()->name,
+                    'updated_by' => Auth::user()->name,
+                ]
+            );
 
             // Pcash
-            PCash::create([
-                'coy_id' => Auth::user()->coy_id,
-                'trxdtl_code' => $request->glacct_code,
-                'created_by' => Auth::user()->name,
-                'updated_by' => Auth::user()->name,
-            ]);
+            PCash::updateOrCreate(
+                [
+                    'trxdtl_code' => $request->glacct_code,
+                ],
+                [
+                    'coy_id' => Auth::user()->coy_id,
+                    'created_by' => Auth::user()->name,
+                    'updated_by' => Auth::user()->name,
+                ]
+            );
 
             // Correct
-            Correct::create([
-                'coy_id' => Auth::user()->coy_id,
-                'trxdtl_code' => $request->glacct_code,
-                'created_by' => Auth::user()->name,
-                'updated_by' => Auth::user()->name,
-            ]);
+            Correct::updateOrCreate(
+                [
+                    'trxdtl_code' => $request->glacct_code,
+                ],
+                [
+                    'coy_id' => Auth::user()->coy_id,
+                    'created_by' => Auth::user()->name,
+                    'updated_by' => Auth::user()->name,
+                ]
+            );
 
-            Alert::toast('Data Created Successfully!', 'success');
-            return redirect()->route('finances.accounts.index');
+            // Alert::toast('Data Created Successfully!', 'success');
+            // return redirect()->route('finances.accounts.index');
+            return response()->json([
+                "request" => $request->all()
+            ]);
         }
     }
 
@@ -118,7 +136,12 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        //
+        $account = Account::with('children')->select('glacct_code AS id', DB::raw("CONCAT(gl_mst_account.glacct_code,' - ',gl_mst_account.glacct_description) as text"), 'glacct_code', 'glacct_acct_parent')->where([
+            ['coy_id', '=', Auth::user()->coy_id],
+            ['glacct_acct_parent', '=', null]
+        ])->orderBy('glacct_code', 'asc')->get();
+
+        return response()->json($account, 200, [], JSON_PRETTY_PRINT);
     }
 
     /**

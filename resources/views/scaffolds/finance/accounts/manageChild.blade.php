@@ -1,6 +1,6 @@
 <ul>
     @foreach ($childs as $child)
-        <li style="list-style-type:none">
+        <li id="{{ $child->glacct_code }}" style="list-style-type:none">
             @if (count($child->childs))
                 <i class="bi bi-arrow-right-short h3" aria-hidden="true"></i>
             @endif

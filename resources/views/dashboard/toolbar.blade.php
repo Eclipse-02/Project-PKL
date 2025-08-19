@@ -6,11 +6,15 @@
         <div class="card shadow-sm my-3">
             <!--begin::Body-->
             <div class="card-body d-flex flex-row px-6 py-3">
-                <!--begin::Button-->
-                <button id="search" class="btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary p-3 mx-2" data-bs-toggle="tooltip" data-bs-delay-show="500" data-bs-custom-class="tooltip-dark" data-bs-placement="bottom" title="Search" data-bs-dimiss="click">
-                    <i class="bi bi-search fs-2 p-0"></i>
-                </button>
-                <!--end::Button-->
+                <!--begin::Modal Trigger-->
+                <span data-bs-toggle="modal" data-bs-target="#kt_modal_1">
+                    <!--begin::Button-->
+                    <button id="search" class="btn btn-outline btn-outline-dashed btn-outline-primary btn-active-light-primary p-3 mx-2" data-bs-toggle="tooltip" data-bs-delay-show="500" data-bs-custom-class="tooltip-dark" data-bs-placement="bottom" title="Search" data-bs-dimiss="click">
+                        <i class="bi bi-search fs-2 p-0"></i>
+                    </button>
+                    <!--end::Button-->
+                </span>
+                <!--End::Modal Trigger-->
                 <!--begin::Button-->
                 <button id="add" class="btn btn-outline btn-outline-dashed btn-outline-success btn-active-light-success p-3 mx-2" data-bs-toggle="tooltip" data-bs-delay-show="500" data-bs-custom-class="tooltip-dark" data-bs-placement="bottom" title="Add" data-bs-dimiss="click">
                     <i class="bi bi-file-earmark-plus fs-2 p-0"></i>

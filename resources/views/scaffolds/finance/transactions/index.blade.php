@@ -3,10 +3,11 @@
 @section('title', 'Transaction')
 
 @section('content')
+@include('dashboard.toolbar')
 <!--begin::Col-->
-<div class="col-xxl-12">
+<div class="col-xxl-12 mt-0">
     <!--begin::Widget-->
-    <div class="card card-xxl-stretch mb-5 mb-xl-8" style="height:80vh;">
+    <div class="card card-xxl-stretch mb-5" style="height:80vh;">
         <!--begin::Body-->
         <div class="card-body d-flex flex-column px-4 py-6">
             <div class="row mt-8">

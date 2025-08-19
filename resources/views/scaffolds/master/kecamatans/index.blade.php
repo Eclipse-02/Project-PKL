@@ -75,7 +75,7 @@
                 </div>
                 <!--end::Stats-->
                 <!--start::Table-->
-                <table class="table table-striped gy-7 gs-7">
+                <table class="table table-striped gy-7  gs-7">
                     <!--start::Thead-->
                     <thead>
                         <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200">

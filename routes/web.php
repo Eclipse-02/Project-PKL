@@ -379,7 +379,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
                     Route::get('/', [AccountController::class, 'index'])->name('finances.accounts.index');
                     Route::post('/', [AccountController::class, 'store'])->name('finances.accounts.store');
                     Route::get('/create', [AccountController::class, 'create'])->name('finances.accounts.create');
-                    Route::get('/{account}', [AccountController::class, 'show'])->name('finances.accounts.show');
+                    Route::get('/tree', [AccountController::class, 'show'])->name('finances.accounts.show');
                     Route::match(['put', 'patch'],'/{account}', [AccountController::class, 'update'])->name('finances.accounts.update');
                     Route::delete('/{account}', [AccountController::class, 'destroy'])->name('finances.accounts.destroy');
                     Route::get('/{account}/edit', [AccountController::class, 'edit'])->name('finances.accounts.edit');

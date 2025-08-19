@@ -3,6 +3,7 @@
 namespace App\Models\Finance;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
@@ -60,7 +61,7 @@ class Account extends Model
         'updated_by',
     ];
 
-    public function childs() {
-        return $this->hasMany(Account::class, 'glacct_acct_parent', 'glacct_code');
+    public function children() {
+        return $this->hasMany(Account::class, 'glacct_acct_parent', 'glacct_code')->with('children')->select('glacct_code AS id', DB::raw("CONCAT(gl_mst_account.glacct_code,' - ',gl_mst_account.glacct_description) as text"), 'glacct_code', 'glacct_acct_parent');
     }
 }
