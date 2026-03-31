@@ -1,66 +1,129 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# ERP Travel Umroh
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A web-based **ERP (Enterprise Resource Planning) application** built with **Laravel 10** to support operational management for **Umroh travel agencies**.
 
-## About Laravel
+This system helps streamline **jamaah registration**, **package management**, **document handling**, and **branch operations**.  
+It also includes a **Finance module** to manage and track jamaah payments, which is currently under active development.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This project was developed as part of my **Field Work Practice (PKL)** during Vocational High School and serves as both a real-world business solution and portfolio project.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Features
 
-## Learning Laravel
+### Master Module
+The core operational module of the system.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Jamaah registration management
+- Package management
+- Branch management
+- Jamaah document upload & handling
+- Searchable and dynamic data tables
+- Role-based access control
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Finance Module
+Payment management module.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Jamaah payment tracking
+- Installment/payment status monitoring
+- Financial report generation
+- Export reports to Excel
+- **Currently in ongoing development**
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Tech Stack
 
-### Premium Partners
+- **Backend:** Laravel 10
+- **Authentication:** Laravel UI
+- **Role Management:** Laratrust
+- **Frontend:** Bootstrap
+- **Data Tables:** Laravel DataTables
+- **Excel Export:** Laravel Excel
+- **Notifications:** SweetAlert2
+- **Build Tool:** Vite
+- **Database:** MySQL
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+---
 
-## Contributing
+## Installation
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Follow these steps to run the project locally.
 
-## Code of Conduct
+```bash
+git clone https://github.com/Eclipse-02/ERP-Travel-Umroh.git
+cd ERP-Travel-Umroh
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+composer install
+npm install
 
-## Security Vulnerabilities
+cp .env.example .env
+php artisan key:generate
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+php artisan migrate --seed
+php artisan storage:link
+
+npm run dev
+php artisan serve
+```
+
+The app will run on:
+
+```bash
+http://127.0.0.1:8000
+```
+
+---
+
+## Project Structure
+
+```bash
+ERP-Travel-Umroh/
+├── app/
+├── bootstrap/
+├── config/
+├── database/
+├── public/
+├── resources/
+├── routes/
+├── storage/
+├── tests/
+└── vite.config.js
+```
+
+---
+
+## Use Case
+
+This ERP system is designed to help **Umroh travel agencies** manage operational workflows such as:
+
+- Registering new jamaah
+- Organizing available Umroh packages
+- Managing supporting documents
+- Monitoring payment progress
+- Managing multi-branch operations
+- Generating reports for administration
+
+---
+
+## Project Background
+
+This project was developed during my **PKL (Field Work Practice)** at Vocational High School.
+
+The goal was to solve real operational problems in Umroh travel business workflows by digitizing manual administrative processes into an integrated ERP platform.
+
+---
+
+## Development Status
+
+Current status:
+
+- ✅ Master module completed
+- 🚧 Finance module in progress
+- 🔄 Continuous improvements and maintenance
+
+---
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is created for educational, internship, and portfolio purposes.
